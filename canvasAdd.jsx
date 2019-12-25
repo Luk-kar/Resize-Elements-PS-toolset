@@ -47,7 +47,7 @@ function main() {
         ///Destination folder UI
         var pnlDestFold = grpInfo.add("panel", undefined);
         pnlDestFold.alignment = "left";
-        
+
             //Title
             pnlDestFold.title = pnlDestFold.add("statictext", undefined, "Destination folder:");
             pnlDestFold.title.alignment = "left";
@@ -83,7 +83,7 @@ function main() {
                 //Group dialog units value
                 grpUnitValDlg = grpUnitVal.add("group");
                 grpUnitValDlg.orientation = 'column';
-                    
+
                     //Group width
                     var grpWidth = grpUnitValDlg.add("group");
                     grpWidth.alignment = "left";
@@ -105,8 +105,8 @@ function main() {
                         //Image: InfoHover.png
                         const imageInfHov = File(scriptPathString + "InfoHover.png");
                         grpWidth.image = grpWidth.add("image", undefined, imageInfHov);
-                        
-                    //Group height       
+
+                    //Group height
                     var grpHeight = grpUnitValDlg.add("group");
                     grpHeight.alignment = "left";
 
@@ -121,7 +121,7 @@ function main() {
 
                         //Image: InfoHover.png
                         grpHeight.image = grpHeight.add("image", undefined, imageInfHov);
-                        
+
                 //Graphic element proportions constrains (true, false)
 
                 //Uplaoding constrains images
@@ -165,18 +165,18 @@ function main() {
                         //Adding 003 line of buttons
                         var anchorPosBOTTOMLEFT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
                         var anchorPosBOTTOMCENTER = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
-                        var anchorPosBOTTOMRIGHT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);                
+                        var anchorPosBOTTOMRIGHT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
 
             //Constrains proportions
                 var constrainsProportions = pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
                 constrainsProportions.alignment = "left";
-          
+
             //Canvas color extension
             var grpCanvExtendColor = pnlAddCanvas.add("group");
             grpCanvExtendColor.alignment = "left";
-                
+
                 grpCanvExtendColor.text = grpCanvExtendColor.add("statictext", undefined, "Canvas extension color: ");
-                
+
                 var canvExtendColorValues = ["Foreground", "Background", "White", "Black", "Grey", "Other..."];
                 var canvExtendColorDropDwn = grpCanvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
                 canvExtendColorDropDwn.selection = 1;
@@ -200,8 +200,8 @@ function main() {
             //Text to populate info UI
             var prevDoclinesOpened = infoUItoText(globals.openedFilesInfo, numbOfDisplayedFiles);
             var docsOpenedCounter = prevDoclinesOpened[0];
-            
-            //Creating panel title "[number of displayed files] of [number of opened in PS files] files" 
+
+            //Creating panel title "[number of displayed files] of [number of opened in PS files] files"
             var pnlDocInfoTitle = ("Files to process: " + docsOpenedCounter).toString();
 
             //Creating panel with displayed files
@@ -220,7 +220,7 @@ function main() {
                 pnlDocInfo.line001.alignment = "left";
                 pnlDocInfo.line002.alignment = "left";
                 pnlDocInfo.line003.alignment = "left";
-                
+
     ////Buttons validation UI
 
     //Creating button group
@@ -233,30 +233,30 @@ function main() {
         //Cancel button
         var btnCancel = grpBtns.add("button", undefined, "Close");
 
-//-------------------------------------------------------------------------------------------------------------------------------       
+//-------------------------------------------------------------------------------------------------------------------------------
 
     ////Buttons functionality
 
         ///Choose files buttons
             //Radial buttons choose files
 
-                //Opened files in PS               
+                //Opened files in PS
                 btnRadChooseFilesActiveDoc.onClick = function() {
-                    
+
                     //Refreshing info UI with active documents names
                     docsToPrccssNames = globals.openedFilesInfo;
-                    
+
                     //Disabled "Source folder..." button
                     btnChooseFilesSource.enabled = false;
                     grpChooseFilesSource.title.enabled = false;
-                    
+
                     //Disabled "Destination folder"" panel title
                     pnlDestFold.title.enabled = false;
-                    
+
                     //Disabled radButton destination folder
                     btnRadSameFolder.enabled = false;
                     btnRadOtherFolder.enabled = false;
-                    
+
                     //Disabled "destination folder..." button
                     btnDestFold.enabled = false;
                     grpBtnBrowse.text.enabled = false;
@@ -270,10 +270,10 @@ function main() {
 
                     checkingIfWidthAndHeightIs0();
                 }
-                
+
                 //Choose source folder
                 btnRadChooseFilesSource.onClick = function() {
-                    
+
                     //Anabled "Source folder..." button
                     btnChooseFilesSource.enabled = true;
                     grpChooseFilesSource.title.enabled = true;
@@ -282,11 +282,11 @@ function main() {
                     if (grpChooseFilesSource.title.text === "Source folder...") {
                         //Disabled "Destination folder"" panel title
                         pnlDestFold.title.enabled = false;
-                        
+
                         //Disabled radButton destination folder
                         btnRadSameFolder.enabled = false;
                         btnRadOtherFolder.enabled = false;
-                        
+
                         //Disabled "destination folder..." button
                         btnDestFold.enabled = false;
                         grpBtnBrowse.text.enabled = false;
@@ -325,10 +325,10 @@ function main() {
                         if(checkingIfWidthAndHeightIs0()) btnAccept.enabled = true;
 
                         //Refresh of names files in "Info UI"
-                        infoUIDisplay(globals.prevDoclinesSource);                       
+                        infoUIDisplay(globals.prevDoclinesSource);
                     }
                 }
-                
+
                 //Start setting. If there is no active docs, set choose
                 if (app.documents.length === 0) {
                     btnRadChooseFilesActiveDoc.enabled = false;
@@ -343,7 +343,7 @@ function main() {
 
                 //Browse source folder
                 btnChooseFilesSource.onClick = function() {
-                    
+
                     //Selection source folder explorer
                     globals.sourceFolder = Folder.selectDialog("Select folder with files to process");
                     //Warning that you didn't choose any folder
@@ -354,7 +354,7 @@ function main() {
                         btnRadSameFolder.value = true;
                         //Enabled accept button
                         if ((grpHeight.numb.text === "0") && (grpWidth.numb.text === "0")) btnAccept.enabled = true;
-                        
+
                         //Anabled choosing destination
                         if (grpChooseFilesSource.title.text !== "Source folder...") {
                             //Anabled "destination folder"" panel title
@@ -362,7 +362,7 @@ function main() {
 
                             //Anabled Add canvas panel
                             pnlAddCanvas.enabled = true;
-    
+
                             //Anabled radButton destination folder
                             btnRadSameFolder.enabled = true;
                             btnRadOtherFolder.enabled = true;
@@ -413,7 +413,7 @@ function main() {
                                 filesSourceToOpenCounter++;
                             }
                         }
-                        
+
                         //Setting name string into statictext next to button target folder
                         if (filesSourceToOpenCounter > 0) {
                             var newTitle = (".../" + globals.sourceFolder.parent.name + "/" + globals.sourceFolder.name).replace(/%20/g, ' ');
@@ -432,7 +432,7 @@ function main() {
                             btnRadOtherFolder.enabled = true;
                             pnlAddCanvas.enabled = true;
                             checkingIfWidthAndHeightIs0();
-                        
+
                         } else {
                             alert("In choosed folder there is 0 files to process");
                             btnAccept.enabled = false;
@@ -442,8 +442,8 @@ function main() {
                             btnRadSameFolder.enabled = false;
                             btnRadOtherFolder.enabled = false;
                             btnDestFold.enabled = false;
-                            grpBtnBrowse.text.enabled = false;                            
-                            pnlAddCanvas.enabled = false;   
+                            grpBtnBrowse.text.enabled = false;
+                            pnlAddCanvas.enabled = false;
 
                             infoUIDisplay([0, "no files to process", "", ""]);
                         }
@@ -452,10 +452,10 @@ function main() {
                             alert("In folder are " + globals.sourceFileCounter + " files");
                         } else {
                             alert("In folder is " + globals.sourceFileCounter + " file");
-                        }            
+                        }
                     }
                 }
-                
+
         ///Destination folder
             //Radial buttons destination folder
                 //Add canvas in the same folder
@@ -526,12 +526,12 @@ function main() {
                         //Disabled accept button if Width or Height is equal 0
                         checkingIfWidthAndHeightIs0();
                     }
-                    
+
                     //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked; setting units to PX
                     grpWidth.unitDropDwn.onChange = function() {
                         if (grpWidth.unitDropDwn.selection == 0) {grpHeight.unitDropDwn.selection = 0; unitOutcome = "PX"}
                         else {grpHeight.unitDropDwn.selection = 1;}
-                    }      
+                    }
                     //Image: InfoHover.png; setting tooltip
                     grpWidth.image.helpTip = "You can substract number by adding '-' before value";
                 //Group Height
@@ -552,10 +552,10 @@ function main() {
                     }
                     //Image: InfoHover.png; setting tooltip
                     grpHeight.image.helpTip = "You can substract number by adding '-' before value";
-                    
+
                 //Image chains - constrains proportions tooltip
                 grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"
-            
+
             //Anchor display
                 //creating anchor data to read in resizeCanvas(); Default anchor is in MIDDLECENTER
                 var anchorPosOutcome = AnchorPosition.MIDDLECENTER;
@@ -573,17 +573,17 @@ function main() {
                 anchorPosBOTTOMCENTER.onClick = function() {anchorSetingNew(anchorPosBOTTOMCENTER, AnchorPosition.BOTTOMCENTER)}
                 anchorPosBOTTOMRIGHT.onClick = function() {anchorSetingNew(anchorPosBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT)}
 
-                
+
                 //Constrain proportions checkbox
                 constrainsProportions.onClick = function() {
                     //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
                     if (constrainsProportions.value == true) {
-                        grpDlgUnitValImage.image = imageCnstrPrpTrue; 
+                        grpDlgUnitValImage.image = imageCnstrPrpTrue;
                         grpDlgUnitValImage.helpTip = "Width and Height same value anabled"}
                         else {
-                            grpDlgUnitValImage.image = imageCnstrPrpFalse; 
+                            grpDlgUnitValImage.image = imageCnstrPrpFalse;
                             grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"}
-                            
+
                             //Set the same heighest value in "Height" and "Width"
                             if (constrainsProportions.value == true) {
                                 //If Height and Width is negative or equal 0, it set in both most negative number
@@ -595,17 +595,17 @@ function main() {
                                     else {grpHeight.numb.onChanging();}
                                 } else {
                                     if (parseInt(grpWidth.numb.text, 10) > parseInt(grpHeight.numb.text, 10)) {
-                                        grpWidth.numb.onChanging();} 
+                                        grpWidth.numb.onChanging();}
                                         else {
                                             grpHeight.numb.onChanging();}
                                         }
                                     }
                 }
-                                
+
                                 //Adding tooltip to checkbox
                                 constrainsProportions.helpTip =  "Check to constrain Height and Width"
-                                
-                                //Canvas extension color                           
+
+                                //Canvas extension color
                                     ///Saving BG and FG bucket color
                                     //Foregound bucket color
                                     var bgColor = new SolidColor();
@@ -617,8 +617,8 @@ function main() {
                                     var fgColor = new SolidColor();
                                     fgColor.rgb.red = parseInt(app.foregroundColor.rgb.red, 10);
                                     fgColor.rgb.green = parseInt(app.foregroundColor.rgb.green, 10);
-                                    fgColor.rgb.blue = parseInt(app.foregroundColor.rgb.blue, 10);    
-                                    
+                                    fgColor.rgb.blue = parseInt(app.foregroundColor.rgb.blue, 10);
+
                                     //Setting bg color by dropdownlist
                                     canvExtendColorDropDwn.onChange = function() {
 
@@ -636,19 +636,19 @@ function main() {
                                         if (canvExtendColorDropDwn.selection == 2) {
                                             app.backgroundColor.rgb.red = 255;
                                             app.backgroundColor.rgb.green = 255;
-                                            app.backgroundColor.rgb.blue = 255;    
+                                            app.backgroundColor.rgb.blue = 255;
                                         }
                                         //Choosing Black
                                         if (canvExtendColorDropDwn.selection == 3) {
                                             app.backgroundColor.rgb.red = 0;
                                             app.backgroundColor.rgb.green = 0;
-                                            app.backgroundColor.rgb.blue = 0;                                      
+                                            app.backgroundColor.rgb.blue = 0;
                                         }
                                         //Choosing Grey
                                         if (canvExtendColorDropDwn.selection == 4) {
                                             app.backgroundColor.rgb.red = 128;
                                             app.backgroundColor.rgb.green = 128;
-                                            app.backgroundColor.rgb.blue = 128;                                
+                                            app.backgroundColor.rgb.blue = 128;
                                         }
                                         //Color picker
                                         if (canvExtendColorDropDwn.selection == 5) {
@@ -674,7 +674,7 @@ function main() {
                                 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------                             
+//-------------------------------------------------------------------------------------------------------------------------------
 
     //Resizng canvas unfctionality
     function changeFileAndSave(addWidth, addHeight, units, anchor){
@@ -716,54 +716,34 @@ function main() {
 
                             //Declaring path
                             var path = globals.detinationFolder;
+                            var sourceFile = globals.sourceFilesPaths[i];
+                            const imageTypes = [
+                                [/.png$/, SavePNG],
+                                [/.psd$/, savePSD],
+                                [/.jpg$/, saveJPEG],
+                                [/.tif$/, saveTIFF],
+                                [/.bmp$/, saveBMP],
+                                [/.gif$/, saveGIF],
+                            ];
 
-                            //Saving PNG
-                            if (globals.sourceFilesPaths[i].match(/.png$/)) {
 
-                                var saveFile = File(path + "/" + name);
-                                if(saveFile.exists) saveFile.remove(); 
-                                SavePNG(saveFile);
-                                
-                            //Saving PSD
-                            } else if (globals.sourceFilesPaths[i].match(/.psd$/)) {
-
-                                var saveFile = File(path + "/" + name);
-                                if(saveFile.exists) saveFile.remove(); 
-                                savePSD(saveFile);                               
-                      
-                            //Saving JPEG
-                            } else if (globals.sourceFilesPaths[i].match(/.jpg$/)) {
-                                
-                                var saveFile = File(path + "/" + name);
-                                if(saveFile.exists) saveFile.remove(); 
-                                saveJPEG(saveFile);
-
-                            //Saving Tiff
-                            } else if (globals.sourceFilesPaths[i].match(/.tif$/)) {
-                                
-                                var saveFile = File(path + "/" + name);
-                                if(saveFile.exists) saveFile.remove(); 
-                                saveTIFF(saveFile);
-
-                            //Saving BMP
-                            } else if (globals.sourceFilesPaths[i].match(/.bmp$/)) {
-
-                                var saveFile = File(path + "/" + name);
-                                if(saveFile.exists) saveFile.remove();
-                                saveBMP(saveFile);
-
-                            //Saving GIF
-                            } else {
-                                
-                                var saveFile = File(path + "/" + name);
-                                if(saveFile.exists) saveFile.remove(); 
-                                saveGIF(saveFile);
+                            for( var j = 0 ; j < imageTypes.length ; j++ ){
+                                if (sourceFile.match(imageTypes[j][0])) {
+                                    var saveFile = File(path + "/" + name);
+                                    if(saveFile.exists) {
+                                        saveFile.remove();
+                                    }
+                                    (imageTypes[j][1])(saveFile);
+                                    break;
+                                }
                             }
-
+                            if( j === imageTypes.length){
+                                throw new Error("Unhandled type for "+sourceFile)
+                            }
                         }
                         doc.close();
                     }
-                }       
+                }
             }
         }
         //Setting background & foregound colors back to original state
@@ -771,7 +751,7 @@ function main() {
         app.backgroundColor = bgColor;
     }
 
-    //Saving PSD 
+    //Saving PSD
     function savePSD(saveFile) {
 
         var psdFile = new File(saveFile);
@@ -787,7 +767,7 @@ function main() {
         var jpegSaveOptions = new JPEGSaveOptions();
         jpegSaveOptions.formatOptions = FormatOptions.STANDARDBASELINE;
         jpegSaveOptions.quality = 10;
-    
+
         activeDocument.saveAs(jpegFile, jpegSaveOptions, false, Extension.LOWERCASE);
     }
 
@@ -836,19 +816,19 @@ function main() {
 
 
         doc.resizeCanvas(UnitValue(sumWidth, units), UnitValue(sumHeight, units), anchor);
-    }   
+    }
 
-                                
+
     //Anchor button functionality
     function anchorSetingNew(btnAnchorClickedOn, anchorString) {
         //Reseting buttons to empty state
         var anchorArray = new Array;
          anchorArray.push(
-             anchorPosTOPLEFT, anchorPosTOPCENTER, anchorPosTOPRIGHT, 
+             anchorPosTOPLEFT, anchorPosTOPCENTER, anchorPosTOPRIGHT,
             anchorPosMIDDLELEFT, anchorPosMIDDLECENTER, anchorPosMIDDLERIGHT,
             anchorPosBOTTOMLEFT, anchorPosBOTTOMCENTER, anchorPosBOTTOMRIGHT
         )
-                
+
         for (i = 0; i < anchorArray.length; i++){
             anchorArray[i].image = imageAnchorFalse;
         }
@@ -859,10 +839,10 @@ function main() {
         //Sending information which anchor is marked for resizeCanvas()
         anchorPosOutcome = anchorString;
     }
-                                
+
     //Populating array with activeDocuments
     function docsOpenedNames(displayedFiles) {
-        
+
             //Counter of active docs
             var docsOpenedCounter = app.documents.length;
 
@@ -874,14 +854,14 @@ function main() {
                 infoUICounter++;
                 if (infoUICounter <= (displayedFiles + 1)){
                     docsToPrccssNames[i] = app.documents[i].name;
-                } 
+                }
             }
 
             //Adding condition if there no docs to display
             if (docsToPrccssNames.length === 0) {docsToPrccssNames = "";}
 
             //Return prevDocArray to use again in chooseFilesActiveDoc.onClick
-            return [docsOpenedCounter, docsToPrccssNames]; 
+            return [docsOpenedCounter, docsToPrccssNames];
     }
 
     //Text to disaplay in panel info
@@ -891,25 +871,25 @@ function main() {
         //Creating array of files to display
         var docsToPrccssNames = filesInfo[1];
 
-        //Creating deafult files display     
+        //Creating deafult files display
         var prevDocName = new Array;
         for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
             prevDocName[i] = "";
         }
-        prevDocName[0] = "no files to process"; 
+        prevDocName[0] = "no files to process";
 
         //Filing deafult files display with files names
         for (var i = 0; i < docsToPrccssNames.length; i++) {
-            prevDocName[i] = docsToPrccssNames[i];               
+            prevDocName[i] = docsToPrccssNames[i];
         }
-    
+
         //Creating "," for files names
         var signsComas = new Array;
         for (var i = 0; i < numbOfDisplayedFiles; i++) {
             signsComas[i] = "";
         }
         for (var i = 1; i < docsToPrccssNames.length; i++) {
-            signsComas[i] = ",";  
+            signsComas[i] = ",";
         }
         signsComas.reverse();
 
@@ -938,12 +918,12 @@ function main() {
         var pnlDocInfoTitle = ("Files to process: " + prevDoclines[0]).toString();
 
         pnlDocInfo.text = pnlDocInfoTitle;
-        
+
         pnlDocInfo.line001.text = prevDoclines[1];
         pnlDocInfo.line002.text = prevDoclines[2];
         pnlDocInfo.line003.text = prevDoclines[3];
 
     }
-    
+
     startWindow.show();
 }
