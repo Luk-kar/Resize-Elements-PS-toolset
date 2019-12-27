@@ -14,31 +14,26 @@ function main() {
     ////Info group UI
         var grpInfo = grpMain.add("group");
         grpInfo.orientation = 'column';
-        grpInfo.alignment = "left";
+        grpInfo.alignChildren = "left";
 
             //Source files
             var plnSourceFiles = grpInfo.add("panel", undefined);
-            plnSourceFiles.alignment = "left";
+            plnSourceFiles.alignChildren = "left";
 
                 //Source files title
                 plnSourceFiles.title = plnSourceFiles.add("statictext", undefined, "Source files:");
-                plnSourceFiles.title.alignment = "left";
 
                 //Creating radial button group
                 var grpBtnRadFiles = plnSourceFiles.add("group");
-                grpBtnRadFiles.alignment = "left";
                 grpBtnRadFiles.orientation = 'column';
+                grpBtnRadFiles.alignChildren = "left";
 
                     //Radial button choose active/target folder
                     var btnRadChooseFilesActiveDoc = grpBtnRadFiles.add("radiobutton", undefined, "Opened files");
                     var btnRadChooseFilesSource = grpBtnRadFiles.add("radiobutton", undefined, "Choose folder");
 
-                    btnRadChooseFilesActiveDoc.alignment = "left";
-                    btnRadChooseFilesSource.alignment = "left";
-
                     //Add button choose target folder
                     var grpChooseFilesSource = plnSourceFiles.add("group");
-                    grpChooseFilesSource.alignment = "left";
 
                     var btnChooseFilesSource =  grpChooseFilesSource.add("button", undefined, "Browse...");
                     grpChooseFilesSource.title = grpChooseFilesSource.add("statictext", undefined, "Source folder...");
@@ -46,23 +41,19 @@ function main() {
 
         ///Destination folder UI
         var pnlDestFold = grpInfo.add("panel", undefined);
-        pnlDestFold.alignment = "left";
+        pnlDestFold.alignChildren = "left";
 
             //Title
             pnlDestFold.title = pnlDestFold.add("statictext", undefined, "Destination folder:");
-            pnlDestFold.title.alignment = "left";
 
             //Creating group radial button choose destination folder
             var grpBtnRadFol = pnlDestFold.add("group");
             grpBtnRadFol.orientation = 'column';
-            grpBtnRadFol.alignment = "left";
+            grpBtnRadFol.alignChildren = "left";
 
                 //Radial buttons choose destination folder
                 var btnRadSameFolder = grpBtnRadFol.add("radiobutton", undefined, "Add canvas in the same folder");
                 var btnRadOtherFolder = grpBtnRadFol.add("radiobutton", undefined, "Add canvas and copy files to other folder");
-
-                btnRadSameFolder.alignment = "left";
-                btnRadOtherFolder.alignment = "left";
 
             //Browse button destination folder
             var grpBtnBrowse = pnlDestFold.add("group");
@@ -72,21 +63,22 @@ function main() {
 
         ///Add canvas UI
         var pnlAddCanvas = grpInfo.add("panel", undefined);
+        pnlAddCanvas.alignChildren = "left";
+
             //Title
             pnlAddCanvas.title = pnlAddCanvas.add("statictext", undefined, "Add canvas");
-            pnlAddCanvas.title.alignment = "left";
 
             //Group units value
             var grpUnitVal = pnlAddCanvas.add("group");
-            grpUnitVal.alignment = "left";
+            //grpUnitVal.alignment = "left";
 
                 //Group dialog units value
                 grpUnitValDlg = grpUnitVal.add("group");
+                grpUnitValDlg.alignChildren = "left";
                 grpUnitValDlg.orientation = 'column';
 
                     //Group width
                     var grpWidth = grpUnitValDlg.add("group");
-                    grpWidth.alignment = "left";
 
                         //Edittext: Width
                         grpWidth.text = grpWidth.add("statictext", undefined, "Width:  ");
@@ -108,7 +100,6 @@ function main() {
 
                     //Group height
                     var grpHeight = grpUnitValDlg.add("group");
-                    grpHeight.alignment = "left";
 
                         //Edittext: Height
                         grpHeight.text = grpHeight.add("statictext", undefined, "Height: ");
@@ -135,45 +126,41 @@ function main() {
             //Anchor display
 
             var grpAnchor = pnlAddCanvas.add("group");
-                grpAnchor.alignment = "left";
-                grpAnchor.text = grpAnchor.add("statictext", undefined, "Anchor: ");
+            grpAnchor.text = grpAnchor.add("statictext", undefined, "Anchor: ");
 
-                    //Creating anchor group box
-                    var grpAnchorSquare = grpAnchor.add("group");
-                    grpAnchorSquare.orientation = 'column';
-                    grpAnchorSquare.alignment = "left";
+                //Creating anchor group box
+                var grpAnchorSquare = grpAnchor.add("group");
+                grpAnchorSquare.orientation = 'column';
 
-                    //Creating anchor gorup lines inside box
-                    grpAnchorSquare.line001 = grpAnchorSquare.add("group");
-                    grpAnchorSquare.line002 = grpAnchorSquare.add("group");
-                    grpAnchorSquare.line003 = grpAnchorSquare.add("group");
+                //Creating anchor gorup lines inside box
+                grpAnchorSquare.line001 = grpAnchorSquare.add("group");
+                grpAnchorSquare.line002 = grpAnchorSquare.add("group");
+                grpAnchorSquare.line003 = grpAnchorSquare.add("group");
 
-                        //Image: imageAnchorTrue.png and imageAnchorFalse.png
-                        const imageAnchorTrue = File(scriptPathString + "anchorPointerTrue.png");
-                        const imageAnchorFalse = File(scriptPathString + "anchorPointerFalse.png");
+                    //Image: imageAnchorTrue.png and imageAnchorFalse.png
+                    const imageAnchorTrue = File(scriptPathString + "anchorPointerTrue.png");
+                    const imageAnchorFalse = File(scriptPathString + "anchorPointerFalse.png");
 
-                        //Adding 001 line of buttons
-                        var anchorPosTOPLEFT = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse, "name: anchorPosTOPLEFT");
-                        var anchorPosTOPCENTER = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse);
-                        var anchorPosTOPRIGHT = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse);
+                    //Adding 001 line of buttons
+                    var anchorPosTOPLEFT = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse, "name: anchorPosTOPLEFT");
+                    var anchorPosTOPCENTER = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPosTOPRIGHT = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse);
 
-                        //Adding 002 line of buttons
-                        var anchorPosMIDDLELEFT = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorFalse);
-                        var anchorPosMIDDLECENTER = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorTrue);
-                        var anchorPosMIDDLERIGHT = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorFalse);
+                    //Adding 002 line of buttons
+                    var anchorPosMIDDLELEFT = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPosMIDDLECENTER = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorTrue);
+                    var anchorPosMIDDLERIGHT = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorFalse);
 
-                        //Adding 003 line of buttons
-                        var anchorPosBOTTOMLEFT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
-                        var anchorPosBOTTOMCENTER = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
-                        var anchorPosBOTTOMRIGHT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
+                    //Adding 003 line of buttons
+                    var anchorPosBOTTOMLEFT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPosBOTTOMCENTER = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPosBOTTOMRIGHT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
 
             //Constrains proportions
-                var constrainsProportions = pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
-                constrainsProportions.alignment = "left";
+            var constrainsProportions = pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
 
             //Canvas color extension
             var grpCanvExtendColor = pnlAddCanvas.add("group");
-            grpCanvExtendColor.alignment = "left";
 
                 grpCanvExtendColor.text = grpCanvExtendColor.add("statictext", undefined, "Canvas extension color: ");
 
@@ -206,7 +193,6 @@ function main() {
 
             //Creating panel with displayed files
             var pnlDocInfo = grpInfo.add("panel", undefined, pnlDocInfoTitle);
-            pnlDocInfo.alignment = "left";
 
                 //Creating text with displayed files
                 pnlDocInfo.line001 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[1]);
@@ -717,8 +703,9 @@ function main() {
                             //Declaring path
                             var path = globals.detinationFolder;
                             var sourceFile = globals.sourceFilesPaths[i];
-                            const imageTypes = [
-                                [/.png$/, SavePNG],
+
+                            var imageTypes = [
+                                [/.png$/, savePNG],
                                 [/.psd$/, savePSD],
                                 [/.jpg$/, saveJPEG],
                                 [/.tif$/, saveTIFF],
@@ -726,8 +713,7 @@ function main() {
                                 [/.gif$/, saveGIF],
                             ];
 
-
-                            for( var j = 0 ; j < imageTypes.length ; j++ ){
+                            for( var j = 0 ; j < imageTypes.length; j++ ){
                                 if (sourceFile.match(imageTypes[j][0])) {
                                     var saveFile = File(path + "/" + name);
                                     if(saveFile.exists) {
@@ -737,8 +723,9 @@ function main() {
                                     break;
                                 }
                             }
-                            if( j === imageTypes.length){
-                                throw new Error("Unhandled type for "+sourceFile)
+                            if (j === imageTypes.length) {
+
+                                throw new Error("Unhandled type for "+ sourceFile)
                             }
                         }
                         doc.close();
@@ -798,7 +785,7 @@ function main() {
 
     }
     //Saving GIF
-    function SavePNG(saveFile) {
+    function savePNG(saveFile) {
 
         var pngFile = new File(saveFile);
         var pngSaveOptions = new PNGSaveOptions();
