@@ -7,66 +7,63 @@ main();
 function main() {
 
     ////Creating main UI
-    var startWindow = new Window("dialog", "Add canvas");
+    var mainWindow = new Window("dialog", "Add canvas");
         //Creating group to populate with main UI
-        var grpMain = startWindow.add("group")
+        var grpMain = mainWindow.add("group")
 
-    ////Info group UI
-        var grpInfo = grpMain.add("group");
-        grpInfo.orientation = 'column';
-        grpInfo.alignChildren = "left";
+        var grpInfo = createGroupUI(grpMain);
 
             //Source files
             var plnSourceFiles = grpInfo.add("panel", undefined);
             plnSourceFiles.alignChildren = "left";
 
                 //Source files title
-                plnSourceFiles.title = plnSourceFiles.add("statictext", undefined, "Source files:");
+                var plnSourceFilesTitle = plnSourceFiles.add("statictext", undefined, "Source files:");
 
                 //Creating radial button group
-                var grpBtnRadFiles = plnSourceFiles.add("group");
-                grpBtnRadFiles.orientation = 'column';
-                grpBtnRadFiles.alignChildren = "left";
+                var grpBtnRadSourceFiles = plnSourceFiles.add("group");
+                grpBtnRadSourceFiles.orientation = 'column';
+                grpBtnRadSourceFiles.alignChildren = "left";
 
                     //Radial button choose active/target folder
-                    var btnRadChooseFilesActiveDoc = grpBtnRadFiles.add("radiobutton", undefined, "Opened files");
-                    var btnRadChooseFilesSource = grpBtnRadFiles.add("radiobutton", undefined, "Choose folder");
+                    var btnRadChooseFilesActiveDocs = grpBtnRadSourceFiles.add("radiobutton", undefined, "Opened files");
+                    var btnRadChooseFilesSourceFold = grpBtnRadSourceFiles.add("radiobutton", undefined, "Choose folder");
 
                     //Add button choose target folder
-                    var grpChooseFilesSource = plnSourceFiles.add("group");
+                    var grpBtnChooseFilesSourceFold = plnSourceFiles.add("group");
 
-                    var btnChooseFilesSource =  grpChooseFilesSource.add("button", undefined, "Browse...");
-                    grpChooseFilesSource.title = grpChooseFilesSource.add("statictext", undefined, "Source folder...");
-                    grpChooseFilesSource.title.characters = 25;
+                    var btnChooseFilesSourceFold =  grpBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
+                    var btnChooseFilesSourceFoldTitle = grpBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
+                    btnChooseFilesSourceFoldTitle.characters = 25;
 
         ///Destination folder UI
         var pnlDestFold = grpInfo.add("panel", undefined);
         pnlDestFold.alignChildren = "left";
 
             //Title
-            pnlDestFold.title = pnlDestFold.add("statictext", undefined, "Destination folder:");
+            var pnlDestFoldTitle = pnlDestFold.add("statictext", undefined, "Destination folder:");
 
             //Creating group radial button choose destination folder
-            var grpBtnRadFol = pnlDestFold.add("group");
-            grpBtnRadFol.orientation = 'column';
-            grpBtnRadFol.alignChildren = "left";
+            var grpBtnRadFolder = pnlDestFold.add("group");
+            grpBtnRadFolder.orientation = 'column';
+            grpBtnRadFolder.alignChildren = "left";
 
                 //Radial buttons choose destination folder
-                var btnRadSameFolder = grpBtnRadFol.add("radiobutton", undefined, "Add canvas in the same folder");
-                var btnRadOtherFolder = grpBtnRadFol.add("radiobutton", undefined, "Add canvas and copy files to other folder");
+                var btnRadSameFolder = grpBtnRadFolder.add("radiobutton", undefined, "Add canvas in the same folder");
+                var btnRadOtherFolder = grpBtnRadFolder.add("radiobutton", undefined, "Add canvas and copy files to other folder");
 
             //Browse button destination folder
-            var grpBtnBrowse = pnlDestFold.add("group");
-            var btnDestFold = grpBtnBrowse.add("button", undefined, "Browse...");
-            grpBtnBrowse.text = grpBtnBrowse.add("statictext", undefined, "Destination folder...");
-            grpBtnBrowse.text.characters = 25;
+            var grpBtnDestFold = pnlDestFold.add("group");
+            var btnDestFold = grpBtnDestFold.add("button", undefined, "Browse...");
+            var btnDestFoldText = grpBtnDestFold.add("statictext", undefined, "Destination folder...");
+            btnDestFoldText.characters = 25;
 
         ///Add canvas UI
         var pnlAddCanvas = grpInfo.add("panel", undefined);
         pnlAddCanvas.alignChildren = "left";
 
             //Title
-            pnlAddCanvas.title = pnlAddCanvas.add("statictext", undefined, "Add canvas");
+            var pnlAddCanvasTitle = pnlAddCanvas.add("statictext", undefined, "Add canvas");
 
             //Group units value
             var grpUnitVal = pnlAddCanvas.add("group");
@@ -81,14 +78,14 @@ function main() {
                     var grpWidth = grpUnitValDlg.add("group");
 
                         //Edittext: Width
-                        grpWidth.text = grpWidth.add("statictext", undefined, "Width:  ");
-                        grpWidth.numb =  grpWidth.add("edittext", undefined, 0);
-                        grpWidth.numb.characters = 9;
+                        var grpWidthText = grpWidth.add("statictext", undefined, "Width:  ");
+                        var grpWidthNumb =  grpWidth.add("edittext", undefined, 0);
+                        grpWidthNumb.characters = 9;
 
                         //Dropdownlist: Add PX, add %
-                        var ResDocUnits = ["ADD PX", "ADD %"];
-                        grpWidth.unitDropDwn = grpWidth.add("dropdownlist", undefined, ResDocUnits);
-                        grpWidth.unitDropDwn.selection = 0;
+                        var AddCanvasDocUnits = ["ADD PX", "ADD %"];
+                        var grpWidthUnitsDropDown = grpWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
+                        grpWidthUnitsDropDown.selection = 0;
 
                         //Crating path to image folder
                         var scriptPath = $.fileName;
@@ -96,65 +93,65 @@ function main() {
 
                         //Image: InfoHover.png
                         const imageInfHov = File(scriptPathString + "InfoHover.png");
-                        grpWidth.image = grpWidth.add("image", undefined, imageInfHov);
+                        var grpWidthImage = grpWidth.add("image", undefined, imageInfHov);
 
                     //Group height
                     var grpHeight = grpUnitValDlg.add("group");
 
                         //Edittext: Height
-                        grpHeight.text = grpHeight.add("statictext", undefined, "Height: ");
-                        grpHeight.numb =  grpHeight.add("edittext", undefined, 0);
-                        grpHeight.numb.characters = 9;
+                        var grpHeightText = grpHeight.add("statictext", undefined, "Height: ");
+                        var grpHeightNumb =  grpHeight.add("edittext", undefined, 0);
+                        grpHeightNumb.characters = 9;
 
                         //Dropdownlist: Add PX, add %
-                        grpHeight.unitDropDwn = grpHeight.add("dropdownlist", undefined, ResDocUnits);
-                        grpHeight.unitDropDwn.selection = 0;
+                        grpHeightUnitDropDown = grpHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
+                        grpHeightUnitDropDown.selection = 0;
 
                         //Image: InfoHover.png
-                        grpHeight.image = grpHeight.add("image", undefined, imageInfHov);
+                        var grpHeightImage = grpHeight.add("image", undefined, imageInfHov);
 
                 //Graphic element proportions constrains (true, false)
 
                 //Uplaoding constrains images
-                const imageCnstrPrpFalse = File(scriptPathString + "ConstrPropFalse.png");
-                const imageCnstrPrpTrue = File(scriptPathString + "ConstrPropTrue.png");
+                const imageCnstrnsProportionFalse = File(scriptPathString + "ConstrPropFalse.png");
+                const imageCnstrnsProportionTrue = File(scriptPathString + "ConstrPropTrue.png");
 
                 //Add constrain image next to dialog
-                var grpDlgUnitValImage = grpUnitVal.add("image", undefined, imageCnstrPrpFalse);
+                var grpDlgUnitValImage = grpUnitVal.add("image", undefined, imageCnstrnsProportionFalse);
                 grpDlgUnitValImage.alignment = "right";
 
             //Anchor display
 
             var grpAnchor = pnlAddCanvas.add("group");
-            grpAnchor.text = grpAnchor.add("statictext", undefined, "Anchor: ");
+            var grpAnchorText = grpAnchor.add("statictext", undefined, "Anchor: ");
 
                 //Creating anchor group box
-                var grpAnchorSquare = grpAnchor.add("group");
-                grpAnchorSquare.orientation = 'column';
+                var grpAnchorSquareBtns = grpAnchor.add("group");
+                grpAnchorSquareBtns.orientation = 'column';
 
                 //Creating anchor gorup lines inside box
-                grpAnchorSquare.line001 = grpAnchorSquare.add("group");
-                grpAnchorSquare.line002 = grpAnchorSquare.add("group");
-                grpAnchorSquare.line003 = grpAnchorSquare.add("group");
+                var grpAnchorSquareBtnsLine001 = grpAnchorSquareBtns.add("group");
+                var grpAnchorSquareBtnsLine002 = grpAnchorSquareBtns.add("group");
+                var grpAnchorSquareBtnsLine003 = grpAnchorSquareBtns.add("group");
 
                     //Image: imageAnchorTrue.png and imageAnchorFalse.png
                     const imageAnchorTrue = File(scriptPathString + "anchorPointerTrue.png");
                     const imageAnchorFalse = File(scriptPathString + "anchorPointerFalse.png");
 
                     //Adding 001 line of buttons
-                    var anchorPosTOPLEFT = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse, "name: anchorPosTOPLEFT");
-                    var anchorPosTOPCENTER = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPosTOPRIGHT = grpAnchorSquare.line001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionTOPLEFT = grpAnchorSquareBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionTOPCENTER = grpAnchorSquareBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionTOPRIGHT = grpAnchorSquareBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
 
                     //Adding 002 line of buttons
-                    var anchorPosMIDDLELEFT = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPosMIDDLECENTER = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorTrue);
-                    var anchorPosMIDDLERIGHT = grpAnchorSquare.line002.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionMIDDLELEFT = grpAnchorSquareBtnsLine002.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionMIDDLECENTER = grpAnchorSquareBtnsLine002.add("iconbutton", undefined, imageAnchorTrue);
+                    var anchorPositionMIDDLERIGHT = grpAnchorSquareBtnsLine002.add("iconbutton", undefined, imageAnchorFalse);
 
                     //Adding 003 line of buttons
-                    var anchorPosBOTTOMLEFT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPosBOTTOMCENTER = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPosBOTTOMRIGHT = grpAnchorSquare.line003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionBOTTOMLEFT = grpAnchorSquareBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionBOTTOMCENTER = grpAnchorSquareBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionBOTTOMRIGHT = grpAnchorSquareBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
 
             //Constrains proportions
             var constrainsProportions = pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
@@ -162,7 +159,7 @@ function main() {
             //Canvas color extension
             var grpCanvExtendColor = pnlAddCanvas.add("group");
 
-                grpCanvExtendColor.text = grpCanvExtendColor.add("statictext", undefined, "Canvas extension color: ");
+                var grpCanvExtendColorText = grpCanvExtendColor.add("statictext", undefined, "Canvas extension color: ");
 
                 var canvExtendColorValues = ["Foreground", "Background", "White", "Black", "Grey", "Other..."];
                 var canvExtendColorDropDwn = grpCanvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
@@ -193,26 +190,23 @@ function main() {
 
             //Creating panel with displayed files
             var pnlDocInfo = grpInfo.add("panel", undefined, pnlDocInfoTitle);
+            pnlDocInfo.alignChildren = "left";          
 
                 //Creating text with displayed files
-                pnlDocInfo.line001 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[1]);
-                pnlDocInfo.line002 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[2]);
-                pnlDocInfo.line003 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[3]);
+                var pnlDocInfoLine001 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[1]);
+                var pnlDocInfoLine002 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[2]);
+                var pnlDocInfoLine003 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[3]);
 
-                pnlDocInfo.line001.characters = 38;
-                pnlDocInfo.line002.characters = 38;
-                pnlDocInfo.line003.characters = 38;
-
-                pnlDocInfo.line001.alignment = "left";
-                pnlDocInfo.line002.alignment = "left";
-                pnlDocInfo.line003.alignment = "left";
+                pnlDocInfoLine001.characters = 38;
+                pnlDocInfoLine002.characters = 38;
+                pnlDocInfoLine003.characters = 38;
 
     ////Buttons validation UI
 
     //Creating button group
     var grpBtns = grpMain.add("group");
+    grpBtns.alignment = [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP];
     grpBtns.orientation = 'column';
-    grpBtns.alignment = [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]
 
         //Accept button
         var btnAccept = grpBtns.add("button", undefined, "Accept");
@@ -227,30 +221,28 @@ function main() {
             //Radial buttons choose files
 
                 //Opened files in PS
-                btnRadChooseFilesActiveDoc.onClick = function() {
+                btnRadChooseFilesActiveDocs.onClick = function() {
 
                     //Refreshing info UI with active documents names
                     docsToPrccssNames = globals.openedFilesInfo;
 
                     //Disabled "Source folder..." button
-                    btnChooseFilesSource.enabled = false;
-                    grpChooseFilesSource.title.enabled = false;
+                    btnChooseFilesSourceFold.enabled = false;
+                    btnChooseFilesSourceFoldTitle.enabled = false;
 
                     //Disabled "Destination folder"" panel title
-                    pnlDestFold.title.enabled = false;
+                    pnlDestFoldTitle.enabled = false;
 
                     //Disabled radButton destination folder
                     btnRadSameFolder.enabled = false;
                     btnRadOtherFolder.enabled = false;
 
-                    //Disabled "destination folder..." button
+                    //Disabled "destination folder..." button            
                     btnDestFold.enabled = false;
-                    grpBtnBrowse.text.enabled = false;
+                    btnDestFoldText.enabled = false;
 
                     //Anabled Add canvas panel
-                    if (pnlAddCanvas.enabled === false) {
-                        pnlAddCanvas.enabled = true;
-                    }
+                    if (pnlAddCanvas.enabled === false) pnlAddCanvas.enabled = true;
 
                     infoUIDisplay(prevDoclinesOpened);
 
@@ -258,16 +250,16 @@ function main() {
                 }
 
                 //Choose source folder
-                btnRadChooseFilesSource.onClick = function() {
+                btnRadChooseFilesSourceFold.onClick = function() {
 
                     //Anabled "Source folder..." button
-                    btnChooseFilesSource.enabled = true;
-                    grpChooseFilesSource.title.enabled = true;
+                    btnChooseFilesSourceFold.enabled = true;
+                    btnChooseFilesSourceFoldTitle.enabled = true;
 
-                    //Unitl there is no choosed folder you have only ability to browse for source folder
-                    if (grpChooseFilesSource.title.text === "Source folder...") {
+                    //Until there is no choosed folder you have only ability to browse source folder
+                    if (btnChooseFilesSourceFoldTitle.text === "Source folder...") {
                         //Disabled "Destination folder"" panel title
-                        pnlDestFold.title.enabled = false;
+                        pnlDestFoldTitle.enabled = false;
 
                         //Disabled radButton destination folder
                         btnRadSameFolder.enabled = false;
@@ -275,17 +267,17 @@ function main() {
 
                         //Disabled "destination folder..." button
                         btnDestFold.enabled = false;
-                        grpBtnBrowse.text.enabled = false;
+                        btnDestFoldText.enabled = false;
 
                         //Button accept disabled if you do not change canvas
-                        if ((grpHeight.numb.text === "0") && (grpWidth.numb.text === "0")) {
+                        if ((grpHeightNumb.text === "0") && (grpWidthNumb.text === "0")) {
                             btnAccept.enabled = true;
                         } else {
                             btnAccept.enabled = false;
                         }
 
                         //Disabled Add canvas panel
-                        if((grpChooseFilesSource.title.text === "Source folder...") || grpBtnBrowse.text.text === "Destination folder...") {
+                        if((btnChooseFilesSourceFoldTitle.text === "Source folder...") || btnDestFoldText.text === "Destination folder...") {
                             pnlAddCanvas.enabled = false;
                         } else {
                             pnlAddCanvas.enabled = true;
@@ -297,16 +289,15 @@ function main() {
 
                     } else {
                         //Anabled "Destination folder"" panel title
-                        pnlDestFold.title.enabled = true;
+                        pnlDestFoldTitle.enabled = true;
 
                         //Anabled radButton destination folder
                         btnRadSameFolder.enabled = true;
                         btnRadOtherFolder.enabled = true;
 
                         //Set radio button "Add canvas in the same folder" to true if "Copy file and add canvas to the other folder" is not checked
-                        if (btnRadOtherFolder.value == false) {
-                            btnRadSameFolder.value = true;
-                        }
+                        if (btnRadOtherFolder.value == false) btnRadSameFolder.value = true;
+
                         //Button seeting accept button to true
                         if(checkingIfWidthAndHeightIs0()) btnAccept.enabled = true;
 
@@ -317,34 +308,35 @@ function main() {
 
                 //Start setting. If there is no active docs, set choose
                 if (app.documents.length === 0) {
-                    btnRadChooseFilesActiveDoc.enabled = false;
-                    btnRadChooseFilesSource.value = true;
-                    btnRadChooseFilesSource.onClick();
+
+                    btnRadChooseFilesActiveDocs.enabled = false;
+                    btnRadChooseFilesSourceFold.notify();
                     btnRadSameFolder.value = true;
                     btnAccept.enabled = false;
+
                 } else {
-                    btnRadChooseFilesActiveDoc.value = true;
-                    btnRadChooseFilesActiveDoc.onClick();
+
+                    btnRadChooseFilesActiveDocs.notify();
+                   
                 }
 
                 //Browse source folder
-                btnChooseFilesSource.onClick = function() {
+                btnChooseFilesSourceFold.onClick = function() {
 
                     //Selection source folder explorer
                     globals.sourceFolder = Folder.selectDialog("Select folder with files to process");
                     //Warning that you didn't choose any folder
-                    if (globals.sourceFolder === null && grpChooseFilesSource.title.text === "Source folder...") {
+                    if (globals.sourceFolder === null && btnChooseFilesSourceFoldTitle.text === "Source folder...") {
                         alert("You have not selected source folder");
                     } else {
                         //Setting source folder as default
                         btnRadSameFolder.value = true;
-                        //Enabled accept button
-                        if ((grpHeight.numb.text === "0") && (grpWidth.numb.text === "0")) btnAccept.enabled = true;
+                        //To do enabling choosing folder when you choose again btnrad
 
                         //Anabled choosing destination
-                        if (grpChooseFilesSource.title.text !== "Source folder...") {
+                        if (btnChooseFilesSourceFoldTitle.text !== "Source folder...") {
                             //Anabled "destination folder"" panel title
-                            pnlDestFold.title.enabled = true;
+                            pnlDestFoldTitle.enabled = true;
 
                             //Anabled Add canvas panel
                             pnlAddCanvas.enabled = true;
@@ -403,7 +395,7 @@ function main() {
                         //Setting name string into statictext next to button target folder
                         if (filesSourceToOpenCounter > 0) {
                             var newTitle = (".../" + globals.sourceFolder.parent.name + "/" + globals.sourceFolder.name).replace(/%20/g, ' ');
-                            grpChooseFilesSource.title.text = newTitle;
+                            btnChooseFilesSourceFoldTitle.text = newTitle;
 
                             //Storing text to use again if you change btnrad to Opened Files
                             globals.prevDoclinesSource = infoUItoText([globals.sourceFileCounter, sourceFileNameDisplay], numbOfDisplayedFiles);
@@ -413,7 +405,7 @@ function main() {
 
                             //Enabled button accept
                             btnAccept.enabled = true;
-                            pnlDestFold.title.enabled = true;
+                            pnlDestFoldTitle.enabled = true;
                             btnRadSameFolder.enabled = true;
                             btnRadOtherFolder.enabled = true;
                             pnlAddCanvas.enabled = true;
@@ -423,12 +415,12 @@ function main() {
                             alert("In choosed folder there is 0 files to process");
                             btnAccept.enabled = false;
                             //Setting to dafault value becouse ou didn't choose what you want to
-                            grpChooseFilesSource.title.text = "Source folder...";
+                            btnChooseFilesSourceFoldTitle.text = "Source folder...";
                             btnAccept.enabled = false;
                             btnRadSameFolder.enabled = false;
                             btnRadOtherFolder.enabled = false;
                             btnDestFold.enabled = false;
-                            grpBtnBrowse.text.enabled = false;
+                            btnDestFoldText.enabled = false;
                             pnlAddCanvas.enabled = false;
 
                             infoUIDisplay([0, "no files to process", "", ""]);
@@ -448,9 +440,9 @@ function main() {
                 btnRadSameFolder.onClick = function() {
                     //Disables to browse destination folder
                     btnDestFold.enabled = false;
-                    grpBtnBrowse.text.enabled = false;
+                    btnDestFoldText.enabled = false;
                     //Enables accept button
-                    if ((grpHeight.numb.text !== "0") || (grpWidth.numb.text !== "0")) btnAccept.enabled = true;
+                    if ((grpHeightNumb.text !== "0") || (grpWidthNumb.text !== "0")) btnAccept.enabled = true;
                     //Enables Add Canvas panel
                     pnlAddCanvas.enabled = true;
                 }
@@ -458,11 +450,11 @@ function main() {
                 btnRadOtherFolder.onClick = function() {
                         //Enables to browse destination folder
                         btnDestFold.enabled = true;
-                        grpBtnBrowse.text.enabled = true;
+                        btnDestFoldText.enabled = true;
                         //Enables accept button
-                        if ((grpHeight.numb.text !== "0") || (grpWidth.numb.text !== "0")) btnAccept.enabled = true;
+                        if ((grpHeightNumb.text !== "0") || (grpWidthNumb.text !== "0")) btnAccept.enabled = true;
                         //Disable Accept button if there is not choosed destination folder
-                        if (grpBtnBrowse.text.text === "Destination folder...") {
+                        if (btnDestFoldText.text === "Destination folder...") {
                             btnAccept.enabled = false;
                             pnlAddCanvas.enabled = false;
                         } else {
@@ -475,21 +467,21 @@ function main() {
                     //Getting destination folder
                     globals.detinationFolder = Folder.selectDialog("Select target folder to save files");
                     //Warning that you didn't choose any folder
-                    if (globals.detinationFolder === null && grpBtnBrowse.text.text === "Destination folder...") {
+                    if (globals.detinationFolder === null && btnDestFoldText.text === "Destination folder...") {
                         alert("You have not selected target folder");
                     }
                     //Setting destination folder name
-                    grpBtnBrowse.text.text = globals.detinationFolder.toString();
+                    btnDestFoldText.text = globals.detinationFolder.toString();
                     if (globals.detinationFolder.toString() === globals.sourceFolder.toString()) {
                         alert("Source folder and target folder are the same.\nNext time choose more wisely");
                         btnRadSameFolder.notify();
                         globals.detinationFolder = null;
-                        grpBtnBrowse.text.text = "Destination folder...";
+                        btnDestFoldText.text = "Destination folder...";
                         return;
                     }
-                    if (grpBtnBrowse.text.text !== "Destination folder...") {
+                    if (btnDestFoldText.text !== "Destination folder...") {
                         //Enables accept button
-                        if ((grpHeight.numb.text !== "0") || (grpWidth.numb.text !== "0")) btnAccept.enabled = true;
+                        if ((grpHeightNumb.text !== "0") || (grpWidthNumb.text !== "0")) btnAccept.enabled = true;
                         //Enables Add canvas panel
                         pnlAddCanvas.enabled = true;
                     }
@@ -503,41 +495,39 @@ function main() {
                     //Disabled accept button becouse Width or Height is equal 0
                     checkingIfWidthAndHeightIs0();
                     //Edittext: Width; if "constrains proportion" is checked, Heigth and Width values are changed in the same time
-                    grpWidth.numb.onChanging = function() {
+                    grpWidthNumb.onChanging = function() {
                         //Removing all non-numeric characters
-                        //grpWidth.numb.text = grpWidth.numb.text.replace(/\D/g,'')
                         if (constrainsProportions.value == true){
-                            grpHeight.numb.text = grpWidth.numb.text;
+                            grpHeightNumb.text = grpWidthNumb.text;
                         }
                         //Disabled accept button if Width or Height is equal 0
                         checkingIfWidthAndHeightIs0();
                     }
 
                     //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked; setting units to PX
-                    grpWidth.unitDropDwn.onChange = function() {
-                        if (grpWidth.unitDropDwn.selection == 0) {grpHeight.unitDropDwn.selection = 0; unitOutcome = "PX"}
-                        else {grpHeight.unitDropDwn.selection = 1;}
+                    grpWidthUnitsDropDown.onChange = function() {
+                        if (grpWidthUnitsDropDown.selection == 0) {grpHeightUnitDropDown.selection = 0; unitOutcome = "PX"}
+                        else {grpHeightUnitDropDown.selection = 1;}
                     }
                     //Image: InfoHover.png; setting tooltip
-                    grpWidth.image.helpTip = "You can substract number by adding '-' before value";
+                    grpWidthImage.helpTip = "You can substract number by adding '-' before value";
                 //Group Height
                     //Edittext: Height; if "constrains proportion" is checked, Heigth and Width values are changed in the same time
-                    grpHeight.numb.onChanging = function() {
+                    grpHeightNumb.onChanging = function() {
                         //Removing all non-numeric characters
-                        //grpHeight.numb.text = grpHeight.numb.text.replace(/\D/g,'')
                         if (constrainsProportions.value == true) {
-                            grpWidth.numb.text = grpHeight.numb.text;
+                            grpWidthNumb.text = grpHeightNumb.text;
                         }
                         //Disabled accept button if Width or Height is equal 0
                         checkingIfWidthAndHeightIs0();
                     }
                     //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked setting units to PERCENT
-                    grpHeight.unitDropDwn.onChange = function() {
-                        if (grpHeight.unitDropDwn.selection == 0) {grpWidth.unitDropDwn.selection = 0; unitOutcome = "PERCENT"}
-                        else {grpWidth.unitDropDwn.selection = 1;}
+                    grpHeightUnitDropDown.onChange = function() {
+                        if (grpHeightUnitDropDown.selection == 0) {grpWidthUnitsDropDown.selection = 0; unitOutcome = "PERCENT"}
+                        else {grpHeightUnitDropDown.selection = 1;}
                     }
                     //Image: InfoHover.png; setting tooltip
-                    grpHeight.image.helpTip = "You can substract number by adding '-' before value";
+                    grpHeightImage.helpTip = "You can substract number by adding '-' before value";
 
                 //Image chains - constrains proportions tooltip
                 grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"
@@ -547,43 +537,43 @@ function main() {
                 var anchorPosOutcome = AnchorPosition.MIDDLECENTER;
 
                 //Adding functionality to buttons in anchor box
-                anchorPosTOPLEFT.onClick = function() {anchorSetingNew(anchorPosTOPLEFT, AnchorPosition.TOPLEFT)}
-                anchorPosTOPCENTER.onClick = function() {anchorSetingNew(anchorPosTOPCENTER, AnchorPosition.TOPCENTER)}
-                anchorPosTOPRIGHT.onClick = function() {anchorSetingNew(anchorPosTOPRIGHT, AnchorPosition.TOPRIGHT)}
+                anchorPositionTOPLEFT.onClick = function() {anchorSetingNew(anchorPositionTOPLEFT, AnchorPosition.TOPLEFT)}
+                anchorPositionTOPCENTER.onClick = function() {anchorSetingNew(anchorPositionTOPCENTER, AnchorPosition.TOPCENTER)}
+                anchorPositionTOPRIGHT.onClick = function() {anchorSetingNew(anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT)}
 
-                anchorPosMIDDLELEFT.onClick = function() {anchorSetingNew(anchorPosMIDDLELEFT, AnchorPosition.MIDDLELEFT)}
-                anchorPosMIDDLECENTER.onClick = function() {anchorSetingNew(anchorPosMIDDLECENTER, AnchorPosition.MIDDLECENTER)}
-                anchorPosMIDDLERIGHT.onClick = function() {anchorSetingNew(anchorPosMIDDLERIGHT, AnchorPosition.MIDDLERIGHT)}
+                anchorPositionMIDDLELEFT.onClick = function() {anchorSetingNew(anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT)}
+                anchorPositionMIDDLECENTER.onClick = function() {anchorSetingNew(anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER)}
+                anchorPositionMIDDLERIGHT.onClick = function() {anchorSetingNew(anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT)}
 
-                anchorPosBOTTOMLEFT.onClick = function() {anchorSetingNew(anchorPosBOTTOMLEFT, AnchorPosition.BOTTOMLEFT)}
-                anchorPosBOTTOMCENTER.onClick = function() {anchorSetingNew(anchorPosBOTTOMCENTER, AnchorPosition.BOTTOMCENTER)}
-                anchorPosBOTTOMRIGHT.onClick = function() {anchorSetingNew(anchorPosBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT)}
+                anchorPositionBOTTOMLEFT.onClick = function() {anchorSetingNew(anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT)}
+                anchorPositionBOTTOMCENTER.onClick = function() {anchorSetingNew(anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER)}
+                anchorPositionBOTTOMRIGHT.onClick = function() {anchorSetingNew(anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT)}
 
 
                 //Constrain proportions checkbox
                 constrainsProportions.onClick = function() {
                     //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
                     if (constrainsProportions.value == true) {
-                        grpDlgUnitValImage.image = imageCnstrPrpTrue;
+                        grpDlgUnitValImage.image = imageCnstrnsProportionTrue;
                         grpDlgUnitValImage.helpTip = "Width and Height same value anabled"}
                         else {
-                            grpDlgUnitValImage.image = imageCnstrPrpFalse;
+                            grpDlgUnitValImage.image = imageCnstrnsProportionFalse;
                             grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"}
 
                             //Set the same heighest value in "Height" and "Width"
                             if (constrainsProportions.value == true) {
                                 //If Height and Width is negative or equal 0, it set in both most negative number
-                                if((parseInt(grpWidth.numb.text, 10) <= 0) && (parseInt(grpHeight.numb.text, 10) <= 0)) {
-                                    if (parseInt(grpWidth.numb.text, 10) < parseInt(grpHeight.numb.text, 10)) {
-                                        grpWidth.numb.onChanging();
+                                if((parseInt(grpWidthNumb.text, 10) <= 0) && (parseInt(grpHeightNumb.text, 10) <= 0)) {
+                                    if (parseInt(grpWidthNumb.text, 10) < parseInt(grpHeightNumb.text, 10)) {
+                                        grpWidthNumb.onChanging();
                                     }
                                     //If some value is postive, set in both most positive number
-                                    else {grpHeight.numb.onChanging();}
+                                    else {grpHeightNumb.onChanging();}
                                 } else {
-                                    if (parseInt(grpWidth.numb.text, 10) > parseInt(grpHeight.numb.text, 10)) {
-                                        grpWidth.numb.onChanging();}
+                                    if (parseInt(grpWidthNumb.text, 10) > parseInt(grpHeightNumb.text, 10)) {
+                                        grpWidthNumb.onChanging();}
                                         else {
-                                            grpHeight.numb.onChanging();}
+                                            grpHeightNumb.onChanging();}
                                         }
                                     }
                 }
@@ -646,9 +636,9 @@ function main() {
                                 ///Buttons validation UI
                                 //Accept
                                 btnAccept.onClick = function() {
-                                    startWindow.close();
-                                    changeFileAndSave(grpWidth.numb.text, grpHeight.numb.text, unitOutcome, anchorPosOutcome);
-                                    if (btnRadChooseFilesActiveDoc.value == true) {
+                                    mainWindow.close();
+                                    changeFileAndSave(grpWidthNumb.text, grpHeightNumb.text, unitOutcome, anchorPosOutcome);
+                                    if (btnRadChooseFilesActiveDocs.value == true) {
                                         alert("You added canvas to " + docsOpenedCounter + " files");
                                     } else {
                                         alert("You added canvas to " + globals.sourceFileCounter + " files");
@@ -656,7 +646,7 @@ function main() {
                                 }
                                 //Cancel
                                 btnCancel.onClick = function() {
-                                    startWindow.close();
+                                    mainWindow.close();
                                 }
 
 
@@ -665,7 +655,7 @@ function main() {
     //Resizng canvas unfctionality
     function changeFileAndSave(addWidth, addHeight, units, anchor){
         //If you choose radio button "Opened files"
-        if (btnRadChooseFilesActiveDoc.value == true){
+        if (btnRadChooseFilesActiveDocs.value == true){
 
             while (app.documents.length > 0) {
 
@@ -678,7 +668,7 @@ function main() {
         }
 
         //If you choose radio button "Choose folder"
-        if (btnRadChooseFilesSource.value == true) {
+        if (btnRadChooseFilesSourceFold.value == true) {
 
             for(var i = 0; i < globals.sourceFiles.length; i++) {
 
@@ -811,9 +801,9 @@ function main() {
         //Reseting buttons to empty state
         var anchorArray = new Array;
          anchorArray.push(
-             anchorPosTOPLEFT, anchorPosTOPCENTER, anchorPosTOPRIGHT,
-            anchorPosMIDDLELEFT, anchorPosMIDDLECENTER, anchorPosMIDDLERIGHT,
-            anchorPosBOTTOMLEFT, anchorPosBOTTOMCENTER, anchorPosBOTTOMRIGHT
+             anchorPositionTOPLEFT, anchorPositionTOPCENTER, anchorPositionTOPRIGHT,
+            anchorPositionMIDDLELEFT, anchorPositionMIDDLECENTER, anchorPositionMIDDLERIGHT,
+            anchorPositionBOTTOMLEFT, anchorPositionBOTTOMCENTER, anchorPositionBOTTOMRIGHT
         )
 
         for (i = 0; i < anchorArray.length; i++){
@@ -893,7 +883,7 @@ function main() {
     }
 
     function checkingIfWidthAndHeightIs0() {
-        if ((grpHeight.numb.text === "0") && (grpWidth.numb.text === "0")) {
+        if ((grpHeightNumb.text === "0") && (grpWidthNumb.text === "0")) {
             btnAccept.enabled = false;
         } else {
             btnAccept.enabled = true;
@@ -906,11 +896,18 @@ function main() {
 
         pnlDocInfo.text = pnlDocInfoTitle;
 
-        pnlDocInfo.line001.text = prevDoclines[1];
-        pnlDocInfo.line002.text = prevDoclines[2];
-        pnlDocInfo.line003.text = prevDoclines[3];
+        pnlDocInfoLine001.text = prevDoclines[1];
+        pnlDocInfoLine002.text = prevDoclines[2];
+        pnlDocInfoLine003.text = prevDoclines[3];
 
     }
 
-    startWindow.show();
+    mainWindow.show();
 }
+function createGroupUI(grpMain) {
+    var grpInfo = grpMain.add("group");
+    grpInfo.orientation = 'column';
+    grpInfo.alignChildren = "left";
+    return grpInfo;
+}
+
