@@ -405,6 +405,12 @@ function main() {
                             pnlAddCanvas.enabled = true;
                             checkingIfWidthAndHeightIs0();
 
+                            if (filesSourceToOpenCounter > 1) {
+                                alert("In folder are " + globals.sourceFileCounter + " files");
+                            } else {
+                                alert("In folder is " + globals.sourceFileCounter + " file");
+                            }
+                            
                         } else {
                             alert("In choosed folder there is 0 files to process");
                             btnAccept.enabled = false;
@@ -420,11 +426,6 @@ function main() {
                             infoUIDisplay([0, "no files to process", "", ""]);
                         }
 
-                        if (globals.sourceFileCounter > 1) {
-                            alert("In folder are " + globals.sourceFileCounter + " files");
-                        } else {
-                            alert("In folder is " + globals.sourceFileCounter + " file");
-                        }
                     }
                 }
 
