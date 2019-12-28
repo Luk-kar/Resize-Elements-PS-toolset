@@ -270,18 +270,10 @@ function main() {
                         btnDestFoldText.enabled = false;
 
                         //Button accept disabled if you do not change canvas
-                        if ((grpHeightNumb.text === "0") && (grpWidthNumb.text === "0")) {
-                            btnAccept.enabled = true;
-                        } else {
-                            btnAccept.enabled = false;
-                        }
+                        checkingIfWidthAndHeightIs0();
 
                         //Disabled Add canvas panel
-                        if((btnChooseFilesSourceFoldTitle.text === "Source folder...") || btnDestFoldText.text === "Destination folder...") {
-                            pnlAddCanvas.enabled = false;
-                        } else {
-                            pnlAddCanvas.enabled = true;
-                        }
+                        pnlAddCanvas.enabled = false;
 
                         infoUIDisplay([0, "no files to process", "", ""]);
 
@@ -295,8 +287,11 @@ function main() {
                         btnRadSameFolder.enabled = true;
                         btnRadOtherFolder.enabled = true;
 
-                        //Set radio button "Add canvas in the same folder" to true if "Copy file and add canvas to the other folder" is not checked
                         if (btnRadOtherFolder.value == false) btnRadSameFolder.value = true;
+                        else {
+                            btnDestFold.enabled = true;
+                            btnDestFoldText.enabled = true;
+                        }
 
                         //Button seeting accept button to true
                         if(checkingIfWidthAndHeightIs0()) btnAccept.enabled = true;
@@ -331,7 +326,6 @@ function main() {
                     } else {
                         //Setting source folder as default
                         btnRadSameFolder.value = true;
-                        //To do enabling choosing folder when you choose again btnrad
 
                         //Anabled choosing destination
                         if (btnChooseFilesSourceFoldTitle.text !== "Source folder...") {
@@ -442,7 +436,7 @@ function main() {
                     btnDestFold.enabled = false;
                     btnDestFoldText.enabled = false;
                     //Enables accept button
-                    if ((grpHeightNumb.text !== "0") || (grpWidthNumb.text !== "0")) btnAccept.enabled = true;
+                    checkingIfWidthAndHeightIs0();
                     //Enables Add Canvas panel
                     pnlAddCanvas.enabled = true;
                 }
@@ -452,7 +446,7 @@ function main() {
                         btnDestFold.enabled = true;
                         btnDestFoldText.enabled = true;
                         //Enables accept button
-                        if ((grpHeightNumb.text !== "0") || (grpWidthNumb.text !== "0")) btnAccept.enabled = true;
+                        checkingIfWidthAndHeightIs0();
                         //Disable Accept button if there is not choosed destination folder
                         if (btnDestFoldText.text === "Destination folder...") {
                             btnAccept.enabled = false;
@@ -479,10 +473,10 @@ function main() {
                         btnDestFoldText.text = "Destination folder...";
                         return;
                     }
+
                     if (btnDestFoldText.text !== "Destination folder...") {
                         //Enables accept button
-                        if ((grpHeightNumb.text !== "0") || (grpWidthNumb.text !== "0")) btnAccept.enabled = true;
-                        //Enables Add canvas panel
+                        checkingIfWidthAndHeightIs0();
                         pnlAddCanvas.enabled = true;
                     }
                 }
@@ -834,7 +828,7 @@ function main() {
                 }
             }
 
-            //Adding condition if there no docs to display
+            //Adding condition if there no docs to display to avoid nondefined
             if (docsToPrccssNames.length === 0) {docsToPrccssNames = "";}
 
             //Return prevDocArray to use again in chooseFilesActiveDoc.onClick
