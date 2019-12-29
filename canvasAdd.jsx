@@ -170,36 +170,23 @@ function main() {
             //Number of files displayed in "Info UI"
             var numbOfDisplayedFiles = 2;
 
-            //Creating and storing array of files opened in PS
-            if (app.documents.length > 0) {
-                globals.openedFilesInfo = docsOpenedNames(numbOfDisplayedFiles);
-            } else {
-                globals.openedFilesInfo = new Array;
-                //Number of files to process
-                globals.openedFilesInfo[0] = 0;
-                //Names of files to display
-                globals.openedFilesInfo[1] = "";
+            //Creating panel to display to files
+            var pnlDocInfo = grpInfo.add("panel", undefined, undefined);
+            pnlDocInfo.alignChildren = "left";
+            
+            //Creating empty lines of text to poulate later
+            var plnDocInfoLines = new Array;
+
+            for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
+                plnDocInfoLines[i] = pnlDocInfo.add("statictext", undefined, undefined);
+                plnDocInfoLines[i].characters = 38;
             }
 
+            //Creating and storing array of files opened in PS
+            var openedFilesNamesInfoUI = docsOpenedNames(numbOfDisplayedFiles);
+
             //Text to populate info UI
-            var prevDoclinesOpened = infoUItoText(globals.openedFilesInfo, numbOfDisplayedFiles);
-            var docsOpenedCounter = prevDoclinesOpened[0];
-
-            //Creating panel title "[number of displayed files] of [number of opened in PS files] files"
-            var pnlDocInfoTitle = ("Files to process: " + docsOpenedCounter).toString();
-
-            //Creating panel with displayed files
-            var pnlDocInfo = grpInfo.add("panel", undefined, pnlDocInfoTitle);
-            pnlDocInfo.alignChildren = "left";          
-
-                //Creating text with displayed files
-                var pnlDocInfoLine001 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[1]);
-                var pnlDocInfoLine002 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[2]);
-                var pnlDocInfoLine003 = pnlDocInfo.add("statictext", undefined, prevDoclinesOpened[3]);
-
-                pnlDocInfoLine001.characters = 38;
-                pnlDocInfoLine002.characters = 38;
-                pnlDocInfoLine003.characters = 38;
+            infoUItoDisplay(openedFilesNamesInfoUI, documents.length, numbOfDisplayedFiles);
 
     ////Buttons validation UI
 
@@ -223,9 +210,6 @@ function main() {
                 //Opened files in PS
                 btnRadChooseFilesActiveDocs.onClick = function() {
 
-                    //Refreshing info UI with active documents names
-                    docsToPrccssNames = globals.openedFilesInfo;
-
                     //Disabled "Source folder..." button
                     btnChooseFilesSourceFold.enabled = false;
                     btnChooseFilesSourceFoldTitle.enabled = false;
@@ -244,7 +228,7 @@ function main() {
                     //Anabled Add canvas panel
                     if (pnlAddCanvas.enabled === false) pnlAddCanvas.enabled = true;
 
-                    infoUIDisplay(prevDoclinesOpened);
+                    infoUItoDisplay(openedFilesNamesInfoUI, documents.length, numbOfDisplayedFiles);
 
                     checkingIfWidthAndHeightIs0();
                 }
@@ -275,7 +259,8 @@ function main() {
                         //Disabled Add canvas panel
                         pnlAddCanvas.enabled = false;
 
-                        infoUIDisplay([0, "no files to process", "", ""]);
+                        //Uptade info UI with files from source folder
+                        infoUItoDisplay(sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
 
                         btnAccept.enabled = false;
 
@@ -296,8 +281,8 @@ function main() {
                         //Button seeting accept button to true
                         if(checkingIfWidthAndHeightIs0()) btnAccept.enabled = true;
 
-                        //Refresh of names files in "Info UI"
-                        infoUIDisplay(globals.prevDoclinesSource);
+                        //Uptade info UI with files from source folder
+                        infoUItoDisplay(sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
                     }
                 }
 
@@ -391,11 +376,8 @@ function main() {
                             var newTitle = (".../" + globals.sourceFolder.parent.name + "/" + globals.sourceFolder.name).replace(/%20/g, ' ');
                             btnChooseFilesSourceFoldTitle.text = newTitle;
 
-                            //Storing text to use again if you change btnrad to Opened Files
-                            globals.prevDoclinesSource = infoUItoText([globals.sourceFileCounter, sourceFileNameDisplay], numbOfDisplayedFiles);
-
-                            //Update of names files
-                            infoUIDisplay(globals.prevDoclinesSource);
+                            //Uptade info UI with files from source folder
+                            infoUItoDisplay(sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
 
                             //Enabled button accept
                             btnAccept.enabled = true;
@@ -410,9 +392,9 @@ function main() {
                             } else {
                                 alert("In folder is " + globals.sourceFileCounter + " file");
                             }
-                            
+
                         } else {
-                            alert("In choosed folder there is 0 files to process");
+                            alert("In choosed folder there is no files to process");
                             btnAccept.enabled = false;
                             //Setting to dafault value becouse ou didn't choose what you want to
                             btnChooseFilesSourceFoldTitle.text = "Source folder...";
@@ -813,68 +795,58 @@ function main() {
     }
 
     //Populating array with activeDocuments
-    function docsOpenedNames(displayedFiles) {
+    function docsOpenedNames(numbOfDisplayedFiles) {
 
-            //Counter of active docs
-            var docsOpenedCounter = app.documents.length;
+        //Creating array of docs to display
+        var docsToPrccssNames = new Array;
 
-            //Creating array of docs to display
-            var docsToPrccssNames = new Array;
+        for (var i = 0; (i < numbOfDisplayedFiles) && (i < app.documents.length); i++) {
+            docsToPrccssNames[i] = app.documents[i].name;
+        }
 
-            var infoUICounter = 0;
-            for (var i = 0; i < app.documents.length; i++) {
-                infoUICounter++;
-                if (infoUICounter <= (displayedFiles + 1)){
-                    docsToPrccssNames[i] = app.documents[i].name;
-                }
-            }
-
-            //Adding condition if there no docs to display to avoid nondefined
-            if (docsToPrccssNames.length === 0) {docsToPrccssNames = "";}
-
-            //Return prevDocArray to use again in chooseFilesActiveDoc.onClick
-            return [docsOpenedCounter, docsToPrccssNames];
+        //Return prevDocArray to use again in chooseFilesActiveDoc.onClick
+        return docsToPrccssNames;
     }
 
-    //Text to disaplay in panel info
-    function infoUItoText(filesInfo, numbOfDisplayedFiles){
-        //Creating counter of files to process
-        var docsToPrccssCounter = filesInfo[0];
-        //Creating array of files to display
-        var docsToPrccssNames = filesInfo[1];
+    function infoUItoDisplay(filesNamesInfoUI, filesNumberInfoUI, numbOfDisplayedFiles) {
 
         //Creating deafult files display
-        var prevDocName = new Array;
-        for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
-            prevDocName[i] = "";
+        var prevDocNames = new Array;
+
+        //Default empty file list
+        for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) prevDocNames[i] = "";
+        prevDocNames[0] = "no files to process";
+
+        if (filesNamesInfoUI.length > 0) {
+            //Filing default display with names of files to process 
+            for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = filesNamesInfoUI[i];
+
+            //Creating "," for files names
+            var signsComas = new Array;
+
+            for (var i = 0; i < filesNamesInfoUI.length; i++) signsComas[i] = "";
+            for (var i = 1; i < filesNamesInfoUI.length; i++) signsComas[i] = ",";
+            if (filesNumberInfoUI > filesNamesInfoUI.length) signsComas[0] = ",";
+            signsComas.reverse();
+
+            // Adding "," to file names
+            for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = prevDocNames[i] + signsComas[i];
+
+            //Creating "..." at the end of file list, if you reach limit of displayed files
+            if (filesNumberInfoUI > filesNamesInfoUI.length) prevDocNames[prevDocNames.length -1] = "(...)";
         }
-        prevDocName[0] = "no files to process";
 
-        //Filing deafult files display with files names
-        for (var i = 0; i < docsToPrccssNames.length; i++) {
-            prevDocName[i] = docsToPrccssNames[i];
+        return infoUIwriteText(prevDocNames, filesNumberInfoUI);
+    }
+    
+    function infoUIwriteText(prevDocNames, filesNumberInfoUI) {
+        //Adding created names into empty "InfoUI" list
+        for (var i = 0; i < plnDocInfoLines.length; i++) {
+        plnDocInfoLines[i].text = prevDocNames[i];
         }
 
-        //Creating "," for files names
-        var signsComas = new Array;
-        for (var i = 0; i < numbOfDisplayedFiles; i++) {
-            signsComas[i] = "";
-        }
-        for (var i = 1; i < docsToPrccssNames.length; i++) {
-            signsComas[i] = ",";
-        }
-        signsComas.reverse();
-
-        // Adding "," to file names
-        var prevDocline001 = prevDocName[0] + signsComas[0];
-        var prevDocline002 = prevDocName[1] + signsComas[1];
-        var prevDocline003 = prevDocName[2];
-
-        //Creating "..." at the end of file list, if you reach limit of displayed files
-        if(docsToPrccssNames.length === (numbOfDisplayedFiles + 1)) prevDocline003 = "(...)"
-
-        var prevDoclines = [docsToPrccssCounter, prevDocline001, prevDocline002, prevDocline003];
-        return prevDoclines;
+        //Adding number of files to "Info UI" title panel
+        pnlDocInfo.text =  "Files to process: " + filesNumberInfoUI;
     }
 
     function checkingIfWidthAndHeightIs0() {
