@@ -183,10 +183,10 @@ function main() {
             }
 
             //Creating and storing array of files opened in PS
-            var openedFilesNamesInfoUI = docsOpenedNames(numbOfDisplayedFiles);
+            docsOpenedNames(numbOfDisplayedFiles);
 
             //Text to populate info UI
-            infoUItoDisplay(openedFilesNamesInfoUI, documents.length, numbOfDisplayedFiles);
+            infoUItoDisplay(docsOpenedNames(numbOfDisplayedFiles), documents.length, numbOfDisplayedFiles);
 
     ////Buttons validation UI
 
@@ -228,7 +228,7 @@ function main() {
                     //Anabled Add canvas panel
                     if (pnlAddCanvas.enabled === false) pnlAddCanvas.enabled = true;
 
-                    infoUItoDisplay(openedFilesNamesInfoUI, documents.length, numbOfDisplayedFiles);
+                    infoUItoDisplay(docsOpenedNames(numbOfDisplayedFiles), documents.length, numbOfDisplayedFiles);
 
                     checkingIfWidthAndHeightIs0();
                 }
@@ -260,7 +260,7 @@ function main() {
                         pnlAddCanvas.enabled = false;
 
                         //Uptade info UI with files from source folder
-                        infoUItoDisplay(sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
+                        infoUItoDisplay([], 0, numbOfDisplayedFiles);
 
                         btnAccept.enabled = false;
 
@@ -282,7 +282,7 @@ function main() {
                         if(checkingIfWidthAndHeightIs0()) btnAccept.enabled = true;
 
                         //Uptade info UI with files from source folder
-                        infoUItoDisplay(sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
+                        infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
                     }
                 }
 
@@ -333,7 +333,7 @@ function main() {
                         globals.sourceFiles = [];
 
                         //Creating names to display in info UI
-                        var sourceFileNameDisplay = new Array;
+                        globals.sourceFileNameDisplay = new Array;
 
                         //Number of source files names to display in info UI
                         globals.sourceFileCounter = 0;
@@ -361,12 +361,12 @@ function main() {
                             //Rid off of index of empty names in display
                             if ((globals.sourceFilesPaths[i] !== undefined) && (filesSourceToOpenCounter < (numbOfDisplayedFiles + 1))) {
                                 // Make sure that index starts from 0
-                                sourceFileNameDisplay[filesSourceToOpenCounter] = globals.sourceFilesPaths[i];
+                                globals.sourceFileNameDisplay[filesSourceToOpenCounter] = globals.sourceFilesPaths[i];
                                 //Calculating lenght of file name to extract from path file
-                                var sourceFileNameLength = sourceFileNameDisplay[filesSourceToOpenCounter].toString().length;
+                                var sourceFileNameLength = globals.sourceFileNameDisplay[filesSourceToOpenCounter].toString().length;
                                 var sourceFolFileDiff = sourceFileNameLength - sourceFolderLength;
                                 //Extracting name from path
-                                sourceFileNameDisplay[filesSourceToOpenCounter] = (sourceFileNameDisplay[filesSourceToOpenCounter].toString().slice(-sourceFolFileDiff));
+                                globals.sourceFileNameDisplay[filesSourceToOpenCounter] = (globals.sourceFileNameDisplay[filesSourceToOpenCounter].toString().slice(-sourceFolFileDiff));
                                 filesSourceToOpenCounter++;
                             }
                         }
@@ -377,7 +377,7 @@ function main() {
                             btnChooseFilesSourceFoldTitle.text = newTitle;
 
                             //Uptade info UI with files from source folder
-                            infoUItoDisplay(sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
+                            infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
 
                             //Enabled button accept
                             btnAccept.enabled = true;
