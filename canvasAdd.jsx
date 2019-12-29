@@ -405,7 +405,7 @@ function main() {
                             btnDestFoldText.enabled = false;
                             pnlAddCanvas.enabled = false;
 
-                            infoUIDisplay([0, "no files to process", "", ""]);
+                            infoUItoDisplay([], 0, numbOfDisplayedFiles);
                         }
 
                     }
@@ -855,18 +855,6 @@ function main() {
         } else {
             btnAccept.enabled = true;
         }
-    }
-
-    function infoUIDisplay(prevDoclines) {
-
-        var pnlDocInfoTitle = ("Files to process: " + prevDoclines[0]).toString();
-
-        pnlDocInfo.text = pnlDocInfoTitle;
-
-        pnlDocInfoLine001.text = prevDoclines[1];
-        pnlDocInfoLine002.text = prevDoclines[2];
-        pnlDocInfoLine003.text = prevDoclines[3];
-
     }
 
     mainWindow.show();
