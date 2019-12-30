@@ -803,7 +803,6 @@ function main() {
     }
 
     function infoUItoDisplay(filesNamesInfoUI, filesNumberInfoUI, numbOfDisplayedFiles) {
-        alert(infoUItoDisplay);
 
         if (typeof filesNamesInfoUI == "undefined") {
         filesNamesInfoUI = [];
@@ -859,6 +858,7 @@ function main() {
 
     mainWindow.show();
 }
+
 function createGroupUI(grpMain) {
     var grpInfo = grpMain.add("group");
     grpInfo.orientation = 'column';
