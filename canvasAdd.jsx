@@ -182,12 +182,6 @@ function main() {
                 plnDocInfoLines[i].characters = 38;
             }
 
-            //Creating and storing array of files opened in PS
-            docsOpenedNames(numbOfDisplayedFiles);
-
-            //Text to populate info UI
-            infoUItoDisplay(docsOpenedNames(numbOfDisplayedFiles), documents.length, numbOfDisplayedFiles);
-
     ////Buttons validation UI
 
     //Creating button group
@@ -260,7 +254,7 @@ function main() {
                         pnlAddCanvas.enabled = false;
 
                         //Uptade info UI with files from source folder
-                        infoUItoDisplay([], 0, numbOfDisplayedFiles);
+                        infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles);
 
                         btnAccept.enabled = false;
 
@@ -405,7 +399,7 @@ function main() {
                             btnDestFoldText.enabled = false;
                             pnlAddCanvas.enabled = false;
 
-                            infoUItoDisplay([], 0, numbOfDisplayedFiles);
+                            infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles);
                         }
 
                     }
@@ -809,6 +803,12 @@ function main() {
     }
 
     function infoUItoDisplay(filesNamesInfoUI, filesNumberInfoUI, numbOfDisplayedFiles) {
+        alert(infoUItoDisplay);
+
+        if (typeof filesNamesInfoUI == "undefined") {
+        filesNamesInfoUI = [];
+        filesNumberInfoUI = 0;
+        }
 
         //Creating deafult files display
         var prevDocNames = new Array;
