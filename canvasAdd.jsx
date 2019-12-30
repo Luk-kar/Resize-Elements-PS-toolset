@@ -222,9 +222,9 @@ function main() {
                     //Anabled Add canvas panel
                     if (pnlAddCanvas.enabled === false) pnlAddCanvas.enabled = true;
 
-                    infoUItoDisplay(docsOpenedNames(numbOfDisplayedFiles), documents.length, numbOfDisplayedFiles);
+                    infoUItoDisplay(docsOpenedNames(numbOfDisplayedFiles), documents.length, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
 
-                    checkingIfWidthAndHeightIs0();
+                    checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                 }
 
                 //Choose source folder
@@ -248,13 +248,13 @@ function main() {
                         btnDestFoldText.enabled = false;
 
                         //Button accept disabled if you do not change canvas
-                        checkingIfWidthAndHeightIs0();
+                        checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
 
                         //Disabled Add canvas panel
                         pnlAddCanvas.enabled = false;
 
                         //Uptade info UI with files from source folder
-                        infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles);
+                        infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
 
                         btnAccept.enabled = false;
 
@@ -273,10 +273,10 @@ function main() {
                         }
 
                         //Button seeting accept button to true
-                        if(checkingIfWidthAndHeightIs0()) btnAccept.enabled = true;
+                        checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
 
                         //Uptade info UI with files from source folder
-                        infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
+                        infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
                     }
                 }
 
@@ -371,7 +371,7 @@ function main() {
                             btnChooseFilesSourceFoldTitle.text = newTitle;
 
                             //Uptade info UI with files from source folder
-                            infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles);
+                            infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
 
                             //Enabled button accept
                             btnAccept.enabled = true;
@@ -379,7 +379,7 @@ function main() {
                             btnRadSameFolder.enabled = true;
                             btnRadOtherFolder.enabled = true;
                             pnlAddCanvas.enabled = true;
-                            checkingIfWidthAndHeightIs0();
+                            checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
 
                             if (filesSourceToOpenCounter > 1) {
                                 alert("In folder are " + globals.sourceFileCounter + " files");
@@ -399,7 +399,7 @@ function main() {
                             btnDestFoldText.enabled = false;
                             pnlAddCanvas.enabled = false;
 
-                            infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles);
+                            infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
                         }
 
                     }
@@ -413,7 +413,7 @@ function main() {
                     btnDestFold.enabled = false;
                     btnDestFoldText.enabled = false;
                     //Enables accept button
-                    checkingIfWidthAndHeightIs0();
+                    checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                     //Enables Add Canvas panel
                     pnlAddCanvas.enabled = true;
                 }
@@ -423,7 +423,7 @@ function main() {
                         btnDestFold.enabled = true;
                         btnDestFoldText.enabled = true;
                         //Enables accept button
-                        checkingIfWidthAndHeightIs0();
+                        checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                         //Disable Accept button if there is not choosed destination folder
                         if (btnDestFoldText.text === "Destination folder...") {
                             btnAccept.enabled = false;
@@ -453,7 +453,7 @@ function main() {
 
                     if (btnDestFoldText.text !== "Destination folder...") {
                         //Enables accept button
-                        checkingIfWidthAndHeightIs0();
+                        checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                         pnlAddCanvas.enabled = true;
                     }
                 }
@@ -464,7 +464,7 @@ function main() {
                     //Setting unit to use in resizeCanvas(); unit "PX" as deafult becouse "opened files" is true; Setting blocade on accept becouse Width and Height is 0
                     var unitOutcome = "PX";
                     //Disabled accept button becouse Width or Height is equal 0
-                    checkingIfWidthAndHeightIs0();
+                    checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                     //Edittext: Width; if "constrains proportion" is checked, Heigth and Width values are changed in the same time
                     grpWidthNumb.onChanging = function() {
                         //Removing all non-numeric characters
@@ -472,7 +472,7 @@ function main() {
                             grpHeightNumb.text = grpWidthNumb.text;
                         }
                         //Disabled accept button if Width or Height is equal 0
-                        checkingIfWidthAndHeightIs0();
+                        checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                     }
 
                     //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked; setting units to PX
@@ -490,7 +490,7 @@ function main() {
                             grpWidthNumb.text = grpHeightNumb.text;
                         }
                         //Disabled accept button if Width or Height is equal 0
-                        checkingIfWidthAndHeightIs0();
+                        checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                     }
                     //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked setting units to PERCENT
                     grpHeightUnitDropDown.onChange = function() {
@@ -787,75 +787,7 @@ function main() {
         //Sending information which anchor is marked for resizeCanvas()
         anchorPosOutcome = anchorString;
     }
-
-    //Populating array with activeDocuments
-    function docsOpenedNames(numbOfDisplayedFiles) {
-
-        //Creating array of docs to display
-        var docsToPrccssNames = new Array;
-
-        for (var i = 0; (i < numbOfDisplayedFiles) && (i < app.documents.length); i++) {
-            docsToPrccssNames[i] = app.documents[i].name;
-        }
-
-        //Return prevDocArray to use again in chooseFilesActiveDoc.onClick
-        return docsToPrccssNames;
-    }
-
-    function infoUItoDisplay(filesNamesInfoUI, filesNumberInfoUI, numbOfDisplayedFiles) {
-
-        if (typeof filesNamesInfoUI == "undefined") {
-        filesNamesInfoUI = [];
-        filesNumberInfoUI = 0;
-        }
-
-        //Creating deafult files display
-        var prevDocNames = new Array;
-
-        //Default empty file list
-        for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) prevDocNames[i] = "";
-        prevDocNames[0] = "no files to process";
-
-        if (filesNamesInfoUI.length > 0) {
-            //Filing default display with names of files to process 
-            for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = filesNamesInfoUI[i];
-
-            //Creating "," for files names
-            var signsComas = new Array;
-
-            for (var i = 0; i < filesNamesInfoUI.length; i++) signsComas[i] = "";
-            for (var i = 1; i < filesNamesInfoUI.length; i++) signsComas[i] = ",";
-            if (filesNumberInfoUI > filesNamesInfoUI.length) signsComas[0] = ",";
-            signsComas.reverse();
-
-            // Adding "," to file names
-            for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = prevDocNames[i] + signsComas[i];
-
-            //Creating "..." at the end of file list, if you reach limit of displayed files
-            if (filesNumberInfoUI > filesNamesInfoUI.length) prevDocNames[prevDocNames.length -1] = "(...)";
-        }
-
-        return infoUIwriteText(prevDocNames, filesNumberInfoUI);
-    }
     
-    function infoUIwriteText(prevDocNames, filesNumberInfoUI) {
-        //Adding created names into empty "InfoUI" list
-        for (var i = 0; i < plnDocInfoLines.length; i++) {
-        plnDocInfoLines[i].text = prevDocNames[i];
-        }
-
-        //Adding number of files to "Info UI" title panel
-        pnlDocInfo.text =  "Files to process: " + filesNumberInfoUI;
-    }
-
-    function checkingIfWidthAndHeightIs0() {
-        if ((grpHeightNumb.text === "0") && (grpWidthNumb.text === "0")) {
-            btnAccept.enabled = false;
-        } else {
-            btnAccept.enabled = true;
-        }
-    }
-
     mainWindow.show();
 }
 
@@ -866,3 +798,70 @@ function createGroupUI(grpMain) {
     return grpInfo;
 }
 
+function checkingIfWidthAndHeightIs0(Numb001, Numb002, btnEnabled) {
+    if ((Numb001.text === "0") && (Numb002.text === "0")) {
+        btnEnabled.enabled = false;
+    } else {
+        btnEnabled.enabled = true;
+    }
+}
+
+//Used later to dispaly names of opened files
+function docsOpenedNames(numbOfDisplayedFiles) {
+
+    //Creating array of docs to display
+    var docsToPrccssNames = new Array;
+
+    for (var i = 0; (i < numbOfDisplayedFiles) && (i < app.documents.length); i++) {
+        docsToPrccssNames[i] = app.documents[i].name;
+    }
+
+    //Return prevDocArray to use again in chooseFilesActiveDoc.onClick
+    return docsToPrccssNames;
+}
+
+function infoUItoDisplay(filesNamesInfoUI, filesNumberInfoUI, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
+
+    if (typeof filesNamesInfoUI == "undefined") {
+    filesNamesInfoUI = [];
+    filesNumberInfoUI = 0;
+    }
+
+    //Creating deafult files display
+    var prevDocNames = new Array;
+
+    //Default empty file list
+    for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) prevDocNames[i] = "";
+    prevDocNames[0] = "no files to process";
+
+    if (filesNamesInfoUI.length > 0) {
+        //Filing default display with names of files to process 
+        for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = filesNamesInfoUI[i];
+
+        //Creating "," for files names
+        var signsComas = new Array;
+
+        for (var i = 0; i < filesNamesInfoUI.length; i++) signsComas[i] = "";
+        for (var i = 1; i < filesNamesInfoUI.length; i++) signsComas[i] = ",";
+        if (filesNumberInfoUI > filesNamesInfoUI.length) signsComas[0] = ",";
+        signsComas.reverse();
+
+        // Adding "," to file names
+        for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = prevDocNames[i] + signsComas[i];
+
+        //Creating "..." at the end of file list, if you reach limit of displayed files
+        if (filesNumberInfoUI > filesNamesInfoUI.length) prevDocNames[prevDocNames.length -1] = "(...)";
+    }
+
+    return infoUIwriteText(prevDocNames, filesNumberInfoUI, panelInfoUITitle, panelInfoUIwriteLines);
+}
+
+function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUIwriteLines) {
+    //Adding created names into empty "InfoUI" list
+    for (var i = 0; i < panelInfoUIwriteLines.length; i++) {
+        panelInfoUIwriteLines[i].text = filesNames[i];
+    }
+    
+    //Adding number of files to "Info UI" title panel
+    panelInfoUITitle.text =  "Files to process: " + filesNumbers;
+}
