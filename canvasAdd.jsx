@@ -299,6 +299,7 @@ function main() {
                 } else {
 
                     btnRadChooseFilesActiveDocs.notify();
+                    var numbOfActiveDocuments = app.documents.length;
                    
                 }
 
@@ -628,14 +629,19 @@ function main() {
                                     changeFileAndSave(grpWidthNumb.text, grpHeightNumb.text, unitOutcome, anchorPosOutcome, btnRadChooseFilesActiveDocs, btnRadFolderSame, fgColor, bgColor);
                                     
                                     if (btnRadChooseFilesActiveDocs.value == true) {
-                                        alert("You added canvas to " + docsOpenedCounter + " files");
+
+                                        if (numbOfActiveDocuments > 1) alert("You added canvas to " + numbOfActiveDocuments + " files");
+                                        else alert("You added canvas to only 1 file");
+
                                     } else {
+
                                         var folderName = "";
                                         if (btnRadChooseFilesSourceFold.value === true) {
                                             folderName = globals.sourceFolder.name.replace(/%20/g, ' ');
                                         } else {
                                             folderName = globals.detinationFolder.name.replace(/%20/g, ' ');
                                         }
+
                                         alert("You added canvas to " + globals.sourceFileCounter + " files,\nin folder: " + '"' + folderName + '"'); 
                                     }
                                 }
