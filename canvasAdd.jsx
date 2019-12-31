@@ -507,18 +507,21 @@ function main() {
                 //creating anchor data to read in resizeCanvas(); Default anchor is in MIDDLECENTER
                 var anchorPosOutcome = AnchorPosition.MIDDLECENTER;
 
+                var anchorPositionArray = new Array;
+                anchorPositionArray.push(anchorPositionTOPLEFT, anchorPositionTOPCENTER, anchorPositionTOPRIGHT, anchorPositionMIDDLELEFT, anchorPositionMIDDLECENTER, anchorPositionMIDDLERIGHT, anchorPositionBOTTOMLEFT, anchorPositionBOTTOMCENTER, anchorPositionBOTTOMRIGHT);
+
                 //Adding functionality to buttons in anchor box
-                anchorPositionTOPLEFT.onClick = function() {anchorSetingNew(anchorPositionTOPLEFT, AnchorPosition.TOPLEFT)}
-                anchorPositionTOPCENTER.onClick = function() {anchorSetingNew(anchorPositionTOPCENTER, AnchorPosition.TOPCENTER)}
-                anchorPositionTOPRIGHT.onClick = function() {anchorSetingNew(anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT)}
+                anchorPositionTOPLEFT.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionTOPLEFT, AnchorPosition.TOPLEFT, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
+                anchorPositionTOPCENTER.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionTOPCENTER, AnchorPosition.TOPCENTER, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
+                anchorPositionTOPRIGHT.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
 
-                anchorPositionMIDDLELEFT.onClick = function() {anchorSetingNew(anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT)}
-                anchorPositionMIDDLECENTER.onClick = function() {anchorSetingNew(anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER)}
-                anchorPositionMIDDLERIGHT.onClick = function() {anchorSetingNew(anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT)}
+                anchorPositionMIDDLELEFT.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
+                anchorPositionMIDDLECENTER.onClick = function() {anchorPosOutcome =anchorSetingNew(anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
+                anchorPositionMIDDLERIGHT.onClick = function() {anchorPosOutcome =anchorSetingNew(anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
 
-                anchorPositionBOTTOMLEFT.onClick = function() {anchorSetingNew(anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT)}
-                anchorPositionBOTTOMCENTER.onClick = function() {anchorSetingNew(anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER)}
-                anchorPositionBOTTOMRIGHT.onClick = function() {anchorSetingNew(anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT)}
+                anchorPositionBOTTOMLEFT.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
+                anchorPositionBOTTOMCENTER.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
+                anchorPositionBOTTOMRIGHT.onClick = function() {anchorPosOutcome = anchorSetingNew(anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorPositionArray, imageAnchorTrue, imageAnchorFalse)}
 
 
                 //Constrain proportions checkbox
@@ -608,11 +611,17 @@ function main() {
                                 //Accept
                                 btnAccept.onClick = function() {
                                     mainWindow.close();
-                                    changeFileAndSave(grpWidthNumb.text, grpHeightNumb.text, unitOutcome, anchorPosOutcome);
+                                    changeFileAndSave(grpWidthNumb.text, grpHeightNumb.text, unitOutcome, anchorPosOutcome, btnRadChooseFilesActiveDocs, btnRadSameFolder, fgColor, bgColor);
                                     if (btnRadChooseFilesActiveDocs.value == true) {
                                         alert("You added canvas to " + docsOpenedCounter + " files");
                                     } else {
-                                        alert("You added canvas to " + globals.sourceFileCounter + " files");
+                                        var folderName = "";
+                                        if (btnRadChooseFilesSourceFold.value === true) {
+                                            folderName = globals.sourceFolder.name.replace(/%20/g, ' ');
+                                        } else {
+                                            folderName = globals.detinationFolder.name.replace(/%20/g, ' ');
+                                        }
+                                        alert("You added canvas to " + globals.sourceFileCounter + " files,\nin folder: " + '"' + folderName + '"'); 
                                     }
                                 }
                                 //Cancel
@@ -620,175 +629,94 @@ function main() {
                                     mainWindow.close();
                                 }
 
+mainWindow.show();
+}
 
-//-------------------------------------------------------------------------------------------------------------------------------
+//Resizng canvas unfctionality
+function changeFileAndSave(addWidth, addHeight, units, anchor, btnRadChooseFilesActiveDocs, btnRadSameFolder, fgColor, bgColor){
+    //If you choose radio button "Opened files"
+    if (btnRadChooseFilesActiveDocs.value == true){
 
-    //Resizng canvas unfctionality
-    function changeFileAndSave(addWidth, addHeight, units, anchor){
-        //If you choose radio button "Opened files"
-        if (btnRadChooseFilesActiveDocs.value == true){
+        while (app.documents.length > 0) {
 
-            while (app.documents.length > 0) {
+            var doc = app.activeDocument;
+            addCanvas(addWidth, addHeight, units, anchor, doc);
 
-                var doc = app.activeDocument;
-                addCanvas(addWidth, addHeight, units, anchor, doc);
-
-                doc.save();
-                doc.close();
-            }
+            doc.save();
+            doc.close();
         }
+    
+    //If you choose  radio button "Source folder"
+    } else {
 
-        //If you choose radio button "Choose folder"
-        if (btnRadChooseFilesSourceFold.value == true) {
+        for(var i = 0; i < globals.sourceFiles.length; i++) {
 
-            for(var i = 0; i < globals.sourceFiles.length; i++) {
+            for(var i = 0; i < globals.sourceFilesPaths.length; i++) {
+                if(globals.sourceFilesPaths[i] === globals.sourceFiles[i].toString()){
 
-                for(var i = 0; i < globals.sourceFilesPaths.length; i++) {
-                    if(globals.sourceFilesPaths[i] === globals.sourceFiles[i].toString()){
+                    open(globals.sourceFiles[i]);
 
-                        open(globals.sourceFiles[i]);
+                    var doc = app.activeDocument;
+                    addCanvas(addWidth, addHeight, units, anchor, doc);
 
-                        var doc = app.activeDocument;
-                        addCanvas(addWidth, addHeight, units, anchor, doc);
+                    //If you choose radio button "Add canvas in the same folder", saves the same files
+                    if (btnRadSameFolder.value == true) {
+                        doc.save();
 
-                        //If you choose radio button "Add canvas in the same folder", saves the same files
-                        if (btnRadSameFolder.value == true) {
-                            doc.save();
+                    //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
+                    } else {
 
-                        //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
-                        } else {
+                        //Declaring name of saved file
+                        var name = doc.name;
 
-                            //Declaring name of saved file
-                            var name = doc.name;
+                        //Declaring path
+                        var path = globals.detinationFolder;
+                        var sourceFile = globals.sourceFilesPaths[i];
 
-                            //Declaring path
-                            var path = globals.detinationFolder;
-                            var sourceFile = globals.sourceFilesPaths[i];
+                        var imageTypes = [
+                            [/.png$/, savePNG],
+                            [/.psd$/, savePSD],
+                            [/.jpg$/, saveJPEG],
+                            [/.tif$/, saveTIFF],
+                            [/.bmp$/, saveBMP],
+                            [/.gif$/, saveGIF],
+                        ];
 
-                            var imageTypes = [
-                                [/.png$/, savePNG],
-                                [/.psd$/, savePSD],
-                                [/.jpg$/, saveJPEG],
-                                [/.tif$/, saveTIFF],
-                                [/.bmp$/, saveBMP],
-                                [/.gif$/, saveGIF],
-                            ];
-
-                            for( var j = 0 ; j < imageTypes.length; j++ ){
-                                if (sourceFile.match(imageTypes[j][0])) {
-                                    var saveFile = File(path + "/" + name);
-                                    if(saveFile.exists) {
-                                        saveFile.remove();
-                                    }
-                                    (imageTypes[j][1])(saveFile);
-                                    break;
+                        for( var j = 0 ; j < imageTypes.length; j++ ){
+                            if (sourceFile.match(imageTypes[j][0])) {
+                                var saveFile = File(path + "/" + name);
+                                if(saveFile.exists) {
+                                    saveFile.remove();
                                 }
-                            }
-                            if (j === imageTypes.length) {
-
-                                throw new Error("Unhandled type for "+ sourceFile)
+                                (imageTypes[j][1])(saveFile);
+                                break;
                             }
                         }
-                        doc.close();
+                        if (j === imageTypes.length) {
+
+                            throw new Error("Unhandled type for "+ sourceFile)
+                        }
                     }
+                    doc.close();
                 }
             }
         }
-        //Setting background & foregound colors back to original state
-        app.foregroundColor = fgColor;
-        app.backgroundColor = bgColor;
     }
+    //Setting background & foregound colors back to original state
+    app.foregroundColor = fgColor;
+    app.backgroundColor = bgColor;
+}
 
-    //Saving PSD
-    function savePSD(saveFile) {
+function addCanvas(addWidth, addHeight, units, anchor, doc) {
 
-        var psdFile = new File(saveFile);
-        var psdSaveOptions = new PhotoshopSaveOptions();
+    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10)
+    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10)
 
-        activeDocument.saveAs(psdFile, psdSaveOptions, false, Extension.LOWERCASE);
-    }
-
-    //Saving JPEG
-    function saveJPEG(saveFile) {
-
-        var jpegFile = new File(saveFile);
-        var jpegSaveOptions = new JPEGSaveOptions();
-        jpegSaveOptions.formatOptions = FormatOptions.STANDARDBASELINE;
-        jpegSaveOptions.quality = 10;
-
-        activeDocument.saveAs(jpegFile, jpegSaveOptions, false, Extension.LOWERCASE);
-    }
-
-    //Saving Tiff
-    function saveTIFF(saveFile) {
-
-        var tiffFile = new File(saveFile);
-        var tiffSaveOptions = new TiffSaveOptions();
-        tiffSaveOptions.embedColorProfile = true;
-
-        activeDocument.saveAs(tiffFile, tiffSaveOptions);
-    }
-
-    //Saving BMP
-    function saveBMP(saveFile) {
-
-        var bmpFile = new File(saveFile);
-        var bmpSaveOptions = new BMPSaveOptions();
-        activeDocument.saveAs(bmpFile, bmpSaveOptions);
-
-    }
-    //Saving GIF
-    function saveGIF(saveFile) {
-
-        var gifFile = new File(saveFile);
-        var gifSaveOptions = new GIFSaveOptions();
-        activeDocument.saveAs(gifFile, gifSaveOptions);
-
-    }
-    //Saving GIF
-    function savePNG(saveFile) {
-
-        var pngFile = new File(saveFile);
-        var pngSaveOptions = new PNGSaveOptions();
-        activeDocument.saveAs(pngFile, pngSaveOptions);
-
-    }
-
-    function addCanvas(addWidth, addHeight, units, anchor, doc){
-
-        var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10)
-        var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10)
-
-        var sumHeight = activeDocHeight + parseInt(addHeight, 10);
-        var sumWidth = activeDocWidth + parseInt(addWidth, 10);
+    var sumHeight = activeDocHeight + parseInt(addHeight, 10);
+    var sumWidth = activeDocWidth + parseInt(addWidth, 10);
 
 
-        doc.resizeCanvas(UnitValue(sumWidth, units), UnitValue(sumHeight, units), anchor);
-    }
-
-
-    //Anchor button functionality
-    function anchorSetingNew(btnAnchorClickedOn, anchorString) {
-        //Reseting buttons to empty state
-        var anchorArray = new Array;
-         anchorArray.push(
-             anchorPositionTOPLEFT, anchorPositionTOPCENTER, anchorPositionTOPRIGHT,
-            anchorPositionMIDDLELEFT, anchorPositionMIDDLECENTER, anchorPositionMIDDLERIGHT,
-            anchorPositionBOTTOMLEFT, anchorPositionBOTTOMCENTER, anchorPositionBOTTOMRIGHT
-        )
-
-        for (i = 0; i < anchorArray.length; i++){
-            anchorArray[i].image = imageAnchorFalse;
-        }
-
-         //Setting cliked button to anchor
-        btnAnchorClickedOn.image = imageAnchorTrue;
-
-        //Sending information which anchor is marked for resizeCanvas()
-        anchorPosOutcome = anchorString;
-    }
-    
-    mainWindow.show();
+    doc.resizeCanvas(UnitValue(sumWidth, units), UnitValue(sumHeight, units), anchor);
 }
 
 function createGroupUI(grpMain) {
@@ -796,6 +724,60 @@ function createGroupUI(grpMain) {
     grpInfo.orientation = 'column';
     grpInfo.alignChildren = "left";
     return grpInfo;
+}
+
+function savePNG(saveFile) {
+    
+    var pngFile = new File(saveFile);
+    var pngSaveOptions = new PNGSaveOptions();
+    activeDocument.saveAs(pngFile, pngSaveOptions);
+    
+}
+
+function savePSD(saveFile) {
+
+    var psdFile = new File(saveFile);
+    var psdSaveOptions = new PhotoshopSaveOptions();
+
+    activeDocument.saveAs(psdFile, psdSaveOptions, false, Extension.LOWERCASE);
+}
+
+
+function saveJPEG(saveFile) {
+
+    var jpegFile = new File(saveFile);
+    var jpegSaveOptions = new JPEGSaveOptions();
+    jpegSaveOptions.formatOptions = FormatOptions.STANDARDBASELINE;
+    jpegSaveOptions.quality = 10;
+
+    activeDocument.saveAs(jpegFile, jpegSaveOptions, false, Extension.LOWERCASE);
+}
+
+
+function saveTIFF(saveFile) {
+
+    var tiffFile = new File(saveFile);
+    var tiffSaveOptions = new TiffSaveOptions();
+    tiffSaveOptions.embedColorProfile = true;
+
+    activeDocument.saveAs(tiffFile, tiffSaveOptions);
+}
+
+
+function saveBMP(saveFile) {
+
+    var bmpFile = new File(saveFile);
+    var bmpSaveOptions = new BMPSaveOptions();
+    activeDocument.saveAs(bmpFile, bmpSaveOptions);
+
+}
+
+function saveGIF(saveFile) {
+
+    var gifFile = new File(saveFile);
+    var gifSaveOptions = new GIFSaveOptions();
+    activeDocument.saveAs(gifFile, gifSaveOptions);
+
 }
 
 function checkingIfWidthAndHeightIs0(Numb001, Numb002, btnEnabled) {
@@ -808,10 +790,10 @@ function checkingIfWidthAndHeightIs0(Numb001, Numb002, btnEnabled) {
 
 //Used later to dispaly names of opened files
 function docsOpenedNames(numbOfDisplayedFiles) {
-
+    
     //Creating array of docs to display
     var docsToPrccssNames = new Array;
-
+    
     for (var i = 0; (i < numbOfDisplayedFiles) && (i < app.documents.length); i++) {
         docsToPrccssNames[i] = app.documents[i].name;
     }
@@ -821,38 +803,38 @@ function docsOpenedNames(numbOfDisplayedFiles) {
 }
 
 function infoUItoDisplay(filesNamesInfoUI, filesNumberInfoUI, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
-
+    
     if (typeof filesNamesInfoUI == "undefined") {
-    filesNamesInfoUI = [];
-    filesNumberInfoUI = 0;
+        filesNamesInfoUI = [];
+        filesNumberInfoUI = 0;
     }
-
+    
     //Creating deafult files display
     var prevDocNames = new Array;
-
+    
     //Default empty file list
     for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) prevDocNames[i] = "";
     prevDocNames[0] = "no files to process";
-
+    
     if (filesNamesInfoUI.length > 0) {
         //Filing default display with names of files to process 
         for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = filesNamesInfoUI[i];
-
+        
         //Creating "," for files names
         var signsComas = new Array;
-
+        
         for (var i = 0; i < filesNamesInfoUI.length; i++) signsComas[i] = "";
         for (var i = 1; i < filesNamesInfoUI.length; i++) signsComas[i] = ",";
         if (filesNumberInfoUI > filesNamesInfoUI.length) signsComas[0] = ",";
         signsComas.reverse();
-
+        
         // Adding "," to file names
         for (var i = 0; i < filesNamesInfoUI.length; i++) prevDocNames[i] = prevDocNames[i] + signsComas[i];
-
+        
         //Creating "..." at the end of file list, if you reach limit of displayed files
         if (filesNumberInfoUI > filesNamesInfoUI.length) prevDocNames[prevDocNames.length -1] = "(...)";
     }
-
+    
     return infoUIwriteText(prevDocNames, filesNumberInfoUI, panelInfoUITitle, panelInfoUIwriteLines);
 }
 
@@ -864,4 +846,18 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
     
     //Adding number of files to "Info UI" title panel
     panelInfoUITitle.text =  "Files to process: " + filesNumbers;
+}
+
+//Anchor button functionality
+function anchorSetingNew(btnAnchorClickedOn, anchorPosition, anchorPositionArray, imageAnchorTrue, imageAnchorFalse) {
+
+    for (i = 0; i < anchorPositionArray.length; i++){
+        anchorPositionArray[i].image = imageAnchorFalse;
+    }
+
+     //Setting cliked button to anchor
+    btnAnchorClickedOn.image = imageAnchorTrue;
+
+    //Sending information which anchor is marked for resizeCanvas()
+    return anchorPosition;
 }
