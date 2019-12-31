@@ -25,11 +25,11 @@ function main() {
                 grpBtnRadSourceFiles.orientation = 'column';
                 grpBtnRadSourceFiles.alignChildren = "left";
 
-                    //Radial button choose active/target folder
+                    //Radial button choose active files/target folder
                     var btnRadChooseFilesActiveDocs = grpBtnRadSourceFiles.add("radiobutton", undefined, "Opened files");
                     var btnRadChooseFilesSourceFold = grpBtnRadSourceFiles.add("radiobutton", undefined, "Choose folder");
 
-                    //Add button choose target folder
+                    //Add button to choose target folder
                     var grpBtnChooseFilesSourceFold = plnSourceFiles.add("group");
 
                     var btnChooseFilesSourceFold =  grpBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
@@ -44,19 +44,20 @@ function main() {
             var pnlDestFoldTitle = pnlDestFold.add("statictext", undefined, "Destination folder:");
 
             //Creating group radial button choose destination folder
-            var grpBtnRadFolder = pnlDestFold.add("group");
-            grpBtnRadFolder.orientation = 'column';
-            grpBtnRadFolder.alignChildren = "left";
+            var grpBtnRadChooseFolder = pnlDestFold.add("group");
+            grpBtnRadChooseFolder.orientation = 'column';
+            grpBtnRadChooseFolder.alignChildren = "left";
 
                 //Radial buttons choose destination folder
-                var btnRadSameFolder = grpBtnRadFolder.add("radiobutton", undefined, "Add canvas in the same folder");
-                var btnRadOtherFolder = grpBtnRadFolder.add("radiobutton", undefined, "Add canvas and copy files to other folder");
+                var btnRadFolderSame = grpBtnRadChooseFolder.add("radiobutton", undefined, "Add canvas in the same folder");
+                var btnRadFolderOther = grpBtnRadChooseFolder.add("radiobutton", undefined, "Add canvas and copy files to other folder");
 
             //Browse button destination folder
             var grpBtnDestFold = pnlDestFold.add("group");
+
             var btnDestFold = grpBtnDestFold.add("button", undefined, "Browse...");
-            var btnDestFoldText = grpBtnDestFold.add("statictext", undefined, "Destination folder...");
-            btnDestFoldText.characters = 25;
+            var btnDestFoldTitle = grpBtnDestFold.add("statictext", undefined, "Destination folder...");
+            btnDestFoldTitle.characters = 25;
 
         ///Add canvas UI
         var pnlAddCanvas = grpInfo.add("panel", undefined);
@@ -89,11 +90,11 @@ function main() {
 
                         //Crating path to image folder
                         var scriptPath = $.fileName;
-                        var scriptPathString = scriptPath.toString().replace(/\\/g, '/').slice(0, -13); // -13 is the lenght of the script file
+                        var scriptPathString = scriptPath.toString().replace(/\\/g, '/').slice(0, -13); // -13 is the lenght of the script file name
 
                         //Image: InfoHover.png
                         const imageInfHov = File(scriptPathString + "InfoHover.png");
-                        var grpWidthImage = grpWidth.add("image", undefined, imageInfHov);
+                        var toolTipWidthImage = grpWidth.add("image", undefined, imageInfHov);
 
                     //Group height
                     var grpHeight = grpUnitValDlg.add("group");
@@ -108,53 +109,57 @@ function main() {
                         grpHeightUnitDropDown.selection = 0;
 
                         //Image: InfoHover.png
-                        var grpHeightImage = grpHeight.add("image", undefined, imageInfHov);
+                        var toolTipHeightImage = grpHeight.add("image", undefined, imageInfHov);
 
                 //Graphic element proportions constrains (true, false)
 
-                //Uplaoding constrains images
-                const imageCnstrnsProportionFalse = File(scriptPathString + "ConstrPropFalse.png");
-                const imageCnstrnsProportionTrue = File(scriptPathString + "ConstrPropTrue.png");
+                    //Uplaoding constrains images next Width and Height dialog groups
+                    const imageCnstrnsProportionFalse = File(scriptPathString + "ConstrPropFalse.png");
+                    const imageCnstrnsProportionTrue = File(scriptPathString + "ConstrPropTrue.png");
 
-                //Add constrain image next to dialog
-                var grpDlgUnitValImage = grpUnitVal.add("image", undefined, imageCnstrnsProportionFalse);
-                grpDlgUnitValImage.alignment = "right";
+                    //Add constrain image next to dialog
+                    var grpDlgUnitValImage = grpUnitVal.add("image", undefined, imageCnstrnsProportionFalse);
+                    grpDlgUnitValImage.alignment = "right";
 
             //Anchor display
+            var grpAnchorMarginesSpaceTop =  pnlAddCanvas.add("group");
 
             var grpAnchor = pnlAddCanvas.add("group");
-            var grpAnchorText = grpAnchor.add("statictext", undefined, "Anchor: ");
+            var grpAnchorTitle = grpAnchor.add("statictext", undefined, "Anchor: ");
+            grpAnchorTitle.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
 
                 //Creating anchor group box
-                var grpAnchorSquareBtns = grpAnchor.add("group");
-                grpAnchorSquareBtns.orientation = 'column';
+                var grpAnchorBoxBtns = grpAnchor.add("group");
+                grpAnchorBoxBtns.orientation = 'column';
 
                 //Creating anchor gorup lines inside box
-                var grpAnchorSquareBtnsLine001 = grpAnchorSquareBtns.add("group");
-                var grpAnchorSquareBtnsLine002 = grpAnchorSquareBtns.add("group");
-                var grpAnchorSquareBtnsLine003 = grpAnchorSquareBtns.add("group");
+                var grpAnchorBoxBtnsLine001 = grpAnchorBoxBtns.add("group");
+                var grpAnchorBoxBtnsLine002 = grpAnchorBoxBtns.add("group");
+                var grpAnchorBoxBtnsLine003 = grpAnchorBoxBtns.add("group");
 
                     //Image: imageAnchorTrue.png and imageAnchorFalse.png
                     const imageAnchorTrue = File(scriptPathString + "anchorPointerTrue.png");
                     const imageAnchorFalse = File(scriptPathString + "anchorPointerFalse.png");
 
                     //Adding 001 line of buttons
-                    var anchorPositionTOPLEFT = grpAnchorSquareBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPositionTOPCENTER = grpAnchorSquareBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPositionTOPRIGHT = grpAnchorSquareBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionTOPLEFT = grpAnchorBoxBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionTOPCENTER = grpAnchorBoxBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionTOPRIGHT = grpAnchorBoxBtnsLine001.add("iconbutton", undefined, imageAnchorFalse);
 
                     //Adding 002 line of buttons
-                    var anchorPositionMIDDLELEFT = grpAnchorSquareBtnsLine002.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPositionMIDDLECENTER = grpAnchorSquareBtnsLine002.add("iconbutton", undefined, imageAnchorTrue);
-                    var anchorPositionMIDDLERIGHT = grpAnchorSquareBtnsLine002.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionMIDDLELEFT = grpAnchorBoxBtnsLine002.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionMIDDLECENTER = grpAnchorBoxBtnsLine002.add("iconbutton", undefined, imageAnchorTrue);
+                    var anchorPositionMIDDLERIGHT = grpAnchorBoxBtnsLine002.add("iconbutton", undefined, imageAnchorFalse);
 
                     //Adding 003 line of buttons
-                    var anchorPositionBOTTOMLEFT = grpAnchorSquareBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPositionBOTTOMCENTER = grpAnchorSquareBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
-                    var anchorPositionBOTTOMRIGHT = grpAnchorSquareBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionBOTTOMLEFT = grpAnchorBoxBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionBOTTOMCENTER = grpAnchorBoxBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
+                    var anchorPositionBOTTOMRIGHT = grpAnchorBoxBtnsLine003.add("iconbutton", undefined, imageAnchorFalse);
+            
+            var grpAnchorMarginesSpaceBottom =  pnlAddCanvas.add("group");
 
             //Constrains proportions
-            var constrainsProportions = pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
+            var constrainsProportionsCheckbox = pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
 
             //Canvas color extension
             var grpCanvExtendColor = pnlAddCanvas.add("group");
@@ -167,20 +172,21 @@ function main() {
 
         ///Info UI
 
-            //Number of files displayed in "Info UI"
-            var numbOfDisplayedFiles = 2;
+        
+        //Creating panel to display to files
+        var pnlDocInfo = grpInfo.add("panel", undefined, undefined);
+        pnlDocInfo.alignChildren = "left";
+        
+        //Number of files displayed in "Info UI"
+        var numbOfDisplayedFiles = 2;
 
-            //Creating panel to display to files
-            var pnlDocInfo = grpInfo.add("panel", undefined, undefined);
-            pnlDocInfo.alignChildren = "left";
-            
-            //Creating empty lines of text to poulate later
-            var plnDocInfoLines = new Array;
+        //Creating empty lines of text to fill with files names
+        var plnDocInfoLines = new Array;
 
-            for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
-                plnDocInfoLines[i] = pnlDocInfo.add("statictext", undefined, undefined);
-                plnDocInfoLines[i].characters = 38;
-            }
+        for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
+            plnDocInfoLines[i] = pnlDocInfo.add("statictext", undefined, undefined);
+            plnDocInfoLines[i].characters = 38;
+        }
 
     ////Buttons validation UI
 
@@ -212,12 +218,12 @@ function main() {
                     pnlDestFoldTitle.enabled = false;
 
                     //Disabled radButton destination folder
-                    btnRadSameFolder.enabled = false;
-                    btnRadOtherFolder.enabled = false;
+                    btnRadFolderSame.enabled = false;
+                    btnRadFolderOther.enabled = false;
 
                     //Disabled "destination folder..." button            
                     btnDestFold.enabled = false;
-                    btnDestFoldText.enabled = false;
+                    btnDestFoldTitle.enabled = false;
 
                     //Anabled Add canvas panel
                     if (pnlAddCanvas.enabled === false) pnlAddCanvas.enabled = true;
@@ -239,15 +245,15 @@ function main() {
                         //Disabled "Destination folder"" panel title
                         pnlDestFoldTitle.enabled = false;
 
-                        //Disabled radButton destination folder
-                        btnRadSameFolder.enabled = false;
-                        btnRadOtherFolder.enabled = false;
+                        //Disabled radButtons destination folder
+                        btnRadFolderSame.enabled = false;
+                        btnRadFolderOther.enabled = false;
 
                         //Disabled "destination folder..." button
                         btnDestFold.enabled = false;
-                        btnDestFoldText.enabled = false;
+                        btnDestFoldTitle.enabled = false;
 
-                        //Button accept disabled if you do not change canvas
+                        //Button accept disabled if you do not any values to Height and Width dialog
                         checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
 
                         //Disabled Add canvas panel
@@ -257,19 +263,20 @@ function main() {
                         infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
 
                         btnAccept.enabled = false;
-
+                    
+                    //When you have choosed source folder
                     } else {
                         //Anabled "Destination folder"" panel title
                         pnlDestFoldTitle.enabled = true;
 
                         //Anabled radButton destination folder
-                        btnRadSameFolder.enabled = true;
-                        btnRadOtherFolder.enabled = true;
+                        btnRadFolderSame.enabled = true;
+                        btnRadFolderOther.enabled = true;
 
-                        if (btnRadOtherFolder.value == false) btnRadSameFolder.value = true;
+                        if (btnRadFolderOther.value == false) btnRadFolderSame.value = true;
                         else {
                             btnDestFold.enabled = true;
-                            btnDestFoldText.enabled = true;
+                            btnDestFoldTitle.enabled = true;
                         }
 
                         //Button seeting accept button to true
@@ -280,12 +287,13 @@ function main() {
                     }
                 }
 
-                //Start setting. If there is no active docs, set choose
+                //Start setting. If there is no active docs, set to choose folder
                 if (app.documents.length === 0) {
 
                     btnRadChooseFilesActiveDocs.enabled = false;
                     btnRadChooseFilesSourceFold.notify();
-                    btnRadSameFolder.value = true;
+
+                    btnRadFolderSame.value = true;
                     btnAccept.enabled = false;
 
                 } else {
@@ -297,41 +305,39 @@ function main() {
                 //Browse source folder
                 btnChooseFilesSourceFold.onClick = function() {
 
-                    //Selection source folder explorer
+                    //Selection source folder from explorer
                     globals.sourceFolder = Folder.selectDialog("Select folder with files to process");
                     //Warning that you didn't choose any folder
                     if (globals.sourceFolder === null && btnChooseFilesSourceFoldTitle.text === "Source folder...") {
                         alert("You have not selected source folder");
+                    //When you choose source folder
                     } else {
-                        //Setting source folder as default
-                        btnRadSameFolder.value = true;
+                        //Setting save option in source folder as default
+                        btnRadFolderSame.value = true;
 
-                        //Anabled choosing destination
+                        //Anabled choosing destination and changing values in add canvas panel
                         if (btnChooseFilesSourceFoldTitle.text !== "Source folder...") {
-                            //Anabled "destination folder"" panel title
+
                             pnlDestFoldTitle.enabled = true;
-
-                            //Anabled Add canvas panel
+                            btnRadFolderSame.enabled = true;
+                            btnRadFolderOther.enabled = true;
+                            
                             pnlAddCanvas.enabled = true;
-
-                            //Anabled radButton destination folder
-                            btnRadSameFolder.enabled = true;
-                            btnRadOtherFolder.enabled = true;
-
                         }
 
-                        //Creating empty array of strings of files to filter docs worth to open
+                        //Creating empty of files in choosed folder
                         globals.sourceFilesPaths = [];
 
-                        //Creating empty array of file list
+                        //Creating empty array of file list to open
                         globals.sourceFiles = [];
 
                         //Creating names to display in info UI
                         globals.sourceFileNameDisplay = new Array;
 
-                        //Number of source files names to display in info UI
+                        //Number of source files names displayed in info UI
                         globals.sourceFileCounter = 0;
 
+                        //Filtering files to open from source folder
                         globals.sourceFiles = globals.sourceFolder.getFiles();
                         for(var i = 0; i < globals.sourceFiles.length; i++) {
                             //check to see if the target item is a file or folder
@@ -347,6 +353,7 @@ function main() {
                                 }
                             }
                         }
+
                         //Creating files names to display in info UI
                         var sourceFolderLength = globals.sourceFolder.toString().length + 1;
                         var filesSourceToOpenCounter = 0;
@@ -365,7 +372,7 @@ function main() {
                             }
                         }
 
-                        //Setting name string into statictext next to button target folder
+                        //If you choosed folder with files
                         if (filesSourceToOpenCounter > 0) {
                             var newTitle = (".../" + globals.sourceFolder.parent.name + "/" + globals.sourceFolder.name).replace(/%20/g, ' ');
                             btnChooseFilesSourceFoldTitle.text = newTitle;
@@ -373,12 +380,13 @@ function main() {
                             //Uptade info UI with files from source folder
                             infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
 
-                            //Enabled button accept
-                            btnAccept.enabled = true;
+                            //Enabling buttons
                             pnlDestFoldTitle.enabled = true;
-                            btnRadSameFolder.enabled = true;
-                            btnRadOtherFolder.enabled = true;
+                            btnRadFolderSame.enabled = true;
+                            btnRadFolderOther.enabled = true;
+
                             pnlAddCanvas.enabled = true;
+
                             checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
 
                             if (filesSourceToOpenCounter > 1) {
@@ -387,16 +395,19 @@ function main() {
                                 alert("In folder is " + globals.sourceFileCounter + " file");
                             }
 
+                        //If there is no files in choosed folder
                         } else {
+
                             alert("In choosed folder there is no files to process");
+
                             btnAccept.enabled = false;
-                            //Setting to dafault value becouse ou didn't choose what you want to
+
                             btnChooseFilesSourceFoldTitle.text = "Source folder...";
-                            btnAccept.enabled = false;
-                            btnRadSameFolder.enabled = false;
-                            btnRadOtherFolder.enabled = false;
+                            btnRadFolderSame.enabled = false;
+                            btnRadFolderOther.enabled = false;
+
                             btnDestFold.enabled = false;
-                            btnDestFoldText.enabled = false;
+                            btnDestFoldTitle.enabled = false;
                             pnlAddCanvas.enabled = false;
 
                             infoUItoDisplay(undefined, undefined, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
@@ -405,27 +416,27 @@ function main() {
                     }
                 }
 
-        ///Destination folder
+        ///Destination folder panel
             //Radial buttons destination folder
                 //Add canvas in the same folder
-                btnRadSameFolder.onClick = function() {
-                    //Disables to browse destination folder
+                btnRadFolderSame.onClick = function() {
+
                     btnDestFold.enabled = false;
-                    btnDestFoldText.enabled = false;
-                    //Enables accept button
+                    btnDestFoldTitle.enabled = false;
+
                     checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
-                    //Enables Add Canvas panel
+
                     pnlAddCanvas.enabled = true;
                 }
                 //Copy and Add canvas in other folder
-                btnRadOtherFolder.onClick = function() {
-                        //Enables to browse destination folder
+                btnRadFolderOther.onClick = function() {
+
                         btnDestFold.enabled = true;
-                        btnDestFoldText.enabled = true;
-                        //Enables accept button
+                        btnDestFoldTitle.enabled = true;
+
                         checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
-                        //Disable Accept button if there is not choosed destination folder
-                        if (btnDestFoldText.text === "Destination folder...") {
+
+                        if (btnDestFoldTitle.text === "Destination folder...") {
                             btnAccept.enabled = false;
                             pnlAddCanvas.enabled = false;
                         } else {
@@ -437,68 +448,67 @@ function main() {
                 btnDestFold.onClick = function() {
                     //Getting destination folder
                     globals.detinationFolder = Folder.selectDialog("Select target folder to save files");
-                    //Warning that you didn't choose any folder
-                    if (globals.detinationFolder === null && btnDestFoldText.text === "Destination folder...") {
+                    if (globals.detinationFolder === null && btnDestFoldTitle.text === "Destination folder...") {
                         alert("You have not selected target folder");
                     }
-                    //Setting destination folder name
-                    btnDestFoldText.text = globals.detinationFolder.toString();
-                    if (globals.detinationFolder.toString() === globals.sourceFolder.toString()) {
-                        alert("Source folder and target folder are the same.\nNext time choose more wisely");
-                        btnRadSameFolder.notify();
-                        globals.detinationFolder = null;
-                        btnDestFoldText.text = "Destination folder...";
-                        return;
-                    }
 
-                    if (btnDestFoldText.text !== "Destination folder...") {
-                        //Enables accept button
+                    
+                    if (globals.detinationFolder.toString() === globals.sourceFolder.toString()) {
+
+                        alert("Source folder and target folder are the same.\nNext time choose more wisely");
+                        btnRadFolderSame.notify();
+                        globals.detinationFolder = null;
+                        btnDestFoldTitle.text = "Destination folder...";
+
+                    } else {
+
+                        btnDestFoldTitle.text = globals.detinationFolder.toString();
                         checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                         pnlAddCanvas.enabled = true;
+
                     }
                 }
 
         ////Add canvas
             //Group dialog units value
                 //Group width
-                    //Setting unit to use in resizeCanvas(); unit "PX" as deafult becouse "opened files" is true; Setting blocade on accept becouse Width and Height is 0
+                    //Setting unit to use in resizeCanvas(); unit "PX"
                     var unitOutcome = "PX";
-                    //Disabled accept button becouse Width or Height is equal 0
+
                     checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
-                    //Edittext: Width; if "constrains proportion" is checked, Heigth and Width values are changed in the same time
+
                     grpWidthNumb.onChanging = function() {
-                        //Removing all non-numeric characters
-                        if (constrainsProportions.value == true){
-                            grpHeightNumb.text = grpWidthNumb.text;
-                        }
-                        //Disabled accept button if Width or Height is equal 0
+
+                        if (constrainsProportionsCheckbox.value == true) grpHeightNumb.text = grpWidthNumb.text;                        
+
                         checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                     }
 
-                    //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked; setting units to PX
+                    //Dropdownlist: setting the same units: "ADD %" and "ADD %"
                     grpWidthUnitsDropDown.onChange = function() {
                         if (grpWidthUnitsDropDown.selection == 0) {grpHeightUnitDropDown.selection = 0; unitOutcome = "PX"}
                         else {grpHeightUnitDropDown.selection = 1;}
                     }
-                    //Image: InfoHover.png; setting tooltip
-                    grpWidthImage.helpTip = "You can substract number by adding '-' before value";
+
+                    toolTipWidthImage.helpTip = "You can substract number by adding '-' before value";
+
                 //Group Height
-                    //Edittext: Height; if "constrains proportion" is checked, Heigth and Width values are changed in the same time
                     grpHeightNumb.onChanging = function() {
-                        //Removing all non-numeric characters
-                        if (constrainsProportions.value == true) {
+
+                        if (constrainsProportionsCheckbox.value == true) {
                             grpWidthNumb.text = grpHeightNumb.text;
                         }
-                        //Disabled accept button if Width or Height is equal 0
+
                         checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                     }
-                    //Dropdownlist: Add PX, add %; Setting the same units if constrains proportions is checked setting units to PERCENT
+
+                    //Dropdownlist: setting the same units: "ADD %" and "ADD %"
                     grpHeightUnitDropDown.onChange = function() {
                         if (grpHeightUnitDropDown.selection == 0) {grpWidthUnitsDropDown.selection = 0; unitOutcome = "PERCENT"}
                         else {grpHeightUnitDropDown.selection = 1;}
                     }
-                    //Image: InfoHover.png; setting tooltip
-                    grpHeightImage.helpTip = "You can substract number by adding '-' before value";
+
+                    toolTipHeightImage.helpTip = "You can substract number by adding '-' before value";
 
                 //Image chains - constrains proportions tooltip
                 grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"
@@ -525,35 +535,38 @@ function main() {
 
 
                 //Constrain proportions checkbox
-                constrainsProportions.onClick = function() {
+                constrainsProportionsCheckbox.onClick = function() {
                     //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
-                    if (constrainsProportions.value == true) {
+                    if (constrainsProportionsCheckbox.value == true) {
                         grpDlgUnitValImage.image = imageCnstrnsProportionTrue;
-                        grpDlgUnitValImage.helpTip = "Width and Height same value anabled"}
-                        else {
-                            grpDlgUnitValImage.image = imageCnstrnsProportionFalse;
-                            grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"}
+                        grpDlgUnitValImage.helpTip = "Width and Height same value anabled"
+                    } else {
+                        grpDlgUnitValImage.image = imageCnstrnsProportionFalse;
+                        grpDlgUnitValImage.helpTip = "Width and Height diffrent value anabled"}
 
-                            //Set the same heighest value in "Height" and "Width"
-                            if (constrainsProportions.value == true) {
-                                //If Height and Width is negative or equal 0, it set in both most negative number
-                                if((parseInt(grpWidthNumb.text, 10) <= 0) && (parseInt(grpHeightNumb.text, 10) <= 0)) {
-                                    if (parseInt(grpWidthNumb.text, 10) < parseInt(grpHeightNumb.text, 10)) {
-                                        grpWidthNumb.onChanging();
-                                    }
-                                    //If some value is postive, set in both most positive number
-                                    else {grpHeightNumb.onChanging();}
+                        //Set the same highest value in "Height" and "Width"
+                        if (constrainsProportionsCheckbox.value == true) {
+                            //If Height and Width is negative or equal 0, it set in both most negative number
+                            if((parseInt(grpWidthNumb.text, 10) <= 0) && (parseInt(grpHeightNumb.text, 10) <= 0)) {
+                                if (parseInt(grpWidthNumb.text, 10) < parseInt(grpHeightNumb.text, 10)) {
+                                    grpWidthNumb.onChanging();
+                                }
+                                //If some value is postive, set in both most positive number
+                                else {
+                                    grpHeightNumb.onChanging();
+                                }
+                            } else {
+                                if (parseInt(grpWidthNumb.text, 10) > parseInt(grpHeightNumb.text, 10)) {
+                                    grpWidthNumb.onChanging();
                                 } else {
-                                    if (parseInt(grpWidthNumb.text, 10) > parseInt(grpHeightNumb.text, 10)) {
-                                        grpWidthNumb.onChanging();}
-                                        else {
-                                            grpHeightNumb.onChanging();}
-                                        }
-                                    }
+                                    grpHeightNumb.onChanging();
+                                }
+                            }
+                        }
                 }
 
                                 //Adding tooltip to checkbox
-                                constrainsProportions.helpTip =  "Check to constrain Height and Width"
+                                constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width"
 
                                 //Canvas extension color
                                     ///Saving BG and FG bucket color
@@ -611,7 +624,9 @@ function main() {
                                 //Accept
                                 btnAccept.onClick = function() {
                                     mainWindow.close();
-                                    changeFileAndSave(grpWidthNumb.text, grpHeightNumb.text, unitOutcome, anchorPosOutcome, btnRadChooseFilesActiveDocs, btnRadSameFolder, fgColor, bgColor);
+
+                                    changeFileAndSave(grpWidthNumb.text, grpHeightNumb.text, unitOutcome, anchorPosOutcome, btnRadChooseFilesActiveDocs, btnRadFolderSame, fgColor, bgColor);
+                                    
                                     if (btnRadChooseFilesActiveDocs.value == true) {
                                         alert("You added canvas to " + docsOpenedCounter + " files");
                                     } else {
