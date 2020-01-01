@@ -7,20 +7,21 @@ main();
 function main() {
 
     ////Creating main UI
+    
     var mainWindow = new Window("dialog", "Add canvas");
         //Creating group to populate with main UI
         var grpMain = mainWindow.add("group")
 
-        var grpInfo = createGroup(grpMain, "column", "left");
+        var grpInfo = createGroupUI(grpMain, "column", "left");
 
             //Source files
-            var plnSourceFiles = createPanel(grpInfo, undefined, "left");
+            var plnSourceFiles = createPanelUI(grpInfo, undefined, "left");
 
                 //Source files title
-                var plnSourceFilesTitle = plnSourceFiles.add("statictext", undefined, "Source files:");
+                plnSourceFiles.add("statictext", undefined, "Source files:");
 
                 //Creating radial button group
-                var grpBtnRadSourceFiles = createGroup(plnSourceFiles, "column", "left", "left");
+                var grpBtnRadSourceFiles = createGroupUI(plnSourceFiles, "column", "left", "left");
 
                     //Radial button choose active files/target folder
                     var btnRadChooseFilesActiveDocs = grpBtnRadSourceFiles.add("radiobutton", undefined, "Opened files");
@@ -34,13 +35,13 @@ function main() {
                     btnChooseFilesSourceFoldTitle.characters = 25;
 
         ///Destination folder UI
-        var pnlDestFold = createPanel(grpInfo, undefined, "left");
+        var pnlDestFold = createPanelUI(grpInfo, undefined, "left");
 
             //Title
             var pnlDestFoldTitle = pnlDestFold.add("statictext", undefined, "Destination folder:");
 
             //Creating group radial button choose destination folder
-            var grpBtnRadChooseFolder = createGroup(pnlDestFold, "column", "left");
+            var grpBtnRadChooseFolder = createGroupUI(pnlDestFold, "column", "left");
 
                 //Radial buttons choose destination folder
                 var btnRadFolderSame = grpBtnRadChooseFolder.add("radiobutton", undefined, "Add canvas in the same folder");
@@ -54,7 +55,7 @@ function main() {
             btnDestFoldTitle.characters = 25;
 
         ///Add canvas UI
-        var pnlAddCanvas = createPanel(grpInfo, undefined, "left");
+        var pnlAddCanvas = createPanelUI(grpInfo, undefined, "left");
 
             //Title
             var pnlAddCanvasTitle = pnlAddCanvas.add("statictext", undefined, "Add canvas");
@@ -64,7 +65,7 @@ function main() {
             //grpUnitVal.alignment = "left";
 
                 //Group dialog units value
-                grpUnitValDlg = createGroup(grpUnitVal, "column", "left");
+                grpUnitValDlg = createGroupUI(grpUnitVal, "column", "left");
 
                     //Group width
                     var grpWidth = grpUnitValDlg.add("group");
@@ -120,7 +121,7 @@ function main() {
             grpAnchorTitle.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
 
                 //Creating anchor group box
-                var grpAnchorBoxBtns = createGroup(grpAnchor, "column");
+                var grpAnchorBoxBtns = createGroupUI(grpAnchor, "column");
 
                 //Creating anchor gorup lines inside box
                 var grpAnchorBoxBtnsLine001 = grpAnchorBoxBtns.add("group");
@@ -164,7 +165,7 @@ function main() {
 
         
         //Creating panel to display to files
-        var pnlDocInfo = createPanel(grpInfo, undefined, "left");
+        var pnlDocInfo = createPanelUI(grpInfo, undefined, "left");
         
         //Number of files displayed in "Info UI"
         var numbOfDisplayedFiles = 2;
@@ -180,7 +181,7 @@ function main() {
     ////Buttons validation UI
 
     //Creating button group
-    var grpBtns = createGroup(grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
+    var grpBtns = createGroupUI(grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
         //Accept button
         var btnAccept = grpBtns.add("button", undefined, "Accept");
@@ -641,7 +642,7 @@ function main() {
 mainWindow.show();
 }
 
-function createPanel(objectParent, orientationChildren, alignChildren, alignmentObject) {
+function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
     objectChildGroup.alignChildren = alignChildren;
@@ -649,7 +650,7 @@ function createPanel(objectParent, orientationChildren, alignChildren, alignment
     return objectChildGroup;
 }
 
-function createGroup(objectParent, orientationChildren, alignChildren, alignmentObject) {
+function createGroupUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("group");
     objectChildGroup.orientation = orientationChildren;
     objectChildGroup.alignChildren = alignChildren;
