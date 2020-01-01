@@ -21,9 +21,7 @@ function main() {
                 var plnSourceFilesTitle = plnSourceFiles.add("statictext", undefined, "Source files:");
 
                 //Creating radial button group
-                var grpBtnRadSourceFiles = plnSourceFiles.add("group");
-                grpBtnRadSourceFiles.orientation = 'column';
-                grpBtnRadSourceFiles.alignChildren = "left";
+                var grpBtnRadSourceFiles = createGroup(plnSourceFiles);
 
                     //Radial button choose active files/target folder
                     var btnRadChooseFilesActiveDocs = grpBtnRadSourceFiles.add("radiobutton", undefined, "Opened files");
@@ -72,8 +70,8 @@ function main() {
 
                 //Group dialog units value
                 grpUnitValDlg = grpUnitVal.add("group");
-                grpUnitValDlg.alignChildren = "left";
                 grpUnitValDlg.orientation = 'column';
+                grpUnitValDlg.alignChildren = "left";
 
                     //Group width
                     var grpWidth = grpUnitValDlg.add("group");
@@ -375,8 +373,8 @@ function main() {
 
                         //If you choosed folder with files
                         if (filesSourceToOpenCounter > 0) {
-                            var newTitle = (".../" + globals.sourceFolder.parent.name + "/" + globals.sourceFolder.name).replace(/%20/g, ' ');
-                            btnChooseFilesSourceFoldTitle.text = newTitle;
+
+                            creatingPathString(btnChooseFilesSourceFoldTitle, globals.sourceFolder);
 
                             //Uptade info UI with files from source folder
                             infoUItoDisplay(globals.sourceFileNameDisplay, globals.sourceFileCounter, numbOfDisplayedFiles, pnlDocInfo, plnDocInfoLines);
@@ -463,7 +461,8 @@ function main() {
 
                     } else {
 
-                        btnDestFoldTitle.text = globals.detinationFolder.toString();
+                        creatingPathString(btnDestFoldTitle, globals.detinationFolder);
+
                         checkingIfWidthAndHeightIs0(grpWidthNumb, grpHeightNumb, btnAccept);
                         pnlAddCanvas.enabled = true;
 
@@ -651,6 +650,24 @@ function main() {
                                 }
 
 mainWindow.show();
+}
+
+function creatingPathString(stringObject, Path) {
+
+    var stringPath = Path.toString().replace(/%20/g, ' ');
+    if (stringPath.length >= 30) {
+        stringObject.text = "..." + stringPath.slice(-(stringObject.characters + 5));
+    }
+    else {
+        stringObject.text = stringPath;
+    }
+}
+
+function createGroup(plnSourceFiles) {
+    var grpBtnRadSourceFiles = plnSourceFiles.add("group");
+    grpBtnRadSourceFiles.orientation = 'column';
+    grpBtnRadSourceFiles.alignChildren = "left";
+    return grpBtnRadSourceFiles;
 }
 
 //Resizng canvas unfctionality
