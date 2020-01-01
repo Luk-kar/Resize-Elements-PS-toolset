@@ -11,17 +11,16 @@ function main() {
         //Creating group to populate with main UI
         var grpMain = mainWindow.add("group")
 
-        var grpInfo = createGroupUI(grpMain);
+        var grpInfo = createGroup(grpMain, "column", "left");
 
             //Source files
-            var plnSourceFiles = grpInfo.add("panel", undefined);
-            plnSourceFiles.alignChildren = "left";
+            var plnSourceFiles = createPanel(grpInfo, undefined, "left");
 
                 //Source files title
                 var plnSourceFilesTitle = plnSourceFiles.add("statictext", undefined, "Source files:");
 
                 //Creating radial button group
-                var grpBtnRadSourceFiles = createGroup(plnSourceFiles);
+                var grpBtnRadSourceFiles = createGroup(plnSourceFiles, "column", "left", "left");
 
                     //Radial button choose active files/target folder
                     var btnRadChooseFilesActiveDocs = grpBtnRadSourceFiles.add("radiobutton", undefined, "Opened files");
@@ -35,16 +34,13 @@ function main() {
                     btnChooseFilesSourceFoldTitle.characters = 25;
 
         ///Destination folder UI
-        var pnlDestFold = grpInfo.add("panel", undefined);
-        pnlDestFold.alignChildren = "left";
+        var pnlDestFold = createPanel(grpInfo, undefined, "left");
 
             //Title
             var pnlDestFoldTitle = pnlDestFold.add("statictext", undefined, "Destination folder:");
 
             //Creating group radial button choose destination folder
-            var grpBtnRadChooseFolder = pnlDestFold.add("group");
-            grpBtnRadChooseFolder.orientation = 'column';
-            grpBtnRadChooseFolder.alignChildren = "left";
+            var grpBtnRadChooseFolder = createGroup(pnlDestFold, "column", "left");
 
                 //Radial buttons choose destination folder
                 var btnRadFolderSame = grpBtnRadChooseFolder.add("radiobutton", undefined, "Add canvas in the same folder");
@@ -58,8 +54,7 @@ function main() {
             btnDestFoldTitle.characters = 25;
 
         ///Add canvas UI
-        var pnlAddCanvas = grpInfo.add("panel", undefined);
-        pnlAddCanvas.alignChildren = "left";
+        var pnlAddCanvas = createPanel(grpInfo, undefined, "left");
 
             //Title
             var pnlAddCanvasTitle = pnlAddCanvas.add("statictext", undefined, "Add canvas");
@@ -69,9 +64,7 @@ function main() {
             //grpUnitVal.alignment = "left";
 
                 //Group dialog units value
-                grpUnitValDlg = grpUnitVal.add("group");
-                grpUnitValDlg.orientation = 'column';
-                grpUnitValDlg.alignChildren = "left";
+                grpUnitValDlg = createGroup(grpUnitVal, "column", "left");
 
                     //Group width
                     var grpWidth = grpUnitValDlg.add("group");
@@ -127,8 +120,7 @@ function main() {
             grpAnchorTitle.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
 
                 //Creating anchor group box
-                var grpAnchorBoxBtns = grpAnchor.add("group");
-                grpAnchorBoxBtns.orientation = 'column';
+                var grpAnchorBoxBtns = createGroup(grpAnchor, "column");
 
                 //Creating anchor gorup lines inside box
                 var grpAnchorBoxBtnsLine001 = grpAnchorBoxBtns.add("group");
@@ -172,8 +164,7 @@ function main() {
 
         
         //Creating panel to display to files
-        var pnlDocInfo = grpInfo.add("panel", undefined, undefined);
-        pnlDocInfo.alignChildren = "left";
+        var pnlDocInfo = createPanel(grpInfo, undefined, "left");
         
         //Number of files displayed in "Info UI"
         var numbOfDisplayedFiles = 2;
@@ -182,16 +173,14 @@ function main() {
         var plnDocInfoLines = new Array;
 
         for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
-            plnDocInfoLines[i] = pnlDocInfo.add("statictext", undefined, undefined);
+            plnDocInfoLines[i] = pnlDocInfo.add("statictext");
             plnDocInfoLines[i].characters = 38;
         }
 
     ////Buttons validation UI
 
     //Creating button group
-    var grpBtns = grpMain.add("group");
-    grpBtns.alignment = [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP];
-    grpBtns.orientation = 'column';
+    var grpBtns = createGroup(grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
         //Accept button
         var btnAccept = grpBtns.add("button", undefined, "Accept");
@@ -652,6 +641,22 @@ function main() {
 mainWindow.show();
 }
 
+function createPanel(objectParent, orientationChildren, alignChildren, alignmentObject) {
+    var objectChildGroup = objectParent.add("panel");
+    if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
+    objectChildGroup.alignChildren = alignChildren;
+    objectChildGroup.alignment = alignmentObject;
+    return objectChildGroup;
+}
+
+function createGroup(objectParent, orientationChildren, alignChildren, alignmentObject) {
+    var objectChildGroup = objectParent.add("group");
+    objectChildGroup.orientation = orientationChildren;
+    objectChildGroup.alignChildren = alignChildren;
+    objectChildGroup.alignment = alignmentObject;
+    return objectChildGroup;
+}
+
 function creatingPathString(stringObject, Path) {
 
     var stringPath = Path.toString().replace(/%20/g, ' ');
@@ -663,12 +668,6 @@ function creatingPathString(stringObject, Path) {
     }
 }
 
-function createGroup(plnSourceFiles) {
-    var grpBtnRadSourceFiles = plnSourceFiles.add("group");
-    grpBtnRadSourceFiles.orientation = 'column';
-    grpBtnRadSourceFiles.alignChildren = "left";
-    return grpBtnRadSourceFiles;
-}
 
 //Resizng canvas unfctionality
 function changeFileAndSave(addWidth, addHeight, units, anchor, btnRadChooseFilesActiveDocs, btnRadSameFolder, fgColor, bgColor){
@@ -755,13 +754,6 @@ function addCanvas(addWidth, addHeight, units, anchor, doc) {
 
 
     doc.resizeCanvas(UnitValue(sumWidth, units), UnitValue(sumHeight, units), anchor);
-}
-
-function createGroupUI(grpMain) {
-    var grpInfo = grpMain.add("group");
-    grpInfo.orientation = 'column';
-    grpInfo.alignChildren = "left";
-    return grpInfo;
 }
 
 function savePNG(saveFile) {
