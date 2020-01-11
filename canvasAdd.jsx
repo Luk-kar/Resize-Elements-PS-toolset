@@ -532,6 +532,7 @@ EventHandlerBuilder.prototype.onGrpWidthUnitsDropDown  = function() {
 
         sameDropDown(UI.grpWidthUnitsDropDown, UI.grpHeightUnitDropDown);
     }
+
 }
 
 EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
@@ -769,11 +770,11 @@ function createPathString(textObject, path) {
 
 function checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(Numb001, Numb002, btnEnabled) {
 
-        if ((Numb001.text === "0") && (Numb002.text === "0")) {
-            btnEnabled.enabled = false;
-        } else if ((Numb001.text !== "0") || (Numb002.text !== "0")) {
-            btnEnabled.enabled = true;
-        }
+    if ((Numb001.text.match(/[^-\+,0-9]+/) !== null) || (Numb002.text.match(/[^-\+,0-9]+/) !== null)|| (Numb001.text === "") || (Numb002.text === "") ) {
+        btnEnabled.enabled = false;
+    } else if ((Numb001.text.match(/[0-9]+/) !== null) && ((parseInt(Numb001.text, 10) !== 0) || (parseInt(Numb002.text, 10) !== 0)) ){
+        btnEnabled.enabled = true;
+    }
 
 }
 
@@ -956,14 +957,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     app.backgroundColor = bgColor;
 }
 
-function addCanvas(addWidth, v, units, anchor, doc) {
-
-    if (addWidth === "") {
-        addWidth = 0;
-    }
-    if (addHeight === "") {
-        addHeight = 0;
-    }
+function addCanvas(addWidth, addHeight, units, anchor, doc) {
 
     var mathWidthAndHeightResult = mathSumWidthAndHeight(units, addWidth, addHeight, doc);
     var sumWidth = mathWidthAndHeightResult[1];
