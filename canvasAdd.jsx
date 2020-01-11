@@ -311,6 +311,8 @@ EventHandlerBuilder.prototype.startSettingsUINoActiveDocs = function() {
 
         UI.btnRadChooseFilesSourceFold.notify();
 
+        UI.btnRadChooseFilesActiveDocs.enabled = false;
+
         UI.btnRadDestFoldSame.value = true;
         UI.btnAccept.enabled = false;
 
@@ -425,8 +427,8 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 if (notTheSameChoosedSourceFolderAsBefore === true) {
                     if (self.sourceFiles.length > 1) {
                         alert("In folder are " + self.sourceFiles.length + " files");
-                    } else {
-                        alert("In folder is " + self.sourceFiles.length + " file");
+                    } else if (self.sourceFiles.length === 0) {
+                        alert("In folder is 1 file");
                     }
                 }
             }
@@ -462,7 +464,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
         if (UI.btnChooseFilesDestFoldTitle.text === "Destination folder...") {
             UI.btnAccept.enabled = false;
             UI.pnlAddCanvas.enabled = false;
-        } else {
+        } else if (UI.btnChooseFilesDestFoldTitle.text !== "Destination folder...") {
             UI.pnlAddCanvas.enabled = true;
         }
     }
@@ -491,7 +493,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
             UI.pnlAddCanvas.enabled = true;
 
             self.detinationFolder = detinationFolderSelection;
-        } else {
+        } else if (detinationFolderSelection.toString() === self.sourceFolder.toString()) {
 
             UI.btnRadDestFoldSame.notify();
             createPathString(UI.btnChooseFilesDestFoldTitle, "Destination folder...");
@@ -514,7 +516,9 @@ EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
 
     UI.grpWidthNumb.onChanging = function() {
 
-        if (UI.constrainsProportionsCheckbox.value === true) UI.grpHeightNumb.text = UI.grpWidthNumb.text;                        
+        if (UI.constrainsProportionsCheckbox.value === true) {
+            UI.grpHeightNumb.text = UI.grpWidthNumb.text;
+        }                        
 
         checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
     }
@@ -592,7 +596,6 @@ EventHandlerBuilder.prototype.onAnchorButtons = function() {
 EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
     var UI = this.UI;
 
-    //Constrain proportions checkbox
     UI.constrainsProportionsCheckbox.onClick = function() {
         //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
         createTooltipToImage(UI.constrainsProportionsCheckbox, UI.grpDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
@@ -608,7 +611,7 @@ EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
                 else {
                     UI.grpHeightNumb.onChanging();
                 }
-            } else {
+            } else if ((parseInt(UI.grpWidthNumb.text, 10) > 0) || (parseInt(UI.grpHeightNumb.text, 10) > 0)) {
                 if (parseInt(UI.grpWidthNumb.text, 10) > parseInt(UI.grpHeightNumb.text, 10)) {
                     UI.grpWidthNumb.onChanging();
                 } else {
@@ -689,14 +692,22 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        changeFileAndSave(self.sourceFiles, self.detinationFolder, UI.grpWidthNumb.text, UI.grpHeightNumb.text, UI.grpWidthUnitsDropDown, self.anchorPosOutcome, UI.btnRadChooseFilesActiveDocs, UI.btnRadDestFoldSame, self.fgColor, self.bgColor);
+        changeFileAndSave(self.sourceFiles, self.detinationFolder, 
+            UI.grpWidthNumb.text, UI.grpHeightNumb.text, UI.grpWidthUnitsDropDown, self.anchorPosOutcome, 
+            UI.btnRadChooseFilesActiveDocs, UI.btnRadChooseFilesSourceFold, 
+            UI.btnRadDestFoldSame, UI.btnRadDestFoldOther,
+            self.fgColor, self.bgColor);
         
         if (UI.btnRadChooseFilesActiveDocs.value === true) {
 
-            if (UI.numbOfActiveDocuments > 1) alert("You added canvas to " + UI.numbOfActiveDocuments + " files");
-            else alert("You added canvas to only 1 file");
+            if (UI.numbOfActiveDocuments > 1) {
+                alert("You added canvas to " + UI.numbOfActiveDocuments + " files");
+            }
+            else if (UI.numbOfActiveDocuments === 1) {
+                alert("You added canvas to only 1 file");
+            }
 
-        } else {
+        } else if (UI.btnRadChooseFilesSourceFold.value === true) {
 
             var folderName = "";
             if (UI.btnRadDestFoldSame.value === true) {
@@ -707,7 +718,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
 
             if (self.sourceFiles.length > 1) {
                 var files = "files"
-            } else {
+            } else if (self.sourceFiles.length === 1) {
                 var files = "file"
             }
 
@@ -744,24 +755,26 @@ function createPathString(textObject, path) {
 
     if (typeof path !== "string") {
         var string = path.toString().replace(/%20/g, ' ');
-    } else {
-        var string = path
+    } else if (typeof path === "string") {
+        var string = path;
     }
 
     if (string.length > textObject.characters) {
         textObject.text = "..." + string.slice(-(textObject.characters));
     }
-    else {
+    else if (textObject.characters >= string.length) {
         textObject.text = string;
     }
 }
 
 function checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(Numb001, Numb002, btnEnabled) {
-    if ((Numb001.text === "0") && (Numb002.text === "0")) {
-        btnEnabled.enabled = false;
-    } else {
-        btnEnabled.enabled = true;
-    }
+
+        if ((Numb001.text === "0") && (Numb002.text === "0")) {
+            btnEnabled.enabled = false;
+        } else if ((Numb001.text !== "0") || (Numb002.text !== "0")) {
+            btnEnabled.enabled = true;
+        }
+
 }
 
 function sameDropDown(objectEvent, objectIndexSetSame) {
@@ -775,7 +788,7 @@ function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSour
         picture.image = pictureSourceTrue;
         picture.helpTip = "Width and Height same value anabled";
     }
-    else {
+    else if (condition.value === false) {
         picture.image = pictureSourceFalse;
         picture.helpTip = "Width and Height same value disabled";
     }
@@ -818,7 +831,7 @@ function infoUItoDisplay(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, pa
 
     if (typeof sourceFiles === "undefined") {
         var filesNamesInfoUI = [];
-    } else {
+    } else if (typeof sourceFiles !== "undefined") {
         var filesNamesInfoUI = new Array;
         for (var i = 0; i < sourceFiles.length; i++) {
             filesNamesInfoUI[i] = sourceFiles[i].name;
@@ -861,7 +874,11 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
     panelInfoUITitle.text =  "Files to process: " + filesNumbers;
 }
 
-function changeFileAndSave(sourceFiles, detinationFolder, addWidth, addHeight, unitsList, anchor, btnRadChooseFilesActiveDocs, btnRadSameFolder, fgColor, bgColor) {
+function changeFileAndSave(sourceFiles, detinationFolder, 
+    addWidth, addHeight, unitsList, anchor, 
+    btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
+    btnRadSameFolder, btnRadDestFoldOther, 
+    fgColor, bgColor) {
 
     //full list is in var AddCanvasDocUnits
     var unitsTypes = [
@@ -884,7 +901,7 @@ function changeFileAndSave(sourceFiles, detinationFolder, addWidth, addHeight, u
         }
     
     //If you choose  radio button "Source folder"
-    } else {
+    } else if (btnRadChooseFilesSourceFold.value === true) {
 
         for(var i = 0; i < sourceFiles.length; i++) {
 
@@ -898,7 +915,7 @@ function changeFileAndSave(sourceFiles, detinationFolder, addWidth, addHeight, u
                 doc.save();
 
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
-            } else {
+            } else if (btnRadDestFoldOther.value === true) {
 
                 //Declaring name of saved file
                 var name = doc.name;
@@ -939,7 +956,14 @@ function changeFileAndSave(sourceFiles, detinationFolder, addWidth, addHeight, u
     app.backgroundColor = bgColor;
 }
 
-function addCanvas(addWidth, addHeight, units, anchor, doc) {
+function addCanvas(addWidth, v, units, anchor, doc) {
+
+    if (addWidth === "") {
+        addWidth = 0;
+    }
+    if (addHeight === "") {
+        addHeight = 0;
+    }
 
     var mathWidthAndHeightResult = mathSumWidthAndHeight(units, addWidth, addHeight, doc);
     var sumWidth = mathWidthAndHeightResult[1];
@@ -957,7 +981,7 @@ function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
         var sumWidth = 100 + parseInt(addWidth, 10);
         var sumHeight = 100 + parseInt(addHeight, 10);
     }
-    else {
+    else if (units === "PX") {
         var sumWidth = activeDocWidth + parseInt(addWidth, 10);
         var sumHeight = activeDocHeight + parseInt(addHeight, 10);
     }
