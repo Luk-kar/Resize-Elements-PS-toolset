@@ -244,9 +244,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
     //Choose source folder
     UI.btnRadSourceFiles.chooseFilesSourceFold.onClick = function() {
 
-        //Anabled "Source folder..." button
-        UI.btnChooseFilesSourceFold.enabled = true;
-        UI.btnChooseFilesSourceFold.title.enabled = true;
+        enabledBtnSourceFolder(false, UI);//todo
 
         //Until there is no choosed folder you have only ability to browse source folder
         if (UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
