@@ -725,19 +725,19 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function enabledBtnDestFold(boolean, UI) {
-    UI.btnChooseFilesDestFold.enabled = boolean;
-    UI.btnChooseFilesDestFold.title.enabled = boolean;
+function enabledBtnDestFold(trueFalse, UI) {
+    UI.btnChooseFilesDestFold.enabled = trueFalse;
+    UI.btnChooseFilesDestFold.title.enabled = trueFalse;
 }
 
-function enabledRadBtnsDestFold(boolean, UI) {
-    UI.btnRadDestFold.same.enabled = boolean;
-    UI.btnRadDestFold.other.enabled = boolean;
+function enabledRadBtnsDestFold(trueFalse, UI) {
+    UI.btnRadDestFold.same.enabled = trueFalse;
+    UI.btnRadDestFold.other.enabled = trueFalse;
 }
 
-function enabledBtnSourceFolder(boolean, UI) {
-    UI.btnChooseFilesSourceFold.enabled = boolean;
-    UI.btnChooseFilesSourceFold.title.enabled = boolean;
+function enabledBtnSourceFolder(trueFalse, UI) {
+    UI.btnChooseFilesSourceFold.enabled = trueFalse;
+    UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
 }
 
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
