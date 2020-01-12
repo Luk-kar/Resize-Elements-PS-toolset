@@ -734,12 +734,6 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
-    if (condition.value === true) {
-        inputFieldToPasteIn.text = inputFieldToCopy.text;
-    }
-}
-
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
@@ -785,6 +779,12 @@ function checkingIfWidthAndHeightIsNot0UnlockingBtn(Numb001, Numb002, btnEnabled
         btnEnabled.enabled = true;
     }
 
+}
+
+function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
+    if (condition.value === true) {
+        inputFieldToPasteIn.text = inputFieldToCopy.text;
+    }
 }
 
 function sameDropDown(objectEvent, objectIndexSetSame) {
