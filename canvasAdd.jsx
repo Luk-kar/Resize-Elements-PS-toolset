@@ -770,9 +770,14 @@ function createPathString(textObject, path) {
 
 function checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(Numb001, Numb002, btnEnabled) {
 
-    if ((Numb001.text.match(/[^-\+0-9]+/) !== null) || (Numb002.text.match(/[^-\+,0-9]+/) !== null)|| (Numb001.text === "") || (Numb002.text === "") ) {
+    if ((Numb001.text.match(/[^-\+0-9]+/) !== null) || (Numb002.text.match(/[^-\+,0-9]+/) !== null) || 
+        (Numb001.text.match(/[0-9]+/) === null) || (Numb002.text.match(/[0-9]+/) === null) ||
+        ((parseInt(Numb001.text, 10) === 0) && (parseInt(Numb002.text, 10) === 0)) ) {
+
         btnEnabled.enabled = false;
-    } else if ((Numb001.text.match(/[0-9]+/) !== null) && ((parseInt(Numb001.text, 10) !== 0) || (parseInt(Numb002.text, 10) !== 0)) ){
+
+    } else {
+        
         btnEnabled.enabled = true;
     }
 
@@ -972,12 +977,12 @@ function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
     var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
 
     if (units === "PERCENT") {
-        var sumWidth = 100 + parseInt(addWidth, 10); //Have to parse to Int becouse numb with decinamls cause bugs in script
-        var sumHeight = 100 + parseInt(addHeight, 10); //Have to parse to Int becouse numb with decinamls cause bugs in script
+        var sumWidth = 100 + parseInt(addWidth, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
+        var sumHeight = 100 + parseInt(addHeight, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
     }
     else if (units === "PX") {
-        var sumWidth = activeDocWidth + parseInt(addWidth, 10); //Have to parse to Int becouse numb with decinamls cause bugs in script
-        var sumHeight = activeDocHeight + parseInt(addHeight, 10); //Have to parse to Int becouse numb with decinamls cause bugs in script
+        var sumWidth = activeDocWidth + parseInt(addWidth, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
+        var sumHeight = activeDocHeight + parseInt(addHeight, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
     }
 
     return [ sumWidth, sumHeight ];
