@@ -189,7 +189,7 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
     this.numbOfDisplayedFiles = 2;
 
     //Creating empty lines of text to fill with files names
-    this.plnDocInfoLines = new Array;
+    this.plnDocInfoLines = new Array; //plnDocInfo.lines -> "undefined not as object"
 
     for (var i = 0; i < (this.numbOfDisplayedFiles + 1); i++) {
         this.plnDocInfoLines[i] = this.pnlDocInfo.add("statictext");
@@ -198,7 +198,7 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
 }
 
 GuiBuilder.prototype.buildAcceptCancelButtons = function() {
-        //Creating button group
+
         this.grpBtns = createGroupUI(this.grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
         //Accept button
