@@ -242,7 +242,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         infoUItoDisplay(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
-        checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
     }
 }
 
@@ -271,7 +271,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
             UI.btnChooseFilesDestFoldTitle.enabled = false;
 
             //Button accept disabled if you do not any values to Height and Width dialog
-            checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
 
             //Disabled Add canvas panel
             UI.pnlAddCanvas.enabled = false;
@@ -295,7 +295,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             }
 
-            checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
 
             //Uptade info UI with files from source folder
             infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
@@ -444,7 +444,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
         UI.btnChooseFilesDestFold.enabled = false;
         UI.btnChooseFilesDestFoldTitle.enabled = false;
 
-        checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
 
         UI.pnlAddCanvas.enabled = true;
     }
@@ -459,7 +459,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
         UI.btnChooseFilesDestFold.enabled = true;
         UI.btnChooseFilesDestFoldTitle.enabled = true;
 
-        checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
 
         if (UI.btnChooseFilesDestFoldTitle.text === "Destination folder...") {
             UI.btnAccept.enabled = false;
@@ -489,7 +489,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
         } else if (detinationFolderSelection.toString() !== self.sourceFolder.toString()) {
 
             createPathString(UI.btnChooseFilesDestFoldTitle, detinationFolderSelection);
-            checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
             UI.pnlAddCanvas.enabled = true;
 
             self.detinationFolder = detinationFolderSelection;
@@ -508,7 +508,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 EventHandlerBuilder.prototype.startSettingsWidthAndHeight = function() {
     var UI = this.UI;
 
-    checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+    checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
 }
 
 EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
@@ -516,11 +516,9 @@ EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
 
     UI.grpWidthNumb.onChanging = function() {
 
-        if (UI.constrainsProportionsCheckbox.value === true) {
-            UI.grpHeightNumb.text = UI.grpWidthNumb.text;
-        }                        
+        sameInputField(UI.constrainsProportionsCheckbox, UI.grpWidthNumb, UI.grpHeightNumb);
 
-        checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
     }
 }
 
@@ -551,11 +549,9 @@ EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
     //Group Height
     UI.grpHeightNumb.onChanging = function() {
 
-        if (UI.constrainsProportionsCheckbox.value === true) {
-            UI.grpWidthNumb.text = UI.grpHeightNumb.text;
-        }
+        sameInputField(UI.constrainsProportionsCheckbox, UI.grpHeightNumb, UI.grpWidthNumb);
 
-        checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
     }
 }
 
@@ -738,6 +734,12 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
+function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
+    if (condition.value === true) {
+        inputFieldToPasteIn.text = inputFieldToCopy.text;
+    }
+}
+
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
@@ -770,7 +772,7 @@ function createPathString(textObject, path) {
     }
 }
 
-function checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(Numb001, Numb002, btnEnabled) {
+function checkingIfWidthAndHeightIsNot0UnlockingBtn(Numb001, Numb002, btnEnabled) {
 
     if ((Numb001.text.match(/[^-\+0-9]+/) !== null) || (Numb002.text.match(/[^-\+,0-9]+/) !== null) || 
         (Numb001.text.match(/[0-9]+/) === null) || (Numb002.text.match(/[0-9]+/) === null) ||
