@@ -11,7 +11,7 @@ GuiBuilder.prototype.baseLayout = function() {
     this.mainWindow = new Window("dialog", "Add canvas");
     this.grpMain = this.mainWindow.add("group")
     this.grpInfo = createGroupUI(this.grpMain, "column", "left");
-    this.btnChooseFilesTitleCharLength = 40;//This number is responsible for width of panels; Do not use creation property for panels due to issues with bugs
+    this.panelWidth = 40; // Do not use creation property for panels due to issues with bugs
 }
 
 GuiBuilder.prototype.buildPanelSourceFiles = function() {
@@ -19,21 +19,21 @@ GuiBuilder.prototype.buildPanelSourceFiles = function() {
     this.plnSourceFiles = createPanelUI(this.grpInfo, undefined, "left");
 
     //Source files title
-    this.plnSourceFiles.add("statictext", undefined, "Source files:");
+    this.plnSourceFiles.title = this.plnSourceFiles.add("statictext", undefined, "Source files:");
 
     //Creating radial button group
-    this.grpBtnRadSourceFiles = createGroupUI(this.plnSourceFiles, "column", "left", "left");
+    this.btnRadSourceFiles = createGroupUI(this.plnSourceFiles, "column", "left", "left");
 
     //Radial button choose active files/target folder
-    this.btnRadChooseFilesActiveDocs = this.grpBtnRadSourceFiles.add("radiobutton", undefined, "Opened files");
-    this.btnRadChooseFilesSourceFold = this.grpBtnRadSourceFiles.add("radiobutton", undefined, "Choose folder");
+    this.btnRadSourceFiles.chooseSourceFold = this.btnRadSourceFiles.add("radiobutton", undefined, "Opened files");
+    this.btnRadSourceFiles.chooseFilesSourceFold = this.btnRadSourceFiles.add("radiobutton", undefined, "Choose folder");
 
     //Add button to choose target folder
     this.grpBtnChooseFilesSourceFold = this.plnSourceFiles.add("group");
 
     this.btnChooseFilesSourceFold =  this.grpBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
-    this.btnChooseFilesSourceFoldTitle = this.grpBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
-    this.btnChooseFilesSourceFoldTitle.characters = this.btnChooseFilesTitleCharLength;
+    this.btnChooseFilesSourceFold.title = this.grpBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
+    this.btnChooseFilesSourceFold.title.characters = this.panelWidth;
 }
 
 GuiBuilder.prototype.buildPanelDestinationFolder = function() {
@@ -41,21 +41,21 @@ GuiBuilder.prototype.buildPanelDestinationFolder = function() {
     this.pnlDestFold = createPanelUI(this.grpInfo, undefined, "left");
 
     //Title
-    this.pnlDestFoldTitle = this.pnlDestFold.add("statictext", undefined, "Destination folder:");
+    this.pnlDestFold.title = this.pnlDestFold.add("statictext", undefined, "Destination folder:");
 
     //Creating group radial button choose destination folder
-    this.grpBtnRadChooseFolder = createGroupUI(this.pnlDestFold, "column", "left", "left");
+    this.btnRadDestFold = createGroupUI(this.pnlDestFold, "column", "left", "left");
 
     //Radial buttons choose destination folder
-    this.btnRadDestFoldSame = this.grpBtnRadChooseFolder.add("radiobutton", undefined, "Add canvas in the same folder");
-    this.btnRadDestFoldOther = this.grpBtnRadChooseFolder.add("radiobutton", undefined, "Add canvas and copy files to other folder");
+    this.btnRadDestFold.same = this.btnRadDestFold.add("radiobutton", undefined, "Add canvas in the same folder");
+    this.btnRadDestFold.other = this.btnRadDestFold.add("radiobutton", undefined, "Add canvas and copy files to other folder");
 
     //Browse button destination folder
     this.grpBtnDestFold = this.pnlDestFold.add("group");
 
     this.btnChooseFilesDestFold = this.grpBtnDestFold.add("button", undefined, "Browse...");
-    this.btnChooseFilesDestFoldTitle = this.grpBtnDestFold.add("statictext", undefined, "Destination folder...");
-    this.btnChooseFilesDestFoldTitle.characters = this.btnChooseFilesTitleCharLength;
+    this.btnChooseFilesDestFold.title = this.grpBtnDestFold.add("statictext", undefined, "Destination folder...");
+    this.btnChooseFilesDestFold.title.characters = this.panelWidth;
 }
 
 GuiBuilder.prototype.buildPanelAddCanvas = function(){
@@ -64,11 +64,10 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
     this.pnlAddCanvas = createPanelUI(this.grpInfo, undefined, "left");
 
     //Title
-    this.pnlAddCanvasTitle = this.pnlAddCanvas.add("statictext", undefined, "Add canvas");
+    this.pnlAddCanvas.title = this.pnlAddCanvas.add("statictext", undefined, "Add canvas");
 
     //Group units value
     this.grpUnitVal = this.pnlAddCanvas.add("group");
-    //grpUnitVal.alignment = "left";
 
         //Group dialog units value
         this.grpUnitValDlg = createGroupUI(this.grpUnitVal, "column", "left");
@@ -77,46 +76,46 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
             this.grpWidth = this.grpUnitValDlg.add("group");
 
                 //Edittext: Width
-                this.grpWidthText = this.grpWidth.add("statictext", undefined, "Width:  ");
-                this.grpWidthNumb =  this.grpWidth.add("edittext", undefined, 0);
-                this.grpWidthNumb.characters = 9;
+                this.grpWidth.title = this.grpWidth.add("statictext", undefined, "Width:  ");
+                this.grpWidth.numb =  this.grpWidth.add("edittext", undefined, 0);
+                this.grpWidth.numb.characters = 9;
 
                 //Update also unitsTypes
                 var AddCanvasDocUnits = [
                     "ADD PX", 
                     "ADD %",
                     ];
-                this.grpWidthUnitsDropDown = this.grpWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.grpWidthUnitsDropDown.selection = 0;
+                this.grpWidth.unitsDropDown = this.grpWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
+                this.grpWidth.unitsDropDown.selection = 0;
 
                 //Crating path to image folder
                 this.scriptPath = $.fileName;
-                this.scriptPathString = this.scriptPath.toString().replace(/\\/g, '/').slice(0, -13); // -13 is the lenght of the script file name
+                this.scriptFolderDestination = this.scriptPath.toString().replace(/\\/g, '/').slice(0, -13); // -13 is the lenght of the script file name
 
                 //Image: InfoHover.png
-                this.imageInfHov = File(this.scriptPathString + "InfoHover.png");
-                this.toolTipWidthImage = this.grpWidth.add("image", undefined, this.imageInfHov);
+                this.imageInfHov = File(this.scriptFolderDestination + "InfoHover.png");
+                this.grpWidth.imageTooltip = this.grpWidth.add("image", undefined, this.imageInfHov);
 
             //Group height
             this.grpHeight = this.grpUnitValDlg.add("group");
 
                 //Edittext: Height
-                this.grpHeightText = this.grpHeight.add("statictext", undefined, "Height: ");
-                this.grpHeightNumb =  this.grpHeight.add("edittext", undefined, 0);
-                this.grpHeightNumb.characters = 9;
+                this.grpHeight.title = this.grpHeight.add("statictext", undefined, "Height: ");
+                this.grpHeight.numb =  this.grpHeight.add("edittext", undefined, 0);
+                this.grpHeight.numb.characters = 9;
 
                 //Dropdownlist: Add PX, add %
-                this.grpHeightUnitDropDown = this.grpHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.grpHeightUnitDropDown.selection = 0;
+                this.grpHeight.unitDropDown = this.grpHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
+                this.grpHeight.unitDropDown.selection = 0;
 
                 //Image: InfoHover.png
-                this.toolTipHeightImage = this.grpHeight.add("image", undefined, this.imageInfHov);
+                this.grpHeight.imageTooltip = this.grpHeight.add("image", undefined, this.imageInfHov);
 
         //Graphic element proportions constrains (true, false)
 
             //Uplaoding constrains images next Width and Height dialog groups
-            this.imageCnstrnsProportionFalse = File(this.scriptPathString + "ConstrPropFalse.png");
-            this.imageCnstrnsProportionTrue = File(this.scriptPathString + "ConstrPropTrue.png");
+            this.imageCnstrnsProportionFalse = File(this.scriptFolderDestination + "ConstrPropFalse.png");
+            this.imageCnstrnsProportionTrue = File(this.scriptFolderDestination + "ConstrPropTrue.png");
 
             //Add constrain image next to dialog
             this.grpDlgUnitValImage = this.grpUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
@@ -130,43 +129,43 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                                     this.pnlAddCanvas.add("group", undefined, "")];
 
     this.grpAnchor = this.pnlAddCanvas.add("group");
-    this.grpAnchorTitle = this.grpAnchor.add("statictext", undefined, "Anchor: ");
-    this.grpAnchorTitle.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
+    this.grpAnchor.title = this.grpAnchor.add("statictext", undefined, "Anchor: ");
+    this.grpAnchor.title.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
 
         //Creating anchor group box
-        this.grpAnchorBoxBtns = createGroupUI(this.grpAnchor, "column");
+        this.grpAnchor.boxBtns = createGroupUI(this.grpAnchor, "column");
 
         //Creating anchor gorup lines inside box
-        this.grpAnchorBoxBtnsLine001 = this.grpAnchorBoxBtns.add("group");
-        this.grpAnchorBoxBtnsLine002 = this.grpAnchorBoxBtns.add("group");
-        this.grpAnchorBoxBtnsLine003 = this.grpAnchorBoxBtns.add("group");
+        this.grpAnchor.boxBtns.line001 = this.grpAnchor.boxBtns.add("group");
+        this.grpAnchor.boxBtns.line002 = this.grpAnchor.boxBtns.add("group");
+        this.grpAnchor.boxBtns.line003 = this.grpAnchor.boxBtns.add("group");
 
             //Image: imageAnchorTrue.png and imageAnchorFalse.png
-            this.imageAnchorTrue = File(this.scriptPathString + "anchorPointerTrue.png");
-            this.imageAnchorFalse = File(this.scriptPathString + "anchorPointerFalse.png");
+            this.imageAnchorTrue = File(this.scriptFolderDestination + "anchorPointerTrue.png");
+            this.imageAnchorFalse = File(this.scriptFolderDestination + "anchorPointerFalse.png");
 
             //Adding 001 line of buttons
-            this.anchorPositionTOPLEFT = this.grpAnchorBoxBtnsLine001.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionTOPCENTER = this.grpAnchorBoxBtnsLine001.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionTOPRIGHT = this.grpAnchorBoxBtnsLine001.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionTOPLEFT = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionTOPCENTER = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionTOPRIGHT = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
 
             //Adding 002 line of buttons
-            this.anchorPositionMIDDLELEFT = this.grpAnchorBoxBtnsLine002.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionMIDDLECENTER = this.grpAnchorBoxBtnsLine002.add("iconbutton", undefined, this.imageAnchorTrue);
-            this.anchorPositionMIDDLERIGHT = this.grpAnchorBoxBtnsLine002.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionMIDDLELEFT = this.grpAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionMIDDLECENTER = this.grpAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorTrue);
+            this.anchorPositionMIDDLERIGHT = this.grpAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
 
             //Adding 003 line of buttons
-            this.anchorPositionBOTTOMLEFT = this.grpAnchorBoxBtnsLine003.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionBOTTOMCENTER = this.grpAnchorBoxBtnsLine003.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionBOTTOMRIGHT = this.grpAnchorBoxBtnsLine003.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionBOTTOMLEFT = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionBOTTOMCENTER = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionBOTTOMRIGHT = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
 
     this.grpAnchorMarginesSpaceBottom = this.pnlAddCanvas.add("statictext", undefined, "");
-    this.grpAnchorMarginesSpaceBottom.characters = this.btnChooseFilesTitleCharLength + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
+    this.grpAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
 
     //Canvas color extension
-    this.grpCanvExtendColor = this.pnlAddCanvas.add("group");
+    this.canvExtendColor = this.pnlAddCanvas.add("group");
 
-        this.grpCanvExtendColorText = this.grpCanvExtendColor.add("statictext", undefined, "Canvas extension color: ");
+        this.canvExtendColor.title = this.canvExtendColor.add("statictext", undefined, "Canvas extension color: ");
 
         var canvExtendColorValues = ["Foreground",
                                     "Background",
@@ -174,10 +173,10 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                                     "Black",
                                     "Grey",
                                     "Other..."
-                                    ];// functions in onCanvExtendColorDropDwn
+                                    ];// functions in onCanvExtendColorDropDwn; Can't be part of UI object, becouse of bug in the next line
 
-        this.canvExtendColorDropDwn = this.grpCanvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
-        this.canvExtendColorDropDwn.selection = 1;
+        this.canvExtendColor.dropDwn = this.canvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
+        this.canvExtendColor.dropDwn.selection = 1;
 
 }
 
@@ -194,7 +193,7 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
 
     for (var i = 0; i < (this.numbOfDisplayedFiles + 1); i++) {
         this.plnDocInfoLines[i] = this.pnlDocInfo.add("statictext");
-        this.plnDocInfoLines[i].characters = this.btnChooseFilesTitleCharLength + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
+        this.plnDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
     }
 }
 
@@ -220,29 +219,29 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
     var UI = this.UI;
 
     //Opened files in PS
-    UI.btnRadChooseFilesActiveDocs.onClick = function() {
+    UI.btnRadSourceFiles.chooseSourceFold.onClick = function() {
 
         //Disabled "Source folder..." button
         UI.btnChooseFilesSourceFold.enabled = false;
-        UI.btnChooseFilesSourceFoldTitle.enabled = false;
+        UI.btnChooseFilesSourceFold.title.enabled = false;
 
         //Disabled "Destination folder"" panel title
-        UI.pnlDestFoldTitle.enabled = false;
+        UI.pnlDestFold.title.enabled = false;
 
         //Disabled radButton destination folder
-        UI.btnRadDestFoldSame.enabled = false;
-        UI.btnRadDestFoldOther.enabled = false;
+        UI.btnRadDestFold.same.enabled = false;
+        UI.btnRadDestFold.other.enabled = false;
 
         //Disabled "destination folder..." button            
         UI.btnChooseFilesDestFold.enabled = false;
-        UI.btnChooseFilesDestFoldTitle.enabled = false;
+        UI.btnChooseFilesDestFold.title.enabled = false;
 
         //Anabled Add canvas panel
         if (UI.pnlAddCanvas.enabled === false) UI.pnlAddCanvas.enabled = true;
 
         infoUItoDisplay(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
 }
 
@@ -251,27 +250,27 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
     var self = this;
 
     //Choose source folder
-    UI.btnRadChooseFilesSourceFold.onClick = function() {
+    UI.btnRadSourceFiles.chooseFilesSourceFold.onClick = function() {
 
         //Anabled "Source folder..." button
         UI.btnChooseFilesSourceFold.enabled = true;
-        UI.btnChooseFilesSourceFoldTitle.enabled = true;
+        UI.btnChooseFilesSourceFold.title.enabled = true;
 
         //Until there is no choosed folder you have only ability to browse source folder
-        if (UI.btnChooseFilesSourceFoldTitle.text === "Source folder...") {
+        if (UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
             //Disabled "Destination folder"" panel title
-            UI.pnlDestFoldTitle.enabled = false;
+            UI.pnlDestFold.title.enabled = false;
 
             //Disabled radButtons destination folder
-            UI.btnRadDestFoldSame.enabled = false;
-            UI.btnRadDestFoldOther.enabled = false;
+            UI.btnRadDestFold.same.enabled = false;
+            UI.btnRadDestFold.other.enabled = false;
 
             //Disabled "destination folder..." button
             UI.btnChooseFilesDestFold.enabled = false;
-            UI.btnChooseFilesDestFoldTitle.enabled = false;
+            UI.btnChooseFilesDestFold.title.enabled = false;
 
             //Button accept disabled if you do not any values to Height and Width dialog
-            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
             //Disabled Add canvas panel
             UI.pnlAddCanvas.enabled = false;
@@ -281,21 +280,21 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             UI.btnAccept.enabled = false;
         
-        } else if (UI.btnChooseFilesSourceFoldTitle.text !== "Source folder..."){
+        } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder..."){
             //Anabled "Destination folder"" panel title
-            UI.pnlDestFoldTitle.enabled = true;
+            UI.pnlDestFold.title.enabled = true;
 
             //Anabled radButton destination folder
-            UI.btnRadDestFoldSame.enabled = true;
-            UI.btnRadDestFoldOther.enabled = true;
+            UI.btnRadDestFold.same.enabled = true;
+            UI.btnRadDestFold.other.enabled = true;
             
-            if (UI.btnRadDestFoldOther.value === true) {
+            if (UI.btnRadDestFold.other.value === true) {
 
-                UI.btnRadDestFoldOther.notify();
+                UI.btnRadDestFold.other.notify();
 
             }
 
-            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
             //Uptade info UI with files from source folder
             infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
@@ -309,16 +308,16 @@ EventHandlerBuilder.prototype.startSettingsUINoActiveDocs = function() {
     //Start setting. If there is no active docs, set to choose folder
     if (app.documents.length === 0) {
 
-        UI.btnRadChooseFilesSourceFold.notify();
+        UI.btnRadSourceFiles.chooseFilesSourceFold.notify();
 
-        UI.btnRadChooseFilesActiveDocs.enabled = false;
+        UI.btnRadSourceFiles.chooseSourceFold.enabled = false;
 
-        UI.btnRadDestFoldSame.value = true;
+        UI.btnRadDestFold.same.value = true;
         UI.btnAccept.enabled = false;
 
     } else if (app.documents.length > 0) {
 
-        UI.btnRadChooseFilesActiveDocs.notify();
+        UI.btnRadSourceFiles.chooseSourceFold.notify();
         UI.numbOfActiveDocuments = app.documents.length; //Save later to use in summary alert
         
     }
@@ -334,9 +333,9 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
         self.sourceFolder = Folder.selectDialog("Select folder with files to process");
 
         //Warning when you didn't choose any folder now and before
-        if (self.sourceFolder === null && UI.btnChooseFilesSourceFoldTitle.text === "Source folder...") {
+        if (self.sourceFolder === null && UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
             alert("You have not selected source folder");
-        //else if (self.sourceFolder === null && UI.btnChooseFilesSourceFoldTitle.text !== "Source folder..."). Leave selected source folder -> leave status quo
+        //else if (self.sourceFolder === null && UI.btnChooseFilesSourceFold.title.text !== "Source folder..."). Leave selected source folder -> leave status quo
 
         } else if (self.sourceFolder !== null) {
 
@@ -367,12 +366,12 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 self.sourceFolder === null;
                 
-                createPathString(UI.btnChooseFilesSourceFoldTitle, "Source folder...");
-                UI.btnRadDestFoldSame.enabled = false;
-                UI.btnRadDestFoldOther.enabled = false;
+                createPathString(UI.btnChooseFilesSourceFold.title, "Source folder...");
+                UI.btnRadDestFold.same.enabled = false;
+                UI.btnRadDestFold.other.enabled = false;
                 
                 UI.btnChooseFilesDestFold.enabled = false;
-                UI.btnChooseFilesDestFoldTitle.enabled = false;
+                UI.btnChooseFilesDestFold.title.enabled = false;
                 UI.pnlAddCanvas.enabled = false;
                 
                 UI.btnAccept.enabled = false;
@@ -392,32 +391,32 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                     }
                 }
 
-                createPathString(UI.btnChooseFilesSourceFoldTitle, self.sourceFolder);
+                createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
                 
                 //Uptade info UI with files from source folder
                 infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 //Enabling buttons
-                UI.pnlDestFoldTitle.enabled = true;
-                UI.btnRadDestFoldSame.enabled = true;
-                UI.btnRadDestFoldOther.enabled = true;
+                UI.pnlDestFold.title.enabled = true;
+                UI.btnRadDestFold.same.enabled = true;
+                UI.btnRadDestFold.other.enabled = true;
 
                 if (typeof self.detinationFolder === "undefined") {
 
-                    UI.btnRadDestFoldSame.notify();
+                    UI.btnRadDestFold.same.notify();
 
                 } else if ((typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug
 
                     if (self.detinationFolder.toString() !== self.sourceFolder.toString() ) {
 
-                        UI.btnRadDestFoldOther.notify();
+                        UI.btnRadDestFold.other.notify();
 
                     } else if (self.detinationFolder.toString() === self.sourceFolder.toString() ) {
 
-                        createPathString(UI.btnChooseFilesDestFoldTitle, "Destination folder...");
+                        createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
                         
                         self.detinationFolder = null;
-                        UI.btnRadDestFoldSame.notify();
+                        UI.btnRadDestFold.same.notify();
     
                         alert("Source folder and target folder are the same.\nNext time choose more wisely");
 
@@ -439,12 +438,12 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
     var UI = this.UI;
 
-    UI.btnRadDestFoldSame.onClick = function() {
+    UI.btnRadDestFold.same.onClick = function() {
 
         UI.btnChooseFilesDestFold.enabled = false;
-        UI.btnChooseFilesDestFoldTitle.enabled = false;
+        UI.btnChooseFilesDestFold.title.enabled = false;
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
         UI.pnlAddCanvas.enabled = true;
     }
@@ -454,17 +453,17 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
     var UI = this.UI;
 
     //Copy and Add canvas in other folder
-    UI.btnRadDestFoldOther.onClick = function() {
+    UI.btnRadDestFold.other.onClick = function() {
 
         UI.btnChooseFilesDestFold.enabled = true;
-        UI.btnChooseFilesDestFoldTitle.enabled = true;
+        UI.btnChooseFilesDestFold.title.enabled = true;
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
-        if (UI.btnChooseFilesDestFoldTitle.text === "Destination folder...") {
+        if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
             UI.btnAccept.enabled = false;
             UI.pnlAddCanvas.enabled = false;
-        } else if (UI.btnChooseFilesDestFoldTitle.text !== "Destination folder...") {
+        } else if (UI.btnChooseFilesDestFold.title.text !== "Destination folder...") {
             UI.pnlAddCanvas.enabled = true;
         }
     }
@@ -481,22 +480,22 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 
         if (detinationFolderSelection === null) {
 
-            if (UI.btnChooseFilesDestFoldTitle.text === "Destination folder...") {
+            if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
                 alert("You have not selected target folder");
                 self.detinationFolder = null; //to avoid bug
             } //else {if you have already have had selected folder destination, then it remains status quo}
 
         } else if (detinationFolderSelection.toString() !== self.sourceFolder.toString()) {
 
-            createPathString(UI.btnChooseFilesDestFoldTitle, detinationFolderSelection);
-            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+            createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
+            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
             UI.pnlAddCanvas.enabled = true;
 
             self.detinationFolder = detinationFolderSelection;
         } else if (detinationFolderSelection.toString() === self.sourceFolder.toString()) {
 
-            UI.btnRadDestFoldSame.notify();
-            createPathString(UI.btnChooseFilesDestFoldTitle, "Destination folder...");
+            UI.btnRadDestFold.same.notify();
+            createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
             alert("Source folder and target folder are the same.\nNext time choose more wisely");
             
             self.detinationFolder = null; //to avoid bug
@@ -508,17 +507,17 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 EventHandlerBuilder.prototype.startSettingsWidthAndHeight = function() {
     var UI = this.UI;
 
-    checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+    checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 }
 
 EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
 
-    UI.grpWidthNumb.onChanging = function() {
+    UI.grpWidth.numb.onChanging = function() {
 
-        sameInputField(UI.constrainsProportionsCheckbox, UI.grpWidthNumb, UI.grpHeightNumb);
+        sameInputField(UI.constrainsProportionsCheckbox, UI.grpWidth.numb, UI.grpHeight.numb);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
 }
 
@@ -526,9 +525,9 @@ EventHandlerBuilder.prototype.onGrpWidthUnitsDropDown  = function() {
     var UI = this.UI;
 
     //Dropdownlist: setting the same units: "ADD %" and "ADD %"
-    UI.grpWidthUnitsDropDown.onChange = function() {
+    UI.grpWidth.unitsDropDown.onChange = function() {
 
-        sameDropDown(UI.grpWidthUnitsDropDown, UI.grpHeightUnitDropDown);
+        sameDropDown(UI.grpWidth.unitsDropDown, UI.grpHeight.unitDropDown);
     }
 
 }
@@ -539,27 +538,27 @@ EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
     var tooltipValue = "You can substract number by adding '-' before value.\n" +
                         "Only characters avaible are: digits: [0-9] and signs: '-', '+'.\n" + 
                         "The only accepted value inside input field is integer."
-    UI.toolTipWidthImage.helpTip = tooltipValue;
-    UI.toolTipHeightImage.helpTip = tooltipValue;
+    UI.grpWidth.imageTooltip.helpTip = tooltipValue;
+    UI.grpHeight.imageTooltip.helpTip = tooltipValue;
 }
 
 EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
 
     //Group Height
-    UI.grpHeightNumb.onChanging = function() {
+    UI.grpHeight.numb.onChanging = function() {
 
-        sameInputField(UI.constrainsProportionsCheckbox, UI.grpHeightNumb, UI.grpWidthNumb);
+        sameInputField(UI.constrainsProportionsCheckbox, UI.grpHeight.numb, UI.grpWidth.numb);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidthNumb, UI.grpHeightNumb, UI.btnAccept);
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
 }
 
 EventHandlerBuilder.prototype.onGrpHeightUnitDropDown = function() {
     var UI = this.UI;
 
-    UI.grpHeightUnitDropDown.onChange = function() {
-        sameDropDown(UI.grpHeightUnitDropDown, UI.grpWidthUnitsDropDown);
+    UI.grpHeight.unitDropDown.onChange = function() {
+        sameDropDown(UI.grpHeight.unitDropDown, UI.grpWidth.unitsDropDown);
     }
 }
 
@@ -602,19 +601,19 @@ EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
         //Set the same highest value in "Height" and "Width"
         if (UI.constrainsProportionsCheckbox.value === true) {
             //If Height and Width is negative or equal 0, it set in both most negative number
-            if((parseInt(UI.grpWidthNumb.text, 10) <= 0) && (parseInt(UI.grpHeightNumb.text, 10) <= 0)) {
-                if (parseInt(UI.grpWidthNumb.text, 10) < parseInt(UI.grpHeightNumb.text, 10)) {
-                    UI.grpWidthNumb.onChanging();
+            if((parseInt(UI.grpWidth.numb.text, 10) <= 0) && (parseInt(UI.grpHeight.numb.text, 10) <= 0)) {
+                if (parseInt(UI.grpWidth.numb.text, 10) < parseInt(UI.grpHeight.numb.text, 10)) {
+                    UI.grpWidth.numb.onChanging();
                 }
                 //If some value is postive, set in both most positive number
                 else {
-                    UI.grpHeightNumb.onChanging();
+                    UI.grpHeight.numb.onChanging();
                 }
-            } else if ((parseInt(UI.grpWidthNumb.text, 10) > 0) || (parseInt(UI.grpHeightNumb.text, 10) > 0)) {
-                if (parseInt(UI.grpWidthNumb.text, 10) > parseInt(UI.grpHeightNumb.text, 10)) {
-                    UI.grpWidthNumb.onChanging();
+            } else if ((parseInt(UI.grpWidth.numb.text, 10) > 0) || (parseInt(UI.grpHeight.numb.text, 10) > 0)) {
+                if (parseInt(UI.grpWidth.numb.text, 10) > parseInt(UI.grpHeight.numb.text, 10)) {
+                    UI.grpWidth.numb.onChanging();
                 } else {
-                    UI.grpHeightNumb.onChanging();
+                    UI.grpHeight.numb.onChanging();
                 }
             }
         }
@@ -650,8 +649,8 @@ EventHandlerBuilder.prototype.onCanvExtendColorDropDwn = function() {
     var UI = this.UI;
     var self = this;
 
-    UI.canvExtendColorDropDwn.onChange = function() {
-        var canvExtendColorDropDwn = UI.canvExtendColorDropDwn.selection.toString();//Full list to select canvExtendColorValues
+    UI.canvExtendColor.dropDwn.onChange = function() {
+        var canvExtendColorDropDwn = UI.canvExtendColor.dropDwn.selection.toString();//Full list to select canvExtendColor.values
 
         if (canvExtendColorDropDwn === "Foreground") {
             app.foregroundColor = self.bgColor;
@@ -692,12 +691,12 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         UI.mainWindow.close();
 
         changeFileAndSave(self.sourceFiles, self.detinationFolder, 
-            UI.grpWidthNumb.text, UI.grpHeightNumb.text, UI.grpWidthUnitsDropDown, self.anchorPosOutcome, 
-            UI.btnRadChooseFilesActiveDocs, UI.btnRadChooseFilesSourceFold, 
-            UI.btnRadDestFoldSame, UI.btnRadDestFoldOther,
+            UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPosOutcome, 
+            UI.btnRadSourceFiles.chooseSourceFold, UI.btnRadSourceFiles.chooseFilesSourceFold, 
+            UI.btnRadDestFold.same, UI.btnRadDestFold.other,
             self.fgColor, self.bgColor);
         
-        if (UI.btnRadChooseFilesActiveDocs.value === true) {
+        if (UI.btnRadSourceFiles.chooseSourceFold.value === true) {
 
             if (UI.numbOfActiveDocuments > 1) {
                 alert("You added canvas to " + UI.numbOfActiveDocuments + " files");
@@ -706,12 +705,12 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
                 alert("You added canvas to only 1 file");
             }
 
-        } else if (UI.btnRadChooseFilesSourceFold.value === true) {
+        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
             var folderName = "";
-            if (UI.btnRadDestFoldSame.value === true) {
+            if (UI.btnRadDestFold.same.value === true) {
                 folderName = self.sourceFolderNameRecent.replace(/%20/g, ' ');
-            } else if (UI.btnRadDestFoldOther.value === true) {
+            } else if (UI.btnRadDestFold.other.value === true) {
                 folderName = self.detinationFolder.name.replace(/%20/g, ' ');
             }
 
