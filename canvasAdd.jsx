@@ -221,22 +221,14 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
     //Opened files in PS
     UI.btnRadSourceFiles.chooseSourceFold.onClick = function() {
 
-        //Disabled "Source folder..." button
-        UI.btnChooseFilesSourceFold.enabled = false;
-        UI.btnChooseFilesSourceFold.title.enabled = false;
+        enabledBtnSourceFolder(false, UI);
 
-        //Disabled "Destination folder"" panel title
         UI.pnlDestFold.title.enabled = false;
 
-        //Disabled radButton destination folder
-        UI.btnRadDestFold.same.enabled = false;
-        UI.btnRadDestFold.other.enabled = false;
+        enabledRadBtnsDestFold(false, UI);
+          
+        enabledBtnDestFold(false, UI);
 
-        //Disabled "destination folder..." button            
-        UI.btnChooseFilesDestFold.enabled = false;
-        UI.btnChooseFilesDestFold.title.enabled = false;
-
-        //Anabled Add canvas panel
         if (UI.pnlAddCanvas.enabled === false) UI.pnlAddCanvas.enabled = true;
 
         infoUItoDisplay(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
@@ -731,6 +723,21 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     UI.btnCancel.onClick = function() {
         UI.mainWindow.close();
     }
+}
+
+function enabledBtnDestFold(boolean, UI) {
+    UI.btnChooseFilesDestFold.enabled = boolean;
+    UI.btnChooseFilesDestFold.title.enabled = boolean;
+}
+
+function enabledRadBtnsDestFold(boolean, UI) {
+    UI.btnRadDestFold.same.enabled = boolean;
+    UI.btnRadDestFold.other.enabled = boolean;
+}
+
+function enabledBtnSourceFolder(boolean, UI) {
+    UI.btnChooseFilesSourceFold.enabled = boolean;
+    UI.btnChooseFilesSourceFold.title.enabled = boolean;
 }
 
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
