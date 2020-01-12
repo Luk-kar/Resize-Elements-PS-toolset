@@ -538,7 +538,9 @@ EventHandlerBuilder.prototype.onGrpWidthUnitsDropDown  = function() {
 EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
     var UI = this.UI;
 
-    var tooltipValue = "You can substract number by adding '-' before value"
+    var tooltipValue = "You can substract number by adding '-' before value.\n" +
+                        "Only characters avaible are: digits: [0-9] and signs: '-', '+'.\n" + 
+                        "The only accepted value inside input field is integer."
     UI.toolTipWidthImage.helpTip = tooltipValue;
     UI.toolTipHeightImage.helpTip = tooltipValue;
 }
@@ -777,7 +779,7 @@ function checkingIfWidthAndHeightIsNot0UnlockingAcceptBtn(Numb001, Numb002, btnE
         btnEnabled.enabled = false;
 
     } else {
-        
+
         btnEnabled.enabled = true;
     }
 
