@@ -16,7 +16,7 @@ GuiBuilder.prototype.baseLayout = function() {
     this.mainWindow = new Window("dialog", "Add canvas");
     this.grpMain = this.mainWindow.add("group")
     this.grpInfo = createGroupUI(this.grpMain, "column", "left");
-    this.panelWidth = 40; // Do not use creation property for panels due to issues with bugs
+    this.panelWidth = 40; // Do not use creation property size in px for panels due to issues with bugs
 }
 
 GuiBuilder.prototype.buildPanelSourceFiles = function() {
