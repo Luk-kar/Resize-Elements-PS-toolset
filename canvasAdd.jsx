@@ -231,7 +231,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
             UI.pnlAddCanvas.enabled = true;
         }
 
-        infoUItoDisplay(docsOpenedNames(), UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoUIUpdate(docsOpenedNames(), UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
         checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
@@ -259,8 +259,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             UI.pnlAddCanvas.enabled = false;
 
-            //Uptade empty info UI
-            infoUItoDisplay(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoUIUpdate(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
             UI.btnAccept.enabled = false;
         
@@ -280,8 +279,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
-            //Uptade info UI with files from source folder
-            infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
     }
 }
@@ -323,7 +321,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
         } else if (self.sourceFolder !== null) {
 
-            var notTheSameChoosedSourceFolderAsBefore = checkingIfItIsTheSameSourceFolderAsBefore(self);
+            var sameChoosedSourceFolderAsBefore = checkingIfItIsTheSameSourceFolderAsBefore(self);
     
             self.sourceFolderNameRecent = self.sourceFolder.name; //Saving name of source folder to avoid bug; If you choose already some folder, but later you canceled choosing folder, you will not get "undefined" becouse of this variable.
             self.sourceFolderPathRecent = self.sourceFolder; //Add to self to avoid scope issues
@@ -334,7 +332,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
             
             sourceFilesUnfiltered = self.sourceFolder.getFiles();
 
-            filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles);
+            sourceFilesFiltered = filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles);
 
             if (sourceFilesFiltered.length === 0) {
 
@@ -350,7 +348,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 UI.btnAccept.enabled = false;
 
-                infoUItoDisplay(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoUIUpdate(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 alert("In choosed folder there is no files to process");
 
@@ -361,24 +359,21 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
                 
-                //Uptade info UI with files from source folder
-                infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
-
                 UI.pnlDestFold.title.enabled = true;
-
+                
                 btnsRadDestFoldEnabled(true, UI);
+                
+                infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 if (typeof self.detinationFolder === "undefined") {
 
                     UI.btnRadDestFold.same.notify();
 
-                } else if ((typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug
+                } else if ( (typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug
 
-                    if (self.detinationFolder.toString() !== self.sourceFolder.toString() ) {
+                    var sameDestinationFolderAndSourceFolder = self.detinationFolder.toString() === self.sourceFolder.toString();
 
-                        UI.btnRadDestFold.other.notify();
-
-                    } else if (self.detinationFolder.toString() === self.sourceFolder.toString() ) {
+                    if (sameDestinationFolderAndSourceFolder) {
 
                         createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
                         
@@ -387,10 +382,14 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
     
                         alert("Source folder and target folder are the same.\nNext time choose more wisely");
 
+                    } else {
+
+                        UI.btnRadDestFold.other.notify();
+
                     }
                 }
                 
-                if (notTheSameChoosedSourceFolderAsBefore === true) {
+                if (sameChoosedSourceFolderAsBefore === false) {
                     if (self.sourceFiles.length > 1) {
                         alert("In folder are " + self.sourceFiles.length + " files");
                     } else if (self.sourceFiles.length === 0) {
@@ -728,15 +727,16 @@ function filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, proper
         }
     }
 
+    return sourceFilesFiltered;
 }
 
 function checkingIfItIsTheSameSourceFolderAsBefore(self) {
 
-    var notTheSameChoosedSourceFolderAsBefore = true;
+    var sameChoosedSourceFolderAsBefore = false;
     if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) {
-        notTheSameChoosedSourceFolderAsBefore = false;
+        sameChoosedSourceFolderAsBefore = true;
     }
-    return notTheSameChoosedSourceFolderAsBefore;
+    return sameChoosedSourceFolderAsBefore;
 }
 
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
@@ -850,7 +850,7 @@ function docsOpenedNames() {
     return docsNamesToInfoUI;
 }
 
-function infoUItoDisplay(sourceFiles, numbOfDisplayedLines, panelInfoUITitle, panelInfoUIwriteLines) {
+function infoUIUpdate(sourceFiles, numbOfDisplayedLines, panelInfoUITitle, panelInfoUIwriteLines) {
 
     var prevDocNames = new Array;
 
