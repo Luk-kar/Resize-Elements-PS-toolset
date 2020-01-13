@@ -25,7 +25,7 @@ GuiBuilder.prototype.buildPanelSourceFiles = function() {
     this.btnRadSourceFiles = createGroupUI(this.plnSourceFiles, "column", "left", "left");
 
     //Radial button choose active files/target folder
-    this.btnRadSourceFiles.chooseSourceFold = this.btnRadSourceFiles.add("radiobutton", undefined, "Opened files");
+    this.btnRadSourceFiles.chooseOpenedFiles = this.btnRadSourceFiles.add("radiobutton", undefined, "Opened files");
     this.btnRadSourceFiles.chooseFilesSourceFold = this.btnRadSourceFiles.add("radiobutton", undefined, "Choose folder");
 
     //Add button to choose target folder
@@ -182,16 +182,15 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
 
 GuiBuilder.prototype.buildPanelInfoUI = function(){
 
-    //Creating panel to display to files
     this.pnlDocInfo = createPanelUI(this.grpInfo, undefined, "left");
 
     //Number of files displayed in "Info UI"
-    this.numbOfDisplayedFiles = 2;
+    this.numbOfDisplayedLines = 2;
 
-    //Creating empty lines of text to fill with files names
+    //Creating empty lines of text to fill with files names later
     this.plnDocInfoLines = new Array; //plnDocInfo.lines -> "undefined not as object"
 
-    for (var i = 0; i < (this.numbOfDisplayedFiles + 1); i++) {
+    for (var i = 0; i < (this.numbOfDisplayedLines + 1); i++) {
         this.plnDocInfoLines[i] = this.pnlDocInfo.add("statictext");
         this.plnDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
     }
@@ -201,9 +200,8 @@ GuiBuilder.prototype.buildAcceptCancelButtons = function() {
 
         this.grpBtns = createGroupUI(this.grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
-        //Accept button
         this.btnAccept = this.grpBtns.add("button", undefined, "Accept");
-        //Cancel button
+
         this.btnCancel = this.grpBtns.add("button", undefined, "Close");
 }
 
@@ -219,19 +217,21 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
     var UI = this.UI;
 
     //Opened files in PS
-    UI.btnRadSourceFiles.chooseSourceFold.onClick = function() {
+    UI.btnRadSourceFiles.chooseOpenedFiles.onClick = function() {
 
-        enabledBtnSourceFolder(false, UI);
+        btnChooseFilesSourceFoldEnabled(false, UI);
 
         UI.pnlDestFold.title.enabled = false;
 
-        enabledRadBtnsDestFold(false, UI);
+        btnRadDestFoldEnabled(false, UI);
           
-        enabledBtnDestFold(false, UI);
+        btnChooseFilesDestFoldEnabled(false, UI);
 
-        if (UI.pnlAddCanvas.enabled === false) UI.pnlAddCanvas.enabled = true;
+        if (UI.pnlAddCanvas.enabled === false) {
+            UI.pnlAddCanvas.enabled = true;
+        }
 
-        infoUItoDisplay(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoUItoDisplay(docsOpenedNames(), UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
         checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
@@ -244,39 +244,33 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
     //Choose source folder
     UI.btnRadSourceFiles.chooseFilesSourceFold.onClick = function() {
 
-        enabledBtnSourceFolder(false, UI);//todo
-
         //Until there is no choosed folder you have only ability to browse source folder
         if (UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
-            //Disabled "Destination folder"" panel title
+
+            btnChooseFilesSourceFoldEnabled(true, UI);
+
             UI.pnlDestFold.title.enabled = false;
 
-            //Disabled radButtons destination folder
-            UI.btnRadDestFold.same.enabled = false;
-            UI.btnRadDestFold.other.enabled = false;
+            btnRadDestFoldEnabled(false, UI);
 
-            //Disabled "destination folder..." button
-            UI.btnChooseFilesDestFold.enabled = false;
-            UI.btnChooseFilesDestFold.title.enabled = false;
+            btnChooseFilesDestFoldEnabled(false, UI);
 
-            //Button accept disabled if you do not any values to Height and Width dialog
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
-            //Disabled Add canvas panel
             UI.pnlAddCanvas.enabled = false;
 
-            //Uptade info UI with files from source folder
-            infoUItoDisplay(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            //Uptade empty info UI
+            infoUItoDisplay(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
             UI.btnAccept.enabled = false;
         
         } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder..."){
-            //Anabled "Destination folder"" panel title
+
+            btnChooseFilesSourceFoldEnabled(true, UI);
+
             UI.pnlDestFold.title.enabled = true;
 
-            //Anabled radButton destination folder
-            UI.btnRadDestFold.same.enabled = true;
-            UI.btnRadDestFold.other.enabled = true;
+            btnRadDestFoldEnabled(true, UI);
             
             if (UI.btnRadDestFold.other.value === true) {
 
@@ -287,7 +281,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
             //Uptade info UI with files from source folder
-            infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
     }
 }
@@ -300,14 +294,14 @@ EventHandlerBuilder.prototype.startSettingsUINoActiveDocs = function() {
 
         UI.btnRadSourceFiles.chooseFilesSourceFold.notify();
 
-        UI.btnRadSourceFiles.chooseSourceFold.enabled = false;
+        UI.btnRadSourceFiles.chooseOpenedFiles.enabled = false;
 
         UI.btnRadDestFold.same.value = true;
         UI.btnAccept.enabled = false;
 
     } else if (app.documents.length > 0) {
 
-        UI.btnRadSourceFiles.chooseSourceFold.notify();
+        UI.btnRadSourceFiles.chooseOpenedFiles.notify();
         UI.numbOfActiveDocuments = app.documents.length; //Save later to use in summary alert
         
     }
@@ -357,16 +351,16 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 self.sourceFolder === null;
                 
                 createPathString(UI.btnChooseFilesSourceFold.title, "Source folder...");
-                UI.btnRadDestFold.same.enabled = false;
-                UI.btnRadDestFold.other.enabled = false;
-                
-                UI.btnChooseFilesDestFold.enabled = false;
-                UI.btnChooseFilesDestFold.title.enabled = false;
+
+                btnRadDestFoldEnabled(false, UI);
+
+                btnChooseFilesDestFoldEnabled(false, UI);
+
                 UI.pnlAddCanvas.enabled = false;
                 
                 UI.btnAccept.enabled = false;
 
-                infoUItoDisplay(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoUItoDisplay(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 alert("In choosed folder there is no files to process");
 
@@ -384,12 +378,12 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
                 
                 //Uptade info UI with files from source folder
-                infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 //Enabling buttons
                 UI.pnlDestFold.title.enabled = true;
-                UI.btnRadDestFold.same.enabled = true;
-                UI.btnRadDestFold.other.enabled = true;
+
+                btnRadDestFoldEnabled(true, UI);
 
                 if (typeof self.detinationFolder === "undefined") {
 
@@ -430,8 +424,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
 
     UI.btnRadDestFold.same.onClick = function() {
 
-        UI.btnChooseFilesDestFold.enabled = false;
-        UI.btnChooseFilesDestFold.title.enabled = false;
+        btnChooseFilesDestFoldEnabled(false, UI);
 
         checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
@@ -445,15 +438,17 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
     //Copy and Add canvas in other folder
     UI.btnRadDestFold.other.onClick = function() {
 
-        UI.btnChooseFilesDestFold.enabled = true;
-        UI.btnChooseFilesDestFold.title.enabled = true;
+        btnChooseFilesDestFoldEnabled(true, UI);
 
         checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
         if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
+
             UI.btnAccept.enabled = false;
             UI.pnlAddCanvas.enabled = false;
+
         } else if (UI.btnChooseFilesDestFold.title.text !== "Destination folder...") {
+
             UI.pnlAddCanvas.enabled = true;
         }
     }
@@ -468,7 +463,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 
         var detinationFolderSelection = Folder.selectDialog("Select target folder to save files");
 
-        if (detinationFolderSelection === null) {
+        if ((detinationFolderSelection === null) || (typeof detinationFolderSelection === "undefined")) {// "undefined" exception to avoid bug
 
             if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
                 alert("You have not selected target folder");
@@ -682,11 +677,11 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
 
         changeFileAndSave(self.sourceFiles, self.detinationFolder, 
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPosOutcome, 
-            UI.btnRadSourceFiles.chooseSourceFold, UI.btnRadSourceFiles.chooseFilesSourceFold, 
+            UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
             self.fgColor, self.bgColor);
         
-        if (UI.btnRadSourceFiles.chooseSourceFold.value === true) {
+        if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
             if (UI.numbOfActiveDocuments > 1) {
                 alert("You added canvas to " + UI.numbOfActiveDocuments + " files");
@@ -723,21 +718,6 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function enabledBtnDestFold(trueFalse, UI) {
-    UI.btnChooseFilesDestFold.enabled = trueFalse;
-    UI.btnChooseFilesDestFold.title.enabled = trueFalse;
-}
-
-function enabledRadBtnsDestFold(trueFalse, UI) {
-    UI.btnRadDestFold.same.enabled = trueFalse;
-    UI.btnRadDestFold.other.enabled = trueFalse;
-}
-
-function enabledBtnSourceFolder(trueFalse, UI) {
-    UI.btnChooseFilesSourceFold.enabled = trueFalse;
-    UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
-}
-
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
@@ -752,6 +732,21 @@ function createGroupUI(objectParent, orientationChildren, alignChildren, alignme
     objectChildGroup.alignChildren = alignChildren;
     objectChildGroup.alignment = alignmentObject;
     return objectChildGroup;
+}
+
+function btnChooseFilesDestFoldEnabled(trueFalse, UI) {
+    UI.btnChooseFilesDestFold.enabled = trueFalse;
+    UI.btnChooseFilesDestFold.title.enabled = trueFalse;
+}
+
+function btnRadDestFoldEnabled(trueFalse, UI) {
+    UI.btnRadDestFold.same.enabled = trueFalse;
+    UI.btnRadDestFold.other.enabled = trueFalse;
+}
+
+function btnChooseFilesSourceFoldEnabled(trueFalse, UI) {
+    UI.btnChooseFilesSourceFold.enabled = trueFalse;
+    UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
 }
 
 function createPathString(textObject, path) {
@@ -834,11 +829,11 @@ function docsOpenedNames() {
     return docsNamesToInfoUI;
 }
 
-function infoUItoDisplay(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
+function infoUItoDisplay(sourceFiles, numbOfDisplayedLines, panelInfoUITitle, panelInfoUIwriteLines) {
 
     var prevDocNames = new Array;
 
-    for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
+    for (var i = 0; i < (numbOfDisplayedLines + 1); i++) {
         prevDocNames[i] = "";
     }
     prevDocNames[0] = "no files to process";
@@ -855,21 +850,21 @@ function infoUItoDisplay(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, pa
     //Writing files names
     if (filesNamesInfoUI.length > 0) {
 
-        for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length); i++) {
+        for (var i = 0; (i < numbOfDisplayedLines) && (i < filesNamesInfoUI.length); i++) {
 
             prevDocNames[i] = filesNamesInfoUI[i];
         }
 
         var charComas = new Array;
-        for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length -1); i++) {
+        for (var i = 0; (i < numbOfDisplayedLines) && (i < filesNamesInfoUI.length -1); i++) {
 
             charComas[i] = ",";
             prevDocNames[i] = prevDocNames[i] + charComas[i];
         }
 
-        if (filesNamesInfoUI.length > numbOfDisplayedFiles) {
+        if (filesNamesInfoUI.length > numbOfDisplayedLines) {
 
-            prevDocNames[numbOfDisplayedFiles] = "(...)";
+            prevDocNames[numbOfDisplayedLines] = "(...)";
         }
     }
 
