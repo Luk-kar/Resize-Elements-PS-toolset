@@ -701,18 +701,22 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
 }
 
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
+    
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
     objectChildGroup.alignChildren = alignChildren;
     objectChildGroup.alignment = alignmentObject;
+
     return objectChildGroup;
 }
 
 function createGroupUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
+
     var objectChildGroup = objectParent.add("group");
     objectChildGroup.orientation = orientationChildren;
     objectChildGroup.alignChildren = alignChildren;
     objectChildGroup.alignment = alignmentObject;
+    
     return objectChildGroup;
 }
 
