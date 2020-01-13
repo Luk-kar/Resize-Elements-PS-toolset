@@ -7,7 +7,7 @@ function GuiBuilder (){
 }
 
 GuiBuilder.prototype.baseLayout = function() {
-    //Creating group to populate with main UI
+    //Creating groups to populate with main UI
     this.mainWindow = new Window("dialog", "Add canvas");
     this.grpMain = this.mainWindow.add("group")
     this.grpInfo = createGroupUI(this.grpMain, "column", "left");
@@ -90,7 +90,7 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
 
                 //Crating path to image folder
                 this.scriptPath = $.fileName;
-                this.scriptFolderDestination = this.scriptPath.toString().replace(/\\/g, '/').slice(0, -13); // -13 is the lenght of the script file name
+                this.scriptFolderDestination = (this.scriptPath.toString().replace(/\\/g, '/').slice(0, -13) + "/images/"); // -13 is the lenght of the script file name
 
                 //Image: InfoHover.png
                 this.imageInfHov = File(this.scriptFolderDestination + "InfoHover.png");
@@ -716,7 +716,7 @@ function createGroupUI(objectParent, orientationChildren, alignChildren, alignme
     objectChildGroup.orientation = orientationChildren;
     objectChildGroup.alignChildren = alignChildren;
     objectChildGroup.alignment = alignmentObject;
-    
+
     return objectChildGroup;
 }
 
