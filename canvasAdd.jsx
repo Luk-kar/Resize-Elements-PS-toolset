@@ -223,7 +223,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         UI.pnlDestFold.title.enabled = false;
 
-        btnRadDestFoldEnabled(false, UI);
+        btnsRadDestFoldEnabled(false, UI);
           
         btnChooseFilesDestFoldEnabled(false, UI);
 
@@ -251,7 +251,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             UI.pnlDestFold.title.enabled = false;
 
-            btnRadDestFoldEnabled(false, UI);
+            btnsRadDestFoldEnabled(false, UI);
 
             btnChooseFilesDestFoldEnabled(false, UI);
 
@@ -270,7 +270,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             UI.pnlDestFold.title.enabled = true;
 
-            btnRadDestFoldEnabled(true, UI);
+            btnsRadDestFoldEnabled(true, UI);
             
             if (UI.btnRadDestFold.other.value === true) {
 
@@ -323,36 +323,26 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
         } else if (self.sourceFolder !== null) {
 
-            var notTheSameChoosedSourceFolderAsBefore = true;
-            if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) {
-                notTheSameChoosedSourceFolderAsBefore = false;
-            }
+            var notTheSameChoosedSourceFolderAsBefore = checkingIfItIsTheSameSourceFolderAsBefore(self);
     
-            self.sourceFolderNameRecent = self.sourceFolder.name; //Saving name of source folder to avoid bug; If you choose already some folder, but later you canceled choosing folder, you will not get undefined becouse of this variable.
+            self.sourceFolderNameRecent = self.sourceFolder.name; //Saving name of source folder to avoid bug; If you choose already some folder, but later you canceled choosing folder, you will not get "undefined" becouse of this variable.
             self.sourceFolderPathRecent = self.sourceFolder; //Add to self to avoid scope issues
             
             var sourceFilesUnfiltered = new Array;
-            var sourceFilesArrayPathsString = new Array;
+            var sourceFilesFiltered = new Array;
             var properFilesExtPSfiles = /.(jpg|tif|psd|bmp|gif|png)$/;
-
+            
             sourceFilesUnfiltered = self.sourceFolder.getFiles();
 
-            for(var i = 0; i < sourceFilesUnfiltered.length; i++) {
-                if(sourceFilesUnfiltered[i] instanceof File) {
-                    var sourceFilePathString = sourceFilesUnfiltered[i].toString();
-                    if(sourceFilePathString.match(properFilesExtPSfiles)) {
-                        sourceFilesArrayPathsString[i] = sourceFilePathString;
-                    }
-                }
-            }
+            filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles);
 
-            if (sourceFilesArrayPathsString.length === 0) {
+            if (sourceFilesFiltered.length === 0) {
 
-                self.sourceFolder === null;
+                self.sourceFolder === null;// to avoid bug
                 
                 createPathString(UI.btnChooseFilesSourceFold.title, "Source folder...");
 
-                btnRadDestFoldEnabled(false, UI);
+                btnsRadDestFoldEnabled(false, UI);
 
                 btnChooseFilesDestFoldEnabled(false, UI);
 
@@ -364,26 +354,19 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 alert("In choosed folder there is no files to process");
 
-            } else if (sourceFilesArrayPathsString.length > 0) {
+            } else if (sourceFilesFiltered.length > 0) {
 
-                self.sourceFiles = new Array;
-                for(var i = 0; i < sourceFilesUnfiltered.length; i++) {
-                    for(var i = 0; i < sourceFilesArrayPathsString.length; i++) {
-                        if(sourceFilesArrayPathsString[i] === sourceFilesUnfiltered[i].toString()) {
-                            self.sourceFiles.push(sourceFilesUnfiltered[i]);
-                        }
-                    }
-                }
+                self.sourceFiles = null; 
+                self.sourceFiles = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
 
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
                 
                 //Uptade info UI with files from source folder
                 infoUItoDisplay(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
 
-                //Enabling buttons
                 UI.pnlDestFold.title.enabled = true;
 
-                btnRadDestFoldEnabled(true, UI);
+                btnsRadDestFoldEnabled(true, UI);
 
                 if (typeof self.detinationFolder === "undefined") {
 
@@ -718,6 +701,44 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
+function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered) {
+
+    var sourceFiles = new Array;
+
+    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
+        for (var i = 0; i < sourceFilesFiltered.length; i++) {
+            if (sourceFilesFiltered[i] === sourceFilesUnfiltered[i].toString()) {
+                sourceFiles.push(sourceFilesUnfiltered[i]);
+            }
+        }
+    }
+
+    return sourceFiles;
+
+}
+
+function filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles) {
+
+    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
+        if (sourceFilesUnfiltered[i] instanceof File) {
+            var sourceFilePathString = sourceFilesUnfiltered[i].toString();
+            if (sourceFilePathString.match(properFilesExtPSfiles)) {
+                sourceFilesFiltered[i] = sourceFilePathString;
+            }
+        }
+    }
+
+}
+
+function checkingIfItIsTheSameSourceFolderAsBefore(self) {
+
+    var notTheSameChoosedSourceFolderAsBefore = true;
+    if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) {
+        notTheSameChoosedSourceFolderAsBefore = false;
+    }
+    return notTheSameChoosedSourceFolderAsBefore;
+}
+
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
@@ -739,7 +760,7 @@ function btnChooseFilesDestFoldEnabled(trueFalse, UI) {
     UI.btnChooseFilesDestFold.title.enabled = trueFalse;
 }
 
-function btnRadDestFoldEnabled(trueFalse, UI) {
+function btnsRadDestFoldEnabled(trueFalse, UI) {
     UI.btnRadDestFold.same.enabled = trueFalse;
     UI.btnRadDestFold.other.enabled = trueFalse;
 }
