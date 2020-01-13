@@ -700,45 +700,6 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered) {
-
-    var sourceFiles = new Array;
-
-    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
-        for (var i = 0; i < sourceFilesFiltered.length; i++) {
-            if (sourceFilesFiltered[i] === sourceFilesUnfiltered[i].toString()) {
-                sourceFiles.push(sourceFilesUnfiltered[i]);
-            }
-        }
-    }
-
-    return sourceFiles;
-
-}
-
-function filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles) {
-
-    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
-        if (sourceFilesUnfiltered[i] instanceof File) {
-            var sourceFilePathString = sourceFilesUnfiltered[i].toString();
-            if (sourceFilePathString.match(properFilesExtPSfiles)) {
-                sourceFilesFiltered[i] = sourceFilePathString;
-            }
-        }
-    }
-
-    return sourceFilesFiltered;
-}
-
-function checkingIfItIsTheSameSourceFolderAsBefore(self) {
-
-    var sameChoosedSourceFolderAsBefore = false;
-    if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) {
-        sameChoosedSourceFolderAsBefore = true;
-    }
-    return sameChoosedSourceFolderAsBefore;
-}
-
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     var objectChildGroup = objectParent.add("panel");
     if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
@@ -784,6 +745,45 @@ function createPathString(textObject, path) {
     else if (textObject.characters >= string.length) {
         textObject.text = string;
     }
+}
+
+function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered) {
+
+    var sourceFiles = new Array;
+
+    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
+        for (var i = 0; i < sourceFilesFiltered.length; i++) {
+            if (sourceFilesFiltered[i] === sourceFilesUnfiltered[i].toString()) {
+                sourceFiles.push(sourceFilesUnfiltered[i]);
+            }
+        }
+    }
+
+    return sourceFiles;
+
+}
+
+function filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles) {
+
+    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
+        if (sourceFilesUnfiltered[i] instanceof File) {
+            var sourceFilePathString = sourceFilesUnfiltered[i].toString();
+            if (sourceFilePathString.match(properFilesExtPSfiles)) {
+                sourceFilesFiltered[i] = sourceFilePathString;
+            }
+        }
+    }
+
+    return sourceFilesFiltered;
+}
+
+function checkingIfItIsTheSameSourceFolderAsBefore(self) {
+
+    var sameChoosedSourceFolderAsBefore = false;
+    if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) {
+        sameChoosedSourceFolderAsBefore = true;
+    }
+    return sameChoosedSourceFolderAsBefore;
 }
 
 function checkingIfWidthAndHeightIsNot0UnlockingBtn(Numb001, Numb002, btnEnabled) {
