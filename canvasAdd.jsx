@@ -510,6 +510,7 @@ EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
     var tooltipValue = "You can substract number by adding '-' before value.\n" +
                         "Only characters avaible are: digits: [0-9] and signs: '-', '+'.\n" + 
                         "The only accepted value inside input field is integer."
+
     UI.grpWidth.imageTooltip.helpTip = tooltipValue;
     UI.grpHeight.imageTooltip.helpTip = tooltipValue;
 }
@@ -546,21 +547,21 @@ EventHandlerBuilder.prototype.onAnchorButtons = function() {
 
     self.anchorPosOutcome = AnchorPosition.MIDDLECENTER;
 
-    var anchorPositionArray = new Array;
-    anchorPositionArray.push(UI.anchorPositionTOPLEFT, UI.anchorPositionTOPCENTER, UI.anchorPositionTOPRIGHT, UI.anchorPositionMIDDLELEFT, UI.anchorPositionMIDDLECENTER, UI.anchorPositionMIDDLERIGHT, UI.anchorPositionBOTTOMLEFT, UI.anchorPositionBOTTOMCENTER, UI.anchorPositionBOTTOMRIGHT);
+    var anchorArrayResizeCanv = new Array;
+    anchorArrayResizeCanv.push(UI.anchorPositionTOPLEFT, UI.anchorPositionTOPCENTER, UI.anchorPositionTOPRIGHT, UI.anchorPositionMIDDLELEFT, UI.anchorPositionMIDDLECENTER, UI.anchorPositionMIDDLERIGHT, UI.anchorPositionBOTTOMLEFT, UI.anchorPositionBOTTOMCENTER, UI.anchorPositionBOTTOMRIGHT);
 
     //Adding functionality to buttons in anchor box
-    UI.anchorPositionTOPLEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPLEFT, AnchorPosition.TOPLEFT, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionTOPCENTER.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPCENTER, AnchorPosition.TOPCENTER, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionTOPRIGHT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionTOPLEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPLEFT, AnchorPosition.TOPLEFT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionTOPCENTER.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPCENTER, AnchorPosition.TOPCENTER, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionTOPRIGHT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 
-    UI.anchorPositionMIDDLELEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionMIDDLECENTER.onClick = function() {self.anchorPosOutcome =anchorSetingNew(UI.anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionMIDDLERIGHT.onClick = function() {self.anchorPosOutcome =anchorSetingNew(UI.anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLELEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLECENTER.onClick = function() {self.anchorPosOutcome =anchorSetingNew(UI.anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLERIGHT.onClick = function() {self.anchorPosOutcome =anchorSetingNew(UI.anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 
-    UI.anchorPositionBOTTOMLEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionBOTTOMCENTER.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionBOTTOMRIGHT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorPositionArray, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionBOTTOMLEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionBOTTOMCENTER.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionBOTTOMRIGHT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 }
 
 EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
@@ -834,10 +835,10 @@ function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSour
 }
 
 //Anchor button functionality
-function anchorSetingNew(btnAnchorClickedOn, anchorPosition, anchorPositionArray, imageAnchorTrue, imageAnchorFalse) {
+function anchorSetingNew(btnAnchorClickedOn, anchorPosition, anchorArrayResizeCanv, imageAnchorTrue, imageAnchorFalse) {
 
-    for (i = 0; i < anchorPositionArray.length; i++){
-        anchorPositionArray[i].image = imageAnchorFalse;
+    for (i = 0; i < anchorArrayResizeCanv.length; i++){
+        anchorArrayResizeCanv[i].image = imageAnchorFalse;
     }
 
      //Setting cliked button to anchor
