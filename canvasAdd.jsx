@@ -289,7 +289,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
     }
 }
 
-EventHandlerBuilder.prototype.startSettingsUINoActiveDocs = function() {
+EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
     var UI = this.UI;
 
     //Start setting. If there is no active docs, set to choose folder
@@ -1099,7 +1099,7 @@ function main() {
 
     eventHandler.onBtnRadChooseFilesSourceFold();
 
-    eventHandler.startSettingsUINoActiveDocs();
+    eventHandler.startSettingsUINumbofActiveDocs();
 
     eventHandler.onBtnChooseFilesSourceFold();
 
