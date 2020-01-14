@@ -545,23 +545,23 @@ EventHandlerBuilder.prototype.onAnchorButtons = function() {
     var UI = this.UI;
     var self = this;
 
-    self.anchorPosOutcome = AnchorPosition.MIDDLECENTER;
+    self.anchorPostionValue = AnchorPosition.MIDDLECENTER;
 
-    var anchorArrayResizeCanv = new Array;
-    anchorArrayResizeCanv.push(UI.anchorPositionTOPLEFT, UI.anchorPositionTOPCENTER, UI.anchorPositionTOPRIGHT, UI.anchorPositionMIDDLELEFT, UI.anchorPositionMIDDLECENTER, UI.anchorPositionMIDDLERIGHT, UI.anchorPositionBOTTOMLEFT, UI.anchorPositionBOTTOMCENTER, UI.anchorPositionBOTTOMRIGHT);
+    var anchorPositionButtons = new Array;
+    anchorPositionButtons.push(UI.anchorPositionTOPLEFT, UI.anchorPositionTOPCENTER, UI.anchorPositionTOPRIGHT, UI.anchorPositionMIDDLELEFT, UI.anchorPositionMIDDLECENTER, UI.anchorPositionMIDDLERIGHT, UI.anchorPositionBOTTOMLEFT, UI.anchorPositionBOTTOMCENTER, UI.anchorPositionBOTTOMRIGHT);
 
     //Adding functionality to buttons in anchor box
-    UI.anchorPositionTOPLEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPLEFT, AnchorPosition.TOPLEFT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionTOPCENTER.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPCENTER, AnchorPosition.TOPCENTER, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionTOPRIGHT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionTOPLEFT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionTOPLEFT, AnchorPosition.TOPLEFT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionTOPCENTER.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionTOPCENTER, AnchorPosition.TOPCENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionTOPRIGHT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 
-    UI.anchorPositionMIDDLELEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionMIDDLECENTER.onClick = function() {self.anchorPosOutcome =anchorSetingNew(UI.anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionMIDDLERIGHT.onClick = function() {self.anchorPosOutcome =anchorSetingNew(UI.anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLELEFT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLECENTER.onClick = function() {self.anchorPostionValue =anchorSetingNew(UI.anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLERIGHT.onClick = function() {self.anchorPostionValue =anchorSetingNew(UI.anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 
-    UI.anchorPositionBOTTOMLEFT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionBOTTOMCENTER.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionBOTTOMRIGHT.onClick = function() {self.anchorPosOutcome = anchorSetingNew(UI.anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorArrayResizeCanv, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionBOTTOMLEFT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionBOTTOMCENTER.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionBOTTOMRIGHT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 }
 
 EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
@@ -571,17 +571,18 @@ EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
         //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
         createTooltipToImage(UI.constrainsProportionsCheckbox, UI.grpDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
 
-        //Set the same highest value in "Height" and "Width"
+        //Set the same "highest" value in "Height" and "Width"
         if (UI.constrainsProportionsCheckbox.value === true) {
             //If Height and Width is negative or equal 0, it set in both most negative number
             if((parseInt(UI.grpWidth.numb.text, 10) <= 0) && (parseInt(UI.grpHeight.numb.text, 10) <= 0)) {
                 if (parseInt(UI.grpWidth.numb.text, 10) < parseInt(UI.grpHeight.numb.text, 10)) {
                     UI.grpWidth.numb.onChanging();
                 }
-                //If some value is postive, set in both most positive number
+                //If some value is positive, set in both most positive number
                 else {
                     UI.grpHeight.numb.onChanging();
                 }
+            //If all values are positive set the highest one
             } else if ((parseInt(UI.grpWidth.numb.text, 10) > 0) || (parseInt(UI.grpHeight.numb.text, 10) > 0)) {
                 if (parseInt(UI.grpWidth.numb.text, 10) > parseInt(UI.grpHeight.numb.text, 10)) {
                     UI.grpWidth.numb.onChanging();
@@ -597,7 +598,7 @@ EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
 EventHandlerBuilder.prototype.tooltipConstrainsProportionsCheckbox = function() {
     var UI = this.UI;
 
-    UI.constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width"
+    UI.constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width";
 }
 
 EventHandlerBuilder.prototype.savingBGandFGtoRestoreLater = function() {
@@ -664,7 +665,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         UI.mainWindow.close();
 
         changeFileAndSave(self.sourceFiles, self.detinationFolder, 
-            UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPosOutcome, 
+            UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
             self.fgColor, self.bgColor);
@@ -835,17 +836,17 @@ function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSour
 }
 
 //Anchor button functionality
-function anchorSetingNew(btnAnchorClickedOn, anchorPosition, anchorArrayResizeCanv, imageAnchorTrue, imageAnchorFalse) {
+function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionButtons, imageAnchorTrue, imageAnchorFalse) {
 
-    for (i = 0; i < anchorArrayResizeCanv.length; i++){
-        anchorArrayResizeCanv[i].image = imageAnchorFalse;
+    for (i = 0; i < anchorPostionButtons.length; i++){
+        anchorPostionButtons[i].image = imageAnchorFalse;
     }
 
      //Setting cliked button to anchor
     btnAnchorClickedOn.image = imageAnchorTrue;
 
     //Sending information which anchor is marked for resizeCanvas()
-    return anchorPosition;
+    return anchorPositionValue;
 }
 
 //Used later to dispaly names of opened files
