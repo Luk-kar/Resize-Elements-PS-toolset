@@ -177,7 +177,8 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                                     "White",
                                     "Black",
                                     "Grey",
-                                    "Other..."
+                                    "Select color",
+                                    "Left upper corner color"
                                     ];// functions in onCanvExtendColorDropDwn; Can't be part of UI object, becouse of bug in the next line
 
         this.canvExtendColor.dropDwn = this.canvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
@@ -545,6 +546,7 @@ EventHandlerBuilder.prototype.onAnchorButtons = function() {
     var UI = this.UI;
     var self = this;
 
+    //Default anchor position value
     self.anchorPostionValue = AnchorPosition.MIDDLECENTER;
 
     var anchorPositionButtons = new Array;
@@ -649,7 +651,7 @@ EventHandlerBuilder.prototype.onCanvExtendColorDropDwn = function() {
             app.backgroundColor.rgb.green = 128;
             app.backgroundColor.rgb.blue = 128;
 
-        } else if (canvExtendColorDropDwn === "Other...") {
+        } else if (canvExtendColorDropDwn === "Select color") {
             showColorPicker();
             app.backgroundColor = app.foregroundColor;
             app.foregroundColor = self.fgColor;
@@ -668,7 +670,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self.fgColor, self.bgColor);
+            self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn.selection.toString());
         
         if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
@@ -918,7 +920,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     addWidth, addHeight, unitsList, anchor, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    fgColorPrevious, bgColorPrevious) {
+    fgColorPrevious, bgColorPrevious, canvExtendColorDropDwn) {
 
     //full list is in var AddCanvasDocUnits
     var unitsTypes = [
@@ -934,7 +936,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
         while (app.documents.length > 0) {
 
             var doc = app.activeDocument;
-            addCanvas(addWidth, addHeight, units, anchor, doc);
+
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc);
+            addCanvas(addWidth, addHeight, units, anchor, doc,);
 
             doc.save();
             doc.close();
@@ -948,6 +952,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             open(sourceFiles[i]);
 
             var doc = app.activeDocument;
+
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc);
             addCanvas(addWidth, addHeight, units, anchor, doc);
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
@@ -993,6 +999,24 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
     app.foregroundColor = fgColorPrevious;
     app.backgroundColor = bgColorPrevious;
+}
+
+function leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc) {
+
+    if (canvExtendColorDropDwn === "Left upper corner color") {
+        // Remove any Color Samplers that may already exist.
+        doc.colorSamplers.removeAll();
+        // deselct any selection that may already exist.
+        doc.selection.deselect();
+        // Get color sample from a given x,y coordinate.
+        var pixelLoc = [0, 0];
+        var colorSampleRef = doc.colorSamplers.add(pixelLoc);
+
+        var sampledColor = colorSampleRef.color;
+        // Set the foreground color to the sampled color.
+        app.backgroundColor = sampledColor;
+        colorSampleRef.remove();
+    }
 }
 
 function addCanvas(addWidth, addHeight, units, anchor, doc) {
