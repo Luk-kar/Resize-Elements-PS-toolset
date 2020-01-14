@@ -94,11 +94,11 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                 this.grpWidth.unitsDropDown.selection = 0;
 
                 //Crating path to image folder
-                this.scriptPath = $.fileName;
-                this.scriptFolderDestination = (this.scriptPath.toString().replace(/\\/g, '/').slice(0, -13) + "/images/"); // -13 is the lenght of the script file name
+                var scriptPath = $.fileName;
+                var imageFolderDestination = (scriptPath.toString().replace(/\\/g, '/').slice(0, -13) + "/images/"); // -13 is the lenght of the script file name
 
                 //Image: InfoHover.png
-                this.imageInfHov = File(this.scriptFolderDestination + "InfoHover.png");
+                this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
                 this.grpWidth.imageTooltip = this.grpWidth.add("image", undefined, this.imageInfHov);
 
             //Group height
@@ -119,8 +119,8 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
         //Graphic element proportions constrains (true, false)
 
             //Uplaoding constrains images next Width and Height dialog groups
-            this.imageCnstrnsProportionFalse = File(this.scriptFolderDestination + "ConstrPropFalse.png");
-            this.imageCnstrnsProportionTrue = File(this.scriptFolderDestination + "ConstrPropTrue.png");
+            this.imageCnstrnsProportionFalse = File(imageFolderDestination + "ConstrPropFalse.png");
+            this.imageCnstrnsProportionTrue = File(imageFolderDestination + "ConstrPropTrue.png");
 
             //Add constrain image next to dialog
             this.grpDlgUnitValImage = this.grpUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
@@ -146,8 +146,8 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
         this.grpAnchor.boxBtns.line003 = this.grpAnchor.boxBtns.add("group");
 
             //Image: imageAnchorTrue.png and imageAnchorFalse.png
-            this.imageAnchorTrue = File(this.scriptFolderDestination + "anchorPointerTrue.png");
-            this.imageAnchorFalse = File(this.scriptFolderDestination + "anchorPointerFalse.png");
+            this.imageAnchorTrue = File(imageFolderDestination + "anchorPointerTrue.png");
+            this.imageAnchorFalse = File(imageFolderDestination + "anchorPointerFalse.png");
 
             //Adding 001 line of buttons
             this.anchorPositionTOPLEFT = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
@@ -190,12 +190,12 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
     this.pnlDocInfo = createPanelUI(this.grpInfo, undefined, "left");
 
     //Number of files displayed in "Info UI"
-    this.numbOfDisplayedLines = 2;
+    this.numbOfDisplayedFiles = 2;
 
     //Creating empty lines of text to fill with files names later
     this.plnDocInfoLines = new Array; //plnDocInfo.lines -> "undefined not as object"
 
-    for (var i = 0; i < (this.numbOfDisplayedLines + 1); i++) {
+    for (var i = 0; i < (this.numbOfDisplayedFiles + 1); i++) {
         this.plnDocInfoLines[i] = this.pnlDocInfo.add("statictext");
         this.plnDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
     }
@@ -236,7 +236,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
             UI.pnlAddCanvas.enabled = true;
         }
 
-        infoUIUpdate(docsOpenedNames(), UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoUIUpdate(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
         checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
@@ -264,7 +264,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             UI.pnlAddCanvas.enabled = false;
 
-            infoUIUpdate(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
             UI.btnAccept.enabled = false;
         
@@ -284,7 +284,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
-            infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
     }
 }
@@ -353,7 +353,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 UI.btnAccept.enabled = false;
 
-                infoUIUpdate(undefined, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 alert("In choosed folder there is no files to process");
 
@@ -368,7 +368,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 btnsRadDestFoldEnabled(true, UI);
                 
-                infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedLines, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 if (typeof self.detinationFolder === "undefined") {
 
@@ -799,15 +799,15 @@ function checkingIfItIsTheSameSourceFolderAsBefore(self) {
 
 function checkingIfWidthAndHeightIsNot0UnlockingBtn(Numb001, Numb002, btnEnabled) {
 
-    if ((Numb001.text.match(/[^-\+0-9]+/) !== null) || (Numb002.text.match(/[^-\+,0-9]+/) !== null) || 
-        (Numb001.text.match(/[0-9]+/) === null) || (Numb002.text.match(/[0-9]+/) === null) ||
-        ((parseInt(Numb001.text, 10) === 0) && (parseInt(Numb002.text, 10) === 0)) ) {
+    if ((Numb001.text.match(/[^-\+0-9]+/) === null) && (Numb002.text.match(/[^-\+,0-9]+/) === null) && 
+        (Numb001.text.match(/[0-9]+/) !== null) && (Numb002.text.match(/[0-9]+/) !== null) &&
+        ((parseInt(Numb001.text, 10) !== 0) || (parseInt(Numb002.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
 
-        btnEnabled.enabled = false;
+        btnEnabled.enabled = true;
 
     } else {
 
-        btnEnabled.enabled = true;
+        btnEnabled.enabled = false;
     }
 
 }
@@ -818,9 +818,9 @@ function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
     }
 }
 
-function sameDropDown(objectEvent, objectIndexSetSame) {
-    if (objectEvent.selection.index !== objectIndexSetSame.selection.index) {
-        objectIndexSetSame.selection = objectEvent.selection.index;
+function sameDropDown(objectEvent, objectSetSameValue) {
+    if (objectEvent.selection.index !== objectSetSameValue.selection.index) {
+        objectSetSameValue.selection = objectEvent.selection.index;
     }
 }
 
@@ -861,11 +861,11 @@ function docsOpenedNames() {
     return docsNamesToInfoUI;
 }
 
-function infoUIUpdate(sourceFiles, numbOfDisplayedLines, panelInfoUITitle, panelInfoUIwriteLines) {
+function infoUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
 
     var prevDocNames = new Array;
 
-    for (var i = 0; i < (numbOfDisplayedLines + 1); i++) {
+    for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
         prevDocNames[i] = "";
     }
     prevDocNames[0] = "no files to process";
@@ -882,21 +882,21 @@ function infoUIUpdate(sourceFiles, numbOfDisplayedLines, panelInfoUITitle, panel
     //Writing files names
     if (filesNamesInfoUI.length > 0) {
 
-        for (var i = 0; (i < numbOfDisplayedLines) && (i < filesNamesInfoUI.length); i++) {
+        for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length); i++) {
 
             prevDocNames[i] = filesNamesInfoUI[i];
         }
 
         var charComas = new Array;
-        for (var i = 0; (i < numbOfDisplayedLines) && (i < filesNamesInfoUI.length -1); i++) {
+        for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length -1); i++) {
 
             charComas[i] = ",";
             prevDocNames[i] = prevDocNames[i] + charComas[i];
         }
 
-        if (filesNamesInfoUI.length > numbOfDisplayedLines) {
+        if (filesNamesInfoUI.length > numbOfDisplayedFiles) {
 
-            prevDocNames[numbOfDisplayedLines] = "(...)";
+            prevDocNames[numbOfDisplayedFiles] = "(...)";
         }
     }
 
@@ -906,12 +906,11 @@ function infoUIUpdate(sourceFiles, numbOfDisplayedLines, panelInfoUITitle, panel
 
 
 function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUIwriteLines) {
-    //Adding created names into empty "InfoUI" list
+
     for (var i = 0; i < panelInfoUIwriteLines.length; i++) {
         panelInfoUIwriteLines[i].text = filesNames[i];
     }
     
-    //Adding number of files to "Info UI" title panel
     panelInfoUITitle.text =  "Files to process: " + filesNumbers;
 }
 
@@ -919,7 +918,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     addWidth, addHeight, unitsList, anchor, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    fgColor, bgColor) {
+    fgColorPrevious, bgColorPrevious) {
 
     //full list is in var AddCanvasDocUnits
     var unitsTypes = [
@@ -951,7 +950,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             var doc = app.activeDocument;
             addCanvas(addWidth, addHeight, units, anchor, doc);
 
-            //If you choose radio button "Add canvas in the same folder", saves the same files
+            //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
                 doc.save();
 
@@ -961,7 +960,6 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 //Declaring name of saved file
                 var name = doc.name;
 
-                //Declaring path
                 var path = detinationFolder;
 
                 var imageTypes = [
@@ -992,9 +990,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 
         }
     }
-    //Setting background & foregound colors back to original state
-    app.foregroundColor = fgColor;
-    app.backgroundColor = bgColor;
+
+    app.foregroundColor = fgColorPrevious;
+    app.backgroundColor = bgColorPrevious;
 }
 
 function addCanvas(addWidth, addHeight, units, anchor, doc) {
