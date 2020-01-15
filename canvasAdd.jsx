@@ -953,7 +953,12 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             var doc = app.activeDocument;
 
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc);
+            if( itHasBackgroundLayerChecker() ) {
+
+                leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc);
+                
+            };
+            
             addCanvas(addWidth, addHeight, units, anchor, doc);
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
@@ -1017,6 +1022,15 @@ function leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc) {
         app.backgroundColor = sampledColor;
         colorSampleRef.remove();
     }
+}
+
+function itHasBackgroundLayerChecker() {
+
+    var doc = app.activeDocument;
+    var docLastLayer = doc.artLayers[doc.artLayers.length - 1];
+    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer;
+    return itHasbackgroundLayer;
+    
 }
 
 function addCanvas(addWidth, addHeight, units, anchor, doc) {
@@ -1163,102 +1177,6 @@ function main() {
 
     UI.showMainWindow();   
 }
-
-
-function colorSelectionValidationHack() {
-
-    alert(app.activeDocument.name.toString().match(/.png|.psd/));
-    //You have to do it in this weird hack way, becouse external apps could not read newer versions of PSD files.
-    doc = app.activeDocument;
-
-    copyAllVisible();
-
-    setNewLayerBGtoBlack();
-
-    pasteAllVisibleToNewLyer();
-
-    selectTransparenceOfFirstLayer();
-
-    selectedTransparencyToWhite();
-
-    selectColorLeftUpperCorner();
-
-    removeRedudantLayers();
-
-    var canDoColorSelection = colorSelectionValidation();
-
-    alert(canDoColorSelection);
-
-    //to add to script
-    function colorSelectionValidation() {
-        if ((app.foregroundColor.rgb.red !== 0) || (app.foregroundColor.rgb.green !== 0) || (app.foregroundColor.rgb.blue !== 0)) {
-            var canDoColorSelection = true;
-        }
-        else {
-            var canDoColorSelection = false;
-        }
-        return canDoColorSelection;
-    }
-
-    function removeRedudantLayers() {
-        doc.artLayers[0].remove();
-        doc.artLayers[1].remove();
-    }
-
-    function pasteAllVisibleToNewLyer() {
-        doc.paste();
-    }
-
-    function selectColorLeftUpperCorner() {
-        var pixelLoc = [0, 0];
-        var colorSampleRef = doc.colorSamplers.add(pixelLoc);
-        var sampledColor = colorSampleRef.color;
-        app.foregroundColor = sampledColor;
-    }
-
-    function copyAllVisible() {
-        doc.selection.selectAll();
-        doc.selection.copy(true);//bug with psd file
-    }
-
-    function selectedTransparencyToWhite() {
-        doc.artLayers.add();
-        doc.selection.selectAll();
-
-        app.foregroundColor.rgb.red = 255;
-        app.foregroundColor.rgb.green = 255;
-        app.foregroundColor.rgb.blue = 255;
-        doc.selection.fill(app.foregroundColor);
-
-        doc.colorSamplers.removeAll();
-        doc.selection.deselect();
-    }
-
-    function setNewLayerBGtoBlack() {
-        app.foregroundColor.rgb.red = 0;
-        app.foregroundColor.rgb.green = 0;
-        app.foregroundColor.rgb.blue = 0;
-        doc.selection.fill(app.foregroundColor);
-    }
-
-    function selectTransparenceOfFirstLayer()
-    {
-        var idChnl = charIDToTypeID( "Chnl" );
-
-        var actionSelect = new ActionReference();
-        actionSelect.putProperty( idChnl, charIDToTypeID( "fsel" ) );     
-
-        var actionTransparent = new ActionReference();    
-        actionTransparent.putEnumerated( idChnl, idChnl, charIDToTypeID( "Trsp" ) );
-
-        var actionDesc = new ActionDescriptor();
-        actionDesc.putReference( charIDToTypeID( "null" ), actionSelect );
-        actionDesc.putReference( charIDToTypeID( "T   " ), actionTransparent );
-
-        executeAction( charIDToTypeID( "setd" ), actionDesc, DialogModes.NO );
-    }
-}
-
 
 
 
