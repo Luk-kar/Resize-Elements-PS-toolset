@@ -937,8 +937,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             var doc = app.activeDocument;
 
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc);
-            addCanvas(addWidth, addHeight, units, anchor, doc,);
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn);
+            addCanvas(addWidth, addHeight, units, anchor);
 
             doc.save();
             doc.close();
@@ -955,11 +955,11 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {
 
-                leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc);
-                
+                leftUpperCornerColorBGSet(canvExtendColorDropDwn);
+
             };
             
-            addCanvas(addWidth, addHeight, units, anchor, doc);
+            addCanvas(addWidth, addHeight, units, anchor);
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
@@ -1006,7 +1006,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     app.backgroundColor = bgColorPrevious;
 }
 
-function leftUpperCornerColorBGSet(canvExtendColorDropDwn, doc) {
+function leftUpperCornerColorBGSet(canvExtendColorDropDwn) {
+
+    var doc = app.activeDocument;
 
     if (canvExtendColorDropDwn === "Left upper corner color") {
         // Remove any Color Samplers that may already exist.
@@ -1033,7 +1035,9 @@ function itHasBackgroundLayerChecker() {
     
 }
 
-function addCanvas(addWidth, addHeight, units, anchor, doc) {
+function addCanvas(addWidth, addHeight, units, anchor) {
+
+    var doc = app.activeDocument;
 
     var mathWidthAndHeightResult = mathSumWidthAndHeight(units, addWidth, addHeight, doc);
     var sumWidth = mathWidthAndHeightResult[1];
