@@ -953,7 +953,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             var doc = app.activeDocument;
 
-            if( itHasBackgroundLayerChecker() ) {
+            if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
                 leftUpperCornerColorBGSet(canvExtendColorDropDwn);
 
