@@ -38,7 +38,32 @@ GuiBuilder.prototype.buildPanelSourceFiles = function() {
 
     this.btnChooseFilesSourceFold =  this.grpBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
     this.btnChooseFilesSourceFold.title = this.grpBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
-    this.btnChooseFilesSourceFold.title.characters = this.panelWidth;
+
+    this.btnChooseFilesSourceFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+}
+
+GuiBuilder.prototype.buildPanelSourceFilesFilter = function() {
+
+    //Create panel
+    this.plnFilterFiles = createPanelUI(this.grpInfo, undefined, "left");
+
+    this.filterSourceFilesCheckbox = createGroupUI(this.plnFilterFiles, "column", "left", "left");
+    //Create checkbox
+    this.filterSourceFilesCheckbox.PNG = this.filterSourceFilesCheckbox.add("checkbox", undefined, "Process only PNG");
+    //Create group
+    this.filterSourceFilesCheckbox.byExpression = this.filterSourceFilesCheckbox.add("checkbox", undefined, "filter files by expression");
+
+
+    this.filterSourceFilesByExpression = this.plnFilterFiles.add("group"); //Why it is not part of this.filterSourceFilesCheckbox.byExpression, thou ask? When you do enabled property of pervious one and this one, they have to be sperate bocouse they are invoked seperatly. 
+        //Create statictext
+        this.filterSourceFilesByExpression.title = this.filterSourceFilesByExpression.add("statictext", undefined, "Filter by:");
+        //CreateeditText
+        this.filterSourceFilesByExpression.input = this.filterSourceFilesByExpression.add("edittext", undefined, "");
+        this.filterSourceFilesByExpression.input.characters = 30;
+
+        this.filterSourceFilesByExpression.panelWidth = this.filterSourceFilesByExpression.add("statictext", undefined, "");
+        this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth -28; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+
 }
 
 GuiBuilder.prototype.buildPanelDestinationFolder = function() {
@@ -60,7 +85,7 @@ GuiBuilder.prototype.buildPanelDestinationFolder = function() {
 
     this.btnChooseFilesDestFold = this.grpBtnDestFold.add("button", undefined, "Browse...");
     this.btnChooseFilesDestFold.title = this.grpBtnDestFold.add("statictext", undefined, "Destination folder...");
-    this.btnChooseFilesDestFold.title.characters = this.panelWidth;
+    this.btnChooseFilesDestFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 }
 
 GuiBuilder.prototype.buildPanelAddCanvas = function(){
@@ -165,7 +190,7 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
             this.anchorPositionBOTTOMRIGHT = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
 
     this.grpAnchorMarginesSpaceBottom = this.pnlAddCanvas.add("statictext", undefined, "");
-    this.grpAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
+    this.grpAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 
     //Canvas color extension
     this.canvExtendColor = this.pnlAddCanvas.add("group");
@@ -198,7 +223,7 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
 
     for (var i = 0; i < (this.numbOfDisplayedFiles + 1); i++) {
         this.plnDocInfoLines[i] = this.pnlDocInfo.add("statictext");
-        this.plnDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.pnlDestFold
+        this.plnDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
     }
 }
 
@@ -215,7 +240,7 @@ function EventHandlerBuilder(UI) {
     this.UI = UI;
 }
 
-GuiBuilder.prototype.showMainWindow = function(){
+GuiBuilder.prototype.showMainWindow = function() {
     this.mainWindow.show();
 }
 
@@ -227,6 +252,8 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         btnChooseFilesSourceFoldEnabled(false, UI);
 
+        plnFilterFilesEnabled(false, UI);
+
         UI.pnlDestFold.title.enabled = false;
 
         btnsRadDestFoldEnabled(false, UI);
@@ -237,7 +264,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
             UI.pnlAddCanvas.enabled = true;
         }
 
-        infoUIUpdate(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoFilesUIUpdate(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
         checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
@@ -265,13 +292,15 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             UI.pnlAddCanvas.enabled = false;
 
-            infoUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
             UI.btnAccept.enabled = false;
         
         } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder..."){
 
             btnChooseFilesSourceFoldEnabled(true, UI);
+
+            plnFilterFilesEnabled(true, UI);
 
             UI.pnlDestFold.title.enabled = true;
 
@@ -285,13 +314,15 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
-            infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
     }
 }
 
 EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
     var UI = this.UI;
+
+    plnFilterFilesEnabled(false, UI);
 
     //Start setting. If there is no active docs, set to choose folder
     if (app.documents.length === 0) {
@@ -306,6 +337,7 @@ EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
     } else if (app.documents.length > 0) {
 
         UI.btnRadSourceFiles.chooseOpenedFiles.notify();
+
         UI.numbOfActiveDocuments = app.documents.length; //Save later to use in summary alert
         
     }
@@ -330,7 +362,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
             var sameChoosedSourceFolderAsBefore = checkingIfItIsTheSameSourceFolderAsBefore(self);
     
             self.sourceFolderNameRecent = self.sourceFolder.name; //Saving name of source folder to avoid bug; If you choose already some folder, but later you canceled choosing folder, you will not get "undefined" becouse of this variable.
-            self.sourceFolderPathRecent = self.sourceFolder; //Add to self to avoid scope issues
+            self.sourceFolderPathRecent = self.sourceFolder; //Add to self to avoid scope issues and bug when source folder is null but it is selected previously in dialog box
             
             var sourceFilesUnfiltered = new Array;
             var sourceFilesFiltered = new Array;
@@ -338,13 +370,15 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
             
             sourceFilesUnfiltered = self.sourceFolder.getFiles();
 
-            sourceFilesFiltered = filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles);
+            sourceFilesFiltered = filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles);
 
             if (sourceFilesFiltered.length === 0) {
 
                 self.sourceFolder === null;// to avoid bug
                 
                 createPathString(UI.btnChooseFilesSourceFold.title, "Source folder...");
+
+                plnFilterFilesEnabled(false, UI);
 
                 btnsRadDestFoldEnabled(false, UI);
 
@@ -354,22 +388,40 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 UI.btnAccept.enabled = false;
 
-                infoUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
                 alert("In choosed folder there is no files to process");
+                
 
             } else if (sourceFilesFiltered.length > 0) {
 
-                self.sourceFiles = null; 
-                self.sourceFiles = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
+                self.sourceFilesUnfiltered = null; 
+                self.sourceFilesUnfiltered = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
+                self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+
+                if (UI.filterSourceFilesCheckbox.PNG.value === true) {
+                    UI.filterSourceFilesCheckbox.PNG.onClick();
+                } else if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
+                    UI.filterSourceFilesCheckbox.byExpression.onClick();
+                }
 
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
+
+                plnFilterFilesEnabled(true, UI);
                 
                 UI.pnlDestFold.title.enabled = true;
                 
                 btnsRadDestFoldEnabled(true, UI);
                 
-                infoUIUpdate(self.sourceFiles, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+
+                if (sameChoosedSourceFolderAsBefore === false) {
+                    if (self.sourceFilesToProcess.length > 1) {
+                        alert("In folder are " + self.sourceFilesToProcess.length + " files");
+                    } else if (self.sourceFilesToProcess.length === 1) {
+                        alert("In folder is 1 file");
+                    }
+                }
 
                 if (typeof self.detinationFolder === "undefined") {
 
@@ -377,7 +429,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 } else if ( (typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug
 
-                    var sameDestinationFolderAndSourceFolder = self.detinationFolder.toString() === self.sourceFolder.toString();
+                    var sameDestinationFolderAndSourceFolder = ( self.detinationFolder.toString() === self.sourceFolder.toString() );
 
                     if (sameDestinationFolderAndSourceFolder) {
 
@@ -394,17 +446,132 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                     }
                 }
-                
-                if (sameChoosedSourceFolderAsBefore === false) {
-                    if (self.sourceFiles.length > 1) {
-                        alert("In folder are " + self.sourceFiles.length + " files");
-                    } else if (self.sourceFiles.length === 0) {
-                        alert("In folder is 1 file");
-                    }
-                }
             }
         } 
     }
+}
+
+EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
+
+    var UI = this.UI;
+    var self = this;
+
+    UI.filterSourceFilesCheckbox.PNG.onClick = function() {
+
+        if (UI.filterSourceFilesCheckbox.PNG.value === true) {
+
+            self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesUnfiltered);
+
+            var filesToInfoUI =  self.sourceFilesPNG;
+            self.sourceFilesToProcess =  self.sourceFilesPNG;
+
+            if ((UI.filterSourceFilesCheckbox.byExpression.value === true) && typeof (self.sourceFilesByExpression !== "undefined")) {
+
+                if (UI.filterSourceFilesByExpression.input.text !== "") {
+                    self.sourceFilesPNGandByExpression = filterFilesByPNG(self.sourceFilesByExpression);
+
+                    filesToInfoUI = self.sourceFilesPNGandByExpression;
+                    self.sourceFilesToProcess = self.sourceFilesPNGandByExpression;
+                } 
+
+            }
+
+            infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+
+        } else if (UI.filterSourceFilesCheckbox.PNG.value === false) {
+
+            if ((UI.filterSourceFilesCheckbox.byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) {
+
+                var filesToInfoUI = self.sourceFilesByExpression;
+                self.sourceFilesToProcess = self.sourceFilesByExpression;
+
+            } else {//todo
+
+                var filesToInfoUI = self.sourceFilesUnfiltered;
+                self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+
+            }
+
+            infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+
+        }
+    }
+}
+
+EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function() { //todo
+
+    var UI = this.UI;
+    var self = this;
+
+    UI.filterSourceFilesCheckbox.byExpression.onClick = function() {
+
+        if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
+
+            UI.filterSourceFilesByExpression.enabled = true;
+
+            if (UI.filterSourceFilesByExpression.input.text !== "") {
+
+                self.sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesUnfiltered);
+
+                var filesToInfoUI = self.sourceFilesByExpression;
+                self.sourceFilesToProcess = self.sourceFilesByExpression;
+
+                if (UI.filterSourceFilesCheckbox.PNG.value === true) {
+
+                    self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesUnfiltered);
+    
+                    self.sourceFilesPNGandByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesPNG);
+    
+                    filesToInfoUI = self.sourceFilesPNGandByExpression;
+                    self.sourceFilesToProcess = self.sourceFilesPNGandByExpression;
+
+                } else if (UI.filterSourceFilesByExpression.input.text === "") {
+
+                    filesToInfoUI = self.sourceFilesUnfiltered;
+                    self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+
+                    if (UI.filterSourceFilesCheckbox.PNG.value === true) {
+
+                        self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesUnfiltered);
+                        filesToInfoUI = self.sourceFilesPNG;
+                        self.sourceFilesToProcess = self.sourceFilesPNG;
+                    }
+                }
+                
+                infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            }
+            
+        } else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
+
+            if (UI.filterSourceFilesCheckbox.PNG.value === true) {
+
+                var filesToInfoUI = self.sourceFilesPNG;
+                self.sourceFilesToProcess = self.sourceFilesPNG;
+
+            } else {
+
+                var filesToInfoUI = self.sourceFilesUnfiltered;
+                self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+
+            }
+
+            infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+
+        }
+    }
+
+}
+
+EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() {
+    
+    var UI = this.UI;
+
+    UI.filterSourceFilesByExpression.input.onChanging = function() {
+
+        UI.filterSourceFilesCheckbox.byExpression.onClick();
+
+    }
+
 }
 
 EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
@@ -451,21 +618,21 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 
         var detinationFolderSelection = Folder.selectDialog("Select target folder to save files");
 
-        if ((detinationFolderSelection === null) || (typeof detinationFolderSelection === "undefined")) {// "undefined" exception to avoid bug
+        if (detinationFolderSelection === null) {// "undefined" exception to avoid bug
 
             if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
                 alert("You have not selected target folder");
                 self.detinationFolder = null; //to avoid bug
             } //else {if you have already have had selected folder destination, then it remains status quo}
 
-        } else if (detinationFolderSelection.toString() !== self.sourceFolder.toString()) {
+        } else if (detinationFolderSelection.toString() !== self.sourceFolderPathRecent.toString()) {
 
             createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
             UI.pnlAddCanvas.enabled = true;
 
             self.detinationFolder = detinationFolderSelection;
-        } else if (detinationFolderSelection.toString() === self.sourceFolder.toString()) {
+        } else if (detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString()) {
 
             UI.btnRadDestFold.same.notify();
             createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
@@ -485,6 +652,8 @@ EventHandlerBuilder.prototype.startSettingsWidthAndHeight = function() {
 
 EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
+
+    blockButtonByEdittext(UI.grpWidth.numb);
 
     UI.grpWidth.numb.onChanging = function() {
 
@@ -518,6 +687,8 @@ EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
 
 EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
+
+    blockButtonByEdittext(UI.grpHeight.numb);
 
     //Group Height
     UI.grpHeight.numb.onChanging = function() {
@@ -558,8 +729,8 @@ EventHandlerBuilder.prototype.onAnchorButtons = function() {
     UI.anchorPositionTOPRIGHT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionTOPRIGHT, AnchorPosition.TOPRIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 
     UI.anchorPositionMIDDLELEFT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionMIDDLELEFT, AnchorPosition.MIDDLELEFT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionMIDDLECENTER.onClick = function() {self.anchorPostionValue =anchorSetingNew(UI.anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-    UI.anchorPositionMIDDLERIGHT.onClick = function() {self.anchorPostionValue =anchorSetingNew(UI.anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLECENTER.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionMIDDLECENTER, AnchorPosition.MIDDLECENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
+    UI.anchorPositionMIDDLERIGHT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionMIDDLERIGHT, AnchorPosition.MIDDLERIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 
     UI.anchorPositionBOTTOMLEFT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
     UI.anchorPositionBOTTOMCENTER.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
@@ -666,7 +837,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        changeFileAndSave(self.sourceFiles, self.detinationFolder, 
+        changeFileAndSave(self.sourceFilesToProcess, self.detinationFolder, 
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
@@ -685,18 +856,18 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
 
             var folderName = "";
             if (UI.btnRadDestFold.same.value === true) {
-                folderName = self.sourceFolderNameRecent.replace(/%20/g, ' ');
+                folderName = decodeURIComponent(self.sourceFolderNameRecent); // string format is URl
             } else if (UI.btnRadDestFold.other.value === true) {
-                folderName = self.detinationFolder.name.replace(/%20/g, ' ');
+                folderName = decodeURIComponent(self.detinationFolder.name); // string format is URl
             }
 
-            if (self.sourceFiles.length > 1) {
+            if (self.sourceFilesToProcess.length > 1) {
                 var files = "files"
-            } else if (self.sourceFiles.length === 1) {
+            } else if (self.sourceFilesToProcess.length === 1) {
                 var files = "file"
             }
 
-            alert("You added canvas to " + self.sourceFiles.length + " " + files + ",\nin folder: " + '"' + folderName + '"'); 
+            alert("You added canvas to " + self.sourceFilesToProcess.length + " " + files + ",\nin folder: " + '"' + folderName + '"'); 
         }
     }
 }
@@ -729,6 +900,26 @@ function createGroupUI(objectParent, orientationChildren, alignChildren, alignme
     return objectChildGroup;
 }
 
+function btnChooseFilesSourceFoldEnabled(trueFalse, UI) {
+    UI.btnChooseFilesSourceFold.enabled = trueFalse;
+    UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
+}
+
+function plnFilterFilesEnabled(trueFalse, UI) {
+
+    if (trueFalse === true) {
+
+        UI.filterSourceFilesCheckbox.enabled = true;
+        UI.filterSourceFilesCheckbox.byExpression.onClick();
+
+    } else if (trueFalse === false){
+
+        UI.filterSourceFilesCheckbox.enabled = false;
+        UI.filterSourceFilesByExpression.enabled = false;
+
+    }
+}
+
 function btnChooseFilesDestFoldEnabled(trueFalse, UI) {
     UI.btnChooseFilesDestFold.enabled = trueFalse;
     UI.btnChooseFilesDestFold.title.enabled = trueFalse;
@@ -739,17 +930,12 @@ function btnsRadDestFoldEnabled(trueFalse, UI) {
     UI.btnRadDestFold.other.enabled = trueFalse;
 }
 
-function btnChooseFilesSourceFoldEnabled(trueFalse, UI) {
-    UI.btnChooseFilesSourceFold.enabled = trueFalse;
-    UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
-}
-
 function createPathString(textObject, path) {
 
     if (typeof path !== "string") {
-        var string = path.toString().replace(/%20/g, ' ');
+        var string = decodeURIComponent(path.toString());  // string format is URl
     } else if (typeof path === "string") {
-        var string = path;
+        var string = decodeURIComponent(path); // string format is URl
     }
 
     if (string.length > textObject.characters) {
@@ -760,15 +946,38 @@ function createPathString(textObject, path) {
     }
 }
 
+function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
+
+    var sourceFilesFiltered = new Array;
+
+    for (var i = 0; i < sourceFilesUnfiltered.length; i++) { //todo undefined is not a object
+        if (sourceFilesUnfiltered[i] instanceof File) {
+            var sourceFilePathString = sourceFilesUnfiltered[i].toString();
+
+            if (decodeURIComponent(sourceFilePathString).match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
+
+                sourceFilesFiltered[i] = sourceFilePathString; //You have to do in this way (not use push method), becouse later you need index value to match certain string with certain file in addingFilteredFilesToSourceFiles();
+            } else {
+                sourceFilesFiltered[i] = "";
+            }
+
+        } else {
+            sourceFilesFiltered[i] = "";
+        }
+    }
+
+    return sourceFilesFiltered;
+}
+
 function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered) {
 
     var sourceFiles = new Array;
 
     for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
-        for (var i = 0; i < sourceFilesFiltered.length; i++) {
+
             if (sourceFilesFiltered[i] === sourceFilesUnfiltered[i].toString()) {
                 sourceFiles.push(sourceFilesUnfiltered[i]);
-            }
+            
         }
     }
 
@@ -776,18 +985,28 @@ function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFilt
 
 }
 
-function filteringSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered, properFilesExtPSfiles) {
+function filterFilesByExpression(string, unfilteredFiles) {
 
-    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
-        if (sourceFilesUnfiltered[i] instanceof File) {
-            var sourceFilePathString = sourceFilesUnfiltered[i].toString();
-            if (sourceFilePathString.match(properFilesExtPSfiles)) {
-                sourceFilesFiltered[i] = sourceFilePathString;
-            }
-        }
-    }
+    var string = string
 
-    return sourceFilesFiltered;
+    var regex = new RegExp(string);
+    var properFilesByExpression = regex;
+
+    var sourceFilesFiltered = filteringSourceFiles( unfilteredFiles, properFilesByExpression);
+    var sourceFilesByExpression = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
+
+    return sourceFilesByExpression;
+
+}
+
+function filterFilesByPNG(unfilteredFiles) {
+
+    var properFilesPNG = /.png$/;
+    var sourceFilesFiltered = filteringSourceFiles(unfilteredFiles, properFilesPNG);
+    var sourceFilesPNG = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
+
+    return sourceFilesPNG;
+
 }
 
 function checkingIfItIsTheSameSourceFolderAsBefore(self) {
@@ -799,10 +1018,58 @@ function checkingIfItIsTheSameSourceFolderAsBefore(self) {
     return sameChoosedSourceFolderAsBefore;
 }
 
+/**
+ * Restricts the character keys permitted in a `edittext` element.
+ * @param {Object} editTextInstance - Reference to `edittext` ScriptUI element.
+ */
+function blockButtonByEdittext(editTextInstance) {
+
+    if (editTextInstance.constructor.name !== 'EditText') {
+      throw new Error ('Invalid class. Expected `EditText` class.')
+    }
+  
+    var permissibleKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'Minus', 'Escape', 'Backspace', 'Enter'];
+  
+    editTextInstance.addEventListener('keydown', function (key) {
+        var keyName = key.keyName;
+        var shiftKeyIsDown = key.shiftKey;
+        var altKeyIsDown = key.altKey;
+  
+    if (shiftKeyIsDown && keyName === 'Equal') {
+        return;
+    }
+  
+    if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) {
+        key.preventDefault();
+        return;
+    }
+  
+    if (! inArray(keyName, permissibleKeys)) {
+        key.preventDefault();
+    }
+    });
+  }
+  
+/**
+ * Determines whether an array includes a certain value among its elements.
+ * @param {String} valueToFind - The value to search for.
+ * @param {Array} arrayToSearch - The array to search in.
+ * @returns {Boolean} true if the value valueToFind is found within the array
+ */
+  
+function inArray(valueToFind, arrayToSearch) {
+for (var i = 0, max = arrayToSearch.length; i < max; i++) {
+    if (arrayToSearch[i] === valueToFind) {
+        return true;
+    }
+}
+return false;
+}
+
 function checkingIfWidthAndHeightIsNot0UnlockingBtn(Numb001, Numb002, btnEnabled) {
 
-    if ((Numb001.text.match(/[^-\+0-9]+/) === null) && (Numb002.text.match(/[^-\+,0-9]+/) === null) && 
-        (Numb001.text.match(/[0-9]+/) !== null) && (Numb002.text.match(/[0-9]+/) !== null) &&
+    if ((Numb001.text.match(/[0-9]+/) !== null) && (Numb002.text.match(/[0-9]+/) !== null) &&
         ((parseInt(Numb001.text, 10) !== 0) || (parseInt(Numb002.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
 
         btnEnabled.enabled = true;
@@ -863,7 +1130,7 @@ function docsOpenedNames() {
     return docsNamesToInfoUI;
 }
 
-function infoUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
+function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
 
     var prevDocNames = new Array;
 
@@ -877,7 +1144,7 @@ function infoUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panel
     } else if (typeof sourceFiles !== "undefined") {
         var filesNamesInfoUI = new Array;
         for (var i = 0; i < sourceFiles.length; i++) {
-            filesNamesInfoUI[i] = sourceFiles[i].name;
+            filesNamesInfoUI[i] = decodeURIComponent(sourceFiles[i].name);  // string format is URl
         }
     }
 
@@ -937,7 +1204,12 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             var doc = app.activeDocument;
 
+            if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
+
             leftUpperCornerColorBGSet(canvExtendColorDropDwn);
+
+            }
+            
             addCanvas(addWidth, addHeight, units, anchor);
 
             doc.save();
@@ -1125,6 +1397,8 @@ function main() {
 
     UI.buildPanelSourceFiles();
 
+    UI.buildPanelSourceFilesFilter();
+
     UI.buildPanelDestinationFolder();
 
     UI.buildPanelAddCanvas();
@@ -1144,6 +1418,12 @@ function main() {
     eventHandler.startSettingsUINumbofActiveDocs();
 
     eventHandler.onBtnChooseFilesSourceFold();
+
+    eventHandler.onFilterSourceFilesCheckboxPNG();
+
+    eventHandler.onFilterSourceFilesCheckboxByExpression();
+
+    eventHandler.onFilterSourceFilesByExpressionInput();
 
     eventHandler.onBtnRadDestFoldSame();
 
