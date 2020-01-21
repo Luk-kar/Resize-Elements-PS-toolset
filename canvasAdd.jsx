@@ -437,8 +437,6 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                         
                         self.detinationFolder = null;
                         UI.btnRadDestFold.same.notify();
-
-                        UI.filterSourceFilesCheckbox.byExpression.onClick(); //To check filtering conditions
     
                         alert("Source folder and target folder are the same.\nNext time choose more wisely");
 
@@ -637,7 +635,6 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
         } else if (detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString()) {
 
             UI.btnRadDestFold.same.notify();
-            UI.filterSourceFilesCheckbox.byExpression.onClick(); //To check filtering conditions
 
             createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
             alert("Source folder and target folder are the same.\nNext time choose more wisely");
