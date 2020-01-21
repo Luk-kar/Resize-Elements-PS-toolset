@@ -395,9 +395,9 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
             } else if (sourceFilesFiltered.length > 0) {
 
-                self.sourceFilesUnfiltered = null; 
-                self.sourceFilesUnfiltered = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
-                self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+                self.sourceFilesPSDformat = null; 
+                self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
+                self.sourceFilesToProcess = self.sourceFilesPSDformat;
 
                 if (UI.filterSourceFilesCheckbox.PNG.value === true) {
                     UI.filterSourceFilesCheckbox.PNG.onClick();
@@ -460,7 +460,7 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
 
         if (UI.filterSourceFilesCheckbox.PNG.value === true) {
 
-            self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesUnfiltered);
+            self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesPSDformat);
 
             var filesToInfoUI =  self.sourceFilesPNG;
             self.sourceFilesToProcess =  self.sourceFilesPNG;
@@ -485,10 +485,10 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
                 var filesToInfoUI = self.sourceFilesByExpression;
                 self.sourceFilesToProcess = self.sourceFilesByExpression;
 
-            } else {//todo
+            } else {
 
-                var filesToInfoUI = self.sourceFilesUnfiltered;
-                self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+                var filesToInfoUI = self.sourceFilesPSDformat;
+                self.sourceFilesToProcess = self.sourceFilesPSDformat;
 
             }
 
@@ -511,14 +511,14 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 
             if (UI.filterSourceFilesByExpression.input.text !== "") {
 
-                self.sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesUnfiltered);
+                self.sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesPSDformat);
 
                 var filesToInfoUI = self.sourceFilesByExpression;
                 self.sourceFilesToProcess = self.sourceFilesByExpression;
 
                 if (UI.filterSourceFilesCheckbox.PNG.value === true) {
 
-                    self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesUnfiltered);
+                    self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesPSDformat);
     
                     self.sourceFilesPNGandByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesPNG);
     
@@ -527,12 +527,12 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 
                 } else if (UI.filterSourceFilesByExpression.input.text === "") {
 
-                    filesToInfoUI = self.sourceFilesUnfiltered;
-                    self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+                    filesToInfoUI = self.sourceFilesPSDformat;
+                    self.sourceFilesToProcess = self.sourceFilesPSDformat;
 
                     if (UI.filterSourceFilesCheckbox.PNG.value === true) {
 
-                        self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesUnfiltered);
+                        self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesPSDformat);
                         filesToInfoUI = self.sourceFilesPNG;
                         self.sourceFilesToProcess = self.sourceFilesPNG;
                     }
@@ -550,8 +550,8 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 
             } else {
 
-                var filesToInfoUI = self.sourceFilesUnfiltered;
-                self.sourceFilesToProcess = self.sourceFilesUnfiltered;
+                var filesToInfoUI = self.sourceFilesPSDformat;
+                self.sourceFilesToProcess = self.sourceFilesPSDformat;
 
             }
 
@@ -1206,7 +1206,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn);
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn);//Todo
 
             }
             
