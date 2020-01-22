@@ -505,7 +505,14 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 
     UI.filterSourceFilesCheckbox.byExpression.onClick = function() {
 
-        filterSourceFilesByExpressionEnabled(UI);
+        if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
+
+            UI.filterSourceFilesByExpression.enabled = true;
+        
+        } else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
+        
+            UI.filterSourceFilesByExpression.enabled = false;
+        }
         
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
@@ -832,15 +839,6 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function filterSourceFilesByExpressionEnabled(UI) {
-    if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
-        UI.filterSourceFilesByExpression.enabled = true;
-    }
-    else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
-        UI.filterSourceFilesByExpression.enabled = false;
-    }
-}
-
 function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFilesCheckbox_byExpression, UI_filterSourceFilesCheckbox_PNG) {
 
     var sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPSDformat);
@@ -849,29 +847,31 @@ function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFiles
 
     var sourceFilesPNGandByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPNG);
 
-    
-    var sourceFilesToProcess = filterFilesToProcess(UI_filterSourceFilesCheckbox_byExpression, UI, UI_filterSourceFilesCheckbox_PNG, sourceFilesByExpression, sourceFilesPNGandByExpression, sourceFilesPSDformat, sourceFilesPNG);
 
-    return sourceFilesToProcess;
-}
-
-function filterFilesToProcess(UI_filterSourceFilesCheckbox_byExpression, UI, UI_filterSourceFilesCheckbox_PNG, sourceFilesByExpression, sourceFilesPNGandByExpression, sourceFilesPSDformat, sourceFilesPNG) {
     if ((UI_filterSourceFilesCheckbox_byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) {
+
         if (UI_filterSourceFilesCheckbox_PNG.value === false) {
+
             var sourceFilesToProcess = sourceFilesByExpression;
         }
         else if (UI_filterSourceFilesCheckbox_PNG.value === true) {
+
             var sourceFilesToProcess = sourceFilesPNGandByExpression;
         }
+
     }
     else if ((UI_filterSourceFilesCheckbox_byExpression.value === false) || (UI.filterSourceFilesByExpression.input.text === "")) {
+
         if (UI_filterSourceFilesCheckbox_PNG.value === false) {
+
             var sourceFilesToProcess = sourceFilesPSDformat;
         }
         else if (UI_filterSourceFilesCheckbox_PNG.value === true) {
+
             var sourceFilesToProcess = sourceFilesPNG;
         }
     }
+
     return sourceFilesToProcess;
 }
 
