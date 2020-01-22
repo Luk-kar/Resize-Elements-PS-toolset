@@ -458,43 +458,9 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
 
     UI.filterSourceFilesCheckbox.PNG.onClick = function() {
 
-        if (UI.filterSourceFilesCheckbox.PNG.value === true) {
-
-            self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesPSDformat);
-
-            var filesToInfoUI =  self.sourceFilesPNG;
-            self.sourceFilesToProcess =  self.sourceFilesPNG;
-
-            if ((UI.filterSourceFilesCheckbox.byExpression.value === true) && typeof (self.sourceFilesByExpression !== "undefined")) {
-
-                if (UI.filterSourceFilesByExpression.input.text !== "") {
-                    self.sourceFilesPNGandByExpression = filterFilesByPNG(self.sourceFilesByExpression);
-
-                    filesToInfoUI = self.sourceFilesPNGandByExpression;
-                    self.sourceFilesToProcess = self.sourceFilesPNGandByExpression;
-                } 
-
-            }
-
-            infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
-
-        } else if (UI.filterSourceFilesCheckbox.PNG.value === false) {
-
-            if ((UI.filterSourceFilesCheckbox.byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) {
-
-                var filesToInfoUI = self.sourceFilesByExpression;
-                self.sourceFilesToProcess = self.sourceFilesByExpression;
-
-            } else {
-
-                var filesToInfoUI = self.sourceFilesPSDformat;
-                self.sourceFilesToProcess = self.sourceFilesPSDformat;
-
-            }
-
-            infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
-
-        }
+        self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
+        
+        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
     }
 }
 
@@ -523,10 +489,13 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() {
     
     var UI = this.UI;
+    var self = this;
 
     UI.filterSourceFilesByExpression.input.onChanging = function() {
 
-        UI.filterSourceFilesCheckbox.byExpression.onClick();
+        self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
+        
+        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
     }
 
