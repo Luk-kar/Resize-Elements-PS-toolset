@@ -397,13 +397,8 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 self.sourceFilesPSDformat = null; 
                 self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
-                self.sourceFilesToProcess = self.sourceFilesPSDformat;
 
-                if (UI.filterSourceFilesCheckbox.PNG.value === true) {
-                    UI.filterSourceFilesCheckbox.PNG.onClick();
-                } else if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
-                    UI.filterSourceFilesCheckbox.byExpression.onClick();
-                }
+                self.sourceFilesToProcess = self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
 
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
 
