@@ -505,61 +505,12 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 
     UI.filterSourceFilesCheckbox.byExpression.onClick = function() {
 
-        if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
-
-            UI.filterSourceFilesByExpression.enabled = true;
-
-            if (UI.filterSourceFilesByExpression.input.text !== "") {
-
-                self.sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesPSDformat);
-
-                var filesToInfoUI = self.sourceFilesByExpression;
-                self.sourceFilesToProcess = self.sourceFilesByExpression;
-
-                if (UI.filterSourceFilesCheckbox.PNG.value === true) {
-
-                    self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesPSDformat);
-    
-                    self.sourceFilesPNGandByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, self.sourceFilesPNG);
-    
-                    filesToInfoUI = self.sourceFilesPNGandByExpression;
-                    self.sourceFilesToProcess = self.sourceFilesPNGandByExpression;
-
-                } else if (UI.filterSourceFilesByExpression.input.text === "") {
-
-                    filesToInfoUI = self.sourceFilesPSDformat;
-                    self.sourceFilesToProcess = self.sourceFilesPSDformat;
-
-                    if (UI.filterSourceFilesCheckbox.PNG.value === true) {
-
-                        self.sourceFilesPNG = filterFilesByPNG(self.sourceFilesPSDformat);
-                        filesToInfoUI = self.sourceFilesPNG;
-                        self.sourceFilesToProcess = self.sourceFilesPNG;
-                    }
-                }
-                
-                infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
-            }
-            
-        } else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
-
-            if (UI.filterSourceFilesCheckbox.PNG.value === true) {
-
-                var filesToInfoUI = self.sourceFilesPNG;
-                self.sourceFilesToProcess = self.sourceFilesPNG;
-
-            } else {
-
-                var filesToInfoUI = self.sourceFilesPSDformat;
-                self.sourceFilesToProcess = self.sourceFilesPSDformat;
-
-            }
-
-            infoFilesUIUpdate(filesToInfoUI, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
-
-        }
+        filterSourceFilesByExpressionEnabled(UI);
+        
+        self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
+        
+        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
     }
-
 }
 
 EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() {
@@ -879,6 +830,49 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     UI.btnCancel.onClick = function() {
         UI.mainWindow.close();
     }
+}
+
+function filterSourceFilesByExpressionEnabled(UI) {
+    if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
+        UI.filterSourceFilesByExpression.enabled = true;
+    }
+    else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
+        UI.filterSourceFilesByExpression.enabled = false;
+    }
+}
+
+function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFilesCheckbox_byExpression, UI_filterSourceFilesCheckbox_PNG) {
+
+    var sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPSDformat);
+
+    var sourceFilesPNG = filterFilesByPNG(sourceFilesPSDformat);
+
+    var sourceFilesPNGandByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPNG);
+
+    
+    var sourceFilesToProcess = filterFilesToProcess(UI_filterSourceFilesCheckbox_byExpression, UI, UI_filterSourceFilesCheckbox_PNG, sourceFilesByExpression, sourceFilesPNGandByExpression, sourceFilesPSDformat, sourceFilesPNG);
+
+    return sourceFilesToProcess;
+}
+
+function filterFilesToProcess(UI_filterSourceFilesCheckbox_byExpression, UI, UI_filterSourceFilesCheckbox_PNG, sourceFilesByExpression, sourceFilesPNGandByExpression, sourceFilesPSDformat, sourceFilesPNG) {
+    if ((UI_filterSourceFilesCheckbox_byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) {
+        if (UI_filterSourceFilesCheckbox_PNG.value === false) {
+            var sourceFilesToProcess = sourceFilesByExpression;
+        }
+        else if (UI_filterSourceFilesCheckbox_PNG.value === true) {
+            var sourceFilesToProcess = sourceFilesPNGandByExpression;
+        }
+    }
+    else if ((UI_filterSourceFilesCheckbox_byExpression.value === false) || (UI.filterSourceFilesByExpression.input.text === "")) {
+        if (UI_filterSourceFilesCheckbox_PNG.value === false) {
+            var sourceFilesToProcess = sourceFilesPSDformat;
+        }
+        else if (UI_filterSourceFilesCheckbox_PNG.value === true) {
+            var sourceFilesToProcess = sourceFilesPNG;
+        }
+    }
+    return sourceFilesToProcess;
 }
 
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
