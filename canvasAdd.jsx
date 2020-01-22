@@ -380,6 +380,8 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 plnFilterFilesEnabled(false, UI);
 
+                UI.pnlDestFold.title.enabled = false;
+
                 btnsRadDestFoldEnabled(false, UI);
 
                 btnChooseFilesDestFoldEnabled(false, UI);
@@ -398,7 +400,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 self.sourceFilesPSDformat = null; 
                 self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
 
-                self.sourceFilesToProcess = self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
+                self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
 
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
 
@@ -466,14 +468,7 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
 
     UI.filterSourceFilesCheckbox.byExpression.onClick = function() {
 
-        if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
-
-            UI.filterSourceFilesByExpression.enabled = true;
-        
-        } else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
-        
-            UI.filterSourceFilesByExpression.enabled = false;
-        }
+        filterSourceFilesCheckboxByExpressionEnabled(UI);
         
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
@@ -803,6 +798,15 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
+function filterSourceFilesCheckboxByExpressionEnabled(UI) {
+    if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
+        UI.filterSourceFilesByExpression.enabled = true;
+    }
+    else if (UI.filterSourceFilesCheckbox.byExpression.value === false) {
+        UI.filterSourceFilesByExpression.enabled = false;
+    }
+}
+
 function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFilesCheckbox_byExpression, UI_filterSourceFilesCheckbox_PNG) {
 
     var sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPSDformat);
@@ -869,7 +873,8 @@ function plnFilterFilesEnabled(trueFalse, UI) {
     if (trueFalse === true) {
 
         UI.filterSourceFilesCheckbox.enabled = true;
-        UI.filterSourceFilesCheckbox.byExpression.onClick();
+        UI.filterSourceFilesCheckbox.byExpression.enabled = true;
+        filterSourceFilesCheckboxByExpressionEnabled(UI); // set to true
 
     } else if (trueFalse === false){
 
