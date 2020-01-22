@@ -1085,13 +1085,13 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
 //Used later to dispaly names of opened files
 function docsOpenedNames() {
     
-    var docsNamesToInfoUI = new Array;
+    var activeDocs = new Array;
     
     for (var i = 0; i < app.documents.length; i++) {
-        docsNamesToInfoUI[i] = app.documents[i];
+        activeDocs[i] = app.documents[i];
     }
 
-    return docsNamesToInfoUI;
+    return activeDocs;
 }
 
 function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
@@ -1164,8 +1164,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
-        while (app.documents.length > 0) {
+        for (var i = 0; i < app.documents.length; i++) {
 
+            app.activeDocument = app.documents[i];
             var doc = app.activeDocument;
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
@@ -1177,7 +1178,14 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             addCanvas(addWidth, addHeight, units, anchor);
 
             doc.save();
-            doc.close();
+        }
+
+        var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
+
+        if (closeOpenedFilesConfirmation) {
+            while ( app.documents.length > 0) {
+                app.activeDocument.close();
+            }
         }
     
     //If you choose  radio button "Source folder"
