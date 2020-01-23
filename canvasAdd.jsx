@@ -336,12 +336,10 @@ EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
 
         UI.btnRadSourceFiles.chooseOpenedFiles.enabled = false;
 
-        UI.btnRadDestFold.same.value = true;
-        UI.btnAccept.enabled = false;
-
     } else if (app.documents.length > 0) {
 
         UI.btnRadSourceFiles.chooseOpenedFiles.notify();
+        UI.btnRadDestFold.same.notify();
 
         UI.numbOfActiveDocuments = app.documents.length; //Save later to use in summary alert
         
@@ -417,14 +415,6 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
-                if (sameChoosedSourceFolderAsBefore === false) {
-                    if (self.sourceFilesToProcess.length > 1) {
-                        alert("In folder are " + self.sourceFilesToProcess.length + " files");
-                    } else if (self.sourceFilesToProcess.length === 1) {
-                        alert("In folder is 1 file");
-                    }
-                }
-
                 if (typeof self.detinationFolder === "undefined") {
 
                     UI.btnRadDestFold.same.notify();
@@ -445,7 +435,14 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                     } else {
 
                         UI.btnRadDestFold.other.notify();
-
+                    }
+                }
+                
+                if (sameChoosedSourceFolderAsBefore === false) {
+                    if (self.sourceFilesToProcess.length > 1) {
+                        alert("In folder are " + self.sourceFilesToProcess.length + " files");
+                    } else if (self.sourceFilesToProcess.length === 1) {
+                        alert("In folder is 1 file");
                     }
                 }
             }
@@ -540,21 +537,21 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 
         var detinationFolderSelection = Folder.selectDialog("Select target folder to save files");
 
-        if (detinationFolderSelection === null) {// "undefined" exception to avoid bug
+        if (detinationFolderSelection === null) {
 
             if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
                 alert("You have not selected target folder");
                 self.detinationFolder = null; //to avoid bug
             } //else {if you have already have had selected folder destination, then it remains status quo}
 
-        } else if ( typeof self.sourceFolderPathRecent !== "undefined" && (detinationFolderSelection.toString() !== self.sourceFolderPathRecent.toString()) ) {//todo "undefined is not an object"
+        } else if ( detinationFolderSelection.toString() !== self.sourceFolderPathRecent.toString() ) {//todo "undefined is not an object"
 
             createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
             UI.pnlAddCanvas.enabled = true;
 
             self.detinationFolder = detinationFolderSelection;
-        } else if ( typeof self.sourceFolderPathRecent !== "undefined" && (detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString()) ) {//changing name of dest fold needed //todo
+        } else if ( detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString() ) {//changing name of dest fold needed //todo
 
             UI.btnRadDestFold.same.notify();
 
@@ -1182,7 +1179,14 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
             addCanvas(addWidth, addHeight, units, anchor);
 
-            doc.save();
+            //If you choose radio button "Add canvas in the same folder", saves the same files in original location
+            if (btnRadSameFolder.value === true) {
+                doc.save();
+
+            //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
+            } else if (btnRadDestFoldOther.value === true) {
+                saveInDestFolder(detinationFolder);
+            }
         }
 
         var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
@@ -1217,34 +1221,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
 
-                //Declaring name of saved file
-                var name = doc.name;
-
-                var path = detinationFolder;
-
-                var imageTypes = [
-                    [/.png$/, savePNG],
-                    [/.psd$/, savePSD],
-                    [/.jpg$/, saveJPEG],
-                    [/.tif$/, saveTIFF],
-                    [/.bmp$/, saveBMP],
-                    [/.gif$/, saveGIF],
-                ];
-
-                for( var j = 0 ; j < imageTypes.length; j++ ){
-                    if (name.match(imageTypes[j][0])) {
-                        var saveFile = File(path + "/" + name);
-                        if(saveFile.exists) {
-                            saveFile.remove();
-                        }
-                        (imageTypes[j][1])(saveFile);
-                        break;
-                    }
-                }
-                if (j === imageTypes.length) {
-
-                    throw new Error("Unhandled type for "+ name)
-                }
+                saveInDestFolder(detinationFolder);
             }
             doc.close();
                 
@@ -1310,6 +1287,40 @@ function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
     }
 
     return [ sumWidth, sumHeight ];
+}
+
+function saveInDestFolder(detinationFolder) {
+
+    var doc = app.activeDocument;
+
+    //Declaring name of saved file
+    var name = doc.name;
+
+    var path = detinationFolder;
+
+    var imageTypes = [
+        [/.png$/, savePNG],
+        [/.psd$/, savePSD],
+        [/.jpg$/, saveJPEG],
+        [/.tif$/, saveTIFF],
+        [/.bmp$/, saveBMP],
+        [/.gif$/, saveGIF],
+    ];
+
+    for( var j = 0 ; j < imageTypes.length; j++ ){
+        if (name.match(imageTypes[j][0])) {
+            var saveFile = File(path + "/" + name);
+            if(saveFile.exists) {
+                saveFile.remove();
+            }
+            (imageTypes[j][1])(saveFile);
+            break;
+        }
+    }
+    if (j === imageTypes.length) {
+
+        throw new Error("Unhandled type for "+ name)
+    }
 }
 
 function savePNG(saveFile) {
