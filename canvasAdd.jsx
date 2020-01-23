@@ -312,7 +312,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
             
             if (UI.btnRadDestFold.other.value === true) {
 
-                UI.btnRadDestFold.other.notify();
+                UI.btnRadDestFold.other.onClick();
 
             }
 
@@ -982,7 +982,7 @@ function checkingIfItIsTheSameSourceFolderAsBefore(self) {
     return sameChoosedSourceFolderAsBefore;
 }
 
-function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self_sourceFolderPathRecent) {
+function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self_sourceFolderPathRecent) { // <--- used only in onBtnChooseFilesDestFold
 
     if ( detinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
 
