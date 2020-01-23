@@ -328,14 +328,16 @@ EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
 
     plnFilterFilesEnabled(false, UI);
 
+    var openedDocsToProcess = docsOpenedNames().length;
+
     //Start setting. If there is no active docs, set to choose folder
-    if (app.documents.length === 0) {
+    if (openedDocsToProcess === 0) {
 
         UI.btnRadSourceFiles.chooseFilesSourceFold.notify();
 
         UI.btnRadSourceFiles.chooseOpenedFiles.enabled = false;
 
-    } else if (app.documents.length > 0) {
+    } else if (openedDocsToProcess > 0) {
 
         UI.btnRadSourceFiles.chooseOpenedFiles.notify();
         UI.btnRadDestFold.same.notify();
@@ -1106,11 +1108,24 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
 
 //Used later to dispaly names of opened files
 function docsOpenedNames() {
+
+    var imageTypes = [
+    /.png$/,
+    /.psd$/,
+    /.jpg$/,
+    /.tif$/,
+    /.bmp$/,
+    /.gif$/,
+    ];
     
     var activeDocs = new Array;
     
-    for (var i = 0; i < app.documents.length; i++) {
-        activeDocs[i] = app.documents[i];
+    for (var i = 0; i < app.documents.length; i++) { //bug if you have unsaved file with name with extension
+        for ( var j = 0 ; j < imageTypes.length; j++ ) {
+            if ( app.documents[i].name.match(imageTypes[j]) ) {
+                activeDocs.push(app.documents[i]);
+            };
+        }
     }
 
     return activeDocs;
@@ -1199,14 +1214,23 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
             addCanvas(addWidth, addHeight, units, anchor);
 
+            //var previousSaveTime = doc.path.modified; //todo
+
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
                 doc.save();
+                //var savedFile
 
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
                 saveInDestFolder(detinationFolder);
             }
+
+            /*var currentSaveTime = doc.path.modified;
+            var isFileSaved = checkTime(previousSaveTime, currentSaveTime, savedFile);
+            if (isFileSaved === false) {
+                alert("file wasn't saved")
+            }*/
         }
 
         var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
@@ -1395,6 +1419,29 @@ function saveGIF(saveFile) {
     var gifSaveOptions = new GIFSaveOptions();
     activeDocument.saveAs(gifFile, gifSaveOptions);
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
+
+//Check the time of PREVIOUS save of the file against the save time of the CURRENT file
+function checkTime(previousSaveTime, currentSaveTime, savedFile) {
+    if (previousSaveTime < currentSaveTime) {
+    //Call the file exists function
+    var isFileSaved = imageExistsValidation(savedFile);
+    } else {
+    var isFileSaved = false;
+    }
+
+    return isFileSaved;
+}
+
+//Check to see if the file actually exists
+function imageExistsValidation(savedFile) {
+    if (savedFile.exists) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 main();
