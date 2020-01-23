@@ -258,20 +258,19 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         btnsRadDestFoldEnabled(true, UI);
 
-        if (UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
-            btnChooseFilesDestFoldEnabled(false, UI);
-            
-        } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder...") {
-            btnChooseFilesDestFoldEnabled(true, UI);
-        }
+        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
 
         if (UI.pnlAddCanvas.enabled === false) {
             UI.pnlAddCanvas.enabled = true;
         }
 
+        if (UI.btnRadDestFold.other.value === true) {
+
+            UI.btnRadDestFold.other.onClick();
+        } 
+
         infoFilesUIUpdate(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
     }
 }
 
@@ -544,23 +543,22 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
                 self.detinationFolder = null; //to avoid bug
             } //else {if you have already have had selected folder destination, then it remains status quo}
 
-        } else if ( detinationFolderSelection.toString() !== self.sourceFolderPathRecent.toString() ) {//todo "undefined is not an object"
+        } else if (detinationFolderSelection !== null) {
 
-            createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
-            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
-            UI.pnlAddCanvas.enabled = true;
+            if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true ) {
 
-            self.detinationFolder = detinationFolderSelection;
-        } else if ( detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString() ) {//changing name of dest fold needed //todo
+                self.detinationFolder = detinationFolderSelection;
+                createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
+                UI.pnlAddCanvas.enabled = true;
 
-            UI.btnRadDestFold.same.notify();
+                checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
 
-            createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
-            alert("Source folder and target folder are the same.\nNext time choose more wisely");
-            
-            self.detinationFolder = null; //to avoid bug
+            } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
+
+                self.detinationFolder = checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self.sourceFolderPathRecent);
+
+            }
         }
-
     }
 }
 
@@ -982,6 +980,28 @@ function checkingIfItIsTheSameSourceFolderAsBefore(self) {
         sameChoosedSourceFolderAsBefore = true;
     }
     return sameChoosedSourceFolderAsBefore;
+}
+
+function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self_sourceFolderPathRecent) {
+
+    if ( detinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
+
+    createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
+    checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+    UI.pnlAddCanvas.enabled = true;
+
+    self_detinationFolder = detinationFolderSelection;
+    } else if ( detinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
+
+    UI.btnRadDestFold.same.notify();
+
+    createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
+    alert("Source folder and target folder are the same.\nNext time choose more wisely");
+
+    self_detinationFolder = null; //to avoid bug
+    }
+
+    return self_detinationFolder;
 }
 
 /**
