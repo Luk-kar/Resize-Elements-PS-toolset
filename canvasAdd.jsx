@@ -254,11 +254,16 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         plnFilterFilesEnabled(false, UI);
 
-        UI.pnlDestFold.title.enabled = false;
+        UI.pnlDestFold.title.enabled = true;
 
-        btnsRadDestFoldEnabled(false, UI);
-          
-        btnChooseFilesDestFoldEnabled(false, UI);
+        btnsRadDestFoldEnabled(true, UI);
+
+        if (UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
+            btnChooseFilesDestFoldEnabled(false, UI);
+            
+        } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder...") {
+            btnChooseFilesDestFoldEnabled(true, UI);
+        }
 
         if (UI.pnlAddCanvas.enabled === false) {
             UI.pnlAddCanvas.enabled = true;
@@ -461,7 +466,7 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function() { //todo
+EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function() { 
 
     var UI = this.UI;
     var self = this;
@@ -542,14 +547,14 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
                 self.detinationFolder = null; //to avoid bug
             } //else {if you have already have had selected folder destination, then it remains status quo}
 
-        } else if (detinationFolderSelection.toString() !== self.sourceFolderPathRecent.toString()) {
+        } else if ( typeof self.sourceFolderPathRecent !== "undefined" && (detinationFolderSelection.toString() !== self.sourceFolderPathRecent.toString()) ) {//todo "undefined is not an object"
 
             createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
             checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
             UI.pnlAddCanvas.enabled = true;
 
             self.detinationFolder = detinationFolderSelection;
-        } else if (detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString()) {
+        } else if ( typeof self.sourceFolderPathRecent !== "undefined" && (detinationFolderSelection.toString() === self.sourceFolderPathRecent.toString()) ) {//changing name of dest fold needed //todo
 
             UI.btnRadDestFold.same.notify();
 
@@ -914,7 +919,7 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
 
     var sourceFilesFiltered = new Array;
 
-    for (var i = 0; i < sourceFilesUnfiltered.length; i++) { //todo undefined is not a object
+    for (var i = 0; i < sourceFilesUnfiltered.length; i++) { 
         if (sourceFilesUnfiltered[i] instanceof File) {
             var sourceFilePathString = sourceFilesUnfiltered[i].toString();
 
@@ -1171,7 +1176,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn);//Todo
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn);
 
             }
             
