@@ -5,7 +5,7 @@
 
 #target photoshop
 
-$.level = 1; // Debugging level
+$.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
 
 function GuiBuilder (){
     this.baseLayout();
@@ -325,24 +325,25 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
 EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
     var UI = this.UI;
+    var self = this;
 
     plnFilterFilesEnabled(false, UI);
 
-    var openedDocsToProcess = docsOpenedNames().length;
+    UI.numbOfActiveDocuments = docsOpenedNames().length; //Save later to use in summary alert
+    self.openedDocs = docsOpenedNames(); //Use later to repopening docs in //todo do like in source folder
 
     //Start setting. If there is no active docs, set to choose folder
-    if (openedDocsToProcess === 0) {
+    if (UI.numbOfActiveDocuments === 0) {
 
         UI.btnRadSourceFiles.chooseFilesSourceFold.notify();
 
         UI.btnRadSourceFiles.chooseOpenedFiles.enabled = false;
 
-    } else if (openedDocsToProcess > 0) {
+    } else if (UI.numbOfActiveDocuments > 0) {
 
         UI.btnRadSourceFiles.chooseOpenedFiles.notify();
         UI.btnRadDestFold.same.notify();
-
-        UI.numbOfActiveDocuments = app.documents.length; //Save later to use in summary alert
+        btnChooseFilesDestFoldEnabled(false, UI);
         
     }
 }
@@ -771,6 +772,9 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             else if (UI.numbOfActiveDocuments === 1) {
                 alert("You added canvas to only 1 file");
             }
+            alert(self.openedDocs);
+
+            confrimDialDoYouWantCloseOpenedFiles(self.openedDocs);
 
         } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
@@ -797,6 +801,27 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
 
     UI.btnCancel.onClick = function() {
         UI.mainWindow.close();
+    }
+}
+
+function confrimDialDoYouWantCloseOpenedFiles(self_openedDocs) {
+
+    var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
+    if (closeOpenedFilesConfirmation) {
+        while (app.documents.length > 0) {
+            app.activeDocument.close();
+        }
+    }
+    else {
+        alert(self_openedDocs);
+        for (i = 0; i < self_openedDocs.length; i++) {
+            
+            app.activeDocument = self_openedDocs[i];
+            app.activeDocument.close();
+
+            alert(File(self_openedDocs[i]));//todo
+            //open( self_openedDocs[i].getFiles() );
+        }
     }
 }
 
@@ -1109,26 +1134,30 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
 //Used later to dispaly names of opened files
 function docsOpenedNames() {
 
-    var imageTypes = [
-    /.png$/,
-    /.psd$/,
-    /.jpg$/,
-    /.tif$/,
-    /.bmp$/,
-    /.gif$/,
-    ];
-    
-    var activeDocs = new Array;
-    
-    for (var i = 0; i < app.documents.length; i++) { //bug if you have unsaved file with name with extension
-        for ( var j = 0 ; j < imageTypes.length; j++ ) {
-            if ( app.documents[i].name.match(imageTypes[j]) ) {
-                activeDocs.push(app.documents[i]);
-            };
+    var openedDocsToProcess = new Array;
+    var failed = false;
+    var temp;
+  
+    for (var i = 0; i < app.documents.length; i++) {
+      
+        try 
+        {
+            failed = false;
+            $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+            temp = app.documents[i].fullName; //catching "Error 8103: The document has not yet been saved."
+            $.level = 1; //Set to level: 1 to reset debug
+        }
+        catch(e)
+        {
+            failed = true;
+        }
+        if(!failed)
+        {
+            openedDocsToProcess.push(app.documents[i]);
         }
     }
-
-    return activeDocs;
+  
+    return openedDocsToProcess;
 }
 
 function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
@@ -1201,9 +1230,11 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
-        for (var i = 0; i < app.documents.length; i++) {
+        var docsToProcess = docsOpenedNames();
 
-            app.activeDocument = app.documents[i];
+        for (var i = 0; i < docsToProcess.length; i++) {
+
+            app.activeDocument = docsToProcess[i]; //setting active document from filtered files
             var doc = app.activeDocument;
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
@@ -1214,30 +1245,21 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
             addCanvas(addWidth, addHeight, units, anchor);
 
-            //var previousSaveTime = doc.path.modified; //todo
+            var openTime = doc.path.modified;
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
                 doc.save();
-                //var savedFile
 
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
                 saveInDestFolder(detinationFolder);
             }
 
-            /*var currentSaveTime = doc.path.modified;
-            var isFileSaved = checkTime(previousSaveTime, currentSaveTime, savedFile);
+            var currentSaveTime = doc.path.modified;
+            var isFileSaved = checkTime(openTime, currentSaveTime, doc);
             if (isFileSaved === false) {
-                alert("file wasn't saved")
-            }*/
-        }
-
-        var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
-
-        if (closeOpenedFilesConfirmation) {
-            while ( app.documents.length > 0) {
-                app.activeDocument.close();
+                alert("file wasn't saved");
             }
         }
     
@@ -1437,7 +1459,8 @@ function checkTime(previousSaveTime, currentSaveTime, savedFile) {
 
 //Check to see if the file actually exists
 function imageExistsValidation(savedFile) {
-    if (savedFile.exists) {
+    var file = File(savedFile.path);
+    if (file.exists) {
         return true;
     } else {
         return false;
