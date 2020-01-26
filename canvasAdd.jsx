@@ -330,7 +330,9 @@ EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
     plnFilterFilesEnabled(false, UI);
 
     UI.numbOfActiveDocuments = docsOpenedNames().length; //Save later to use in summary alert
-    self.openedDocs = docsOpenedNames(); //Use later to repopening docs in //todo do like in source folder
+
+    self.openedDocsToReopen = gettingFilesOpenedDocsToReopen(); // To avoid bug with unability with "saving as" opened files again after evoking script again
+
 
     //Start setting. If there is no active docs, set to choose folder
     if (UI.numbOfActiveDocuments === 0) {
@@ -772,9 +774,8 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             else if (UI.numbOfActiveDocuments === 1) {
                 alert("You added canvas to only 1 file");
             }
-            alert(self.openedDocs);
 
-            confrimDialDoYouWantCloseOpenedFiles(self.openedDocs);
+            confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
 
         } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
@@ -804,25 +805,35 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function confrimDialDoYouWantCloseOpenedFiles(self_openedDocs) {
+function gettingFilesOpenedDocsToReopen() {
+
+    var openedDocsToGetFiles = docsOpenedNames();
+    var openedDocsToReopen = new Array;
+    for (var i = 0; i < openedDocsToGetFiles.length; i++) {
+        openedDocsToReopen.push(openedDocsToGetFiles[i].fullName);
+    }
+
+    return openedDocsToReopen;
+}
+
+function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
 
     var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
-    if (closeOpenedFilesConfirmation) {
-        while (app.documents.length > 0) {
-            app.activeDocument.close();
-        }
-    }
-    else {
-        alert(self_openedDocs);
-        for (i = 0; i < self_openedDocs.length; i++) {
-            
-            app.activeDocument = self_openedDocs[i];
-            app.activeDocument.close();
 
-            alert(File(self_openedDocs[i]));//todo
-            //open( self_openedDocs[i].getFiles() );
+    for (var i = 0; i < openedDocs.length; i++) {
+
+        var activeDoc = openedDocs[i];
+        activeDoc = app.activeDocument;
+        activeDoc.close();
+    }
+
+    // To avoid bug with unability with "saving as" opened files again after evoking script again
+    if (!closeOpenedFilesConfirmation) {
+        for (var i = 0; i < openedDocs.length; i++) {
+            open(openedDocs[i]);
         }
     }
+
 }
 
 function filterSourceFilesCheckboxByExpressionEnabled(UI) {
