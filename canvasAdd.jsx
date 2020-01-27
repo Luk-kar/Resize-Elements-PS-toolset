@@ -9,14 +9,37 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 function GuiBuilder (){
     this.baseLayout();
+    this.images();
 }
 
 GuiBuilder.prototype.baseLayout = function() {
+
     //Creating groups to populate with main UI
     this.mainWindow = new Window("dialog", "Add canvas");
+
     this.grpMain = this.mainWindow.add("group")
+
     this.grpInfo = createGroupUI(this.grpMain, "column", "left");
     this.panelWidth = 40; // Do not use creation property size in px for panels due to issues with bugs
+
+}
+
+GuiBuilder.prototype.images = function() {
+
+    var scriptPath = $.fileName;
+    var imageFolderDestination = (scriptPath.toString().replace(/\\/g, '/').slice(0, -13) + "/images/"); // -13 is the lenght of the script file name
+
+    //Image: InfoHover.png
+    this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
+
+    //Image: ConstrPropFalse.png and ConstrPropTrue.png
+    this.imageCnstrnsProportionFalse = File(imageFolderDestination + "ConstrPropFalse.png");
+    this.imageCnstrnsProportionTrue = File(imageFolderDestination + "ConstrPropTrue.png");
+
+    //Image: imageAnchorTrue.png and imageAnchorFalse.png
+    this.imageAnchorTrue = File(imageFolderDestination + "anchorPointerTrue.png");
+    this.imageAnchorFalse = File(imageFolderDestination + "anchorPointerFalse.png");
+
 }
 
 GuiBuilder.prototype.buildPanelSourceFiles = function() {
@@ -54,15 +77,17 @@ GuiBuilder.prototype.buildPanelSourceFilesFilter = function() {
     this.filterSourceFilesCheckbox.byExpression = this.filterSourceFilesCheckbox.add("checkbox", undefined, "filter files by expression");
 
 
-    this.filterSourceFilesByExpression = this.plnFilterFiles.add("group"); //Why it is not part of this.filterSourceFilesCheckbox.byExpression, thou ask? When you do enabled property of pervious one and this one, they have to be sperate bocouse they are invoked seperatly. 
+    this.filterSourceFilesByExpression = this.plnFilterFiles.add("group"); //Why it is not part of this.filterSourceFilesCheckbox.byExpression, thou ask? Becouse only checkbox of filterSourceFilesCheckbox.byExpression enable or disable this group
         //Create statictext
         this.filterSourceFilesByExpression.title = this.filterSourceFilesByExpression.add("statictext", undefined, "Filter by:");
-        //CreateeditText
+        //Create editText
         this.filterSourceFilesByExpression.input = this.filterSourceFilesByExpression.add("edittext", undefined, "");
         this.filterSourceFilesByExpression.input.characters = 30;
 
+        this.filterSourceFilesByExpression.imageTooltip = this.filterSourceFilesByExpression.add("image", undefined, this.imageInfHov);
+
         this.filterSourceFilesByExpression.panelWidth = this.filterSourceFilesByExpression.add("statictext", undefined, "");
-        this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth -28; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+        this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth -32; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 
 }
 
@@ -118,12 +143,7 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                 this.grpWidth.unitsDropDown = this.grpWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
                 this.grpWidth.unitsDropDown.selection = 0;
 
-                //Crating path to image folder
-                var scriptPath = $.fileName;
-                var imageFolderDestination = (scriptPath.toString().replace(/\\/g, '/').slice(0, -13) + "/images/"); // -13 is the lenght of the script file name
-
-                //Image: InfoHover.png
-                this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
+                //Crating tooltip
                 this.grpWidth.imageTooltip = this.grpWidth.add("image", undefined, this.imageInfHov);
 
             //Group height
@@ -142,10 +162,6 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                 this.grpHeight.imageTooltip = this.grpHeight.add("image", undefined, this.imageInfHov);
 
         //Graphic element proportions constrains (true, false)
-
-            //Uplaoding constrains images next Width and Height dialog groups
-            this.imageCnstrnsProportionFalse = File(imageFolderDestination + "ConstrPropFalse.png");
-            this.imageCnstrnsProportionTrue = File(imageFolderDestination + "ConstrPropTrue.png");
 
             //Add constrain image next to dialog
             this.grpDlgUnitValImage = this.grpUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
@@ -169,10 +185,6 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
         this.grpAnchor.boxBtns.line001 = this.grpAnchor.boxBtns.add("group");
         this.grpAnchor.boxBtns.line002 = this.grpAnchor.boxBtns.add("group");
         this.grpAnchor.boxBtns.line003 = this.grpAnchor.boxBtns.add("group");
-
-            //Image: imageAnchorTrue.png and imageAnchorFalse.png
-            this.imageAnchorTrue = File(imageFolderDestination + "anchorPointerTrue.png");
-            this.imageAnchorFalse = File(imageFolderDestination + "anchorPointerFalse.png");
 
             //Adding 001 line of buttons
             this.anchorPositionTOPLEFT = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
@@ -486,6 +498,10 @@ EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() 
     
     var UI = this.UI;
     var self = this;
+
+    UI.filterSourceFilesByExpression.imageTooltip.helpTip = "You can use regular expression (RegExp), but be cautious. Wrong syntax input cause disturbance of functioning of the script.\n" +
+                                                            "To avoid that, copy and paste well defined expression in to input dialog.\n" +
+                                                            "If you want to check expression, enter website: https://regex101.com/ ";
 
     UI.filterSourceFilesByExpression.input.onChanging = function() {
 
