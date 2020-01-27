@@ -954,9 +954,12 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
 
     for (var i = 0; i < sourceFilesUnfiltered.length; i++) { 
         if (sourceFilesUnfiltered[i] instanceof File) {
+            
             var sourceFilePathString = sourceFilesUnfiltered[i].toString();
 
-            if (decodeURIComponent(sourceFilePathString).match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
+            var sourceFileToMatch = decodeURIComponent(sourceFilePathString).match(/[^\/]+$/g).toString();; //match all characters from last "/" occurence. //ToString() to enabled be process by match() method
+
+            if (sourceFileToMatch.match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
 
                 sourceFilesFiltered[i] = sourceFilePathString; //You have to do in this way (not use push method), becouse later you need index value to match certain string with certain file in addingFilteredFilesToSourceFiles();
             } else {
@@ -989,7 +992,7 @@ function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFilt
 
 function filterFilesByExpression(string, unfilteredFiles) {
 
-    var string = string
+    var string = string;
 
     var regex = new RegExp(string);
     var properFilesByExpression = regex;
