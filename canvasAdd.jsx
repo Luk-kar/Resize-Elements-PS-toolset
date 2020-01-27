@@ -7,7 +7,34 @@
 
 $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
 
-function GuiBuilder (){
+function appDataBuilder () {
+
+    var listFile = createListFilePath();
+
+    buildListFilesIfItDoesntExists(listFile);
+}
+
+function createListFilePath() {
+    
+    var scriptPath = $.fileName;
+    var scriptFolder = scriptPath.toString().replace(/\\/g, '/').match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash"
+    var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
+    return listFile;
+}
+
+function buildListFilesIfItDoesntExists(listFile) {
+
+    if (!listFile.exists) {
+
+        var a = listFile;
+        a.open("w");
+        a.writeln("Processed files list:");
+        a.writeln("");
+        a.close();
+    }
+}
+
+function GuiBuilder() {
     this.baseLayout();
     this.images();
 }
@@ -27,7 +54,7 @@ GuiBuilder.prototype.baseLayout = function() {
 GuiBuilder.prototype.images = function() {
 
     var scriptPath = $.fileName;
-    var imageFolderDestination = (scriptPath.toString().replace(/\\/g, '/').slice(0, -13) + "/images/"); // -13 is the lenght of the script file name
+    var imageFolderDestination = scriptPath.toString().replace(/\\/g, '/').match(/^(.*[\\\/])/g) + "/images/"; // match(/^(.*[\\\/])/g) "Select everything before the last forward slash"
 
     //Image: InfoHover.png
     this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
@@ -776,11 +803,27 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
+        var listFile = createListFilePath();
+        var b = listFile;
+        var date = new Date;
+
+        b.open("a");
+        b.writeln("==== " + date + " ============================================================================================================");
+        b.writeln("");
+        b.close();
+
         changeFileAndSave(self.sourceFilesToProcess, self.detinationFolder, 
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
             self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn.selection.toString());
+
+        var listFile = createListFilePath();
+        var d = listFile;
+
+        d.open("a");
+        d.writeln("");
+        d.close();    
         
         if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
@@ -863,11 +906,13 @@ function filterSourceFilesCheckboxByExpressionEnabled(UI) {
 
 function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFilesCheckbox_byExpression, UI_filterSourceFilesCheckbox_PNG) {
 
-    var sourceFilesByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPSDformat);
+    var regex = convertStringIntoRegex(UI.filterSourceFilesByExpression.input);
+
+    var sourceFilesByExpression = filterFilesByExpression(regex, sourceFilesPSDformat);
 
     var sourceFilesPNG = filterFilesByPNG(sourceFilesPSDformat);
 
-    var sourceFilesPNGandByExpression = filterFilesByExpression(UI.filterSourceFilesByExpression.input.text, sourceFilesPNG);
+    var sourceFilesPNGandByExpression = filterFilesByExpression(regex, sourceFilesPNG);
 
 
     if ((UI_filterSourceFilesCheckbox_byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) {
@@ -895,6 +940,22 @@ function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFiles
     }
 
     return sourceFilesToProcess;
+}
+
+function convertStringIntoRegex(input) {
+
+    var string = input.text;
+
+    try {
+        $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+        var regex = new RegExp(string);
+        $.level = 1; //Set to level: 1 to reset debug
+    }
+    catch (e) {
+        alert("The RegExpr is invalid:\n" + "/" + string + "/");
+    }
+    
+    return regex;
 }
 
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
@@ -1006,11 +1067,8 @@ function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFilt
 
 }
 
-function filterFilesByExpression(string, unfilteredFiles) {
+function filterFilesByExpression(regex, unfilteredFiles) {
 
-    var string = string;
-
-    var regex = new RegExp(string);
     var properFilesByExpression = regex;
 
     var sourceFilesFiltered = filteringSourceFiles( unfilteredFiles, properFilesByExpression);
@@ -1287,10 +1345,21 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             }
 
             var currentSaveTime = doc.path.modified;
+
+            var listFile = createListFilePath();
+            var c = listFile;
+
+            var docFullName = decodeURIComponent(doc.fullName).toString();
+            var docName = doc.name;
+            var scriptName = $.fileName.replace(/\\/g, '/').match(/[^\/]+$/).toString().slice(0, -4); // match(/[^\/]+$/g) "Select everything after the last forward slash" // .slice(0, -4) "rid off extension etc .png"
+            alert(scriptName);
+
             var isFileSaved = checkTime(openTime, currentSaveTime, doc);
-            if (isFileSaved === false) {
-                alert("file wasn't saved");
-            }
+
+            c.open("a");
+            c.writeln("*0 " + docName + " *1 " + docFullName + " *2 " + currentSaveTime + " *3 " + scriptName + " *4 " + "save :" + isFileSaved.toString() );
+            c.close();
+
         }
     
     //If you choose  radio button "Source folder"
@@ -1500,6 +1569,10 @@ function imageExistsValidation(savedFile) {
 main();
 
 function main() {
+
+    appDataBuilder();
+
+//-------------------------------------------------------------------------------------------------------------------------------
     
     var UI = new GuiBuilder();   
 
