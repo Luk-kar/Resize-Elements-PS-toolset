@@ -1,132 +1,154 @@
 Processed files list:
 
-==== Mon Jan 27 2020 17:26:43 GMT+0100 ============================================================================================================
+==== Tue Jan 28 2020 14:36:02 GMT+0100 ============================================================================================================
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 17:26:44 GMT+0100 *3 canvasAdd *4* save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 17:26:44 GMT+0100 *3 canvasAdd *4* save :false
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 17:26:44 GMT+0100 *3 canvasAdd *4* save :false
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 17:26:45 GMT+0100 *3 canvasAdd *4* save :true
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 17:26:45 GMT+0100 *3 canvasAdd *4* save :false
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 17:26:45 GMT+0100 *3 canvasAdd *4* save :false
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 17:26:46 GMT+0100 *3 canvasAdd *4* save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 17:26:46 GMT+0100 *3 canvasAdd *4* save :false
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 17:26:46 GMT+0100 *3 canvasAdd *4* save :false
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 17:26:47 GMT+0100 *3 canvasAdd *4* save :true
+000001 <0> dupa 009.tif <1> ~/Desktop/test folder/test source folder/dupa 009.tif <2> Tue Jan 28 2020 14:36:02 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 010.jpg <1> ~/Desktop/test folder/test source folder/dupa 010.jpg <2> Tue Jan 28 2020 14:36:03 GMT+0100 <3> add canvas <4> save :true
+000003 <0> janush.png <1> ~/Desktop/test folder/test source folder/janush.png <2> Tue Jan 28 2020 14:36:03 GMT+0100 <3> add canvas <4> save :false
+000004 <0> dupa 007.png <1> ~/Desktop/test folder/test source folder/dupa 007.png <2> Tue Jan 28 2020 14:36:04 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test source folder/dupa 004.psd <2> Tue Jan 28 2020 14:36:04 GMT+0100 <3> add canvas <4> save :false
+000006 <0> dupa 001.bmp <1> ~/Desktop/test folder/test source folder/dupa 001.bmp <2> Tue Jan 28 2020 14:36:04 GMT+0100 <3> add canvas <4> save :false
+000007 <0> gupa 002.psd <1> ~/Desktop/test folder/test source folder/gupa 002.psd <2> Tue Jan 28 2020 14:36:05 GMT+0100 <3> add canvas <4> save :true
+000008 <0> gupa 005.psd <1> ~/Desktop/test folder/test source folder/gupa 005.psd <2> Tue Jan 28 2020 14:36:05 GMT+0100 <3> add canvas <4> save :false
+000009 <0> dupa 006.psd <1> ~/Desktop/test folder/test source folder/dupa 006.psd <2> Tue Jan 28 2020 14:36:06 GMT+0100 <3> add canvas <4> save :true
+000010 <0> andrzej.tif <1> ~/Desktop/test folder/test source folder/andrzej.tif <2> Tue Jan 28 2020 14:36:06 GMT+0100 <3> add canvas <4> save :false
 
-==== Mon Jan 27 2020 17:30:29 GMT+0100 ============================================================================================================
+==== Tue Jan 28 2020 14:50:02 GMT+0100 ============================================================================================================
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 17:30:29 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 17:30:30 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 17:30:30 GMT+0100 *3 canvasAdd *4 save :false
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 17:30:30 GMT+0100 *3 canvasAdd *4 save :false
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 17:30:31 GMT+0100 *3 canvasAdd *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 17:30:31 GMT+0100 *3 canvasAdd *4 save :false
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 17:30:32 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 17:30:32 GMT+0100 *3 canvasAdd *4 save :false
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 17:30:32 GMT+0100 *3 canvasAdd *4 save :false
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 17:30:33 GMT+0100 *3 canvasAdd *4 save :true
+000001 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 14:50:03 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 14:50:03 GMT+0100 <3> add canvas <4> save :true
+==== Tue Jan 28 2020 14:50:58 GMT+0100 ============================================================================================================
 
-==== Mon Jan 27 2020 19:32:27 GMT+0100 ============================================================================================================
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 14:50:59 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 14:50:59 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 14:51:00 GMT+0100 <3> add canvas <4> save :true
+000004 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 14:51:00 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 14:51:01 GMT+0100 <3> add canvas <4> save :true
+000006 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 14:51:01 GMT+0100 <3> add canvas <4> save :true
+000007 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 14:51:01 GMT+0100 <3> add canvas <4> save :true
+000008 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 14:51:02 GMT+0100 <3> add canvas <4> save :true
+000009 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 14:51:02 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 14:51:03 GMT+0100 <3> add canvas <4> save :true
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:32:28 GMT+0100 *3  *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:32:28 GMT+0100 *3  *4 save :false
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:32:28 GMT+0100 *3  *4 save :false
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:32:29 GMT+0100 *3  *4 save :true
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:32:29 GMT+0100 *3  *4 save :false
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:32:29 GMT+0100 *3  *4 save :false
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:32:30 GMT+0100 *3  *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:32:30 GMT+0100 *3  *4 save :false
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:32:30 GMT+0100 *3  *4 save :false
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:32:31 GMT+0100 *3  *4 save :true
+==== Tue Jan 28 2020 14:52:02 GMT+0100 ============================================================================================================
 
-==== Mon Jan 27 2020 19:35:05 GMT+0100 ============================================================================================================
+000001 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 14:52:03 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 14:52:03 GMT+0100 <3> add canvas <4> save :true
+000003 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 14:52:04 GMT+0100 <3> add canvas <4> save :true
+000004 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 14:52:04 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 14:52:05 GMT+0100 <3> add canvas <4> save :true
+000006 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 14:52:05 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 14:52:05 GMT+0100 <3> add canvas <4> save :true
+000008 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 14:52:06 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 14:52:06 GMT+0100 <3> add canvas <4> save :true
+000010 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 14:52:06 GMT+0100 <3> add canvas <4> save :true
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:35:05 GMT+0100 *3  *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:35:06 GMT+0100 *3  *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:35:06 GMT+0100 *3  *4 save :false
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:35:06 GMT+0100 *3  *4 save :false
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:35:07 GMT+0100 *3  *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:35:07 GMT+0100 *3  *4 save :false
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:35:07 GMT+0100 *3  *4 save :false
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:35:08 GMT+0100 *3  *4 save :true
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:35:08 GMT+0100 *3  *4 save :false
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:35:08 GMT+0100 *3  *4 save :false
+==== Tue Jan 28 2020 14:53:09 GMT+0100 ============================================================================================================
 
-==== Mon Jan 27 2020 19:36:31 GMT+0100 ============================================================================================================
+000001 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 14:53:09 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 14:53:10 GMT+0100 <3> add canvas <4> save :true
+000003 <0> janush.png <1> ~/Desktop/test folder/test source folder/janush.png <2> Tue Jan 28 2020 14:53:53 GMT+0100 <3> add canvas <4> save :true
+000004 <0> dupa 007.png <1> ~/Desktop/test folder/test source folder/dupa 007.png <2> Tue Jan 28 2020 14:54:02 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 14:54:03 GMT+0100 <3> add canvas <4> save :true
+000006 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 14:54:03 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 14:54:04 GMT+0100 <3> add canvas <4> save :true
+000008 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 14:54:04 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 14:54:04 GMT+0100 <3> add canvas <4> save :true
+000010 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 14:54:05 GMT+0100 <3> add canvas <4> save :true
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:36:32 GMT+0100 *3  *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:36:32 GMT+0100 *3  *4 save :false
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:36:33 GMT+0100 *3  *4 save :true
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:36:33 GMT+0100 *3  *4 save :false
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:36:33 GMT+0100 *3  *4 save :false
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:36:34 GMT+0100 *3  *4 save :true
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:36:34 GMT+0100 *3  *4 save :false
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:36:34 GMT+0100 *3  *4 save :false
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:36:35 GMT+0100 *3  *4 save :true
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:36:35 GMT+0100 *3  *4 save :false
+==== Tue Jan 28 2020 15:09:16 GMT+0100 ============================================================================================================
 
-==== Mon Jan 27 2020 19:38:49 GMT+0100 ============================================================================================================
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 15:09:17 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 15:09:17 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 15:09:17 GMT+0100 <3> add canvas <4> save :true
+000004 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 15:09:18 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 15:09:18 GMT+0100 <3> add canvas <4> save :true
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 15:09:19 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 15:09:19 GMT+0100 <3> add canvas <4> save :true
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 15:09:20 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 15:09:20 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 15:09:21 GMT+0100 <3> add canvas <4> save :true
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:38:50 GMT+0100 *3  *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:38:51 GMT+0100 *3  *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:38:53 GMT+0100 *3  *4 save :true
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:38:54 GMT+0100 *3  *4 save :true
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:38:55 GMT+0100 *3  *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:38:56 GMT+0100 *3  *4 save :true
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:38:57 GMT+0100 *3  *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:38:58 GMT+0100 *3  *4 save :true
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:38:59 GMT+0100 *3  *4 save :true
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:39:00 GMT+0100 *3  *4 save :true
+==== Tue Jan 28 2020 15:10:10 GMT+0100 ============================================================================================================
 
-==== Mon Jan 27 2020 19:40:05 GMT+0100 ============================================================================================================
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 15:10:10 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 15:10:10 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 15:10:11 GMT+0100 <3> add canvas <4> save :true
+==== Tue Jan 28 2020 15:23:42 GMT+0100 ============================================================================================================
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:40:05 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:40:08 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:40:09 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:40:10 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:40:11 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:40:12 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:40:13 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:40:13 GMT+0100 *3 canvasAdd.jsx *4 save :false
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:40:14 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:40:15 GMT+0100 *3 canvasAdd.jsx *4 save :true
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test source folder/andrzej.tif <2> Tue Jan 28 2020 15:23:42 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test source folder/dupa 009.tif <2> Tue Jan 28 2020 15:23:43 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test source folder/dupa 010.jpg <2> Tue Jan 28 2020 15:23:43 GMT+0100 <3> add canvas <4> save :false
+000004 <0> janush.png <1> ~/Desktop/test folder/test source folder/janush.png <2> Tue Jan 28 2020 15:23:44 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test source folder/dupa 004.psd <2> Tue Jan 28 2020 15:23:44 GMT+0100 <3> add canvas <4> save :false
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test source folder/gupa 002.psd <2> Tue Jan 28 2020 15:23:44 GMT+0100 <3> add canvas <4> save :false
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test source folder/gupa 005.psd <2> Tue Jan 28 2020 15:23:45 GMT+0100 <3> add canvas <4> save :true
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test source folder/dupa 006.psd <2> Tue Jan 28 2020 15:23:45 GMT+0100 <3> add canvas <4> save :false
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test source folder/dupa 007.png <2> Tue Jan 28 2020 15:23:46 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test source folder/dupa 001.bmp <2> Tue Jan 28 2020 15:23:46 GMT+0100 <3> add canvas <4> save :false
 
-==== Mon Jan 27 2020 19:49:55 GMT+0100 ============================================================================================================
+==== Tue Jan 28 2020 15:24:34 GMT+0100 ============================================================================================================
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:49:56 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:49:58 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:50:04 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:50:15 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:50:16 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:50:16 GMT+0100 *3 canvasAdd.jsx *4 save :false
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:50:17 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:50:18 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:50:19 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:50:20 GMT+0100 *3 canvasAdd.jsx *4 save :true
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 15:24:34 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 15:24:35 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 15:24:35 GMT+0100 <3> add canvas <4> save :true
+000004 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 15:24:36 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 15:24:36 GMT+0100 <3> add canvas <4> save :true
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 15:24:37 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 15:24:37 GMT+0100 <3> add canvas <4> save :true
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 15:24:38 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 15:24:38 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 15:24:39 GMT+0100 <3> add canvas <4> save :true
 
-==== Mon Jan 27 2020 19:51:06 GMT+0100 ============================================================================================================
+==== Tue Jan 28 2020 15:25:27 GMT+0100 ============================================================================================================
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:51:06 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:51:08 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:51:10 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:51:11 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:51:12 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:51:13 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:51:14 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:51:15 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:51:16 GMT+0100 *3 canvasAdd.jsx *4 save :true
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:51:17 GMT+0100 *3 canvasAdd.jsx *4 save :true
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 15:25:27 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 15:25:27 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 15:25:28 GMT+0100 <3> add canvas <4> save :true
+000004 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 15:25:28 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 15:25:29 GMT+0100 <3> add canvas <4> save :true
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 15:25:29 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 15:25:29 GMT+0100 <3> add canvas <4> save :true
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 15:25:30 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 15:25:30 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 15:25:31 GMT+0100 <3> add canvas <4> save :true
 
-==== Mon Jan 27 2020 19:52:05 GMT+0100 ============================================================================================================
+==== Tue Jan 28 2020 15:26:03 GMT+0100 ============================================================================================================
 
-*0 andrzej.tif *1 ~/Desktop/test folder/test source folder/andrzej.tif *2 Mon Jan 27 2020 19:52:06 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 009.tif *1 ~/Desktop/test folder/test source folder/dupa 009.tif *2 Mon Jan 27 2020 19:52:09 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 010.jpg *1 ~/Desktop/test folder/test source folder/dupa 010.jpg *2 Mon Jan 27 2020 19:52:11 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 004.psd *1 ~/Desktop/test folder/test source folder/dupa 004.psd *2 Mon Jan 27 2020 19:52:11 GMT+0100 *3 canvasAdd *4 save :false
-*0 dupa 001.bmp *1 ~/Desktop/test folder/test source folder/dupa 001.bmp *2 Mon Jan 27 2020 19:52:13 GMT+0100 *3 canvasAdd *4 save :true
-*0 gupa 002.psd *1 ~/Desktop/test folder/test source folder/gupa 002.psd *2 Mon Jan 27 2020 19:52:14 GMT+0100 *3 canvasAdd *4 save :true
-*0 gupa 005.psd *1 ~/Desktop/test folder/test source folder/gupa 005.psd *2 Mon Jan 27 2020 19:52:15 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 006.psd *1 ~/Desktop/test folder/test source folder/dupa 006.psd *2 Mon Jan 27 2020 19:52:16 GMT+0100 *3 canvasAdd *4 save :true
-*0 janush.png *1 ~/Desktop/test folder/test source folder/janush.png *2 Mon Jan 27 2020 19:52:17 GMT+0100 *3 canvasAdd *4 save :true
-*0 dupa 007.png *1 ~/Desktop/test folder/test source folder/dupa 007.png *2 Mon Jan 27 2020 19:52:17 GMT+0100 *3 canvasAdd *4 save :false
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test source folder/andrzej.tif <2> Tue Jan 28 2020 15:26:04 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test source folder/dupa 009.tif <2> Tue Jan 28 2020 15:26:04 GMT+0100 <3> add canvas <4> save :false
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test source folder/dupa 010.jpg <2> Tue Jan 28 2020 15:26:04 GMT+0100 <3> add canvas <4> save :false
+000004 <0> janush.png <1> ~/Desktop/test folder/test source folder/janush.png <2> Tue Jan 28 2020 15:26:05 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test source folder/dupa 004.psd <2> Tue Jan 28 2020 15:26:05 GMT+0100 <3> add canvas <4> save :false
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test source folder/gupa 002.psd <2> Tue Jan 28 2020 15:26:06 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test source folder/gupa 005.psd <2> Tue Jan 28 2020 15:26:06 GMT+0100 <3> add canvas <4> save :false
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test source folder/dupa 006.psd <2> Tue Jan 28 2020 15:26:06 GMT+0100 <3> add canvas <4> save :false
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test source folder/dupa 007.png <2> Tue Jan 28 2020 15:26:07 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test source folder/dupa 001.bmp <2> Tue Jan 28 2020 15:26:07 GMT+0100 <3> add canvas <4> save :false
+
+==== Tue Jan 28 2020 15:26:41 GMT+0100 ============================================================================================================
+
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 15:26:41 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 15:26:41 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 15:26:42 GMT+0100 <3> add canvas <4> save :true
+000004 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 15:26:42 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 15:26:43 GMT+0100 <3> add canvas <4> save :true
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 15:26:43 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 15:26:44 GMT+0100 <3> add canvas <4> save :true
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 15:26:44 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 15:26:45 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 15:26:45 GMT+0100 <3> add canvas <4> save :true
+
+==== Tue Jan 28 2020 15:27:53 GMT+0100 ============================================================================================================
+
+000001 <0> andrzej.tif <1> ~/Desktop/test folder/test target folder/andrzej.tif <2> Tue Jan 28 2020 15:27:54 GMT+0100 <3> add canvas <4> save :true
+000002 <0> dupa 009.tif <1> ~/Desktop/test folder/test target folder/dupa 009.tif <2> Tue Jan 28 2020 15:27:55 GMT+0100 <3> add canvas <4> save :true
+000003 <0> dupa 010.jpg <1> ~/Desktop/test folder/test target folder/dupa 010.jpg <2> Tue Jan 28 2020 15:27:55 GMT+0100 <3> add canvas <4> save :true
+000004 <0> janush.png <1> ~/Desktop/test folder/test target folder/janush.png <2> Tue Jan 28 2020 15:27:56 GMT+0100 <3> add canvas <4> save :true
+000005 <0> dupa 004.psd <1> ~/Desktop/test folder/test target folder/dupa 004.psd <2> Tue Jan 28 2020 15:27:56 GMT+0100 <3> add canvas <4> save :true
+000006 <0> gupa 002.psd <1> ~/Desktop/test folder/test target folder/gupa 002.psd <2> Tue Jan 28 2020 15:27:56 GMT+0100 <3> add canvas <4> save :true
+000007 <0> gupa 005.psd <1> ~/Desktop/test folder/test target folder/gupa 005.psd <2> Tue Jan 28 2020 15:27:57 GMT+0100 <3> add canvas <4> save :true
+000008 <0> dupa 006.psd <1> ~/Desktop/test folder/test target folder/dupa 006.psd <2> Tue Jan 28 2020 15:27:57 GMT+0100 <3> add canvas <4> save :true
+000009 <0> dupa 007.png <1> ~/Desktop/test folder/test target folder/dupa 007.png <2> Tue Jan 28 2020 15:27:58 GMT+0100 <3> add canvas <4> save :true
+000010 <0> dupa 001.bmp <1> ~/Desktop/test folder/test target folder/dupa 001.bmp <2> Tue Jan 28 2020 15:27:58 GMT+0100 <3> add canvas <4> save :true
 

@@ -17,9 +17,13 @@ function appDataBuilder () {
 function createListFilePath() {
     
     var scriptPath = $.fileName;
-    var scriptFolder = scriptPath.toString().replace(/\\/g, '/').match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash"
+    var scriptFolder = getScriptFolder(scriptPath);
     var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
     return listFile;
+}
+
+function getScriptFolder(scriptPath) {
+    return scriptPath.match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash" // replace(/\\/g, '/')
 }
 
 function buildListFilesIfItDoesntExists(listFile) {
@@ -54,7 +58,7 @@ GuiBuilder.prototype.baseLayout = function() {
 GuiBuilder.prototype.images = function() {
 
     var scriptPath = $.fileName;
-    var imageFolderDestination = scriptPath.toString().replace(/\\/g, '/').match(/^(.*[\\\/])/g) + "/images/"; // match(/^(.*[\\\/])/g) "Select everything before the last forward slash"
+    var imageFolderDestination = getScriptFolder(scriptPath) + "/images/";
 
     //Image: InfoHover.png
     this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
@@ -816,7 +820,9 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn.selection.toString());
+            self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn.selection.toString(),
+            self
+            );
 
         var listFile = createListFilePath();
         var d = listFile;
@@ -827,11 +833,17 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         
         if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
+            var scriptName = getScriptName();
+            var scriptFolder = getScriptFolder(scriptPath);
+
+            var verbPastParticiple = scriptName.split(" ")[0] + "ed"; //"ed" regular form
+            var noun = scriptName.split(" ")[1];
+
             if (UI.numbOfActiveDocuments > 1) {
-                alert("You added canvas to " + UI.numbOfActiveDocuments + " files");
+                alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " files");
             }
             else if (UI.numbOfActiveDocuments === 1) {
-                alert("You added canvas to only 1 file");
+                alert("You " + verbPastParticiple + " " + noun + " to only 1 file");
             }
 
             confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
@@ -851,8 +863,10 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
                 var files = "file"
             }
 
-            alert("You added canvas to " + self.sourceFilesToProcess.length + " " + files + ",\nin folder: " + '"' + folderName + '"'); 
+            alert("You added canvas to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
         }
+
+        showUnsavedFiles(self.counterChangedFilesFalse, scriptFolder);
     }
 }
 
@@ -861,6 +875,12 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
 
     UI.btnCancel.onClick = function() {
         UI.mainWindow.close();
+    }
+}
+
+function showUnsavedFiles(self_counterChangedFilesFalse, scriptFolder) {
+    if (self_counterChangedFilesFalse > 0) {
+        alert("Save of " + self_counterChangedFilesFalse + "files was unseccesful.\n Please check list of unsaved file" + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
     }
 }
 
@@ -1034,7 +1054,7 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
             
             var sourceFilePathString = sourceFilesUnfiltered[i].toString();
 
-            var sourceFileToMatch = decodeURIComponent(sourceFilePathString).match(/[^\/]+$/g).toString();; //match all characters from last "/" occurence. //ToString() to enabled be process by match() method
+            var sourceFileToMatch = decodeURIComponent(sourceFilePathString).match(/[^execute - ]+$/g).toString(); // Select everything after the last "execute - " expression //ToString() to enabled be process by match() method
 
             if (sourceFileToMatch.match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
 
@@ -1305,7 +1325,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     addWidth, addHeight, unitsList, anchor, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    fgColorPrevious, bgColorPrevious, canvExtendColorDropDwn) {
+    fgColorPrevious, bgColorPrevious, canvExtendColorDropDwn,
+    self
+    ) {
 
     //full list is in var AddCanvasDocUnits
     var unitsTypes = [
@@ -1314,6 +1336,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     ];
     
     var units = unitsTypes[parseInt(unitsList.selection, 10)][1];
+    self.counterChangedFilesTrue = new Number(0);
+    self.counterChangedFilesFalse = new Number(0);
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
@@ -1344,20 +1368,22 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 saveInDestFolder(detinationFolder);
             }
 
-            var currentSaveTime = doc.path.modified;
-
             var listFile = createListFilePath();
             var c = listFile;
 
-            var docFullName = decodeURIComponent(doc.fullName).toString();
-            var docName = doc.name;
-            var scriptName = $.fileName.replace(/\\/g, '/').match(/[^\/]+$/).toString().slice(0, -4); // match(/[^\/]+$/g) "Select everything after the last forward slash" // .slice(0, -4) "rid off extension etc .png"
-            alert(scriptName);
+            var counter = ('00000'+ (i + 1)).slice(-6); // Prefix 5 zeros, and get the last 6 chars
 
-            var isFileSaved = checkTime(openTime, currentSaveTime, doc);
+            var docName = doc.name;
+            var docFullName = decodeURIComponent(doc.fullName).toString();
+
+            var currentSaveTime = doc.path.modified;
+
+            var scriptName = getScriptName();
+
+            var isFileSaved = saveFileValidation(openTime, currentSaveTime, doc, self.counterChangedFilesTrue, self.counterChangedFilesFalse);
 
             c.open("a");
-            c.writeln("*0 " + docName + " *1 " + docFullName + " *2 " + currentSaveTime + " *3 " + scriptName + " *4 " + "save :" + isFileSaved.toString() );
+            c.writeln(counter + " <0> " + docName + " <1> " + docFullName + " <2> " + currentSaveTime + " <3> " + scriptName + " <4> " + "save :" + isFileSaved.toString() );
             c.close();
 
         }
@@ -1395,6 +1421,16 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
     app.foregroundColor = fgColorPrevious;
     app.backgroundColor = bgColorPrevious;
+}
+
+function getScriptName() {
+
+    var pathScriptFile = $.fileName
+    var string = decodeURIComponent(pathScriptFile);
+    var match = "execute \- ";
+    var textAfterLastMatch = string.slice(string.lastIndexOf(match) + match.length, -4);
+
+    return textAfterLastMatch;
 }
 
 function leftUpperCornerColorBGSet(canvExtendColorDropDwn) {
@@ -1474,10 +1510,12 @@ function saveInDestFolder(detinationFolder) {
 
     for( var j = 0 ; j < imageTypes.length; j++ ){
         if (name.match(imageTypes[j][0])) {
+
             var saveFile = File(path + "/" + name);
             if(saveFile.exists) {
                 saveFile.remove();
             }
+
             (imageTypes[j][1])(saveFile);
             break;
         }
@@ -1545,15 +1583,21 @@ function saveGIF(saveFile) {
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
 //Check the time of PREVIOUS save of the file against the save time of the CURRENT file
-function checkTime(previousSaveTime, currentSaveTime, savedFile) {
-    if (previousSaveTime < currentSaveTime) {
-    //Call the file exists function
-    var isFileSaved = imageExistsValidation(savedFile);
+function saveFileValidation(previousSaveTime, currentSaveTime, savedFile, self_counterChangedFilesTrue, self_counterChangedFilesFalse) {
+    if (checktime(previousSaveTime, currentSaveTime)) {
+        //Call the file exists function
+        var isFileSaved = imageExistsValidation(savedFile);
+        self_counterChangedFilesTrue++;
     } else {
-    var isFileSaved = false;
+        var isFileSaved = false;
+        self_counterChangedFilesFalse++;
     }
-
+    
     return isFileSaved;
+}
+
+function checktime(previousSaveTime, currentSaveTime) {
+    return previousSaveTime < currentSaveTime;
 }
 
 //Check to see if the file actually exists
