@@ -829,22 +829,27 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
 
         d.open("a");
         d.writeln("");
-        d.close();    
+        d.close();
+
+        var scriptPath = $.fileName;
+        var scriptName = getScriptName();
+        var scriptFolder = getScriptFolder(scriptPath);
+
+        var verbPastParticiple = scriptName.split(" ")[0] + "ed"; //"ed" regular form
+        var noun = scriptName.split(" ")[1];
+
+        alert(self.counterChangedFilesTrue);
+
+        if (self.counterChangedFilesTrue > 1) {
+            var files = "files"
+        } else if (self.counterChangedFilesTrue === 1) {
+            var files = "file"
+        }
         
         if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
-            var scriptName = getScriptName();
-            var scriptFolder = getScriptFolder(scriptPath);
-
-            var verbPastParticiple = scriptName.split(" ")[0] + "ed"; //"ed" regular form
-            var noun = scriptName.split(" ")[1];
-
-            if (UI.numbOfActiveDocuments > 1) {
-                alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " files");
-            }
-            else if (UI.numbOfActiveDocuments === 1) {
-                alert("You " + verbPastParticiple + " " + noun + " to only 1 file");
-            }
+            alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files);
+            showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
 
             confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
 
@@ -857,16 +862,10 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
                 folderName = decodeURIComponent(self.detinationFolder.name); // string format is URl
             }
 
-            if (self.sourceFilesToProcess.length > 1) {
-                var files = "files"
-            } else if (self.sourceFilesToProcess.length === 1) {
-                var files = "file"
-            }
-
-            alert("You added canvas to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+            alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+            showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
         }
 
-        showUnsavedFiles(self.counterChangedFilesFalse, scriptFolder);
     }
 }
 
@@ -878,9 +877,10 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-function showUnsavedFiles(self_counterChangedFilesFalse, scriptFolder) {
+function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
+
     if (self_counterChangedFilesFalse > 0) {
-        alert("Save of " + self_counterChangedFilesFalse + "files was unseccesful.\n Please check list of unsaved file" + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
+        alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
     }
 }
 
@@ -1368,24 +1368,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 saveInDestFolder(detinationFolder);
             }
 
-            var listFile = createListFilePath();
-            var c = listFile;
-
-            var counter = ('00000'+ (i + 1)).slice(-6); // Prefix 5 zeros, and get the last 6 chars
-
-            var docName = doc.name;
-            var docFullName = decodeURIComponent(doc.fullName).toString();
-
-            var currentSaveTime = doc.path.modified;
-
-            var scriptName = getScriptName();
-
-            var isFileSaved = saveFileValidation(openTime, currentSaveTime, doc, self.counterChangedFilesTrue, self.counterChangedFilesFalse);
-
-            c.open("a");
-            c.writeln(counter + " <0> " + docName + " <1> " + docFullName + " <2> " + currentSaveTime + " <3> " + scriptName + " <4> " + "save :" + isFileSaved.toString() );
-            c.close();
-
+            writeLnOfFile(i, doc, openTime, self);
         }
     
     //If you choose  radio button "Source folder"
@@ -1415,12 +1398,38 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 saveInDestFolder(detinationFolder);
             }
             doc.close();
-                
+
+            //writeLnOfFile(i, doc, openTime, self);
         }
     }
 
     app.foregroundColor = fgColorPrevious;
     app.backgroundColor = bgColorPrevious;
+}
+
+function writeLnOfFile(index, doc, openTime, self) {
+
+    var counter = ('00000' + (index + 1)).slice(-6); // Prefix 5 zeros, and get the last 6 chars
+
+    var docName = doc.name;
+    var docFullName = decodeURIComponent(doc.fullName).toString();
+
+    var currentSaveTime = doc.path.modified;
+    var scriptName = getScriptName();
+
+    var isFileSaved = saveFileValidation(openTime, currentSaveTime, doc); // todo sometimes it gives false positive outcome
+    
+    if (isFileSaved)
+        self.counterChangedFilesTrue++;
+    if (!isFileSaved)
+        self.counterChangedFilesFalse++;
+
+    var listFile = createListFilePath();
+    var c = listFile;
+
+    c.open("a");
+    c.writeln(counter + " save :" + isFileSaved.toString() + " <0> " + docName + " <1> " + scriptName + " <2> " + currentSaveTime + " <3> " + docFullName);
+    c.close();
 }
 
 function getScriptName() {
@@ -1583,14 +1592,15 @@ function saveGIF(saveFile) {
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
 //Check the time of PREVIOUS save of the file against the save time of the CURRENT file
-function saveFileValidation(previousSaveTime, currentSaveTime, savedFile, self_counterChangedFilesTrue, self_counterChangedFilesFalse) {
+function saveFileValidation(previousSaveTime, currentSaveTime, savedFile) {
+
     if (checktime(previousSaveTime, currentSaveTime)) {
         //Call the file exists function
         var isFileSaved = imageExistsValidation(savedFile);
-        self_counterChangedFilesTrue++;
+
     } else {
         var isFileSaved = false;
-        self_counterChangedFilesFalse++;
+
     }
     
     return isFileSaved;
