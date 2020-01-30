@@ -7,11 +7,42 @@
 
 $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
 
+function includeMethods() {
+
+    var scriptPath = $.fileName;
+    var scriptFolderPath = getScriptFolder(scriptPath);
+    var methodFolderPath = scriptFolderPath + "/scripts - method";
+    var methodFolder = Folder(methodFolderPath);
+    var methodFolderFiles = methodFolder.getFiles();
+
+    var scriptFiles = new Array;
+
+    for (var i = 0; i < methodFolderFiles.length; i++) {
+        if (methodFolderFiles[i] instanceof File) {
+            if (methodFolderFiles[i].match(/.jsx$/)) {
+                scriptFiles.push(methodFolderFiles[i].toString() );
+            }
+        }
+    }
+
+    alert(scriptFiles);//todo now is empty
+
+    for (var i = 0; i < scriptFiles.length; i++) {
+        alert(scriptFiles[i]);
+        //#include scriptFiles[i];
+    }
+
+
+}
+
+//#include "method - date Add.jsx";
+
 function appDataBuilder () {
 
     var listFile = createListFilePath();
-
     buildListFilesIfItDoesntExists(listFile);
+
+    includeMethods();
 }
 
 function createListFilePath() {
@@ -312,7 +343,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
             UI.btnRadDestFold.other.onClick();
         } 
 
-        infoFilesUIUpdate(docsOpenedNames(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoFilesUIUpdate(docsOpenedFiles(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
     }
 }
@@ -372,10 +403,10 @@ EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
 
     plnFilterFilesEnabled(false, UI);
 
-    UI.numbOfActiveDocuments = docsOpenedNames().length; //Save later to use in summary alert
+    UI.numbOfActiveDocuments = docsOpenedFiles().length; //Save later to use in summary alert
 
     self.openedDocsToReopen = gettingFilesOpenedDocsToReopen(); // To avoid bug with unability with "saving as" opened files again after evoking script again
-
+    
 
     //Start setting. If there is no active docs, set to choose folder
     if (UI.numbOfActiveDocuments === 0) {
@@ -838,8 +869,6 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         var verbPastParticiple = scriptName.split(" ")[0] + "ed"; //"ed" regular form
         var noun = scriptName.split(" ")[1];
 
-        alert(self.counterChangedFilesTrue);
-
         if (self.counterChangedFilesTrue > 1) {
             var files = "files"
         } else if (self.counterChangedFilesTrue === 1) {
@@ -864,6 +893,8 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
 
             alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
             showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
+
+            recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self.openDocsToRecover);
         }
 
     }
@@ -877,6 +908,14 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
+function recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self_openDocsToRecover) {
+
+    for (var i = 0; i < self_openDocsToRecover.length; i++) {
+
+        open(self_openDocsToRecover[i]);
+    }
+}
+
 function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
 
     if (self_counterChangedFilesFalse > 0) {
@@ -886,7 +925,7 @@ function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
 
 function gettingFilesOpenedDocsToReopen() {
 
-    var openedDocsToGetFiles = docsOpenedNames();
+    var openedDocsToGetFiles = docsOpenedFiles();
     var openedDocsToReopen = new Array;
     for (var i = 0; i < openedDocsToGetFiles.length; i++) {
         openedDocsToReopen.push(openedDocsToGetFiles[i].fullName);
@@ -1054,7 +1093,7 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
             
             var sourceFilePathString = sourceFilesUnfiltered[i].toString();
 
-            var sourceFileToMatch = decodeURIComponent(sourceFilePathString).match(/[^execute - ]+$/g).toString(); // Select everything after the last "execute - " expression //ToString() to enabled be process by match() method
+            var sourceFileToMatch = decodeURIComponent(sourceFilePathString);
 
             if (sourceFileToMatch.match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
 
@@ -1240,7 +1279,7 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
 }
 
 //Used later to dispaly names of opened files
-function docsOpenedNames() {
+function docsOpenedFiles() {
 
     var openedDocsToProcess = new Array;
     var failed = false;
@@ -1298,7 +1337,7 @@ function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, 
         for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length -1); i++) {
 
             charComas[i] = ",";
-            prevDocNames[i] = prevDocNames[i] + charComas[i];
+            prevDocNames[i] += charComas[i];
         }
 
         if (filesNamesInfoUI.length > numbOfDisplayedFiles) {
@@ -1342,7 +1381,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
-        var docsToProcess = docsOpenedNames();
+        var docsToProcess = docsOpenedFiles();
+
+        var previousSaveTimeSourceDoc = getModificationDate(docsToProcess); // This script must be executed first, because it will not be able to read the date value correctly if it will be executed just before save() or saveAs()
 
         for (var i = 0; i < docsToProcess.length; i++) {
 
@@ -1357,28 +1398,43 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
             addCanvas(addWidth, addHeight, units, anchor);
 
-            var openTime = doc.path.modified;
-
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
                 doc.save();
 
+                var currentSaveTime = doc.path.modified;
+                
+                writeLnOfFile(i, doc, previousSaveTimeSourceDoc[i], currentSaveTime, self);
+
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
                 saveInDestFolder(detinationFolder);
+                var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
+
+                var name = doc.name;
+                var path = detinationFolder;
+                var saveAsFile = File(path + "/" + name)
+
+                writeLnOfFile(i, saveAsFile, undefined, currentSaveTime, self);
             }
 
-            writeLnOfFile(i, doc, openTime, self);
         }
     
     //If you choose  radio button "Source folder"
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
+        if (self.openedDocsToReopen.length > 0) {
+            self.openDocsToRecover = new Array;
+        }
+
         for(var i = 0; i < sourceFiles.length; i++) {
+
+            var previousSaveTimeSourceDoc = sourceFiles[i].path.modified;
 
             open(sourceFiles[i]);
 
             var doc = app.activeDocument;
+            var openedDocPath = doc.fullName;
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
@@ -1392,14 +1448,30 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             if (btnRadSameFolder.value === true) {
                 doc.save();
 
+                var currentSaveTime = doc.path.modified;
+                
+                writeLnOfFile(i, doc, previousSaveTimeSourceDoc, currentSaveTime, self);
+
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
 
                 saveInDestFolder(detinationFolder);
-            }
-            doc.close();
+                var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
 
-            //writeLnOfFile(i, doc, openTime, self);
+                var name = doc.name;
+                var path = detinationFolder;
+                var saveAsFile = File(path + "/" + name);
+                
+                writeLnOfFile(i, saveAsFile, undefined, currentSaveTime, self);
+            }
+
+            if (self.openedDocsToReopen.length > 0) {
+                var fileToRecover = appendingDocToRecover(openedDocPath, self.openedDocsToReopen);
+                if (fileToRecover !== null)
+                    self.openDocsToRecover.push(fileToRecover); // To avoid bug // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+            }
+
+            doc.close();
         }
     }
 
@@ -1407,17 +1479,44 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     app.backgroundColor = bgColorPrevious;
 }
 
-function writeLnOfFile(index, doc, openTime, self) {
+function appendingDocToRecover(docToAppendPath, openedDocsPaths) {
+
+    var recoverDocs = null;
+
+    for (var i = 0; i < openedDocsPaths.length; i++) {
+
+        if ( docToAppendPath.toString() === openedDocsPaths[i].toString() ) {
+            var recoverDocs = openedDocsPaths[i];
+            break;
+        }
+    }
+    return recoverDocs;
+}
+
+function getModificationDate(docsToProcess) {
+
+    var previousSaveTime = new Array;
+
+    for (var i = 0; i < docsToProcess.length; i++) {
+        previousSaveTime.push(docsToProcess[i].path.modified);
+    }
+    return previousSaveTime;
+}
+
+function writeLnOfFile(index, doc, lastSaveTime, currentSaveTime, self) {
 
     var counter = ('00000' + (index + 1)).slice(-6); // Prefix 5 zeros, and get the last 6 chars
 
-    var docName = doc.name;
-    var docFullName = decodeURIComponent(doc.fullName).toString();
+    var docName = decodeURIComponent(doc.name); // if doc is not objects of documents, but not opened in PS file somewhere in hard drive, you get URl format which you have to decode
+    var docFullName = decodeURIComponent(doc.fullName);
 
-    var currentSaveTime = doc.path.modified;
+    if (typeof lastSaveTime === "undefined") {
+        var lastSaveTime = dateAdd(currentSaveTime, 'second', -1); // add one second to accept validation when you saveAs source document/open document in target director 
+    }
+
     var scriptName = getScriptName();
 
-    var isFileSaved = saveFileValidation(openTime, currentSaveTime, doc); // todo sometimes it gives false positive outcome
+    var isFileSaved = saveFileValidation(lastSaveTime, currentSaveTime, doc);
     
     if (isFileSaved)
         self.counterChangedFilesTrue++;
