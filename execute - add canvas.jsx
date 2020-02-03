@@ -7,33 +7,8 @@
 
 $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
 
-function includeMethods() {
+#include "./scripts - method/dateAdd.jsx"
 
-    var scriptPath = $.fileName;
-    var scriptFolderPath = getScriptFolder(scriptPath);
-    var methodFolderPath = scriptFolderPath + "/scripts - method";
-    var methodFolder = Folder(methodFolderPath);
-    var methodFolderFiles = methodFolder.getFiles();
-
-    var scriptFiles = new Array;
-
-    for (var i = 0; i < methodFolderFiles.length; i++) {
-        if (methodFolderFiles[i] instanceof File) {
-            if (methodFolderFiles[i].match(/.jsx$/)) {
-                scriptFiles.push(methodFolderFiles[i].toString() );
-            }
-        }
-    }
-
-    alert(scriptFiles);//todo now is empty
-
-    for (var i = 0; i < scriptFiles.length; i++) {
-        alert(scriptFiles[i]);
-        //#include scriptFiles[i];
-    }
-
-
-}
 
 //#include "method - date Add.jsx";
 
@@ -42,7 +17,17 @@ function appDataBuilder () {
     var listFile = createListFilePath();
     buildListFilesIfItDoesntExists(listFile);
 
-    includeMethods();
+    var prefFile = createPrefFilePath();
+    buildPrefFilesIfItDoesntExists(prefFile);
+
+}
+
+function createPrefFilePath() {
+    
+    var scriptPath = $.fileName;
+    var scriptFolder = getScriptFolder(scriptPath);
+    var listFile = new File(scriptFolder + "scriptUI_preferences.txt");
+    return listFile;
 }
 
 function createListFilePath() {
@@ -69,9 +54,30 @@ function buildListFilesIfItDoesntExists(listFile) {
     }
 }
 
+function buildPrefFilesIfItDoesntExists(listFile) {
+
+    if (!listFile.exists) {
+
+        var a = listFile;
+        a.open("w");
+        a.writeln("");
+        a.writeln("ENABLED/DISABLED:");
+        a.writeln("");
+        a.writeln(' OFF: "FILTER BY PNG"- CHECKBOX = TRUE');
+        a.writeln("");
+        a.writeln(' ON : "DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
+        a.writeln("");
+        a.writeln(' ON : "SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+
+        a.close();
+    }
+}
+
 function GuiBuilder() {
+
     this.baseLayout();
     this.images();
+    this.buildSettingsWindow();
 }
 
 GuiBuilder.prototype.baseLayout = function() {
@@ -301,13 +307,74 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
     }
 }
 
-GuiBuilder.prototype.buildAcceptCancelButtons = function() {
+GuiBuilder.prototype.buildAcceptCancelSettingsButtons = function() {
 
         this.grpBtns = createGroupUI(this.grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
         this.btnAccept = this.grpBtns.add("button", undefined, "Accept");
 
         this.btnCancel = this.grpBtns.add("button", undefined, "Close");
+
+        this.btnSettings = this.grpBtns.add("button", undefined, "Settings");
+}
+
+GuiBuilder.prototype.buildSettingsWindow = function() {
+
+    this.settingsWindow = new Window("dialog", "Enabled/Disabled");
+    this.settingsWindow.alignChildren = "left";
+
+
+    this.settingsWindow.PNGbyDefault = this.settingsWindow.add("group");
+    this.settingsWindow.PNGbyDefault.btn = this.settingsWindow.PNGbyDefault.add("button", [0,80,290,101], '"Filter files by PNG" By default');
+
+    var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile('"FILTER BY PNG"- CHECKBOX = TRUE');
+    this.settingsWindow.PNGbyDefault.title = this.settingsWindow.PNGbyDefault.add("statictext", undefined, PNGbyDefault_ON_OFF);
+
+
+    this.settingsWindow.DoNotShowCloseOpenedFiles= this.settingsWindow.add("group");
+    this.settingsWindow.DoNotShowCloseOpenedFiles.btn = this.settingsWindow.DoNotShowCloseOpenedFiles.add("button", [0,40,290,61], '"Do you want to close all opened files?" Dialog');
+
+    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG'); //todo It can't find
+    this.settingsWindow.DoNotShowCloseOpenedFiles.title = this.settingsWindow.DoNotShowCloseOpenedFiles.add("statictext", undefined, DoNotShowCloseOpenedFiles_ON_OFF);
+
+
+    this.settingsWindow.logFiles = this.settingsWindow.add("group");
+    this.settingsWindow.logFiles.btn = this.settingsWindow.logFiles.add("button", [205,80,495,101], '"scriptUI_changedFilesList.txt" Log');
+
+    var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+    this.settingsWindow.logFiles.title = this.settingsWindow.logFiles.add("statictext", undefined, logFiles_ON_OFF);
+
+    this.settingsWindow.btnReturn = this.settingsWindow.add("button", [205,120,495,141], "Return");
+
+}
+
+function readValueOfSeetingsFromPrefFile(searchedPhrase) {
+
+    var textArrayToWritie = [];
+    var prefFile = createPrefFilePath();
+    var b = prefFile;
+
+    b.open('r');
+
+    var numbOfTextLines = 0;
+    while (!b.eof) {
+
+        textArrayToWritie[numbOfTextLines] = b.readln();
+
+        if (textArrayToWritie[numbOfTextLines].search('OFF: ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
+            var textToReplace = ':  OFF';
+            break;
+
+        }
+        else if (textArrayToWritie[numbOfTextLines].search('ON : ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
+            var textToReplace = ':  ON ';
+            break;
+
+        }
+        numbOfTextLines++;
+    }
+    
+    return textToReplace;
 }
 
 function EventHandlerBuilder(UI) {
@@ -894,7 +961,9 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
             showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
 
-            recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self.openDocsToRecover);
+            if (typeof self.openDocsToRecover !== "undefined") {
+                recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self.openDocsToRecover);
+            }
         }
 
     }
@@ -906,6 +975,117 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     UI.btnCancel.onClick = function() {
         UI.mainWindow.close();
     }
+}
+
+EventHandlerBuilder.prototype.onSettings = function() {
+    var UI = this.UI;
+
+    UI.btnSettings.onClick = function() {
+        UI.mainWindow.close();
+        UI.settingsWindow.show();
+    }
+}
+
+EventHandlerBuilder.prototype.onPGNbyDefault = function() {
+    var UI = this.UI;
+
+    UI.settingsWindow.PNGbyDefault.btn.onClick = function() {
+
+        var changedPreference = '"FILTER BY PNG"- CHECKBOX = TRUE';
+
+        setValuesOfPrefs(changedPreference, UI.settingsWindow.PNGbyDefault.title);// Show user made change
+    }
+    
+}
+
+EventHandlerBuilder.prototype.onDoNotShowCloseOpenedFiles = function() { //todo
+    var UI = this.UI;
+
+    UI.settingsWindow.DoNotShowCloseOpenedFiles.btn.onClick = function() {
+
+        var changedPreference = '"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG';
+
+        setValuesOfPrefs(changedPreference, UI.settingsWindow.DoNotShowCloseOpenedFiles.title);// Show user made change
+
+    }
+}
+
+EventHandlerBuilder.prototype.onLogFiles = function() {
+    var UI = this.UI;
+
+    UI.settingsWindow.logFiles.btn.onClick = function() {
+
+        var changedPreference = '"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG';
+
+        setValuesOfPrefs(changedPreference, UI.settingsWindow.logFiles.title);// Show user made change
+
+    }
+}
+
+EventHandlerBuilder.prototype.onReturn = function() {
+    var UI = this.UI;
+
+    UI.settingsWindow.btnReturn.onClick = function() {
+
+        UI.settingsWindow.close();
+
+        UI.mainWindow.show();
+    }
+}
+
+
+function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
+
+    var alertText = changeValueOffOnInPrefFile(changedPreference);
+
+    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference);
+    onOffValueNextToButton.text = updateValue;
+
+    alert(alertText);
+}
+
+function changeValueOffOnInPrefFile(searchedPhrase) {
+
+    var textArrayToWritie = [];
+    var prefFile = createPrefFilePath();
+    var b = prefFile;
+
+    b.open('r');
+
+    var numbOfTextLines = 0;
+
+    while (!b.eof) {
+
+        textArrayToWritie[numbOfTextLines] = b.readln();
+
+        if (textArrayToWritie[numbOfTextLines].search('ON : ' + searchedPhrase ) != -1) { //It can't be == 1 and can't work that way, but I have no idea why
+            var textToReplace = 'OFF: ' + searchedPhrase;
+
+            textArrayToWritie[numbOfTextLines] = textToReplace;
+            var alertText = textToReplace;
+        }
+
+        else if (textArrayToWritie[numbOfTextLines].search('OFF: ' + searchedPhrase) != -1) { //It can't be == 1 and can't work that way, but I have no idea why
+            var textToReplace = 'ON : ' + searchedPhrase;
+
+            textArrayToWritie[numbOfTextLines] = textToReplace;
+            var alertText = textToReplace;
+        }
+
+        numbOfTextLines++;
+    }
+
+    b.close();
+
+    b.open('w');
+
+    for (var i = 0; i < numbOfTextLines; i++) {
+        b.writeln(textArrayToWritie[i]);
+    }
+
+    b.close();
+    
+    return alertText;
 }
 
 function recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self_openDocsToRecover) {
@@ -1739,7 +1919,7 @@ function main() {
 
     UI.buildPanelInfoUI();
 
-    UI.buildAcceptCancelButtons();
+    UI.buildAcceptCancelSettingsButtons();
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
@@ -1793,7 +1973,17 @@ function main() {
 
     eventHandler.onBtnCancel();
 
-    UI.showMainWindow();   
+    eventHandler.onSettings();
+
+    eventHandler.onPGNbyDefault();
+
+    eventHandler.onDoNotShowCloseOpenedFiles();
+
+    eventHandler.onLogFiles();
+
+    eventHandler.onReturn();
+
+    UI.showMainWindow();
 }
 
 
