@@ -90,6 +90,11 @@ GuiBuilder.prototype.buildPanelSourceFilesFilter = function() {
     this.filterSourceFilesCheckbox = createGroupUI(this.plnFilterFiles, "column", "left", "left");
     //Create checkbox
     this.filterSourceFilesCheckbox.PNG = this.filterSourceFilesCheckbox.add("checkbox", undefined, "Process only PNG");
+
+    var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile('"FILTER BY PNG"- CHECKBOX = TRUE');
+    if (PNGbyDefault_ON_OFF === ':  ON ') {
+        this.filterSourceFilesCheckbox.PNG.value = true;
+    }
     //Create group
     this.filterSourceFilesCheckbox.byExpression = this.filterSourceFilesCheckbox.add("checkbox", undefined, "filter files by expression");
 
@@ -283,7 +288,7 @@ GuiBuilder.prototype.buildSettingsWindow = function() {
     this.settingsWindow.DoNotShowCloseOpenedFiles= this.settingsWindow.add("group");
     this.settingsWindow.DoNotShowCloseOpenedFiles.btn = this.settingsWindow.DoNotShowCloseOpenedFiles.add("button", [0,40,290,61], '"Do you want to close all opened files?" Dialog');
 
-    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG'); //todo It can't find
+    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
     this.settingsWindow.DoNotShowCloseOpenedFiles.title = this.settingsWindow.DoNotShowCloseOpenedFiles.add("statictext", undefined, DoNotShowCloseOpenedFiles_ON_OFF);
 
 
@@ -825,6 +830,10 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
+        var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG')
+
+        if (logFiles_ON_OFF === ':  ON ') {
+
         var listFile = createListFilePath();
         var b = listFile;
         var date = new Date;
@@ -834,6 +843,8 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         b.writeln("");
         b.close();
 
+        }
+
         changeFileAndSave(self.sourceFilesToProcess, self.detinationFolder, 
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
@@ -842,12 +853,16 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             self
             );
 
+        if (logFiles_ON_OFF === ':  ON ') {
+
         var listFile = createListFilePath();
         var d = listFile;
 
         d.open("a");
         d.writeln("");
         d.close();
+
+        }
 
         var scriptPath = $.fileName;
         var scriptName = getScriptName();
@@ -907,18 +922,34 @@ EventHandlerBuilder.prototype.onSettings = function() {
 }
 
 EventHandlerBuilder.prototype.onPGNbyDefault = function() {
+
     var UI = this.UI;
+    var self = this;
+
+    self.notify_filterSourceFilesCheckbox_PNG = false;
 
     UI.settingsWindow.PNGbyDefault.btn.onClick = function() {
 
         var changedPreference = '"FILTER BY PNG"- CHECKBOX = TRUE';
 
         setValuesOfPrefs(changedPreference, UI.settingsWindow.PNGbyDefault.title);// Show user made change
+
+        var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile(changedPreference);
+        if (PNGbyDefault_ON_OFF === ':  ON ') {
+            UI.filterSourceFilesCheckbox.PNG.value = true; // To implement change of value of checkbox; You can't do notify when object is not showed
+
+        } else if (PNGbyDefault_ON_OFF === ':  OFF') {
+            UI.filterSourceFilesCheckbox.PNG.value = false; // To implement change of value of checkbox; You can't do notify when object is not showed
+            
+        }
+        if (typeof self.sourceFilesPSDformat !== "undefined" || self.sourceFilesPSDformat === null) {
+            UI.filterSourceFilesCheckbox.PNG.onClick();
+        }
     }
-    
 }
 
-EventHandlerBuilder.prototype.onDoNotShowCloseOpenedFiles = function() { //todo
+EventHandlerBuilder.prototype.onDoNotShowCloseOpenedFiles = function() {
+
     var UI = this.UI;
 
     UI.settingsWindow.DoNotShowCloseOpenedFiles.btn.onClick = function() {
@@ -931,6 +962,7 @@ EventHandlerBuilder.prototype.onDoNotShowCloseOpenedFiles = function() { //todo
 }
 
 EventHandlerBuilder.prototype.onLogFiles = function() {
+    
     var UI = this.UI;
 
     UI.settingsWindow.logFiles.btn.onClick = function() {
@@ -943,6 +975,7 @@ EventHandlerBuilder.prototype.onLogFiles = function() {
 }
 
 EventHandlerBuilder.prototype.onReturn = function() {
+
     var UI = this.UI;
 
     UI.settingsWindow.btnReturn.onClick = function() {
@@ -950,6 +983,7 @@ EventHandlerBuilder.prototype.onReturn = function() {
         UI.settingsWindow.close();
 
         UI.mainWindow.show();
+
     }
 }
 
@@ -1498,8 +1532,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
     fgColorPrevious, bgColorPrevious, canvExtendColorDropDwn,
-    self
-    ) {
+    self) {
 
     //full list is in var AddCanvasDocUnits
     var unitsTypes = [
@@ -1510,6 +1543,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     var units = unitsTypes[parseInt(unitsList.selection, 10)][1];
     self.counterChangedFilesTrue = new Number(0);
     self.counterChangedFilesFalse = new Number(0);
+
+    var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
@@ -1525,7 +1560,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn);
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn === "Left upper corner color");
 
             }
             
@@ -1536,8 +1571,14 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 doc.save();
 
                 var currentSaveTime = doc.path.modified;
+            
+                var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc[i], currentSaveTime, doc);
                 
-                writeLnOfFile(i, doc, previousSaveTimeSourceDoc[i], currentSaveTime, self);
+                counterSavedFiles(isFileSaved, self);
+
+                if (logFiles_ON_OFF === ':  ON ') {
+                    writeLnOfFile(i, doc, currentSaveTime, isFileSaved);
+                }
 
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
@@ -1548,7 +1589,15 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 var path = detinationFolder;
                 var saveAsFile = File(path + "/" + name)
 
-                writeLnOfFile(i, saveAsFile, undefined, currentSaveTime, self);
+                var currentSaveTime = doc.path.modified;
+            
+                var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
+                
+                counterSavedFiles(isFileSaved, self);
+
+                if (logFiles_ON_OFF === ':  ON ') {
+                    writeLnOfFile(i, saveAsFile, currentSaveTime, isFileSaved);
+                }
             }
 
         }
@@ -1557,7 +1606,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
         if (self.openedDocsToReopen.length > 0) {
-            self.openDocsToRecover = new Array;
+            self.openDocsToRecover = new Array; // To avoid bug when source files are the same what opened. And reopen them at the end of script
         }
 
         for(var i = 0; i < sourceFiles.length; i++) {
@@ -1571,7 +1620,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
-                leftUpperCornerColorBGSet(canvExtendColorDropDwn);
+                leftUpperCornerColorBGSet(canvExtendColorDropDwn === "Left upper corner color");
 
             };
             
@@ -1582,8 +1631,14 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 doc.save();
 
                 var currentSaveTime = doc.path.modified;
+            
+                var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc, currentSaveTime, doc);
                 
-                writeLnOfFile(i, doc, previousSaveTimeSourceDoc, currentSaveTime, self);
+                counterSavedFiles(isFileSaved, self);
+                
+                if (logFiles_ON_OFF === ':  ON ') {
+                    writeLnOfFile(i, doc, currentSaveTime, isFileSaved);
+                }
 
             //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
@@ -1594,8 +1649,16 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 var name = doc.name;
                 var path = detinationFolder;
                 var saveAsFile = File(path + "/" + name);
+
+                var currentSaveTime = doc.path.modified;
+            
+                var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
                 
-                writeLnOfFile(i, saveAsFile, undefined, currentSaveTime, self);
+                counterSavedFiles(isFileSaved, self);
+
+                if (logFiles_ON_OFF === ':  ON ') {
+                    writeLnOfFile(i, saveAsFile, currentSaveTime, isFileSaved);
+                }
             }
 
             if (self.openedDocsToReopen.length > 0) {
@@ -1607,9 +1670,17 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             doc.close();
         }
     }
-
+alert(self.counterChangedFilesTrue);
     app.foregroundColor = fgColorPrevious;
     app.backgroundColor = bgColorPrevious;
+}
+
+function counterSavedFiles(isFileSaved, self) {
+    
+    if (isFileSaved)
+        self.counterChangedFilesTrue++;
+    if (!isFileSaved)
+        self.counterChangedFilesFalse++;
 }
 
 function appendingDocToRecover(docToAppendPath, openedDocsPaths) {
@@ -1636,25 +1707,14 @@ function getModificationDate(docsToProcess) {
     return previousSaveTime;
 }
 
-function writeLnOfFile(index, doc, lastSaveTime, currentSaveTime, self) {
+function writeLnOfFile(index, doc, currentSaveTime, isFileSaved) {
+
+    var scriptName = getScriptName();
 
     var counter = ('00000' + (index + 1)).slice(-6); // Prefix 5 zeros, and get the last 6 chars
 
     var docName = decodeURIComponent(doc.name); // if doc is not objects of documents, but not opened in PS file somewhere in hard drive, you get URl format which you have to decode
     var docFullName = decodeURIComponent(doc.fullName);
-
-    if (typeof lastSaveTime === "undefined") {
-        var lastSaveTime = dateAdd(currentSaveTime, 'second', -1); // add one second to accept validation when you saveAs source document/open document in target director 
-    }
-
-    var scriptName = getScriptName();
-
-    var isFileSaved = saveFileValidation(lastSaveTime, currentSaveTime, doc);
-    
-    if (isFileSaved)
-        self.counterChangedFilesTrue++;
-    if (!isFileSaved)
-        self.counterChangedFilesFalse++;
 
     var listFile = createListFilePath();
     var c = listFile;
@@ -1674,11 +1734,11 @@ function getScriptName() {
     return textAfterLastMatch;
 }
 
-function leftUpperCornerColorBGSet(canvExtendColorDropDwn) {
+function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
 
-    var doc = app.activeDocument;
+    if (canvExtendColorDropDwn_IsLeftUpperCroner) {
 
-    if (canvExtendColorDropDwn === "Left upper corner color") {
+        var doc = app.activeDocument;
         // Remove any Color Samplers that may already exist.
         doc.colorSamplers.removeAll();
         // deselct any selection that may already exist.
@@ -1823,7 +1883,15 @@ function saveGIF(saveFile) {
 
 function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
 
-    var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
+    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
+
+    if (DoNotShowCloseOpenedFiles_ON_OFF === ':  ON ') {
+        var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
+
+    } else if (DoNotShowCloseOpenedFiles_ON_OFF === ':  OFF') {
+        var closeOpenedFilesConfirmation = false;
+
+    }
 
     for (var i = 0; i < openedDocs.length; i++) {
 
@@ -1871,6 +1939,10 @@ function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
 
 //Check the time of PREVIOUS save of the file against the save time of the CURRENT file
 function saveFileValidation(previousSaveTime, currentSaveTime, savedFile) {
+    
+    if (typeof previousSaveTime === "undefined") {
+        var previousSaveTime = dateAdd(currentSaveTime, 'second', -1); // add one second to accept validation when you saveAs source document/open document in target director 
+    }
 
     if (checktime(previousSaveTime, currentSaveTime)) {
         //Call the file exists function
