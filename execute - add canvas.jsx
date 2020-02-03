@@ -22,57 +22,6 @@ function appDataBuilder () {
 
 }
 
-function createPrefFilePath() {
-    
-    var scriptPath = $.fileName;
-    var scriptFolder = getScriptFolder(scriptPath);
-    var listFile = new File(scriptFolder + "scriptUI_preferences.txt");
-    return listFile;
-}
-
-function createListFilePath() {
-    
-    var scriptPath = $.fileName;
-    var scriptFolder = getScriptFolder(scriptPath);
-    var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
-    return listFile;
-}
-
-function getScriptFolder(scriptPath) {
-    return scriptPath.match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash" // replace(/\\/g, '/')
-}
-
-function buildListFilesIfItDoesntExists(listFile) {
-
-    if (!listFile.exists) {
-
-        var a = listFile;
-        a.open("w");
-        a.writeln("Processed files list:");
-        a.writeln("");
-        a.close();
-    }
-}
-
-function buildPrefFilesIfItDoesntExists(listFile) {
-
-    if (!listFile.exists) {
-
-        var a = listFile;
-        a.open("w");
-        a.writeln("");
-        a.writeln("ENABLED/DISABLED:");
-        a.writeln("");
-        a.writeln(' OFF: "FILTER BY PNG"- CHECKBOX = TRUE');
-        a.writeln("");
-        a.writeln(' ON : "DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
-        a.writeln("");
-        a.writeln(' ON : "SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
-
-        a.close();
-    }
-}
-
 function GuiBuilder() {
 
     this.baseLayout();
@@ -346,35 +295,6 @@ GuiBuilder.prototype.buildSettingsWindow = function() {
 
     this.settingsWindow.btnReturn = this.settingsWindow.add("button", [205,120,495,141], "Return");
 
-}
-
-function readValueOfSeetingsFromPrefFile(searchedPhrase) {
-
-    var textArrayToWritie = [];
-    var prefFile = createPrefFilePath();
-    var b = prefFile;
-
-    b.open('r');
-
-    var numbOfTextLines = 0;
-    while (!b.eof) {
-
-        textArrayToWritie[numbOfTextLines] = b.readln();
-
-        if (textArrayToWritie[numbOfTextLines].search('OFF: ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
-            var textToReplace = ':  OFF';
-            break;
-
-        }
-        else if (textArrayToWritie[numbOfTextLines].search('ON : ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
-            var textToReplace = ':  ON ';
-            break;
-
-        }
-        numbOfTextLines++;
-    }
-    
-    return textToReplace;
 }
 
 function EventHandlerBuilder(UI) {
@@ -1033,15 +953,84 @@ EventHandlerBuilder.prototype.onReturn = function() {
     }
 }
 
+function createPrefFilePath() {
+    
+    var scriptPath = $.fileName;
+    var scriptFolder = getScriptFolder(scriptPath);
+    var listFile = new File(scriptFolder + "scriptUI_preferences.txt");
+    return listFile;
+}
 
-function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
+function createListFilePath() {
+    
+    var scriptPath = $.fileName;
+    var scriptFolder = getScriptFolder(scriptPath);
+    var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
+    return listFile;
+}
 
-    var alertText = changeValueOffOnInPrefFile(changedPreference);
+function getScriptFolder(scriptPath) {
+    return scriptPath.match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash" // replace(/\\/g, '/')
+}
 
-    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference);
-    onOffValueNextToButton.text = updateValue;
+function buildListFilesIfItDoesntExists(listFile) {
 
-    alert(alertText);
+    if (!listFile.exists) {
+
+        var a = listFile;
+        a.open("w");
+        a.writeln("Processed files list:");
+        a.writeln("");
+        a.close();
+    }
+}
+
+function buildPrefFilesIfItDoesntExists(listFile) {
+
+    if (!listFile.exists) {
+
+        var a = listFile;
+        a.open("w");
+        a.writeln("");
+        a.writeln("ENABLED/DISABLED:");
+        a.writeln("");
+        a.writeln(' OFF: "FILTER BY PNG"- CHECKBOX = TRUE');
+        a.writeln("");
+        a.writeln(' ON : "DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
+        a.writeln("");
+        a.writeln(' ON : "SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+
+        a.close();
+    }
+}
+
+function readValueOfSeetingsFromPrefFile(searchedPhrase) {
+
+    var textArrayToWritie = [];
+    var prefFile = createPrefFilePath();
+    var b = prefFile;
+
+    b.open('r');
+
+    var numbOfTextLines = 0;
+    while (!b.eof) {
+
+        textArrayToWritie[numbOfTextLines] = b.readln();
+
+        if (textArrayToWritie[numbOfTextLines].search('OFF: ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
+            var textToReplace = ':  OFF';
+            break;
+
+        }
+        else if (textArrayToWritie[numbOfTextLines].search('ON : ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
+            var textToReplace = ':  ON ';
+            break;
+
+        }
+        numbOfTextLines++;
+    }
+    
+    return textToReplace;
 }
 
 function changeValueOffOnInPrefFile(searchedPhrase) {
@@ -1088,50 +1077,14 @@ function changeValueOffOnInPrefFile(searchedPhrase) {
     return alertText;
 }
 
-function recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self_openDocsToRecover) {
+function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
 
-    for (var i = 0; i < self_openDocsToRecover.length; i++) {
+    var alertText = changeValueOffOnInPrefFile(changedPreference);
 
-        open(self_openDocsToRecover[i]);
-    }
-}
+    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference);
+    onOffValueNextToButton.text = updateValue;
 
-function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
-
-    if (self_counterChangedFilesFalse > 0) {
-        alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
-    }
-}
-
-function gettingFilesOpenedDocsToReopen() {
-
-    var openedDocsToGetFiles = docsOpenedFiles();
-    var openedDocsToReopen = new Array;
-    for (var i = 0; i < openedDocsToGetFiles.length; i++) {
-        openedDocsToReopen.push(openedDocsToGetFiles[i].fullName);
-    }
-
-    return openedDocsToReopen;
-}
-
-function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
-
-    var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
-
-    for (var i = 0; i < openedDocs.length; i++) {
-
-        var activeDoc = openedDocs[i];
-        activeDoc = app.activeDocument;
-        activeDoc.close();
-    }
-
-    // To avoid bug with unability with "saving as" opened files again after evoking script again
-    if (!closeOpenedFilesConfirmation) {
-        for (var i = 0; i < openedDocs.length; i++) {
-            open(openedDocs[i]);
-        }
-    }
-
+    alert(alertText);
 }
 
 function filterSourceFilesCheckboxByExpressionEnabled(UI) {
@@ -1866,6 +1819,52 @@ function saveGIF(saveFile) {
     var gifSaveOptions = new GIFSaveOptions();
     activeDocument.saveAs(gifFile, gifSaveOptions);
 
+}
+
+function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
+
+    var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
+
+    for (var i = 0; i < openedDocs.length; i++) {
+
+        var activeDoc = openedDocs[i];
+        activeDoc = app.activeDocument;
+        activeDoc.close();
+    }
+
+    // To avoid bug with unability with "saving as" opened files again after evoking script again
+    if (!closeOpenedFilesConfirmation) {
+        for (var i = 0; i < openedDocs.length; i++) {
+            open(openedDocs[i]);
+        }
+    }
+
+}
+
+function gettingFilesOpenedDocsToReopen() {
+
+    var openedDocsToGetFiles = docsOpenedFiles();
+    var openedDocsToReopen = new Array;
+    for (var i = 0; i < openedDocsToGetFiles.length; i++) {
+        openedDocsToReopen.push(openedDocsToGetFiles[i].fullName);
+    }
+
+    return openedDocsToReopen;
+}
+
+function recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self_openDocsToRecover) {
+
+    for (var i = 0; i < self_openDocsToRecover.length; i++) {
+
+        open(self_openDocsToRecover[i]);
+    }
+}
+
+function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
+
+    if (self_counterChangedFilesFalse > 0) {
+        alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
