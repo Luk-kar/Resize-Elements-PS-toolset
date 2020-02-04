@@ -194,7 +194,7 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
 
     //Anchor display
     this.grpAnchorMarginesSpaceTop =  [this.pnlAddCanvas.add("group", undefined, ""),
-                                    this.pnlAddCanvas.add("group", undefined, "")];
+                                       this.pnlAddCanvas.add("group", undefined, "")];
 
     this.grpAnchor = this.pnlAddCanvas.add("group");
     this.grpAnchor.title = this.grpAnchor.add("statictext", undefined, "Anchor: ");
@@ -238,7 +238,7 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
                                     "Grey",
                                     "Select color",
                                     "Left upper corner color"
-                                    ];// functions in onCanvExtendColorDropDwn; Can't be part of UI object, becouse of bug in the next line
+                                    ];// conditions in onCanvExtendColorDropDwn(); Can't be part of UI object, becouse of bug in the next line
 
         this.canvExtendColor.dropDwn = this.canvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
         this.canvExtendColor.dropDwn.selection = 1;
@@ -302,12 +302,12 @@ GuiBuilder.prototype.buildSettingsWindow = function() {
 
 }
 
-function EventHandlerBuilder(UI) {
-    this.UI = UI;
-}
-
 GuiBuilder.prototype.showMainWindow = function() {
     this.mainWindow.show();
+}
+
+function EventHandlerBuilder(UI) {
+    this.UI = UI;
 }
 
 EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
@@ -325,7 +325,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         btnsRadDestFoldEnabled(true, UI);
 
-        self.lockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
+        self.lockingUnlockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
 
         if (UI.pnlAddCanvas.enabled === false) {
             UI.pnlAddCanvas.enabled = true;
@@ -359,9 +359,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             btnChooseFilesDestFoldEnabled(false, UI);
 
-            alert(self.lockingAcceptBtn);
-
-            self.lockingAcceptBtn();
+            self.lockingUnlockingAcceptBtn();
 
             UI.pnlAddCanvas.enabled = false;
 
@@ -385,10 +383,12 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             }
 
-            self.lockingAcceptBtn();
+            self.lockingUnlockingAcceptBtn();
 
             infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
+
+        ErrorWrongStringInputPath(UI.btnChooseFilesSourceFold.title.text);
     }
 }
 
@@ -494,6 +494,10 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 } else if ( (typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug
 
+                    if(( !self.detinationFolder.toString().match(/\//) && !self.sourceFolder.toString().match(/\//) )){
+                        throw new Error("Invalid strings. Strings are not paths");
+                    }
+
                     var sameDestinationFolderAndSourceFolder = ( self.detinationFolder.toString() === self.sourceFolder.toString() );
 
                     if (sameDestinationFolderAndSourceFolder) {
@@ -512,6 +516,11 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
                 }
                 
                 if (sameChoosedSourceFolderAsBefore === false) {
+
+                    if( self.sourceFilesToProcess.length < 0){
+                        throw new Error("Array should contain at least one File");
+                    }
+
                     if (self.sourceFilesToProcess.length > 1) {
                         alert("In folder are " + self.sourceFilesToProcess.length + " files");
                     } else if (self.sourceFilesToProcess.length === 1) {
@@ -578,7 +587,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
 
         btnChooseFilesDestFoldEnabled(false, UI);
 
-        self.lockingAcceptBtn()
+        self.lockingUnlockingAcceptBtn()
 
         UI.pnlAddCanvas.enabled = true;
     }
@@ -593,7 +602,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
 
         btnChooseFilesDestFoldEnabled(true, UI);
 
-        self.lockingAcceptBtn()
+        self.lockingUnlockingAcceptBtn()
 
         if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
 
@@ -604,6 +613,8 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
 
             UI.pnlAddCanvas.enabled = true;
         }
+
+        ErrorWrongStringInputPath(UI.btnChooseFilesDestFold.title.text);
     }
     
 }
@@ -631,7 +642,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
                 createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
                 UI.pnlAddCanvas.enabled = true;
 
-                self.lockingAcceptBtn();
+                self.lockingUnlockingAcceptBtn();
 
             } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
@@ -647,7 +658,7 @@ EventHandlerBuilder.prototype.settingAcceptBtnBlock = function() {
     var UI = this.UI;
     var self = this;
 
-    self.lockingAcceptBtn = function checkingIfWidthAndHeightIsNot0UnlockingBtn() {
+    self.lockingUnlockingAcceptBtn = function checkingIfWidthAndHeightIsNot0UnlockingBtn() {
 
         if ((UI.grpWidth.numb.text.match(/[0-9]+/) !== null) && (UI.grpHeight.numb.text.match(/[0-9]+/) !== null) &&
             ((parseInt(UI.grpWidth.numb.text, 10) !== 0) || (parseInt(UI.grpHeight.numb.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
@@ -660,19 +671,23 @@ EventHandlerBuilder.prototype.settingAcceptBtnBlock = function() {
         }
     
     }
+
+    if (typeof self.lockingUnlockingAcceptBtn !== "function") {
+        throw new Error('Object "self.lockingUnlockingAcceptBtn" is not a function');
+    }
 }
 
 EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
     var self = this;
 
-    blockButtonByEdittext(UI.grpWidth.numb);
+    blockKeysInEdittext(UI.grpWidth.numb);
 
     UI.grpWidth.numb.onChanging = function() {
 
         sameInputField(UI.constrainsProportionsCheckbox, UI.grpWidth.numb, UI.grpHeight.numb);
 
-        self.lockingAcceptBtn();
+        self.lockingUnlockingAcceptBtn();
     }
 }
 
@@ -702,14 +717,14 @@ EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
     var self = this;
 
-    blockButtonByEdittext(UI.grpHeight.numb);
+    blockKeysInEdittext(UI.grpHeight.numb);
 
     //Group Height
     UI.grpHeight.numb.onChanging = function() {
 
         sameInputField(UI.constrainsProportionsCheckbox, UI.grpHeight.numb, UI.grpWidth.numb);
 
-        self.lockingAcceptBtn;
+        self.lockingUnlockingAcceptBtn();
     }
 }
 
@@ -794,15 +809,15 @@ EventHandlerBuilder.prototype.savingBGandFGtoRestoreLater = function() {
     ///Saving BG and FG bucket color
     //Foregound bucket color
     self.bgColor = new SolidColor();
-    self.bgColor.rgb.red = parseInt(app.backgroundColor.rgb.red, 10);
-    self.bgColor.rgb.green = parseInt(app.backgroundColor.rgb.green, 10);
-    self.bgColor.rgb.blue = parseInt(app.backgroundColor.rgb.blue, 10);
+    self.bgColor.rgb.red = app.backgroundColor.rgb.red;
+    self.bgColor.rgb.green = app.backgroundColor.rgb.green;
+    self.bgColor.rgb.blue = app.backgroundColor.rgb.blue;
 
     //Background bucket color
     self.fgColor = new SolidColor();
-    self.fgColor.rgb.red = parseInt(app.foregroundColor.rgb.red, 10);
-    self.fgColor.rgb.green = parseInt(app.foregroundColor.rgb.green, 10);
-    self.fgColor.rgb.blue = parseInt(app.foregroundColor.rgb.blue, 10);
+    self.fgColor.rgb.red = app.foregroundColor.rgb.red;
+    self.fgColor.rgb.green = app.foregroundColor.rgb.green;
+    self.fgColor.rgb.blue = app.foregroundColor.rgb.blue;
 
 }
 
@@ -813,34 +828,38 @@ EventHandlerBuilder.prototype.onCanvExtendColorDropDwn = function() {
     UI.canvExtendColor.dropDwn.onChange = function() {
         var canvExtendColorDropDwn = UI.canvExtendColor.dropDwn.selection.toString();//Full list to select canvExtendColor.values
 
-        if (canvExtendColorDropDwn === "Foreground") {
+        if (canvExtendColorDropDwn === "Foreground") { //:1
             app.foregroundColor = self.bgColor;
             app.backgroundColor = self.fgColor;
 
-        } else if (canvExtendColorDropDwn === "Background") {
+        } else if (canvExtendColorDropDwn === "Background") { //:2
             app.foregroundColor = self.fgColor;
             app.backgroundColor = self.bgColor;
 
-        } else if (canvExtendColorDropDwn === "White") {
+        } else if (canvExtendColorDropDwn === "White") { //:3
             app.backgroundColor.rgb.red = 255;
             app.backgroundColor.rgb.green = 255;
             app.backgroundColor.rgb.blue = 255;
 
-        } else if (canvExtendColorDropDwn === "Black") {
+        } else if (canvExtendColorDropDwn === "Black") { //:4
             app.backgroundColor.rgb.red = 0;
             app.backgroundColor.rgb.green = 0;
             app.backgroundColor.rgb.blue = 0;
 
-        } else if (canvExtendColorDropDwn === "Grey") {
+        } else if (canvExtendColorDropDwn === "Grey") { //:5
             app.backgroundColor.rgb.red = 128;
             app.backgroundColor.rgb.green = 128;
             app.backgroundColor.rgb.blue = 128;
 
-        } else if (canvExtendColorDropDwn === "Select color") {
+        } else if (canvExtendColorDropDwn === "Select color") { //:6
             showColorPicker();
             app.backgroundColor = app.foregroundColor;
             app.foregroundColor = self.fgColor;
-        }
+        } //else if (canvExtendColorDropDwn === "Left upper corner color") {leftUpperCornerColorBGSet() invoked in function changeFileAndSave} //:7
+    }
+
+    if (UI.canvExtendColor.dropDwn.children.length !== 7) { //Update this value if you make any changes Look↑↑↑
+        throw new Error("Not all dropdowns items have assigned outcomes")
     }
 }
 
@@ -864,7 +883,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         b.writeln("");
         b.close();
 
-        }
+        } // OFF -> do nothing
 
         changeFileAndSave(self.sourceFilesToProcess, self.detinationFolder, 
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
@@ -883,14 +902,25 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         d.writeln("");
         d.close();
 
-        }
+        } // OFF -> do nothing
 
         var scriptPath = $.fileName;
         var scriptName = getScriptName();
         var scriptFolder = getScriptFolder(scriptPath);
 
+        if (scriptName.split(" ").length !== 2 || !scriptName.match(/[a-z]/i)) {
+            throw new Error("Wrongly formated name of " + scriptName + ".jsx" + " in folder: " + scriptFolder);
+        }
+
         var verbPastParticiple = scriptName.split(" ")[0] + "ed"; //"ed" regular form
         var noun = scriptName.split(" ")[1];
+
+        if(self.counterChangedFilesTrue < 1) {
+            throw new Error("Counter can't be less than integer = 1");
+        }
+        if(self.counterChangedFilesFalse < 0) {
+            throw new Error("Counter can't be less than integer = 0");
+        }
 
         if (self.counterChangedFilesTrue > 1) {
             var files = "files"
@@ -917,7 +947,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
             showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
 
-            if (typeof self.openDocsToRecover !== "undefined") {
+            if (typeof self.openDocsToRecover !== "undefined" && self.openDocsToRecover !== null) {
                 recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self.openDocsToRecover);
             }
         }
@@ -956,13 +986,18 @@ EventHandlerBuilder.prototype.onPGNbyDefault = function() {
         setValuesOfPrefs(changedPreference, UI.settingsWindow.PNGbyDefault.title);// Show user made change
 
         var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile(changedPreference);
+
+        if (PNGbyDefault_ON_OFF !== ':  ON ' || PNGbyDefault_ON_OFF !== ':  OFF') {
+            throw new Error("It couldn't read value of seetings from PrefFile: " + changedPreference);
+        }
+
         if (PNGbyDefault_ON_OFF === ':  ON ') {
             UI.filterSourceFilesCheckbox.PNG.value = true; // To implement change of value of checkbox; You can't do notify when object is not showed
 
         } else if (PNGbyDefault_ON_OFF === ':  OFF') {
             UI.filterSourceFilesCheckbox.PNG.value = false; // To implement change of value of checkbox; You can't do notify when object is not showed
             
-        }
+        } 
         if (typeof self.sourceFilesPSDformat !== "undefined" || self.sourceFilesPSDformat === null) {
             UI.filterSourceFilesCheckbox.PNG.onClick();
         }
@@ -1013,6 +1048,8 @@ function createPrefFilePath() {
     var scriptPath = $.fileName;
     var scriptFolder = getScriptFolder(scriptPath);
     var listFile = new File(scriptFolder + "scriptUI_preferences.txt");
+    ErrorWrongStringInputPath(listFile.toString());
+
     return listFile;
 }
 
@@ -1021,6 +1058,8 @@ function createListFilePath() {
     var scriptPath = $.fileName;
     var scriptFolder = getScriptFolder(scriptPath);
     var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
+    ErrorWrongStringInputPath(listFile.toString());
+    
     return listFile;
 }
 
@@ -1084,7 +1123,9 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
         }
         numbOfTextLines++;
     }
-    
+    if (typeof textToReplace === "undefined") {
+        throw new Error("Couldn't find value of expression: " + searchedPhrase + "in" + prefFile + "\n. Check correct spelling again.")
+    }
     return textToReplace;
 }
 
@@ -1119,6 +1160,10 @@ function changeValueOffOnInPrefFile(searchedPhrase) {
         numbOfTextLines++;
     }
 
+    if (typeof textToReplace === "undefined") {
+        throw new Error("Couldn't find value of expression: " + searchedPhrase + "in" + prefFile + "\n. Check correct spelling again.")
+    }
+
     b.close();
 
     b.open('w');
@@ -1140,7 +1185,7 @@ function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
     onOffValueNextToButton.text = updateValue;
 
     alert(alertText);
-}
+} //todo
 
 function filterSourceFilesCheckboxByExpressionEnabled(UI) {
     if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
@@ -1349,10 +1394,10 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection
     if ( detinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
 
     createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
-    self.lockingAcceptBtn();
+    self.lockingUnlockingAcceptBtn();
     UI.pnlAddCanvas.enabled = true;
 
-    self_detinationFolder = detinationFolderSelection;
+    var self_detinationFolder = detinationFolderSelection;
     } else if ( detinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
 
     UI.btnRadDestFold.same.notify();
@@ -1360,7 +1405,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection
     createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
     alert("Source folder and target folder are the same.\nNext time choose more wisely");
 
-    self_detinationFolder = null; //to avoid bug
+    var self_detinationFolder = null; //to avoid bug
     }
 
     return self_detinationFolder;
@@ -1370,7 +1415,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection
  * Restricts the character keys permitted in a `edittext` element.
  * @param {Object} editTextInstance - Reference to `edittext` ScriptUI element.
  */
-function blockButtonByEdittext(editTextInstance) {
+function blockKeysInEdittext(editTextInstance) {
 
     if (editTextInstance.constructor.name !== 'EditText') {
       throw new Error ('Invalid class. Expected `EditText` class.')
@@ -1939,6 +1984,12 @@ function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
 
     if (self_counterChangedFilesFalse > 0) {
         alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
+    }
+}
+
+function ErrorWrongStringInputPath(UItitlePath) {
+    if ( UItitlePath === decodeURIComponent(app.path) ) { //Default value when path of File/Folder can't be found (path of runned app) //todo Check if path exists check if input is string or file
+        throw new Error("Invalid string. String is neither path nor default expression");
     }
 }
 
