@@ -312,6 +312,7 @@ GuiBuilder.prototype.showMainWindow = function() {
 
 EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
     var UI = this.UI;
+    var self = this;
 
     //Opened files in PS
     UI.btnRadSourceFiles.chooseOpenedFiles.onClick = function() {
@@ -324,7 +325,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         btnsRadDestFoldEnabled(true, UI);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
+        self.lockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
 
         if (UI.pnlAddCanvas.enabled === false) {
             UI.pnlAddCanvas.enabled = true;
@@ -358,7 +359,9 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             btnChooseFilesDestFoldEnabled(false, UI);
 
-            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+            alert(self.lockingAcceptBtn);
+
+            self.lockingAcceptBtn();
 
             UI.pnlAddCanvas.enabled = false;
 
@@ -382,7 +385,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             }
 
-            checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+            self.lockingAcceptBtn();
 
             infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
@@ -569,12 +572,13 @@ EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() 
 
 EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
     var UI = this.UI;
+    var self = this;
 
     UI.btnRadDestFold.same.onClick = function() {
 
         btnChooseFilesDestFoldEnabled(false, UI);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+        self.lockingAcceptBtn()
 
         UI.pnlAddCanvas.enabled = true;
     }
@@ -582,13 +586,14 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
 
 EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
     var UI = this.UI;
+    var self = this;
 
     //Copy and Add canvas in other folder
     UI.btnRadDestFold.other.onClick = function() {
 
         btnChooseFilesDestFoldEnabled(true, UI);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+        self.lockingAcceptBtn()
 
         if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
 
@@ -626,25 +631,40 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
                 createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
                 UI.pnlAddCanvas.enabled = true;
 
-                checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+                self.lockingAcceptBtn();
 
             } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
-                self.detinationFolder = checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self.sourceFolderPathRecent);
+                self.detinationFolder = checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self.sourceFolderPathRecent, self);
 
             }
         }
     }
 }
 
-EventHandlerBuilder.prototype.startSettingsWidthAndHeight = function() {
-    var UI = this.UI;
+EventHandlerBuilder.prototype.settingAcceptBtnBlock = function() {
 
-    checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+    var UI = this.UI;
+    var self = this;
+
+    self.lockingAcceptBtn = function checkingIfWidthAndHeightIsNot0UnlockingBtn() {
+
+        if ((UI.grpWidth.numb.text.match(/[0-9]+/) !== null) && (UI.grpHeight.numb.text.match(/[0-9]+/) !== null) &&
+            ((parseInt(UI.grpWidth.numb.text, 10) !== 0) || (parseInt(UI.grpHeight.numb.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
+    
+            UI.btnAccept.enabled = true;
+    
+        } else {
+    
+            UI.btnAccept.enabled = false;
+        }
+    
+    }
 }
 
 EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
+    var self = this;
 
     blockButtonByEdittext(UI.grpWidth.numb);
 
@@ -652,7 +672,7 @@ EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
 
         sameInputField(UI.constrainsProportionsCheckbox, UI.grpWidth.numb, UI.grpHeight.numb);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+        self.lockingAcceptBtn();
     }
 }
 
@@ -680,6 +700,7 @@ EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
 
 EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
+    var self = this;
 
     blockButtonByEdittext(UI.grpHeight.numb);
 
@@ -688,7 +709,7 @@ EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
 
         sameInputField(UI.constrainsProportionsCheckbox, UI.grpHeight.numb, UI.grpWidth.numb);
 
-        checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+        self.lockingAcceptBtn;
     }
 }
 
@@ -1323,12 +1344,12 @@ function checkingIfItIsTheSameSourceFolderAsBefore(self) {
     return sameChoosedSourceFolderAsBefore;
 }
 
-function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self_sourceFolderPathRecent) { // <--- used only in onBtnChooseFilesDestFold
+function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self_sourceFolderPathRecent, self) { // <--- used only in onBtnChooseFilesDestFold
 
     if ( detinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
 
     createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
-    checkingIfWidthAndHeightIsNot0UnlockingBtn(UI.grpWidth.numb, UI.grpHeight.numb, UI.btnAccept);
+    self.lockingAcceptBtn();
     UI.pnlAddCanvas.enabled = true;
 
     self_detinationFolder = detinationFolderSelection;
@@ -1392,20 +1413,6 @@ for (var i = 0, max = arrayToSearch.length; i < max; i++) {
     }
 }
 return false;
-}
-
-function checkingIfWidthAndHeightIsNot0UnlockingBtn(Numb001, Numb002, btnEnabled) {
-
-    if ((Numb001.text.match(/[0-9]+/) !== null) && (Numb002.text.match(/[0-9]+/) !== null) &&
-        ((parseInt(Numb001.text, 10) !== 0) || (parseInt(Numb002.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
-
-        btnEnabled.enabled = true;
-
-    } else {
-
-        btnEnabled.enabled = false;
-    }
-
 }
 
 function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
@@ -1670,7 +1677,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             doc.close();
         }
     }
-alert(self.counterChangedFilesTrue);
+
     app.foregroundColor = fgColorPrevious;
     app.backgroundColor = bgColorPrevious;
 }
@@ -1976,7 +1983,7 @@ function main() {
 
     appDataBuilder();
 
-//-------------------------------------------------------------------------------------------------------------------------------
+//================================================================================================================================
     
     var UI = new GuiBuilder();   
 
@@ -1992,31 +1999,13 @@ function main() {
 
     UI.buildAcceptCancelSettingsButtons();
 
-//-------------------------------------------------------------------------------------------------------------------------------
-
+//================================================================================================================================
+    
     var eventHandler = new EventHandlerBuilder( UI );
 
-    eventHandler.onBtnRadChooseFilesActiveDocs();
+// Add canvas --------------------------------------------------------------------------------------------------------------------
 
-    eventHandler.onBtnRadChooseFilesSourceFold();
-
-    eventHandler.startSettingsUINumbofActiveDocs();
-
-    eventHandler.onBtnChooseFilesSourceFold();
-
-    eventHandler.onFilterSourceFilesCheckboxPNG();
-
-    eventHandler.onFilterSourceFilesCheckboxByExpression();
-
-    eventHandler.onFilterSourceFilesByExpressionInput();
-
-    eventHandler.onBtnRadDestFoldSame();
-
-    eventHandler.onBtnRadDestFoldOther();
-
-    eventHandler.onBtnChooseFilesDestFold();
-
-    eventHandler.startSettingsWidthAndHeight();
+    eventHandler.settingAcceptBtnBlock();
 
     eventHandler.onGrpWidthNumb();
 
@@ -2040,6 +2029,28 @@ function main() {
 
     eventHandler.onCanvExtendColorDropDwn();
 
+// Main mechanics -------------------------------------------------------------------------------------------------------------------
+
+    eventHandler.onBtnRadChooseFilesActiveDocs();
+
+    eventHandler.onBtnRadChooseFilesSourceFold();
+
+    eventHandler.startSettingsUINumbofActiveDocs();
+
+    eventHandler.onBtnChooseFilesSourceFold();
+
+    eventHandler.onFilterSourceFilesCheckboxPNG();
+
+    eventHandler.onFilterSourceFilesCheckboxByExpression();
+
+    eventHandler.onFilterSourceFilesByExpressionInput();
+
+    eventHandler.onBtnRadDestFoldSame();
+
+    eventHandler.onBtnRadDestFoldOther();
+
+    eventHandler.onBtnChooseFilesDestFold();
+
     eventHandler.onBtnAccept();
 
     eventHandler.onBtnCancel();
@@ -2053,6 +2064,8 @@ function main() {
     eventHandler.onLogFiles();
 
     eventHandler.onReturn();
+
+    //================================================================================================================================
 
     UI.showMainWindow();
 }
