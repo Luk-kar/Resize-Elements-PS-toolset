@@ -614,7 +614,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
             UI.pnlAddCanvas.enabled = true;
         }
 
-        ErrorWrongStringInputPath(UI.btnChooseFilesDestFold.title.text);
+        ErrorWrongStringInputPath(Folder(UI.btnChooseFilesDestFold.title.text));
     }
     
 }
@@ -889,7 +889,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
             UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn.selection.toString(),
+            self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn,
             self
             );
 
@@ -987,7 +987,7 @@ EventHandlerBuilder.prototype.onPGNbyDefault = function() {
 
         var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile(changedPreference);
 
-        if (PNGbyDefault_ON_OFF !== ':  ON ' || PNGbyDefault_ON_OFF !== ':  OFF') {
+        if (PNGbyDefault_ON_OFF !== ':  ON ' && PNGbyDefault_ON_OFF !== ':  OFF') {
             throw new Error("It couldn't read value of seetings from PrefFile: " + changedPreference);
         }
 
@@ -1048,7 +1048,7 @@ function createPrefFilePath() {
     var scriptPath = $.fileName;
     var scriptFolder = getScriptFolder(scriptPath);
     var listFile = new File(scriptFolder + "scriptUI_preferences.txt");
-    ErrorWrongStringInputPath(listFile.toString());
+    ErrorWrongStringInputPath(listFile);
 
     return listFile;
 }
@@ -1058,7 +1058,7 @@ function createListFilePath() {
     var scriptPath = $.fileName;
     var scriptFolder = getScriptFolder(scriptPath);
     var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
-    ErrorWrongStringInputPath(listFile.toString());
+    ErrorWrongStringInputPath(listFile);
     
     return listFile;
 }
@@ -1123,8 +1123,9 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
         }
         numbOfTextLines++;
     }
-    if (typeof textToReplace === "undefined") {
-        throw new Error("Couldn't find value of expression: " + searchedPhrase + "in" + prefFile + "\n. Check correct spelling again.")
+
+    if (textToReplace !== ':  OFF' && textToReplace !== ':  ON ') {
+        throw new Error("Couldn't find value of expression: " + searchedPhrase + " in " + prefFile + "\n. Check correct spelling again.")
     }
     return textToReplace;
 }
@@ -1184,8 +1185,8 @@ function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
     var updateValue = readValueOfSeetingsFromPrefFile(changedPreference);
     onOffValueNextToButton.text = updateValue;
 
-    alert(alertText);
-} //todo
+    alert(alertText); //Show user value of changed preference
+} 
 
 function filterSourceFilesCheckboxByExpressionEnabled(UI) {
     if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
@@ -1244,7 +1245,7 @@ function convertStringIntoRegex(input) {
         $.level = 1; //Set to level: 1 to reset debug
     }
     catch (e) {
-        alert("The RegExpr is invalid:\n" + "/" + string + "/");
+        alert("The RegEx is invalid:\n" + "/" + string + "/");
     }
     
     return regex;
@@ -1253,8 +1254,8 @@ function convertStringIntoRegex(input) {
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     
     var objectChildGroup = objectParent.add("panel");
-    if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren;
-    objectChildGroup.alignChildren = alignChildren;
+    if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren; //to add possiblity to set only one property
+    if (typeof alignChildren !== "undefined") objectChildGroup.alignChildren = alignChildren; //to add possiblity to set only one property
     objectChildGroup.alignment = alignmentObject;
 
     return objectChildGroup;
@@ -1263,8 +1264,8 @@ function createPanelUI(objectParent, orientationChildren, alignChildren, alignme
 function createGroupUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
 
     var objectChildGroup = objectParent.add("group");
-    objectChildGroup.orientation = orientationChildren;
-    objectChildGroup.alignChildren = alignChildren;
+    if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren; //to add possiblity to set only one property
+    if (typeof alignChildren !== "undefined") objectChildGroup.alignChildren = alignChildren; //to add possiblity to set only one property
     objectChildGroup.alignment = alignmentObject;
 
     return objectChildGroup;
@@ -1321,6 +1322,10 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
 
     var sourceFilesFiltered = new Array;
 
+    if(typeof properFilesExtPSfiles === "undefined") {
+        throw new Error("RegEx is undefined");
+    }
+
     for (var i = 0; i < sourceFilesUnfiltered.length; i++) { 
         if (sourceFilesUnfiltered[i] instanceof File) {
             
@@ -1356,7 +1361,6 @@ function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFilt
     }
 
     return sourceFiles;
-
 }
 
 function filterFilesByExpression(regex, unfilteredFiles) {
@@ -1367,7 +1371,6 @@ function filterFilesByExpression(regex, unfilteredFiles) {
     var sourceFilesByExpression = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
 
     return sourceFilesByExpression;
-
 }
 
 function filterFilesByPNG(unfilteredFiles) {
@@ -1377,28 +1380,27 @@ function filterFilesByPNG(unfilteredFiles) {
     var sourceFilesPNG = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
 
     return sourceFilesPNG;
-
 }
 
 function checkingIfItIsTheSameSourceFolderAsBefore(self) {
 
     var sameChoosedSourceFolderAsBefore = false;
-    if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) {
+    if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) { //typeof self.sourceFolderPathRecent !== "undefined" if you choose folder first time
         sameChoosedSourceFolderAsBefore = true;
     }
     return sameChoosedSourceFolderAsBefore;
 }
 
-function checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self_sourceFolderPathRecent, self) { // <--- used only in onBtnChooseFilesDestFold
+function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelection, self_sourceFolderPathRecent, self) { // <--- used only in onBtnChooseFilesDestFold
 
-    if ( detinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
+    if ( destinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
 
-    createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
+    createPathString(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
     self.lockingUnlockingAcceptBtn();
     UI.pnlAddCanvas.enabled = true;
 
-    var self_detinationFolder = detinationFolderSelection;
-    } else if ( detinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
+    var self_detinationFolder = destinationFolderSelection;
+    } else if ( destinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
 
     UI.btnRadDestFold.same.notify();
 
@@ -1473,6 +1475,7 @@ function sameDropDown(objectEvent, objectSetSameValue) {
 }
 
 function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSourceFalse) {
+
     if (condition.value === true) {
         picture.image = pictureSourceTrue;
         picture.helpTip = "Width and Height same value anabled";
@@ -1492,6 +1495,10 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
 
      //Setting cliked button to anchor
     btnAnchorClickedOn.image = imageAnchorTrue;
+
+    if(anchorPositionValue === undefined) {
+        throw new Error("anchorPositionValue doesn't have declared value");
+    }
 
     //Sending information which anchor is marked for resizeCanvas()
     return anchorPositionValue;
@@ -1575,6 +1582,10 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
     for (var i = 0; i < panelInfoUIwriteLines.length; i++) {
         panelInfoUIwriteLines[i].text = filesNames[i];
     }
+
+    if (filesNumbers < 0) {
+        throw new Error("Invalid number. It can't have negative value");
+    }
     
     panelInfoUITitle.text =  "Files to process: " + filesNumbers;
 }
@@ -1591,6 +1602,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
         ["ADD PX", "PX"],
         ["ADD %", "PERCENT"],
     ];
+    
+    ErrorDiffrentUnitTypes(unitsList, unitsTypes);
     
     var units = unitsTypes[parseInt(unitsList.selection, 10)][1];
     self.counterChangedFilesTrue = new Number(0);
@@ -1612,7 +1625,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn === "Left upper corner color");
+            leftUpperCornerColorBGSet(canvExtendColorDropDwn.selection.toString() === "Left upper corner color");
 
             }
             
@@ -1672,7 +1685,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
 
-                leftUpperCornerColorBGSet(canvExtendColorDropDwn === "Left upper corner color");
+                leftUpperCornerColorBGSet(canvExtendColorDropDwn.selection.toString() === "Left upper corner color");
 
             };
             
@@ -1727,7 +1740,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     app.backgroundColor = bgColorPrevious;
 }
 
-function counterSavedFiles(isFileSaved, self) {
+function counterSavedFiles(isFileSaved, self) { 
     
     if (isFileSaved)
         self.counterChangedFilesTrue++;
@@ -1743,6 +1756,10 @@ function appendingDocToRecover(docToAppendPath, openedDocsPaths) {
 
         if ( docToAppendPath.toString() === openedDocsPaths[i].toString() ) {
             var recoverDocs = openedDocsPaths[i];
+
+            if (!recoverDocs.exists) {
+                throw new Error("Invalid Path file. File doesn't exist");
+            }
             break;
         }
     }
@@ -1771,6 +1788,19 @@ function writeLnOfFile(index, doc, currentSaveTime, isFileSaved) {
     var listFile = createListFilePath();
     var c = listFile;
 
+    if (typeof isFileSaved !== "boolean") {
+        throw new Error ("isFileSaved is not Boolean");
+    }
+    if (typeof scriptName === "undefined" || scriptName === "") {
+        throw new Error ("scriptName is invalid");
+    }
+    if (Object.prototype.toString.call(currentSaveTime) !== '[object Date]') {
+        throw new Error ("currentSaveTime is not a Date object");
+    }
+    if (!File(docFullName).exists) {
+        throw new Error("Invalid Path file. File doesn't exist");
+    }
+
     c.open("a");
     c.writeln(counter + " save :" + isFileSaved.toString() + " <0> " + docName + " <1> " + scriptName + " <2> " + currentSaveTime + " <3> " + docFullName);
     c.close();
@@ -1783,6 +1813,10 @@ function getScriptName() {
     var match = "execute \- ";
     var textAfterLastMatch = string.slice(string.lastIndexOf(match) + match.length, -4);
 
+    if (!File(string).exists) {
+        throw new Error("Invalid Path file. File doesn't exist");
+    }
+
     return textAfterLastMatch;
 }
 
@@ -1791,16 +1825,15 @@ function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
     if (canvExtendColorDropDwn_IsLeftUpperCroner) {
 
         var doc = app.activeDocument;
-        // Remove any Color Samplers that may already exist.
-        doc.colorSamplers.removeAll();
-        // deselct any selection that may already exist.
-        doc.selection.deselect();
-        // Get color sample from a given x,y coordinate.
-        var pixelLoc = [0, 0];
-        var colorSampleRef = doc.colorSamplers.add(pixelLoc);
+        
+        doc.colorSamplers.removeAll(); // Remove any Color Samplers that may already exist to avoid bug when stack samples is 4, and you can't do any new measurement
+        
+        doc.selection.deselect(); // deselct any selection that may already exist.
 
+        var pixelLocalisation_X_Y = [0, 0];
+        var colorSampleRef = doc.colorSamplers.add(pixelLocalisation_X_Y);
         var sampledColor = colorSampleRef.color;
-        // Set the foreground color to the sampled color.
+
         app.backgroundColor = sampledColor;
         colorSampleRef.remove();
     }
@@ -1823,6 +1856,13 @@ function addCanvas(addWidth, addHeight, units, anchor) {
     var sumWidth = mathWidthAndHeightResult[1];
     var sumHeight = mathWidthAndHeightResult[0];
 
+    if ( isNaN(sumWidth) ) {
+        throw new Error ("object is not a Number");
+    }
+    if ( isNaN(sumHeight) ) {
+        throw new Error ("object is not a Number");
+    }
+
     doc.resizeCanvas(UnitValue(sumWidth, units), UnitValue(sumHeight, units), anchor);
 }
 
@@ -1832,12 +1872,12 @@ function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
     var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
 
     if (units === "PERCENT") {
-        var sumWidth = 100 + parseInt(addWidth, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
-        var sumHeight = 100 + parseInt(addHeight, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
+        var sumWidth = 100 + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
+        var sumHeight = 100 + parseInt(addHeight, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
     }
     else if (units === "PX") {
-        var sumWidth = activeDocWidth + parseInt(addWidth, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
-        var sumHeight = activeDocHeight + parseInt(addHeight, 10); //Have to parse to Int becouse numb with decinamls cause bugs in resizeCanvas() function
+        var sumWidth = activeDocWidth + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
+        var sumHeight = activeDocHeight + parseInt(addHeight, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
     }
 
     return [ sumWidth, sumHeight ];
@@ -1851,6 +1891,10 @@ function saveInDestFolder(detinationFolder) {
     var name = doc.name;
 
     var path = detinationFolder;
+
+    if (!Folder(path).exists) {
+        throw new Error("Invalid Path file. Folder doesn't exist");
+    }
 
     var imageTypes = [
         [/.png$/, savePNG],
@@ -1874,7 +1918,6 @@ function saveInDestFolder(detinationFolder) {
         }
     }
     if (j === imageTypes.length) {
-
         throw new Error("Unhandled type for "+ name)
     }
 }
@@ -1952,7 +1995,7 @@ function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
         activeDoc.close();
     }
 
-    // To avoid bug with unability with "saving as" opened files again after evoking script again
+    // To avoid bug with unability with "saving as" opened files, again after evoking script again (propably it cn't find path of opened files)
     if (!closeOpenedFilesConfirmation) {
         for (var i = 0; i < openedDocs.length; i++) {
             open(openedDocs[i]);
@@ -1987,14 +2030,6 @@ function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
     }
 }
 
-function ErrorWrongStringInputPath(UItitlePath) {
-    if ( UItitlePath === decodeURIComponent(app.path) ) { //Default value when path of File/Folder can't be found (path of runned app) //todo Check if path exists check if input is string or file
-        throw new Error("Invalid string. String is neither path nor default expression");
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------
-
 //Check the time of PREVIOUS save of the file against the save time of the CURRENT file
 function saveFileValidation(previousSaveTime, currentSaveTime, savedFile) {
     
@@ -2025,6 +2060,31 @@ function imageExistsValidation(savedFile) {
         return true;
     } else {
         return false;
+    }
+}
+
+function ErrorWrongStringInputPath(UItitlePath) {
+
+    if ( UItitlePath !== "Destination folder..." && UItitlePath !== "Source folder..." &&
+        !UItitlePath.exists && UItitlePath.toString() === decodeURIComponent(app.path) ) { //Default value when path of File/Folder can't be found is Folder path of runned app
+
+        throw new Error("Invalid string. String is neither path nor default expression");
+    }
+}
+
+function ErrorDiffrentUnitTypes(canvExtendColorDropDwn, unitsTypes) {
+
+    var theSameTypes = true;
+    for (var i = 0; i < unitsTypes.length; i++) {
+
+        if (unitsTypes[i][0] !== canvExtendColorDropDwn.children[i].toString()) {
+            theSameTypes = false;
+            break;
+        }
+    }
+
+    if ( (canvExtendColorDropDwn.children.length !== unitsTypes.length) || (theSameTypes === false)) {
+        throw new Error("var unitsTypes has diffrent values than var AddCanvasDocUnits");
     }
 }
 

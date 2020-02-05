@@ -1,128 +1,36 @@
 Processed files list:
 
-==== Mon Feb 03 2020 20:43:49 GMT+0100 ============================================================================================================
+==== Wed Feb 05 2020 17:40:03 GMT+0100 ============================================================================================================
 
-000001 save :true <0> 001.psd <1> add canvas <2> Mon Feb 03 2020 20:43:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Mon Feb 03 2020 20:43:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Mon Feb 03 2020 20:43:52 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Mon Feb 03 2020 20:43:52 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Mon Feb 03 2020 20:43:53 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Mon Feb 03 2020 20:43:54 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Mon Feb 03 2020 20:43:54 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Mon Feb 03 2020 20:43:55 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Mon Feb 03 2020 20:43:55 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+==== Wed Feb 05 2020 17:41:17 GMT+0100 ============================================================================================================
 
-==== Mon Feb 03 2020 20:49:08 GMT+0100 ============================================================================================================
+000001 save :true <0> 001.psd <1> add canvas <2> Wed Feb 05 2020 17:41:17 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> add canvas <2> Wed Feb 05 2020 17:41:18 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> add canvas <2> Wed Feb 05 2020 17:41:18 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> add canvas <2> Wed Feb 05 2020 17:41:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> add canvas <2> Wed Feb 05 2020 17:41:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> add canvas <2> Wed Feb 05 2020 17:41:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> add canvas <2> Wed Feb 05 2020 17:41:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> add canvas <2> Wed Feb 05 2020 17:41:21 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> add canvas <2> Wed Feb 05 2020 17:41:21 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
 
-000001 save :true <0> 001.psd <1> add canvas <2> Mon Feb 03 2020 20:49:09 GMT+0100 <3> ~/Desktop/test folder/test source folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Mon Feb 03 2020 20:49:09 GMT+0100 <3> ~/Desktop/test folder/test source folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Mon Feb 03 2020 20:49:10 GMT+0100 <3> ~/Desktop/test folder/test source folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Mon Feb 03 2020 20:49:10 GMT+0100 <3> ~/Desktop/test folder/test source folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Mon Feb 03 2020 20:49:11 GMT+0100 <3> ~/Desktop/test folder/test source folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Mon Feb 03 2020 20:49:11 GMT+0100 <3> ~/Desktop/test folder/test source folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Mon Feb 03 2020 20:49:12 GMT+0100 <3> ~/Desktop/test folder/test source folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Mon Feb 03 2020 20:49:12 GMT+0100 <3> ~/Desktop/test folder/test source folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Mon Feb 03 2020 20:49:13 GMT+0100 <3> ~/Desktop/test folder/test source folder/009.tif
+==== Wed Feb 05 2020 18:11:19 GMT+0100 ============================================================================================================
 
-==== Mon Feb 03 2020 21:03:36 GMT+0100 ============================================================================================================
+000001 save :true <0> 003.png <1> add canvas <2> Wed Feb 05 2020 18:11:21 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
 
-000001 save :true <0> 002.psd <1> add canvas <2> Mon Feb 03 2020 21:03:36 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000002 save :true <0> 003.png <1> add canvas <2> Mon Feb 03 2020 21:03:37 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000003 save :true <0> 004.psd <1> add canvas <2> Mon Feb 03 2020 21:03:37 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000004 save :true <0> 005.psd <1> add canvas <2> Mon Feb 03 2020 21:03:37 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000005 save :true <0> 006.bmp <1> add canvas <2> Mon Feb 03 2020 21:03:37 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000006 save :true <0> 008.tif <1> add canvas <2> Mon Feb 03 2020 21:03:38 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000007 save :true <0> 009.tif <1> add canvas <2> Mon Feb 03 2020 21:03:38 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
-000008 save :true <0> 007.jpg <1> add canvas <2> Mon Feb 03 2020 21:03:38 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000009 save :true <0> 001.psd <1> add canvas <2> Mon Feb 03 2020 21:03:39 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+==== Wed Feb 05 2020 18:16:50 GMT+0100 ============================================================================================================
 
-==== Mon Feb 03 2020 21:05:12 GMT+0100 ============================================================================================================
+000001 save :true <0> 003.png <1> add canvas <2> Wed Feb 05 2020 18:16:52 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
 
-000001 save :true <0> 002.psd <1> add canvas <2> Mon Feb 03 2020 21:05:13 GMT+0100 <3> ~/Desktop/test folder/test source folder/002.psd
-000002 save :true <0> 003.png <1> add canvas <2> Mon Feb 03 2020 21:05:13 GMT+0100 <3> ~/Desktop/test folder/test source folder/003.png
-000003 save :true <0> 004.psd <1> add canvas <2> Mon Feb 03 2020 21:05:13 GMT+0100 <3> ~/Desktop/test folder/test source folder/004.psd
-000004 save :true <0> 005.psd <1> add canvas <2> Mon Feb 03 2020 21:05:13 GMT+0100 <3> ~/Desktop/test folder/test source folder/005.psd
-000005 save :true <0> 006.bmp <1> add canvas <2> Mon Feb 03 2020 21:05:14 GMT+0100 <3> ~/Desktop/test folder/test source folder/006.bmp
-000006 save :true <0> 008.tif <1> add canvas <2> Mon Feb 03 2020 21:05:14 GMT+0100 <3> ~/Desktop/test folder/test source folder/008.tif
-000007 save :true <0> 009.tif <1> add canvas <2> Mon Feb 03 2020 21:05:14 GMT+0100 <3> ~/Desktop/test folder/test source folder/009.tif
-000008 save :true <0> 007.jpg <1> add canvas <2> Mon Feb 03 2020 21:05:14 GMT+0100 <3> ~/Desktop/test folder/test source folder/007.jpg
-000009 save :true <0> 001.psd <1> add canvas <2> Mon Feb 03 2020 21:05:15 GMT+0100 <3> ~/Desktop/test folder/test source folder/001.psd
+==== Wed Feb 05 2020 18:32:46 GMT+0100 ============================================================================================================
 
-==== Tue Feb 04 2020 12:59:12 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 001.psd <1> add canvas <2> Tue Feb 04 2020 12:59:15 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Tue Feb 04 2020 12:59:16 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Tue Feb 04 2020 12:59:17 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Tue Feb 04 2020 12:59:17 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Tue Feb 04 2020 12:59:17 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Tue Feb 04 2020 12:59:18 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Tue Feb 04 2020 12:59:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Tue Feb 04 2020 12:59:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Tue Feb 04 2020 12:59:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
-
-==== Tue Feb 04 2020 17:33:04 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 001.psd <1> add canvas <2> Tue Feb 04 2020 17:33:06 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Tue Feb 04 2020 17:33:07 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-==== Tue Feb 04 2020 17:34:27 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 001.psd <1> add canvas <2> Tue Feb 04 2020 17:34:27 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Tue Feb 04 2020 17:34:28 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Tue Feb 04 2020 17:34:28 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Tue Feb 04 2020 17:34:29 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Tue Feb 04 2020 17:34:29 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Tue Feb 04 2020 17:34:30 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Tue Feb 04 2020 17:34:30 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Tue Feb 04 2020 17:34:31 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Tue Feb 04 2020 17:34:31 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
-
-==== Tue Feb 04 2020 17:52:31 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 004.psd <1> add canvas <2> Tue Feb 04 2020 17:52:31 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-
-==== Tue Feb 04 2020 17:52:58 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 001.psd <1> add canvas <2> Tue Feb 04 2020 17:53:00 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Tue Feb 04 2020 17:53:00 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Tue Feb 04 2020 17:53:01 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Tue Feb 04 2020 17:53:02 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Tue Feb 04 2020 17:53:03 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Tue Feb 04 2020 17:53:04 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Tue Feb 04 2020 17:53:05 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Tue Feb 04 2020 17:53:05 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Tue Feb 04 2020 17:53:06 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
-
-==== Tue Feb 04 2020 17:55:03 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 001.psd <1> add canvas <2> Tue Feb 04 2020 17:55:05 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Tue Feb 04 2020 17:55:06 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Tue Feb 04 2020 17:55:07 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Tue Feb 04 2020 17:55:08 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Tue Feb 04 2020 17:55:08 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Tue Feb 04 2020 17:55:09 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Tue Feb 04 2020 17:55:10 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Tue Feb 04 2020 17:55:11 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Tue Feb 04 2020 17:55:12 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
-
-==== Tue Feb 04 2020 17:55:32 GMT+0100 ============================================================================================================
-
-==== Tue Feb 04 2020 17:57:12 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 001.psd <1> add canvas <2> Tue Feb 04 2020 17:57:14 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
-000002 save :true <0> 002.psd <1> add canvas <2> Tue Feb 04 2020 17:57:14 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
-000003 save :true <0> 003.png <1> add canvas <2> Tue Feb 04 2020 17:57:15 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
-000004 save :true <0> 004.psd <1> add canvas <2> Tue Feb 04 2020 17:57:16 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
-000005 save :true <0> 005.psd <1> add canvas <2> Tue Feb 04 2020 17:57:17 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-000006 save :true <0> 006.bmp <1> add canvas <2> Tue Feb 04 2020 17:57:18 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
-000007 save :true <0> 007.jpg <1> add canvas <2> Tue Feb 04 2020 17:57:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
-000008 save :true <0> 008.tif <1> add canvas <2> Tue Feb 04 2020 17:57:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
-000009 save :true <0> 009.tif <1> add canvas <2> Tue Feb 04 2020 17:57:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
-
-==== Tue Feb 04 2020 17:57:36 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 005.psd <1> add canvas <2> Tue Feb 04 2020 17:57:47 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
-
-==== Tue Feb 04 2020 20:32:41 GMT+0100 ============================================================================================================
-
-000001 save :true <0> 003.png <1> add canvas <2> Tue Feb 04 2020 20:32:43 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000001 save :true <0> 001.psd <1> add canvas <2> Wed Feb 05 2020 18:32:47 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> add canvas <2> Wed Feb 05 2020 18:32:48 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> add canvas <2> Wed Feb 05 2020 18:32:48 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> add canvas <2> Wed Feb 05 2020 18:32:49 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> add canvas <2> Wed Feb 05 2020 18:32:49 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> add canvas <2> Wed Feb 05 2020 18:32:50 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> add canvas <2> Wed Feb 05 2020 18:32:50 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> add canvas <2> Wed Feb 05 2020 18:32:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> add canvas <2> Wed Feb 05 2020 18:32:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
 
