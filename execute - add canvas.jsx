@@ -1633,7 +1633,16 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
-                doc.save();
+
+                try {
+                    $.level = 0; //todo
+                    doc.save();
+                    $.level = 1;
+                }
+                catch(e) {
+                        alert("You have earlier opened file in destination folder.\nIf you choose source files folder with the same file as opened file in destination folder, it could cause bugs later.\nOpened file couldn't be saved threfore."); //todo file name
+
+                }
 
                 var currentSaveTime = doc.path.modified;
             
@@ -1796,9 +1805,6 @@ function writeLnOfFile(index, doc, currentSaveTime, isFileSaved) {
     }
     if (Object.prototype.toString.call(currentSaveTime) !== '[object Date]') {
         throw new Error ("currentSaveTime is not a Date object");
-    }
-    if (!File(docFullName).exists) {
-        throw new Error("Invalid Path file. File doesn't exist");
     }
 
     c.open("a");
