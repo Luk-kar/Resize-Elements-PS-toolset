@@ -23,9 +23,24 @@ function appDataBuilder() {
 
 function GuiBuilder() {
 
+    this.buildControlPanel();
+
     this.baseLayout();
     this.images();
     this.buildSettingsWindow();
+}
+
+GuiBuilder.prototype.buildControlPanel = function() {
+
+    this.controlPanelWindow = new Window("dialog", "Control panel");
+
+    this.controlPanelWindow.btnAddCanvas = this.controlPanelWindow.add("button", [0,80,190,101], "Add canvas");
+
+    this.controlPanelWindow.btnResizeImage = this.controlPanelWindow.add("button", [0,40,190,61], "Resize image");
+
+    this.controlPanelWindow.btn2toNcanvas = this.controlPanelWindow.add("button", [205,80,395,101], "2^n canvas");
+
+    this.controlPanelWindow.btnCancel = this.controlPanelWindow.add("button", [205,120,395,141], "Close");
 }
 
 GuiBuilder.prototype.baseLayout = function() {
@@ -301,12 +316,22 @@ GuiBuilder.prototype.buildSettingsWindow = function() {
 
 }
 
-GuiBuilder.prototype.showMainWindow = function() {
-    this.mainWindow.show();
+GuiBuilder.prototype.showControlPanel = function() {
+    this.controlPanelWindow.show();
 }
 
 function EventHandlerBuilder(UI) {
     this.UI = UI;
+}
+
+EventHandlerBuilder.prototype.onControlPanelWindowBtnAddCanvas = function() {
+    var UI = this.UI;
+
+    UI.controlPanelWindow.btnAddCanvas.onClick = function() {
+        UI.controlPanelWindow.close();
+
+        UI.mainWindow.show();
+    }
 }
 
 EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
@@ -1568,6 +1593,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
         var previousSaveTimeSourceDoc = getModificationDate(docsToProcess); // This script must be executed first, because it will not be able to read the date value correctly if it will be executed just before save() or saveAs()
 
+        self.alertPreviousAppearance = false; //declared value
+
         for (var i = 0; i < docsToProcess.length; i++) {
 
             app.activeDocument = docsToProcess[i]; //setting active document from filtered files
@@ -1579,13 +1606,20 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             if (btnRadSameFolder.value === true) {
 
                 try {
-                    $.level = 0; //todo
+                    $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
                     doc.save();
-                    $.level = 1;
+                    $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
                 }
                 catch(e) {
-                        alert("You have earlier opened file in destination folder.\nIf you choose source files folder with the same file as opened file in destination folder, it could cause bugs later.\nOpened file couldn't be saved threfore."); //todo file name
+                    if(self.alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
+                        alert("You have earlier opened file in destination folder.\n" + 
+                            "If you choose source files folder with the same file as opened file in destination folder, it could cause bugs later.\n" + 
+                            "Opened file couldn't be saved threfore.\n" + 
+                            "Check files " +'"save :false"' + 'in scriptUI_changedFilesList.txt in script folder:\n' + 
+                            getScriptFolder($.fileName) );
 
+                        self.alertPreviousAppearance === true;
+                    }
                 }
 
                 var currentSaveTime = doc.path.modified;
@@ -2112,7 +2146,9 @@ function main() {
 
 //================================================================================================================================
     
-    var UI = new GuiBuilder();   
+    var UI = new GuiBuilder();
+
+    UI.buildControlPanel();
 
     UI.buildPanelSourceFiles();
 
@@ -2131,6 +2167,8 @@ function main() {
     var eventHandler = new EventHandlerBuilder( UI );
 
 // Add canvas --------------------------------------------------------------------------------------------------------------------
+
+    eventHandler.onControlPanelWindowBtnAddCanvas();
 
     eventHandler.settingAcceptBtnBlock();
 
@@ -2200,7 +2238,7 @@ function main() {
 
     //================================================================================================================================
 
-    UI.showMainWindow();
+    UI.showControlPanel();
 }
 
 
