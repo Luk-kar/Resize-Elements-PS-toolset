@@ -9,10 +9,9 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 #include "./scripts - method/dateAdd.jsx"
 
-
 //#include "method - date Add.jsx";
 
-function appDataBuilder () {
+function appDataBuilder() {
 
     var listFile = createListFilePath();
     buildListFilesIfItDoesntExists(listFile);
@@ -135,16 +134,16 @@ GuiBuilder.prototype.buildPanelDestinationFolder = function() {
     this.btnChooseFilesDestFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 }
 
-GuiBuilder.prototype.buildPanelAddCanvas = function(){
+GuiBuilder.prototype.buildPanelChangeFile = function(){
 
     ///Add canvas UI
-    this.pnlAddCanvas = createPanelUI(this.grpInfo, undefined, "left");
+    this.pnlChangeFile = createPanelUI(this.grpInfo, undefined, "left");
 
     //Title
-    this.pnlAddCanvas.title = this.pnlAddCanvas.add("statictext", undefined, "Add canvas");
+    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, "Add canvas");
 
     //Group units value
-    this.grpUnitVal = this.pnlAddCanvas.add("group");
+    this.grpUnitVal = this.pnlChangeFile.add("group");
 
         //Group dialog units value
         this.grpUnitValDlg = createGroupUI(this.grpUnitVal, "column", "left");
@@ -190,13 +189,13 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
             this.grpDlgUnitValImage.alignment = "right";
 
     //Constrains proportions
-    this.constrainsProportionsCheckbox = this.pnlAddCanvas.add("checkbox", undefined, "Same Height and Width");
+    this.constrainsProportionsCheckbox = this.pnlChangeFile.add("checkbox", undefined, "Same Height and Width");
 
     //Anchor display
-    this.grpAnchorMarginesSpaceTop =  [this.pnlAddCanvas.add("group", undefined, ""),
-                                       this.pnlAddCanvas.add("group", undefined, "")];
+    this.grpAnchorMarginesSpaceTop =  [this.pnlChangeFile.add("group", undefined, ""),
+                                       this.pnlChangeFile.add("group", undefined, "")];
 
-    this.grpAnchor = this.pnlAddCanvas.add("group");
+    this.grpAnchor = this.pnlChangeFile.add("group");
     this.grpAnchor.title = this.grpAnchor.add("statictext", undefined, "Anchor: ");
     this.grpAnchor.title.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
 
@@ -223,11 +222,11 @@ GuiBuilder.prototype.buildPanelAddCanvas = function(){
             this.anchorPositionBOTTOMCENTER = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
             this.anchorPositionBOTTOMRIGHT = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
 
-    this.grpAnchorMarginesSpaceBottom = this.pnlAddCanvas.add("statictext", undefined, "");
+    this.grpAnchorMarginesSpaceBottom = this.pnlChangeFile.add("statictext", undefined, "");
     this.grpAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 
     //Canvas color extension
-    this.canvExtendColor = this.pnlAddCanvas.add("group");
+    this.canvExtendColor = this.pnlChangeFile.add("group");
 
         this.canvExtendColor.title = this.canvExtendColor.add("statictext", undefined, "Canvas extension color: ");
 
@@ -327,8 +326,8 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         self.lockingUnlockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
 
-        if (UI.pnlAddCanvas.enabled === false) {
-            UI.pnlAddCanvas.enabled = true;
+        if (UI.pnlChangeFile.enabled === false) {
+            UI.pnlChangeFile.enabled = true;
         }
 
         if (UI.btnRadDestFold.other.value === true) {
@@ -361,7 +360,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             self.lockingUnlockingAcceptBtn();
 
-            UI.pnlAddCanvas.enabled = false;
+            UI.pnlChangeFile.enabled = false;
 
             infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
 
@@ -462,7 +461,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
 
                 btnChooseFilesDestFoldEnabled(false, UI);
 
-                UI.pnlAddCanvas.enabled = false;
+                UI.pnlChangeFile.enabled = false;
                 
                 UI.btnAccept.enabled = false;
 
@@ -589,7 +588,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
 
         self.lockingUnlockingAcceptBtn()
 
-        UI.pnlAddCanvas.enabled = true;
+        UI.pnlChangeFile.enabled = true;
     }
 }
 
@@ -607,11 +606,11 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
         if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
 
             UI.btnAccept.enabled = false;
-            UI.pnlAddCanvas.enabled = false;
+            UI.pnlChangeFile.enabled = false;
 
         } else if (UI.btnChooseFilesDestFold.title.text !== "Destination folder...") {
 
-            UI.pnlAddCanvas.enabled = true;
+            UI.pnlChangeFile.enabled = true;
         }
 
         ErrorWrongStringInputPath(Folder(UI.btnChooseFilesDestFold.title.text));
@@ -640,7 +639,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
 
                 self.detinationFolder = detinationFolderSelection;
                 createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
-                UI.pnlAddCanvas.enabled = true;
+                UI.pnlChangeFile.enabled = true;
 
                 self.lockingUnlockingAcceptBtn();
 
@@ -863,6 +862,61 @@ EventHandlerBuilder.prototype.onCanvExtendColorDropDwn = function() {
     }
 }
 
+EventHandlerBuilder.prototype.settingChangeFileAndSaveStartingFunction = function() {
+    var UI = this.UI;
+    var self = this;
+
+    self.startingFunction = function setUnitForAddCanvas() {
+        //full list is in var AddCanvasDocUnits
+        var unitsTypes = [
+            ["ADD PX", "PX"],
+            ["ADD %", "PERCENT"],
+        ];
+        ErrorDiffrentUnitTypes(UI.grpWidth.unitsDropDown, unitsTypes);
+    
+        self.units = unitsTypes[parseInt(UI.grpWidth.unitsDropDown.selection, 10)][1];
+    }
+}
+
+EventHandlerBuilder.prototype.settingChangeFile = function() {
+    var UI = this.UI;
+    var self = this;
+
+    self.changeFile = function AddCanvas() {
+    
+        if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
+    
+            leftUpperCornerColorBGSet(UI.grpWidth.unitsDropDown.selection.toString() === "Left upper corner color");
+    
+        }
+    
+        var doc = app.activeDocument;
+    
+        var mathWidthAndHeightResult = mathSumWidthAndHeight(self.units, UI.grpWidth.numb.text, UI.grpHeight.numb.text, doc);
+        var sumWidth = mathWidthAndHeightResult[1];
+        var sumHeight = mathWidthAndHeightResult[0];
+    
+        if ( isNaN(sumWidth) ) {
+            throw new Error ("object is not a Number");
+        }
+        if ( isNaN(sumHeight) ) {
+            throw new Error ("object is not a Number");
+        }
+    
+        doc.resizeCanvas(UnitValue(sumWidth, self.units), UnitValue(sumHeight, self.units), self.anchorPostionValue);
+    }
+}
+
+EventHandlerBuilder.prototype.settingChangeFileAndSaveEndingFunction = function() {
+    var UI = this.UI;
+    var self = this;
+
+    self.endingFunction = function returnInitialBackgroundAndForeground() {
+        app.foregroundColor = self.fgColor;
+        app.backgroundColor = self.bgColor;
+    }
+}
+
 EventHandlerBuilder.prototype.onBtnAccept = function() {
     var UI = this.UI;
     var self = this;
@@ -886,11 +940,9 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
         } // OFF -> do nothing
 
         changeFileAndSave(self.sourceFilesToProcess, self.detinationFolder, 
-            UI.grpWidth.numb.text, UI.grpHeight.numb.text, UI.grpWidth.unitsDropDown, self.anchorPostionValue, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self.fgColor, self.bgColor, UI.canvExtendColor.dropDwn,
-            self
+            UI, self
             );
 
         if (logFiles_ON_OFF === ':  ON ') {
@@ -1397,7 +1449,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
 
     createPathString(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
     self.lockingUnlockingAcceptBtn();
-    UI.pnlAddCanvas.enabled = true;
+    UI.pnlChangeFile.enabled = true;
 
     var self_detinationFolder = destinationFolderSelection;
     } else if ( destinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
@@ -1411,97 +1463,6 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
     }
 
     return self_detinationFolder;
-}
-
-/**
- * Restricts the character keys permitted in a `edittext` element.
- * @param {Object} editTextInstance - Reference to `edittext` ScriptUI element.
- */
-function blockKeysInEdittext(editTextInstance) {
-
-    if (editTextInstance.constructor.name !== 'EditText') {
-      throw new Error ('Invalid class. Expected `EditText` class.')
-    }
-  
-    var permissibleKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        'Minus', 'Escape', 'Backspace', 'Enter'];
-  
-    editTextInstance.addEventListener('keydown', function (key) {
-        var keyName = key.keyName;
-        var shiftKeyIsDown = key.shiftKey;
-        var altKeyIsDown = key.altKey;
-  
-    if (shiftKeyIsDown && keyName === 'Equal') {
-        return;
-    }
-  
-    if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) {
-        key.preventDefault();
-        return;
-    }
-  
-    if (! inArray(keyName, permissibleKeys)) {
-        key.preventDefault();
-    }
-    });
-  }
-  
-/**
- * Determines whether an array includes a certain value among its elements.
- * @param {String} valueToFind - The value to search for.
- * @param {Array} arrayToSearch - The array to search in.
- * @returns {Boolean} true if the value valueToFind is found within the array
- */
-  
-function inArray(valueToFind, arrayToSearch) {
-for (var i = 0, max = arrayToSearch.length; i < max; i++) {
-    if (arrayToSearch[i] === valueToFind) {
-        return true;
-    }
-}
-return false;
-}
-
-function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
-    if (condition.value === true) {
-        inputFieldToPasteIn.text = inputFieldToCopy.text;
-    }
-}
-
-function sameDropDown(objectEvent, objectSetSameValue) {
-    if (objectEvent.selection.index !== objectSetSameValue.selection.index) {
-        objectSetSameValue.selection = objectEvent.selection.index;
-    }
-}
-
-function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSourceFalse) {
-
-    if (condition.value === true) {
-        picture.image = pictureSourceTrue;
-        picture.helpTip = "Width and Height same value anabled";
-    }
-    else if (condition.value === false) {
-        picture.image = pictureSourceFalse;
-        picture.helpTip = "Width and Height same value disabled";
-    }
-}
-
-//Anchor button functionality
-function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionButtons, imageAnchorTrue, imageAnchorFalse) {
-
-    for (i = 0; i < anchorPostionButtons.length; i++){
-        anchorPostionButtons[i].image = imageAnchorFalse;
-    }
-
-     //Setting cliked button to anchor
-    btnAnchorClickedOn.image = imageAnchorTrue;
-
-    if(anchorPositionValue === undefined) {
-        throw new Error("anchorPositionValue doesn't have declared value");
-    }
-
-    //Sending information which anchor is marked for resizeCanvas()
-    return anchorPositionValue;
 }
 
 //Used later to dispaly names of opened files
@@ -1573,9 +1534,7 @@ function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, 
     }
 
     infoUIwriteText(prevDocNames, filesNamesInfoUI.length, panelInfoUITitle, panelInfoUIwriteLines);
-}
-    
-
+} 
 
 function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUIwriteLines) {
 
@@ -1591,25 +1550,16 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
 }
 
 function changeFileAndSave(sourceFiles, detinationFolder, 
-    addWidth, addHeight, unitsList, anchor, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    fgColorPrevious, bgColorPrevious, canvExtendColorDropDwn,
-    self) {
+    UI, self) {
 
-    //full list is in var AddCanvasDocUnits
-    var unitsTypes = [
-        ["ADD PX", "PX"],
-        ["ADD %", "PERCENT"],
-    ];
-    
-    ErrorDiffrentUnitTypes(unitsList, unitsTypes);
-    
-    var units = unitsTypes[parseInt(unitsList.selection, 10)][1];
     self.counterChangedFilesTrue = new Number(0);
     self.counterChangedFilesFalse = new Number(0);
 
     var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+
+    self.startingFunction();
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
@@ -1622,14 +1572,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             app.activeDocument = docsToProcess[i]; //setting active document from filtered files
             var doc = app.activeDocument;
-
-            if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
-
-            leftUpperCornerColorBGSet(canvExtendColorDropDwn.selection.toString() === "Left upper corner color");
-
-            }
             
-            addCanvas(addWidth, addHeight, units, anchor);
+            self.changeFile();
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
@@ -1674,6 +1618,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 }
             }
 
+            self.endingFunction();
         }
     
     //If you choose  radio button "Source folder"
@@ -1691,14 +1636,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             var doc = app.activeDocument;
             var openedDocPath = doc.fullName;
-
-            if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
-
-                leftUpperCornerColorBGSet(canvExtendColorDropDwn.selection.toString() === "Left upper corner color");
-
-            };
             
-            addCanvas(addWidth, addHeight, units, anchor);
+            self.changeFile();
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
@@ -1745,8 +1684,6 @@ function changeFileAndSave(sourceFiles, detinationFolder,
         }
     }
 
-    app.foregroundColor = fgColorPrevious;
-    app.backgroundColor = bgColorPrevious;
 }
 
 function counterSavedFiles(isFileSaved, self) { 
@@ -1824,69 +1761,6 @@ function getScriptName() {
     }
 
     return textAfterLastMatch;
-}
-
-function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
-
-    if (canvExtendColorDropDwn_IsLeftUpperCroner) {
-
-        var doc = app.activeDocument;
-        
-        doc.colorSamplers.removeAll(); // Remove any Color Samplers that may already exist to avoid bug when stack samples is 4, and you can't do any new measurement
-        
-        doc.selection.deselect(); // deselct any selection that may already exist.
-
-        var pixelLocalisation_X_Y = [0, 0];
-        var colorSampleRef = doc.colorSamplers.add(pixelLocalisation_X_Y);
-        var sampledColor = colorSampleRef.color;
-
-        app.backgroundColor = sampledColor;
-        colorSampleRef.remove();
-    }
-}
-
-function itHasBackgroundLayerChecker() {
-
-    var doc = app.activeDocument;
-    var docLastLayer = doc.artLayers[doc.artLayers.length - 1];
-    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer;
-    return itHasbackgroundLayer;
-    
-}
-
-function addCanvas(addWidth, addHeight, units, anchor) {
-
-    var doc = app.activeDocument;
-
-    var mathWidthAndHeightResult = mathSumWidthAndHeight(units, addWidth, addHeight, doc);
-    var sumWidth = mathWidthAndHeightResult[1];
-    var sumHeight = mathWidthAndHeightResult[0];
-
-    if ( isNaN(sumWidth) ) {
-        throw new Error ("object is not a Number");
-    }
-    if ( isNaN(sumHeight) ) {
-        throw new Error ("object is not a Number");
-    }
-
-    doc.resizeCanvas(UnitValue(sumWidth, units), UnitValue(sumHeight, units), anchor);
-}
-
-function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
-
-    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10);
-    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
-
-    if (units === "PERCENT") {
-        var sumWidth = 100 + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
-        var sumHeight = 100 + parseInt(addHeight, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
-    }
-    else if (units === "PX") {
-        var sumWidth = activeDocWidth + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
-        var sumHeight = activeDocHeight + parseInt(addHeight, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
-    }
-
-    return [ sumWidth, sumHeight ];
 }
 
 function saveInDestFolder(detinationFolder) {
@@ -2078,6 +1952,142 @@ function ErrorWrongStringInputPath(UItitlePath) {
     }
 }
 
+/**
+ * Restricts the character keys permitted in a `edittext` element.
+ * @param {Object} editTextInstance - Reference to `edittext` ScriptUI element.
+ */
+function blockKeysInEdittext(editTextInstance) {
+
+    if (editTextInstance.constructor.name !== 'EditText') {
+      throw new Error ('Invalid class. Expected `EditText` class.')
+    }
+  
+    var permissibleKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'Minus', 'Escape', 'Backspace', 'Enter'];
+  
+    editTextInstance.addEventListener('keydown', function (key) {
+        var keyName = key.keyName;
+        var shiftKeyIsDown = key.shiftKey;
+        var altKeyIsDown = key.altKey;
+  
+    if (shiftKeyIsDown && keyName === 'Equal') {
+        return;
+    }
+  
+    if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) {
+        key.preventDefault();
+        return;
+    }
+  
+    if (! inArray(keyName, permissibleKeys)) {
+        key.preventDefault();
+    }
+    });
+  }
+  
+/**
+ * Determines whether an array includes a certain value among its elements.
+ * @param {String} valueToFind - The value to search for.
+ * @param {Array} arrayToSearch - The array to search in.
+ * @returns {Boolean} true if the value valueToFind is found within the array
+ */
+  
+function inArray(valueToFind, arrayToSearch) {
+for (var i = 0, max = arrayToSearch.length; i < max; i++) {
+    if (arrayToSearch[i] === valueToFind) {
+        return true;
+    }
+}
+return false;
+}
+
+function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
+    if (condition.value === true) {
+        inputFieldToPasteIn.text = inputFieldToCopy.text;
+    }
+}
+
+function sameDropDown(objectEvent, objectSetSameValue) {
+    if (objectEvent.selection.index !== objectSetSameValue.selection.index) {
+        objectSetSameValue.selection = objectEvent.selection.index;
+    }
+}
+
+function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSourceFalse) {
+
+    if (condition.value === true) {
+        picture.image = pictureSourceTrue;
+        picture.helpTip = "Width and Height same value anabled";
+    }
+    else if (condition.value === false) {
+        picture.image = pictureSourceFalse;
+        picture.helpTip = "Width and Height same value disabled";
+    }
+}
+
+//Anchor button functionality
+function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionButtons, imageAnchorTrue, imageAnchorFalse) {
+
+    for (i = 0; i < anchorPostionButtons.length; i++){
+        anchorPostionButtons[i].image = imageAnchorFalse;
+    }
+
+     //Setting cliked button to anchor
+    btnAnchorClickedOn.image = imageAnchorTrue;
+
+    if(anchorPositionValue === undefined) {
+        throw new Error("anchorPositionValue doesn't have declared value");
+    }
+
+    //Sending information which anchor is marked for resizeCanvas()
+    return anchorPositionValue;
+}
+
+function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
+
+    if (canvExtendColorDropDwn_IsLeftUpperCroner) {
+
+        var doc = app.activeDocument;
+        
+        doc.colorSamplers.removeAll(); // Remove any Color Samplers that may already exist to avoid bug when stack samples is 4, and you can't do any new measurement
+        
+        doc.selection.deselect(); // deselct any selection that may already exist.
+
+        var pixelLocalisation_X_Y = [0, 0];
+        var colorSampleRef = doc.colorSamplers.add(pixelLocalisation_X_Y);
+        var sampledColor = colorSampleRef.color;
+
+        app.backgroundColor = sampledColor;
+        colorSampleRef.remove();
+    }
+}
+
+function itHasBackgroundLayerChecker() {
+
+    var doc = app.activeDocument;
+    var docLastLayer = doc.artLayers[doc.artLayers.length - 1];
+    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer;
+    return itHasbackgroundLayer;
+    
+}
+
+function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
+
+    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10);
+    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
+
+    if (units === "PERCENT") {
+        var sumWidth = 100 + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
+        var sumHeight = 100 + parseInt(addHeight, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
+    }
+    else if (units === "PX") {
+        var sumWidth = activeDocWidth + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
+        var sumHeight = activeDocHeight + parseInt(addHeight, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function
+    }
+
+    return [ sumWidth, sumHeight ];
+}
+
 function ErrorDiffrentUnitTypes(canvExtendColorDropDwn, unitsTypes) {
 
     var theSameTypes = true;
@@ -2110,7 +2120,7 @@ function main() {
 
     UI.buildPanelDestinationFolder();
 
-    UI.buildPanelAddCanvas();
+    UI.buildPanelChangeFile();
 
     UI.buildPanelInfoUI();
 
@@ -2123,6 +2133,12 @@ function main() {
 // Add canvas --------------------------------------------------------------------------------------------------------------------
 
     eventHandler.settingAcceptBtnBlock();
+
+    eventHandler.settingChangeFileAndSaveStartingFunction();
+
+    eventHandler.settingChangeFile();
+
+    eventHandler.settingChangeFileAndSaveEndingFunction();
 
     eventHandler.onGrpWidthNumb();
 
