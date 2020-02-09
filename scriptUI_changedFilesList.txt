@@ -134,3 +134,63 @@ Processed files list:
 000008 save :true <0> 008.tif <1> add canvas <2> Sat Feb 08 2020 20:34:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
 000009 save :true <0> 009.tif <1> add canvas <2> Sat Feb 08 2020 20:34:46 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
 
+==== Sun Feb 09 2020 19:54:38 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:40 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:41 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:42 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:43 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:43 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:44 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:44 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 19:54:46 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
+==== Sun Feb 09 2020 20:58:18 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:19 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:21 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:21 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:22 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:22 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:58:23 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
+==== Sun Feb 09 2020 20:59:46 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:48 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:48 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:49 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:49 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:49 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:50 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> ts/Programming/ps-plugins/main <2> Sun Feb 09 2020 20:59:52 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
+==== Sun Feb 09 2020 21:11:44 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> add canvas <2> Sun Feb 09 2020 21:11:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> add canvas <2> Sun Feb 09 2020 21:11:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> add canvas <2> Sun Feb 09 2020 21:11:46 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> add canvas <2> Sun Feb 09 2020 21:11:46 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> add canvas <2> Sun Feb 09 2020 21:11:47 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> add canvas <2> Sun Feb 09 2020 21:11:47 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> add canvas <2> Sun Feb 09 2020 21:11:48 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> add canvas <2> Sun Feb 09 2020 21:11:48 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> add canvas <2> Sun Feb 09 2020 21:11:49 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
+==== Sun Feb 09 2020 21:12:52 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> add canvas <2> Sun Feb 09 2020 21:12:54 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> add canvas <2> Sun Feb 09 2020 21:12:54 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> add canvas <2> Sun Feb 09 2020 21:12:55 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> add canvas <2> Sun Feb 09 2020 21:12:55 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> add canvas <2> Sun Feb 09 2020 21:12:56 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> add canvas <2> Sun Feb 09 2020 21:12:56 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> add canvas <2> Sun Feb 09 2020 21:12:57 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> add canvas <2> Sun Feb 09 2020 21:12:57 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> add canvas <2> Sun Feb 09 2020 21:12:58 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
