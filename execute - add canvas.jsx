@@ -21,16 +21,13 @@ function appDataBuilder() {
 
 }
 
-function GuiBuilder() {
+function GuiBuilderControlPln() {
 
     this.buildControlPanel();
 
-    this.baseLayout();
-    this.images();
-    this.buildSettingsWindow();
 }
 
-GuiBuilder.prototype.buildControlPanel = function() {
+GuiBuilderControlPln.prototype.buildControlPanel = function() {
 
     this.controlPanelWindow = new Window("dialog", "Control panel");
 
@@ -43,7 +40,37 @@ GuiBuilder.prototype.buildControlPanel = function() {
     this.controlPanelWindow.btnCancel = this.controlPanelWindow.add("button", [205,120,395,141], "Close");
 }
 
-GuiBuilder.prototype.baseLayout = function() {
+//================================================================================================================================
+
+function EventHandlerBuilderControlPln(UI) {
+    this.UI = UI;
+}
+
+EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = function() {
+    var UI = this.UI;
+
+    UI.controlPanelWindow.btnAddCanvas.onClick = function() {
+        UI.controlPanelWindow.close();
+
+        var executeScript = "add canvas";
+        main(executeScript);
+    }
+}
+
+GuiBuilderControlPln.prototype.showControlPanel = function() {
+    this.controlPanelWindow.show();
+}
+
+//================================================================================================================================
+
+function GuiBuilderMain() {
+
+    this.baseLayout();
+    this.images();
+    this.buildSettingsWindow();
+}
+
+GuiBuilderMain.prototype.baseLayout = function() {
 
     //Creating groups to populate with main UI
     this.mainWindow = new Window("dialog", "Add canvas");
@@ -55,7 +82,7 @@ GuiBuilder.prototype.baseLayout = function() {
 
 }
 
-GuiBuilder.prototype.images = function() {
+GuiBuilderMain.prototype.images = function() {
 
     var scriptPath = $.fileName;
     var imageFolderDestination = getScriptFolder(scriptPath) + "/images/";
@@ -73,7 +100,7 @@ GuiBuilder.prototype.images = function() {
 
 }
 
-GuiBuilder.prototype.buildPanelSourceFiles = function() {
+GuiBuilderMain.prototype.buildPanelSourceFiles = function() {
     //Creating group to populate with main UI
     this.plnSourceFiles = createPanelUI(this.grpInfo, undefined, "left");
 
@@ -96,7 +123,7 @@ GuiBuilder.prototype.buildPanelSourceFiles = function() {
     this.btnChooseFilesSourceFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 }
 
-GuiBuilder.prototype.buildPanelSourceFilesFilter = function() {
+GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
 
     //Create panel
     this.plnFilterFiles = createPanelUI(this.grpInfo, undefined, "left");
@@ -127,7 +154,7 @@ GuiBuilder.prototype.buildPanelSourceFilesFilter = function() {
 
 }
 
-GuiBuilder.prototype.buildPanelDestinationFolder = function() {
+GuiBuilderMain.prototype.buildPanelDestinationFolder = function() {
 
     this.pnlDestFold = createPanelUI(this.grpInfo, undefined, "left");
 
@@ -149,15 +176,15 @@ GuiBuilder.prototype.buildPanelDestinationFolder = function() {
     this.btnChooseFilesDestFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
 }
 
-GuiBuilder.prototype.buildPanelChangeFile = function(){
+GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     var UI = this.UI;
 
-    if (UI.executeScript === "add canvas"){
+    if (executeScript === "add canvas"){
         #include "./scripts - execute/Add canvas/UI.jsx"; //todo change logic of files
     }
 }
 
-GuiBuilder.prototype.buildPanelInfoUI = function(){
+GuiBuilderMain.prototype.buildPanelInfoUI = function(){
 
     this.pnlDocInfo = createPanelUI(this.grpInfo, undefined, "left");
 
@@ -173,7 +200,7 @@ GuiBuilder.prototype.buildPanelInfoUI = function(){
     }
 }
 
-GuiBuilder.prototype.buildAcceptCancelSettingsButtons = function() {
+GuiBuilderMain.prototype.buildAcceptCancelSettingsButtons = function() {
 
         this.grpBtns = createGroupUI(this.grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
@@ -184,7 +211,7 @@ GuiBuilder.prototype.buildAcceptCancelSettingsButtons = function() {
         this.btnSettings = this.grpBtns.add("button", undefined, "Settings");
 }
 
-GuiBuilder.prototype.buildSettingsWindow = function() {
+GuiBuilderMain.prototype.buildSettingsWindow = function() {
 
     this.settingsWindow = new Window("dialog", "Enabled/Disabled");
     this.settingsWindow.alignChildren = "left";
@@ -214,26 +241,11 @@ GuiBuilder.prototype.buildSettingsWindow = function() {
 
 }
 
-GuiBuilder.prototype.showControlPanel = function() {
-    this.controlPanelWindow.show();
-}
-
-function EventHandlerBuilder(UI) {
+function EventHandlerBuilderMain(UI) {
     this.UI = UI;
 }
 
-EventHandlerBuilder.prototype.onControlPanelWindowBtnAddCanvas = function() {
-    var UI = this.UI;
-
-    UI.controlPanelWindow.btnAddCanvas.onClick = function() {
-        UI.controlPanelWindow.close();
-
-        UI.executeScript = "add canvas";
-        UI.mainWindow.show();
-    }
-}
-
-EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
+EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
     var UI = this.UI;
     var self = this;
 
@@ -264,7 +276,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesActiveDocs = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
+EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
     var UI = this.UI;
     var self = this;
 
@@ -315,7 +327,7 @@ EventHandlerBuilder.prototype.onBtnRadChooseFilesSourceFold = function() {
     }
 }
 
-EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
+EventHandlerBuilderMain.prototype.startSettingsUINumbofActiveDocs = function() {
     var UI = this.UI;
     var self = this;
 
@@ -342,7 +354,7 @@ EventHandlerBuilder.prototype.startSettingsUINumbofActiveDocs = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
+EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
     var UI = this.UI;
     var self = this;
 
@@ -455,7 +467,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesSourceFold = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
+EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxPNG = function() {
 
     var UI = this.UI;
     var self = this;
@@ -468,7 +480,7 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxPNG = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function() { 
+EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxByExpression = function() { 
 
     var UI = this.UI;
     var self = this;
@@ -483,7 +495,7 @@ EventHandlerBuilder.prototype.onFilterSourceFilesCheckboxByExpression = function
     }
 }
 
-EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() {
+EventHandlerBuilderMain.prototype.onFilterSourceFilesByExpressionInput = function() {
     
     var UI = this.UI;
     var self = this;
@@ -502,7 +514,7 @@ EventHandlerBuilder.prototype.onFilterSourceFilesByExpressionInput = function() 
 
 }
 
-EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
+EventHandlerBuilderMain.prototype.onBtnRadDestFoldSame = function() {
     var UI = this.UI;
     var self = this;
 
@@ -516,7 +528,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldSame = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
+EventHandlerBuilderMain.prototype.onBtnRadDestFoldOther = function() {
     var UI = this.UI;
     var self = this;
 
@@ -542,7 +554,7 @@ EventHandlerBuilder.prototype.onBtnRadDestFoldOther = function() {
     
 }
 
-EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
+EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
     var UI = this.UI;
     var self = this;
 
@@ -576,7 +588,7 @@ EventHandlerBuilder.prototype.onBtnChooseFilesDestFold = function() {
     }
 }
 
-EventHandlerBuilder.prototype.settingAcceptBtnBlock = function() {
+EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     var UI = this.UI;
     var self = this;
@@ -600,7 +612,7 @@ EventHandlerBuilder.prototype.settingAcceptBtnBlock = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
+EventHandlerBuilderMain.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
     var self = this;
 
@@ -614,7 +626,7 @@ EventHandlerBuilder.prototype.onGrpWidthNumb = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onGrpWidthUnitsDropDown  = function() {
+EventHandlerBuilderMain.prototype.onGrpWidthUnitsDropDown  = function() {
     var UI = this.UI;
 
     //Dropdownlist: setting the same units: "ADD %" and "ADD %"
@@ -625,7 +637,7 @@ EventHandlerBuilder.prototype.onGrpWidthUnitsDropDown  = function() {
 
 }
 
-EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
+EventHandlerBuilderMain.prototype.tooltipWidthAndHeightImage = function() {
     var UI = this.UI;
 
     var tooltipValue = "You can substract number by adding '-' before value.\n" +
@@ -636,7 +648,7 @@ EventHandlerBuilder.prototype.tooltipWidthAndHeightImage = function() {
     UI.grpHeight.imageTooltip.helpTip = tooltipValue;
 }
 
-EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
+EventHandlerBuilderMain.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
     var self = this;
 
@@ -651,7 +663,7 @@ EventHandlerBuilder.prototype.onGrpHeightNumb = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onGrpHeightUnitDropDown = function() {
+EventHandlerBuilderMain.prototype.onGrpHeightUnitDropDown = function() {
     var UI = this.UI;
 
     UI.grpHeight.unitDropDown.onChange = function() {
@@ -659,13 +671,13 @@ EventHandlerBuilder.prototype.onGrpHeightUnitDropDown = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onGrpDlgUnitValImage = function() {
+EventHandlerBuilderMain.prototype.onGrpDlgUnitValImage = function() {
     var UI = this.UI;
 
     createTooltipToImage(UI.constrainsProportionsCheckbox, UI.grpDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
 }
 
-EventHandlerBuilder.prototype.onAnchorButtons = function() {
+EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     var UI = this.UI;
     var self = this;
 
@@ -689,7 +701,7 @@ EventHandlerBuilder.prototype.onAnchorButtons = function() {
     UI.anchorPositionBOTTOMRIGHT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
 }
 
-EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
+EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
     var UI = this.UI;
 
     UI.constrainsProportionsCheckbox.onClick = function() {
@@ -720,13 +732,13 @@ EventHandlerBuilder.prototype.onConstrainsProportionsCheckbox = function() {
 
 }
 
-EventHandlerBuilder.prototype.tooltipConstrainsProportionsCheckbox = function() {
+EventHandlerBuilderMain.prototype.tooltipConstrainsProportionsCheckbox = function() {
     var UI = this.UI;
 
     UI.constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width";
 }
 
-EventHandlerBuilder.prototype.savingBGandFGtoRestoreLater = function() {
+EventHandlerBuilderMain.prototype.savingBGandFGtoRestoreLater = function() {
     var self = this;
 
     ///Saving BG and FG bucket color
@@ -744,7 +756,7 @@ EventHandlerBuilder.prototype.savingBGandFGtoRestoreLater = function() {
 
 }
 
-EventHandlerBuilder.prototype.onCanvExtendColorDropDwn = function() {
+EventHandlerBuilderMain.prototype.onCanvExtendColorDropDwn = function() {
     var UI = this.UI;
     var self = this;
 
@@ -786,7 +798,7 @@ EventHandlerBuilder.prototype.onCanvExtendColorDropDwn = function() {
     }
 }
 
-EventHandlerBuilder.prototype.settingChangeFileAndSaveStartingFunction = function() {
+EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = function() {
     var UI = this.UI;
     var self = this;
 
@@ -802,7 +814,7 @@ EventHandlerBuilder.prototype.settingChangeFileAndSaveStartingFunction = functio
     }
 }
 
-EventHandlerBuilder.prototype.settingChangeFile = function() {
+EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     var UI = this.UI;
     var self = this;
 
@@ -831,7 +843,7 @@ EventHandlerBuilder.prototype.settingChangeFile = function() {
     }
 }
 
-EventHandlerBuilder.prototype.settingChangeFileAndSaveEndingFunction = function() {
+EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = function() {
     var UI = this.UI;
     var self = this;
 
@@ -841,7 +853,7 @@ EventHandlerBuilder.prototype.settingChangeFileAndSaveEndingFunction = function(
     }
 }
 
-EventHandlerBuilder.prototype.onBtnAccept = function() {
+EventHandlerBuilderMain.prototype.onBtnAccept = function() {
     var UI = this.UI;
     var self = this;
 
@@ -931,7 +943,7 @@ EventHandlerBuilder.prototype.onBtnAccept = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onBtnCancel = function() {
+EventHandlerBuilderMain.prototype.onBtnCancel = function() {
     var UI = this.UI;
 
     UI.btnCancel.onClick = function() {
@@ -939,7 +951,7 @@ EventHandlerBuilder.prototype.onBtnCancel = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onSettings = function() {
+EventHandlerBuilderMain.prototype.onSettings = function() {
     var UI = this.UI;
 
     UI.btnSettings.onClick = function() {
@@ -948,7 +960,7 @@ EventHandlerBuilder.prototype.onSettings = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onPGNbyDefault = function() {
+EventHandlerBuilderMain.prototype.onPGNbyDefault = function() {
 
     var UI = this.UI;
     var self = this;
@@ -980,7 +992,7 @@ EventHandlerBuilder.prototype.onPGNbyDefault = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onDoNotShowCloseOpenedFiles = function() {
+EventHandlerBuilderMain.prototype.onDoNotShowCloseOpenedFiles = function() {
 
     var UI = this.UI;
 
@@ -993,7 +1005,7 @@ EventHandlerBuilder.prototype.onDoNotShowCloseOpenedFiles = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onLogFiles = function() {
+EventHandlerBuilderMain.prototype.onLogFiles = function() {
     
     var UI = this.UI;
 
@@ -1006,7 +1018,7 @@ EventHandlerBuilder.prototype.onLogFiles = function() {
     }
 }
 
-EventHandlerBuilder.prototype.onReturn = function() {
+EventHandlerBuilderMain.prototype.onReturn = function() {
 
     var UI = this.UI;
 
@@ -2037,17 +2049,33 @@ function ErrorDiffrentUnitTypes(canvExtendColorDropDwn, unitsTypes) {
     }
 }
 
+controlPanel();
+
 main();
 
-function main() {
+function controlPanel() {
+
+    var UI =  new GuiBuilderControlPln();
+
+    UI.buildControlPanel();
+
+//================================================================================================================================
+
+    var eventHandler = new EventHandlerBuilderControlPln( UI );
+
+    eventHandler.onControlPanelWindowBtnAddCanvas();
+
+    UI.showControlPanel();
+
+}
+
+function main(executeScript) {
 
     appDataBuilder();
 
 //================================================================================================================================
     
-    var UI = new GuiBuilder();
-
-    UI.buildControlPanel();
+    var UI = new GuiBuilderMain();
 
     UI.buildPanelSourceFiles();
 
@@ -2055,7 +2083,7 @@ function main() {
 
     UI.buildPanelDestinationFolder();
 
-    UI.buildPanelChangeFile();
+    UI.buildPanelChangeFile(executeScript);
 
     UI.buildPanelInfoUI();
 
@@ -2063,11 +2091,11 @@ function main() {
 
 //================================================================================================================================
     
-    var eventHandler = new EventHandlerBuilder( UI );
+    var eventHandler = new EventHandlerBuilderMain( UI );
 
 // Add canvas --------------------------------------------------------------------------------------------------------------------
 
-    eventHandler.onControlPanelWindowBtnAddCanvas();
+if (executeScript === "add canvas")
 
     eventHandler.settingAcceptBtnBlock();
 
@@ -2135,9 +2163,6 @@ function main() {
 
     eventHandler.onReturn();
 
-    //================================================================================================================================
-
-    UI.showControlPanel();
 }
 
 
