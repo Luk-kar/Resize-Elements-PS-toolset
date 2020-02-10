@@ -7,7 +7,7 @@
 
 $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
 
-#include "./scripts - method/dateAdd.jsx"
+#include "./Ι_methods/dateAdd.jsx"
 
 //#include "method - date Add.jsx";
 
@@ -33,7 +33,7 @@ function GuiBuilderMain() {
 GuiBuilderMain.prototype.baseLayout = function(executeScript) {
 
     //Creating groups to populate with main UI
-    this.mainWindow = new Window("dialog", capitalizeFirstLetter(executeScript));
+    this.mainWindow = new Window("dialog", executeScript);
 
     this.grpMain = this.mainWindow.add("group")
 
@@ -44,8 +44,9 @@ GuiBuilderMain.prototype.baseLayout = function(executeScript) {
 
 GuiBuilderMain.prototype.images = function() {
 
-    var scriptPath = $.fileName;
-    var imageFolderDestination = getScriptFolder(scriptPath) + "/images/";
+    var scriptParentFolder = getParentfolder(); // slice negative numb is length of file folder
+
+    var imageFolderDestination = scriptParentFolder + "images/";
 
     //Image: InfoHover.png
     this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
@@ -139,8 +140,16 @@ GuiBuilderMain.prototype.buildPanelDestinationFolder = function() {
 GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     var UI = this.UI;
 
-    if (executeScript === "add canvas"){
-        #include "./scripts/Add canvas/UI.jsx"; //todo change logic of files
+    if (executeScript === "Add canvas"){
+        #include "./Add canvas/UI.jsx"; //todo change logic of files
+    }
+
+    if (executeScript === "Resize image"){
+        #include "./Resize image/UI.jsx"; //todo change logic of files
+    }
+
+    if (executeScript === "n^2 canvas"){
+        #include "./n^2 canvas/UI.jsx"; //todo change logic of files
     }
 }
 
@@ -587,9 +596,8 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         } // OFF -> do nothing
 
-        var scriptPath = $.fileName;
         var scriptName = executeScript;
-        var scriptFolder = getScriptFolder(scriptPath);
+        var scriptFolder = $.fileName.slice(0, -16);
 
         if (scriptName.split(" ").length !== 2 || !scriptName.match(/[a-z]/i)) {
             throw new Error('Wrongly formated name of "var executeScript" in controlPanel.jsx in folder: ' + scriptFolder);
@@ -727,27 +735,37 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
 }
 
 function createPrefFilePath() {
-    
-    var scriptPath = $.fileName;
-    var scriptFolder = getScriptFolder(scriptPath);
-    var listFile = new File(scriptFolder + "scriptUI_preferences.txt");
+
+    var scriptParentFolder = getParentfolder(); // slice negative numb is length of file folder
+
+    var listFile = new File(scriptParentFolder + "scriptUI_preferences.txt");
     ErrorWrongStringInputPath(listFile);
 
     return listFile;
 }
 
 function createListFilePath() {
-    
-    var scriptPath = $.fileName;
-    var scriptFolder = getScriptFolder(scriptPath);
-    var listFile = new File(scriptFolder + "scriptUI_changedFilesList.txt");
+
+    var scriptParentFolder = getParentfolder(); // slice negative numb is length of file folder
+
+    var listFile = new File(scriptParentFolder + "scriptUI_changedFilesList.txt");
+
     ErrorWrongStringInputPath(listFile);
     
     return listFile;
 }
 
+function getParentfolder() {
+
+    var sriptPath = decodeURIComponent($.fileName); // "./" or ".//" can be used only in #include to give relative script path directory. There is undocumented bug, when you use it in File/Folder object it gives path to PS program directory 
+    var scriptFolder = getScriptFolder(sriptPath);
+    var scriptParentFolder = scriptFolder.toString().slice(0, -8); // slice negative numb is length of file folder
+    
+    return scriptParentFolder;
+}
+
 function getScriptFolder(scriptPath) {
-    return scriptPath.match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash" // replace(/\\/g, '/')
+    return scriptPath.match(/^(.*[\\\/])/g); // match(/^(.*[\\\/])/g) "Select everything before the last forward slash"
 }
 
 function buildListFilesIfItDoesntExists(listFile) {
@@ -771,11 +789,11 @@ function buildPrefFilesIfItDoesntExists(listFile) {
         a.writeln("");
         a.writeln("ENABLED/DISABLED:");
         a.writeln("");
-        a.writeln(' OFF: "FILTER BY PNG"- CHECKBOX = TRUE');
+        a.writeln('OFF: "FILTER BY PNG"- CHECKBOX = TRUE');
         a.writeln("");
-        a.writeln(' ON : "DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
+        a.writeln('ON : "DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
         a.writeln("");
-        a.writeln(' ON : "SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+        a.writeln('OFF: "SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
 
         a.close();
     }
@@ -1219,10 +1237,10 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 catch(e) {
                     if(self.alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
                         alert("You have earlier opened file in destination folder.\n" + 
-                            "If you choose source files folder with the same file as opened file in destination folder, it could cause bugs later.\n" + 
-                            "Opened file couldn't be saved threfore.\n" + 
-                            "Check files " +'"save :false"' + 'in scriptUI_changedFilesList.txt in script folder:\n' + 
-                            getScriptFolder($.fileName) );
+                            "If you choose source files folder with the same file as opened files in destination folder, it could cause bugs later.\n" + 
+                            "And opened file couldn't be saved threfore.\n" + 
+                            "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.txt in script folder:\n' + 
+                            $.fileName.slice(0, -16) ); // parent directory
 
                         self.alertPreviousAppearance === true;
                     }
@@ -1387,20 +1405,6 @@ function writeLnOfFile(executeScript, index, doc, currentSaveTime, isFileSaved) 
     c.open("a");
     c.writeln(counter + " save :" + isFileSaved.toString() + " <0> " + docName + " <1> " + scriptName + " <2> " + currentSaveTime + " <3> " + docFullName);
     c.close();
-}
-
-function getScriptName() {
-
-    var pathScriptFile = $.fileName
-    var string = decodeURIComponent(pathScriptFile);
-    var match = "execute \- ";
-    var textAfterLastMatch = string.slice(string.lastIndexOf(match) + match.length, -4);
-
-    if (!File(string).exists) {
-        throw new Error("Invalid Path file. File doesn't exist");
-    }
-
-    return textAfterLastMatch;
 }
 
 function saveInDestFolder(detinationFolder) {
@@ -1592,14 +1596,6 @@ function ErrorWrongStringInputPath(UItitlePath) {
     }
 }
 
-function capitalizeFirstLetter(lower) {
-    
-    var upper = new String;
-    return upper = lower.replace(/^\w/, function (chr) {
-        return chr.toUpperCase();
-    });
-}
-
 GuiBuilderMain.prototype.showMainWindow = function () {
     this.mainWindow.show();
 };
@@ -1630,8 +1626,16 @@ function main(executeScript) {
     
     var eventHandler = new EventHandlerBuilderMain( UI );
 
-    if (executeScript === "add canvas") {
-        #include "./scripts/Add canvas/eventHandler.jsx";
+    if (executeScript === "Add canvas") {
+        #include "./Add canvas/eventHandler.jsx";
+    }
+
+    if (executeScript === "Resize image"){
+        #include "./Resize image/eventHandler.jsx"; //todo change logic of files
+    }
+
+    if (executeScript === "n^2 canvas"){
+        #include "./n^2 canvas/eventHandler.jsx"; //todo change logic of files
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------

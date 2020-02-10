@@ -2,7 +2,7 @@
     this.pnlChangeFile = createPanelUI(this.grpInfo, undefined, "left");
 
     //Title
-    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, executeScript + ":");
+    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, "Add canvas");
 
     //Group units value
     this.grpUnitVal = this.pnlChangeFile.add("group");
