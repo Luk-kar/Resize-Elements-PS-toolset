@@ -26,14 +26,14 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = funct
     var UIpln = this.UIpln;
     UIpln.controlPanelWindow.btnAddCanvas.onClick = function () {
         UIpln.controlPanelWindow.close();
+        
         var executeScript = "add canvas";
-
         if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
             throw new Error("Wrongly formated name. It should consist of a verb and a noun");
         }
 
-        #include "./scripts - execute/Add canvas/functions.jsx";
-        #include "./scripts - execute/Add canvas/EventHandlerBuilderMain.jsx";
+        #include "./scripts/Add canvas/functions.jsx";
+        #include "./scripts/Add canvas/EventHandlerBuilderMain.jsx";
         #include "main.jsx"
 
     };

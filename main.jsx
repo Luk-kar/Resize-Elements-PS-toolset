@@ -25,15 +25,15 @@ function appDataBuilder() {
 
 function GuiBuilderMain() {
 
-    this.baseLayout();
+    this.baseLayout(executeScript);
     this.images();
     this.buildSettingsWindow();
 }
 
-GuiBuilderMain.prototype.baseLayout = function() {
+GuiBuilderMain.prototype.baseLayout = function(executeScript) {
 
     //Creating groups to populate with main UI
-    this.mainWindow = new Window("dialog", "Add canvas");
+    this.mainWindow = new Window("dialog", capitalizeFirstLetter(executeScript));
 
     this.grpMain = this.mainWindow.add("group")
 
@@ -140,7 +140,7 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     var UI = this.UI;
 
     if (executeScript === "add canvas"){
-        #include "./scripts - execute/Add canvas/UI.jsx"; //todo change logic of files
+        #include "./scripts/Add canvas/UI.jsx"; //todo change logic of files
     }
 }
 
@@ -1592,6 +1592,14 @@ function ErrorWrongStringInputPath(UItitlePath) {
     }
 }
 
+function capitalizeFirstLetter(lower) {
+    
+    var upper = new String;
+    return upper = lower.replace(/^\w/, function (chr) {
+        return chr.toUpperCase();
+    });
+}
+
 GuiBuilderMain.prototype.showMainWindow = function () {
     this.mainWindow.show();
 };
@@ -1623,7 +1631,7 @@ function main(executeScript) {
     var eventHandler = new EventHandlerBuilderMain( UI );
 
     if (executeScript === "add canvas") {
-        #include "./scripts - execute/Add canvas/eventHandler.jsx";
+        #include "./scripts/Add canvas/eventHandler.jsx";
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
