@@ -137,19 +137,23 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     var self = this;
 
     self.changeFile = function TwotoNCanvas() {
-    
-        if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
-    
-            leftUpperCornerColorBGSet(UI.grpWidth.unitsDropDown.selection.toString() === "Left upper corner color");
-    
-        }
-    
+
         var doc = app.activeDocument;
 
         var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10);
         var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
 
         var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
+
+        if (highestValueSide > UI.grpLowerThan.valueHighest || highestValueSide < UI.grpLowerThan.valueLowest) { //todo
+            return "continue";
+        }
+    
+        if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
+    
+            leftUpperCornerColorBGSet(UI.grpWidth.unitsDropDown.selection.toString() === "Left upper corner color");
+    
+        }
 
         var ValueOfSides = nearestPow2( highestValueSide );
 

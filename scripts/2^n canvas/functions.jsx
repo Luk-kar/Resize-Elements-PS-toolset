@@ -63,24 +63,6 @@ function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSour
     }
 }
 
-//Anchor button functionality
-function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionButtons, imageAnchorTrue, imageAnchorFalse) {
-
-    for (i = 0; i < anchorPostionButtons.length; i++){
-        anchorPostionButtons[i].image = imageAnchorFalse;
-    }
-
-     //Setting cliked button to anchor
-    btnAnchorClickedOn.image = imageAnchorTrue;
-
-    if(anchorPositionValue === undefined) {
-        throw new Error("anchorPositionValue doesn't have declared value");
-    }
-
-    //Sending information which anchor is marked for resizeCanvas()
-    return anchorPositionValue;
-}
-
 function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
 
     if (canvExtendColorDropDwn_IsLeftUpperCroner) {

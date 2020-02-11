@@ -1224,7 +1224,11 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             app.activeDocument = docsToProcess[i]; //setting active document from filtered files
             var doc = app.activeDocument;
             
-            self.changeFile();
+            var doNothingWithThisFile = self.changeFile();
+            if (doNothingWithThisFile === "continue") {
+                doc.close();
+                continue;
+            } // sometimes when some properties of document don't fit you, you can always leave untouched file
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
@@ -1295,7 +1299,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             var doc = app.activeDocument;
             var openedDocPath = doc.fullName;
             
-            self.changeFile();
+            var doNothingWithThisFile = self.changeFile();
+            if (doNothingWithThisFile === "continue") continue;
 
             //If you choose radio button "Add canvas in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
