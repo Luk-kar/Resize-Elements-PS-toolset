@@ -103,3 +103,5 @@
 
         this.canvExtendColor.dropDwn = this.canvExtendColor.add("dropdownlist", undefined, canvExtendColorValues);
         this.canvExtendColor.dropDwn.selection = 1;
+
+        this.canvExtendColor.imageTooltip = this.canvExtendColor.add("image", undefined, this.imageInfHov);

@@ -26,6 +26,8 @@ eventHandler.onConstrainsProportionsCheckbox();
 
 eventHandler.tooltipConstrainsProportionsCheckbox();
 
+eventHandler.tooltipCanvExtendColor();
+
 eventHandler.savingBGandFGtoRestoreLater();
 
 eventHandler.onCanvExtendColorDropDwn();
