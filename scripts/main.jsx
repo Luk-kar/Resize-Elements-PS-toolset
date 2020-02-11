@@ -148,8 +148,8 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
         #include "./Resize image/UI.jsx"; //todo change logic of files
     }
 
-    if (executeScript === "n^2 canvas"){
-        #include "./n^2 canvas/UI.jsx"; //todo change logic of files
+    if (executeScript === "2^n canvas"){
+        #include "./2^n canvas/UI.jsx"; //todo change logic of files
     }
 }
 
@@ -1634,8 +1634,8 @@ function main(executeScript) {
         #include "./Resize image/eventHandler.jsx"; //todo change logic of files
     }
 
-    if (executeScript === "n^2 canvas"){
-        #include "./n^2 canvas/eventHandler.jsx"; //todo change logic of files
+    if (executeScript === "2^n canvas"){
+        #include "./2^n canvas/eventHandler.jsx"; //todo change logic of files
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------

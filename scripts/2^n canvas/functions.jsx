@@ -9,7 +9,7 @@ function blockKeysInEdittext(editTextInstance) {
     }
   
     var permissibleKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        'Minus', 'Escape', 'Backspace', 'Enter'];
+                           'Escape', 'Backspace', 'Enter'];
   
     editTextInstance.addEventListener('keydown', function (key) {
         var keyName = key.keyName;
@@ -47,16 +47,8 @@ for (var i = 0, max = arrayToSearch.length; i < max; i++) {
 return false;
 }
 
-function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
-    if (condition.value === true) {
-        inputFieldToPasteIn.text = inputFieldToCopy.text;
-    }
-}
-
-function sameDropDown(objectEvent, objectSetSameValue) {
-    if (objectEvent.selection.index !== objectSetSameValue.selection.index) {
-        objectSetSameValue.selection = objectEvent.selection.index;
-    }
+function nearestPow2( n ){
+    return Math.pow( 2, Math.ceil( Math.log( n ) / Math.log( 2 ) ) ); // Prefer this way than bitwise, becouse you need more readability than efficiency IMHO
 }
 
 function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSourceFalse) {

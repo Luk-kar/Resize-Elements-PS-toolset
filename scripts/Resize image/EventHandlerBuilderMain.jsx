@@ -34,7 +34,7 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                                     ["Bicubic (best for smooth gradients)", ResampleMethod.BICUBIC],
                                     ["Bicubic (best for enlargemenent)", ResampleMethod.BICUBICSMOOTHER],
                                     ["Bicubic (best for reduction)", ResampleMethod.BICUBICSHARPER],
-                                    ["Bicubic Automatic", undefined]
+                                    ["Bicubic Automatic", undefined] //if it is undefined it sets automatic value
                                     ];
 
         ErrorDiffrentUnitTypes(UI.canvResampleImage.dropDwn, canvResampleImageValues);
@@ -80,7 +80,7 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
     var UI = this.UI;
     var self = this;
 
-    self.endingFunction = function returnInitialBackgroundAndForeground() {
+    self.endingFunction = function doNothingAtTheEnd() {
         //nothing happen; this function has to be declared
     }
 }

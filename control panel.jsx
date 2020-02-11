@@ -15,7 +15,7 @@ GuiBuilderControlPln.prototype.buildControlPanel = function () {
 
     this.controlPanelWindow.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Resize image");
 
-    this.controlPanelWindow.btnNto2canvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
+    this.controlPanelWindow.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
     this.controlPanelWindow.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
 };
@@ -60,18 +60,18 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnResizeImage = fun
     };
 };
 
-EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtnNto2canvas = function () {
+EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtn2toNcanvas = function () {
     var UIpln = this.UIpln;
-    UIpln.controlPanelWindow.btnNto2canvas.onClick = function () {
+    UIpln.controlPanelWindow.btn2toNcanvas.onClick = function () {
         UIpln.controlPanelWindow.close();
         
-        var executeScript = "n^2 canvas";
+        var executeScript = "2^n canvas";
         if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
             throw new Error("Wrongly formated name. It should consist of a verb and a noun");
         }
 
-        #include "./scripts/n^2 canvas/functions.jsx";
-        #include "./scripts/n^2 canvas/EventHandlerBuilderMain.jsx";
+        #include "./scripts/2^n canvas/functions.jsx";
+        #include "./scripts/2^n canvas/EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     };
@@ -103,7 +103,7 @@ function controlPanel() {
 
     eventHandler.onControlPanelWindowBtnResizeImage();
 
-    eventHandler.onControlPanelWindowbtnNto2canvas();
+    eventHandler.onControlPanelWindowbtn2toNcanvas();
 
     eventHandler.onControlPanelWindowBtnClose();
 
