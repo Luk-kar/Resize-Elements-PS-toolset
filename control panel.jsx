@@ -21,7 +21,7 @@ GuiBuilderControlPln.prototype.buildControlPanel = function () {
 
     this.controlPanelWindow.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
-    // this.controlPanelWindow.btnScriptListener = this.controlPanelWindow.add("button", [205, 80, 395, 101], "ScriptListener");
+    // this.controlPanelWindow.btnScriptListener = this.controlPanelWindow.add("button", [205, 80, 395, 101], "ScriptListener"); //Search by phrase ScriptListener to unblock
 
     this.controlPanelWindow.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
 };
