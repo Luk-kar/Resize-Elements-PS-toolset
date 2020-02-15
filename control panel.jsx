@@ -2,6 +2,8 @@
 
 $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
 
+#include "./scripts/common functions.jsx"
+
 function GuiBuilderControlPln() {
 
     this.buildControlPanel();
@@ -17,19 +19,21 @@ GuiBuilderControlPln.prototype.buildControlPanel = function () {
 
     this.controlPanelWindow.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
+    this.controlPanelWindow.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
+
     this.controlPanelWindow.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
 };
 
 //================================================================================================================================
 
-function EventHandlerBuilderControlPln(UIpln) {
-    this.UIpln = UIpln;
+function EventHandlerBuilderControlPln(UIctrlPln) {
+    this.UIctrlPln = UIctrlPln;
 }
 
 EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = function () {
-    var UIpln = this.UIpln;
-    UIpln.controlPanelWindow.btnAddCanvas.onClick = function () {
-        UIpln.controlPanelWindow.close();
+    var UIctrlPln = this.UIctrlPln;
+    UIctrlPln.controlPanelWindow.btnAddCanvas.onClick = function () {
+        UIctrlPln.controlPanelWindow.close();
         
         var executeScript = "Add canvas";
         if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
@@ -40,13 +44,13 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = funct
         #include "./scripts/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
-    };
-};
+    }
+}
 
 EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnResizeImage = function () {
-    var UIpln = this.UIpln;
-    UIpln.controlPanelWindow.btnResizeImage.onClick = function () {
-        UIpln.controlPanelWindow.close();
+    var UIctrlPln = this.UIctrlPln;
+    UIctrlPln.controlPanelWindow.btnResizeImage.onClick = function () {
+        UIctrlPln.controlPanelWindow.close();
         
         var executeScript = "Resize image";
         if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
@@ -57,13 +61,13 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnResizeImage = fun
         #include "./scripts/Resize image/Resize image - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
-    };
-};
+    }
+}
 
 EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtn2toNcanvas = function () {
-    var UIpln = this.UIpln;
-    UIpln.controlPanelWindow.btn2toNcanvas.onClick = function () {
-        UIpln.controlPanelWindow.close();
+    var UIctrlPln = this.UIctrlPln;
+    UIctrlPln.controlPanelWindow.btn2toNcanvas.onClick = function () {
+        UIctrlPln.controlPanelWindow.close();
         
         var executeScript = "2^n canvas";
         if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
@@ -74,30 +78,41 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtn2toNcanvas = func
         #include "./scripts/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
-    };
-};
+    }
+}
+
+EventHandlerBuilderControlPln.prototype.onPanelSettings = function () {
+    var UIctrlPln = this.UIctrlPln;
+
+    UIctrlPln.controlPanelWindow.btnSettings.onClick = function () {
+
+        UIctrlPln.controlPanelWindow.close();
+
+        #include "./scripts/settings.jsx"
+    }
+}
 
 EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnClose = function () {
-    var UIpln = this.UIpln;
+    var UIctrlPln = this.UIctrlPln;
 
-    UIpln.controlPanelWindow.btnClose.onClick = function () {
-        UIpln.controlPanelWindow.close();
-    };
-};
+    UIctrlPln.controlPanelWindow.btnClose.onClick = function () {
+        UIctrlPln.controlPanelWindow.close();
+    }
+}
 
 GuiBuilderControlPln.prototype.showControlPanel = function () {
     this.controlPanelWindow.show();
-};
+}
 
 function controlPanel() {
 
-    var UIpln =  new GuiBuilderControlPln();
+    var UIctrlPln =  new GuiBuilderControlPln();
 
-    UIpln.buildControlPanel();
+    UIctrlPln.buildControlPanel();
 
 //================================================================================================================================
 
-    var eventHandler = new EventHandlerBuilderControlPln( UIpln );
+    var eventHandler = new EventHandlerBuilderControlPln( UIctrlPln );
 
     eventHandler.onControlPanelWindowBtnAddCanvas();
 
@@ -105,9 +120,11 @@ function controlPanel() {
 
     eventHandler.onControlPanelWindowbtn2toNcanvas();
 
+    eventHandler.onPanelSettings();
+
     eventHandler.onControlPanelWindowBtnClose();
 
-    UIpln.showControlPanel();
+    UIctrlPln.showControlPanel();
 
 }
 

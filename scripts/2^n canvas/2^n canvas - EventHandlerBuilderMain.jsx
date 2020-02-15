@@ -67,7 +67,7 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
 EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
     var UI = this.UI;
 
-    var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px\nNot written any value causes that any value is accepted';
+    var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px';
 
     UI.grpBiggerThan.imageTooltip.helpTip = tooltipValue;
     UI.grpLowerThan.imageTooltip.helpTip = tooltipValue;
