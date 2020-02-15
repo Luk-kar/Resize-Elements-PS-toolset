@@ -21,6 +21,8 @@ GuiBuilderControlPln.prototype.buildControlPanel = function () {
 
     this.controlPanelWindow.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
+    // this.controlPanelWindow.btnScriptListener = this.controlPanelWindow.add("button", [205, 80, 395, 101], "ScriptListener");
+
     this.controlPanelWindow.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
 };
 
@@ -91,7 +93,24 @@ EventHandlerBuilderControlPln.prototype.onPanelSettings = function () {
         #include "./scripts/settings.jsx"
     }
 }
+/*
+EventHandlerBuilderControlPln.prototype.onPanelScriptListener = function () {
+    var UIctrlPln = this.UIctrlPln;
 
+    UIctrlPln.controlPanelWindow.btnScriptListener.onClick = function () {
+        UIctrlPln.controlPanelWindow.close();
+
+        var executeScript = "Execute scriptListener";
+        if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
+            throw new Error("Wrongly formated name. It should consist of a verb and a noun");
+        }
+
+        #include "./scripts/Execute scriptListener/Execute scriptListener - functions.jsx"
+        #include "./scripts/Execute scriptListener/Execute scriptListener - EventHandlerBuilderMain.jsx"
+        #include "./scripts/main.jsx"
+    }
+}
+*/
 EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnClose = function () {
     var UIctrlPln = this.UIctrlPln;
 
@@ -119,6 +138,8 @@ function controlPanel() {
     eventHandler.onControlPanelWindowBtnResizeImage();
 
     eventHandler.onControlPanelWindowbtn2toNcanvas();
+
+    //eventHandler.onPanelScriptListener()
 
     eventHandler.onPanelSettings();
 

@@ -130,16 +130,21 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     var UI = this.UI;
 
     if (executeScript === "Add canvas"){
-        #include "./Add canvas/Add canvas - UI.jsx"; //todo change logic of files
+        #include "./Add canvas/Add canvas - UI.jsx";
     }
 
     if (executeScript === "Resize image"){
-        #include "./Resize image/Resize image - UI.jsx"; //todo change logic of files
+        #include "./Resize image/Resize image - UI.jsx"; 
     }
 
     if (executeScript === "2^n canvas"){
-        #include "./2^n canvas/2^n canvas - UI.jsx"; //todo change logic of files
+        #include "./2^n canvas/2^n canvas - UI.jsx"; 
     }
+    /*
+    if (executeScript === "Execute scriptListener"){
+        #include "./Execute scriptListener/Execute scriptListener - UI.jsx"; 
+    }
+    */
 }
 
 GuiBuilderMain.prototype.buildPanelInfoUI = function(){
@@ -660,12 +665,17 @@ function main(executeScript) {
     }
 
     if (executeScript === "Resize image"){
-        #include "./Resize image/Resize image - eventHandler.jsx"; //todo change logic of files
+        #include "./Resize image/Resize image - eventHandler.jsx"; 
     }
 
     if (executeScript === "2^n canvas"){
-        #include "./2^n canvas/2^n canvas - eventHandler.jsx"; //todo change logic of files
+        #include "./2^n canvas/2^n canvas - eventHandler.jsx"; 
     }
+        /*
+    if (executeScript === "Execute scriptListener"){
+        #include "./Execute scriptListener/Execute scriptListener - eventHandler.jsx";
+    }
+    */
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
 
