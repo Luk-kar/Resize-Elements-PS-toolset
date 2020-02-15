@@ -3,7 +3,8 @@
 
     //Title
     this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, executeScript + ":");
-    this.pnlChangeFile.title.characters = this.panelWidth + 13;
+    this.pnlChangeFile.title.characters = this.panelWidth + 1;
+    this.pnlChangeFile.title.graphics.font = this.pnlTitleFont;
 
     //Group units value
     this.grpUnitVal = this.pnlChangeFile.add("group");

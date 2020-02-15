@@ -1,50 +1,67 @@
 /**
- * Restricts the character keys permitted in a `edittext` element.
- * @param {Object} editTextInstance - Reference to `edittext` ScriptUI element.
- */
-function blockKeysInEdittext(editTextInstance) {
-
-    if (editTextInstance.constructor.name !== 'EditText') {
-      throw new Error ('Invalid class. Expected `EditText` class.')
-    }
-  
-    var permissibleKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                           'Escape', 'Backspace', 'Enter'];
-  
-    editTextInstance.addEventListener('keydown', function (key) {
-        var keyName = key.keyName;
-        var shiftKeyIsDown = key.shiftKey;
-        var altKeyIsDown = key.altKey;
-  
-    if (shiftKeyIsDown && keyName === 'Equal') {
-        return;
-    }
-  
-    if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) {
-        key.preventDefault();
-        return;
-    }
-  
-    if (! inArray(keyName, permissibleKeys)) {
-        key.preventDefault();
-    }
-    });
-  }
-  
-/**
  * Determines whether an array includes a certain value among its elements.
  * @param {String} valueToFind - The value to search for.
  * @param {Array} arrayToSearch - The array to search in.
  * @returns {Boolean} true if the value valueToFind is found within the array
  */
-  
 function inArray(valueToFind, arrayToSearch) {
-for (var i = 0, max = arrayToSearch.length; i < max; i++) {
-    if (arrayToSearch[i] === valueToFind) {
+    for (var i = 0, max = arrayToSearch.length; i < max; i++) {
+      if (arrayToSearch[i] === valueToFind) {
         return true;
+      }
+    }
+    return false;
+  }
+  
+  /**
+   * Restricts the character keys permitted in a `edittext` element.
+   * @param {Object} editTextInstance - Reference to `edittext` ScriptUI element.
+   */
+  function restrictInputKeys(editTextInstance) {
+  
+    if (editTextInstance.constructor.name !== 'EditText') {
+      throw new Error ('Invalid class. Expected `EditText` class.')
+    }
+  
+    var hasComma = false;
+  
+    var permissibleKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Escape', 'Backspace'];
+    /*
+     * Add a listener to the given `edittext` element to detect `keydown` events.
+     * In the body of its handler function we detect each key pressed to determine
+     * whether the key is permissible or impermissible.
+     */
+    editTextInstance.addEventListener('keydown', function (key) {
+      var keyName = key.keyName;
+      var shiftKeyIsDown = key.shiftKey;
+      var altKeyIsDown = key.altKey;
+  
+      if (shiftKeyIsDown && keyName === 'Equal') {
+        return;
+      }
+  
+      if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) {
+        key.preventDefault();
+        return;
+      }
+  
+      if (! inArray(keyName, permissibleKeys)) {
+        key.preventDefault();
+      }
+    });
+}
+
+function restrictValueUpTo(maxResValue, valueInEdittext) {
+    if (parseInt(valueInEdittext.text, 10) > maxResValue) {
+        valueInEdittext.text = maxResValue;
     }
 }
-return false;
+
+function setMinimalValueAt1(value) {
+    if ( (parseInt(value.text, 10) === 0) || value.text === "") {
+        alert("Written value has to be bigger than 1");
+        value.text = 1;
+    }
 }
 
 function nearestPow2( n ){

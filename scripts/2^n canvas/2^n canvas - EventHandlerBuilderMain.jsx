@@ -5,9 +5,9 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     self.lockingUnlockingAcceptBtn = function checkingIfAreAnyDocsToProcess() {
 
-        if (UI.btnRadSourceFiles.chooseOpenedFiles === true) {
+        if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
-            if (docsOpenedFiles().length > 0) { //todo
+            if (docsOpenedFiles().length > 0) {
         
                 UI.btnAccept.enabled = true;
         
@@ -16,13 +16,18 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
                 UI.btnAccept.enabled = false;
             }
 
-        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold === true) {
+        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
-            if (self.sourceFilesToProcess.length > 0) {
+            if (typeof self.sourceFilesToProcess !== "undefined" && self.sourceFilesToProcess.length > 0 ) {
+                
+                if ( (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...") || UI.btnRadDestFold.same.value === true) {
 
-                UI.btnAccept.enabled = true;
+                    UI.btnAccept.enabled = true;
+                } else {
 
-            } else if (self.sourceFilesToProcess.length === 0) {
+                    UI.btnAccept.enabled = false;
+                }
+            } else if (typeof self.sourceFilesToProcess === "undefined" || self.sourceFilesToProcess.length === 0) {
 
                 UI.btnAccept.enabled = false;
             }
@@ -39,21 +44,30 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
     var UI = this.UI;
     var self = this;
 
-    blockKeysInEdittext(UI.grpBiggerThan.valueLowest);
+    restrictInputKeys(UI.grpBiggerThan.valueLowest);
 
     UI.grpBiggerThan.valueLowest.onChanging = function() {
 
-        //filter by lowest and highest value
-        //Update infoUI
+        restrictValueUpTo(UI.maxResValue, UI.grpBiggerThan.valueLowest);
 
         self.lockingUnlockingAcceptBtn();
+    }
+
+    UI.grpBiggerThan.valueLowest.onChange = function() {
+
+        setMinimalValueAt1(UI.grpBiggerThan.valueLowest);
+
+        if(parseInt(UI.grpLowerThan.valueHighest.text, 10) < parseInt(UI.grpBiggerThan.valueLowest.text, 10)) {
+            alert('"bigger than:" value can' + "'" + '"t be higher than "smaller than:" value')
+            UI.grpBiggerThan.valueLowest.text = UI.grpLowerThan.valueHighest.text;
+        }
     }
 }
 
 EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
     var UI = this.UI;
 
-    var tooltipValue = "Written value in any input box has to be bigger than 0px and smaller than " + UI.maxResValue + 'px\nNot written value and "0" causes that any value is accepted';
+    var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px\nNot written any value causes that any value is accepted';
 
     UI.grpBiggerThan.imageTooltip.helpTip = tooltipValue;
     UI.grpLowerThan.imageTooltip.helpTip = tooltipValue;
@@ -69,15 +83,24 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     var UI = this.UI;
     var self = this;
 
-    blockKeysInEdittext(UI.grpLowerThan.valueHighest);
+    restrictInputKeys(UI.grpLowerThan.valueHighest);
 
     //Group Height
     UI.grpLowerThan.valueHighest.onChanging = function() {
 
-        //filter by lowest and highest value
-        //Update infoUI
+        restrictValueUpTo(UI.maxResValue, UI.grpLowerThan.valueHighest);
 
         self.lockingUnlockingAcceptBtn();
+    }
+
+    UI.grpLowerThan.valueHighest.onChange = function() {
+
+        setMinimalValueAt1(UI.grpLowerThan.valueHighest);
+
+        if(parseInt(UI.grpLowerThan.valueHighest.text, 10) < parseInt(UI.grpBiggerThan.valueLowest.text, 10)) {
+            alert('"smaller than:" value can' + "'" + '"t be lower than "bigger than:" value')
+            UI.grpLowerThan.valueHighest.text = UI.grpBiggerThan.valueLowest.text;
+        }
     }
 }
 
@@ -127,8 +150,37 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
     var UI = this.UI;
     var self = this;
 
-    self.startingFunction = function doNothingAtTheBeginning() {
-        //nothing happen; this function has to be declared
+    self.startingFunction = function filteringFilesByHeightAndWidthWithoutOpeningThemInPS() { // https://stackoverflow.com/questions/60191804/getting-width-and-height-of-image-without-need-of-opening-it-in-ps-cs6-script?noredirect=1#comment106489010_60191804
+
+        if (typeof self.sourceFilesToProcess !== "undefined" && self.sourceFilesToProcess.length > 0) {
+
+            ExternalObject.AdobeXMPScript = new ExternalObject("lib:AdobeXMPScript");
+
+            var sourceFilesTemp = new Array;
+
+            for(var i = 0; i < self.sourceFilesToProcess.length; i++) {
+
+                var file = new XMPFile(File(self.sourceFilesToProcess[i]).fsName, XMPConst.FILE_UNKNOWN, XMPConst.OPEN_FOR_READ);
+
+                var xmp = file.getXMP();
+
+                if( xmp.doesPropertyExist(XMPConst.NS_EXIF, "PixelXDimension" ) ) {
+
+                    var width = parseInt(xmp.getProperty(XMPConst.NS_EXIF, "PixelXDimension" ), 10);
+                
+                    var height = parseInt(xmp.getProperty(XMPConst.NS_EXIF, "PixelYDimension" ), 10);
+                
+                    var highestValueSide = Math.max( width, height );
+
+                    if (highestValueSide >= parseInt(UI.grpBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.grpLowerThan.valueHighest.text, 10) ) { 
+                        sourceFilesTemp.push(self.sourceFilesToProcess[i]);
+                    }
+                } else { // This files does not have EXIF dimensions, so they will be checked during opening files
+                    sourceFilesTemp.push(self.sourceFilesToProcess[i]);
+                }    
+            }
+            return sourceFilesTemp;
+        }
     }
 }
 
@@ -145,13 +197,13 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
 
         var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
 
-        if (highestValueSide > UI.grpLowerThan.valueHighest || highestValueSide < UI.grpLowerThan.valueLowest) { //todo
+        if (highestValueSide < parseInt(UI.grpBiggerThan.valueLowest.text, 10) || highestValueSide > parseInt(UI.grpLowerThan.valueHighest.text, 10) ) { //todo
             return "continue";
         }
     
-        if( itHasBackgroundLayerChecker() ) {// To avoid bug with picking empty layer
+        if( itHasBackgroundLayerChecker() ) { // To avoid bug with picking empty layer
     
-            leftUpperCornerColorBGSet(UI.grpWidth.unitsDropDown.selection.toString() === "Left upper corner color");
+            leftUpperCornerColorBGSet(UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color");
     
         }
 
@@ -177,4 +229,5 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
         //nothing happen; this function has to be declared
     }
 }
+
 

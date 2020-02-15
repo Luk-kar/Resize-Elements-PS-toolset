@@ -9,8 +9,6 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 #include "./Ι_methods/dateAdd.jsx"
 
-//#include "method - date Add.jsx";
-
 function appDataBuilder() {
 
     var listFile = createListFilePath();
@@ -48,6 +46,8 @@ GuiBuilderMain.prototype.images = function() {
 
     var imageFolderDestination = scriptParentFolder + "images/";
 
+    this.pnlTitleFont = "Arial-Bold:13";
+
     //Image: InfoHover.png
     this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
 
@@ -67,6 +67,7 @@ GuiBuilderMain.prototype.buildPanelSourceFiles = function() {
 
     //Source files title
     this.plnSourceFiles.title = this.plnSourceFiles.add("statictext", undefined, "Source files:");
+    this.plnSourceFiles.title.graphics.font = this.pnlTitleFont;
 
     //Creating radial button group
     this.btnRadSourceFiles = createGroupUI(this.plnSourceFiles, "column", "left", "left");
@@ -121,13 +122,14 @@ GuiBuilderMain.prototype.buildPanelDestinationFolder = function() {
 
     //Title
     this.pnlDestFold.title = this.pnlDestFold.add("statictext", undefined, "Destination folder:");
+    this.pnlDestFold.title.graphics.font = this.pnlTitleFont;
 
     //Creating group radial button choose destination folder
     this.btnRadDestFold = createGroupUI(this.pnlDestFold, "column", "left", "left");
 
     //Radial buttons choose destination folder
-    this.btnRadDestFold.same = this.btnRadDestFold.add("radiobutton", undefined, "Add canvas in the same folder");
-    this.btnRadDestFold.other = this.btnRadDestFold.add("radiobutton", undefined, "Add canvas and copy files to other folder");
+    this.btnRadDestFold.same = this.btnRadDestFold.add("radiobutton", undefined, executeScript + " in the same folder");
+    this.btnRadDestFold.other = this.btnRadDestFold.add("radiobutton", undefined, executeScript + " and copy files to other folder");
 
     //Browse button destination folder
     this.grpBtnDestFold = this.pnlDestFold.add("group");
@@ -141,15 +143,15 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     var UI = this.UI;
 
     if (executeScript === "Add canvas"){
-        #include "./Add canvas/UI.jsx"; //todo change logic of files
+        #include "./Add canvas/Add canvas - UI.jsx"; //todo change logic of files
     }
 
     if (executeScript === "Resize image"){
-        #include "./Resize image/UI.jsx"; //todo change logic of files
+        #include "./Resize image/Resize image - UI.jsx"; //todo change logic of files
     }
 
     if (executeScript === "2^n canvas"){
-        #include "./2^n canvas/UI.jsx"; //todo change logic of files
+        #include "./2^n canvas/2^n canvas - UI.jsx"; //todo change logic of files
     }
 }
 
@@ -263,8 +265,6 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             btnChooseFilesDestFoldEnabled(false, UI);
 
-            self.lockingUnlockingAcceptBtn();
-
             UI.pnlChangeFile.enabled = false;
 
             infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
@@ -287,7 +287,18 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             }
 
-            self.lockingUnlockingAcceptBtn();
+            if (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text === UI.btnChooseFilesSourceFold.title.text) {
+
+                sameSourceFolderAndDestFolderOutcome(UI, self);
+
+            }
+            
+            if (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
+                
+                UI.btnAccept.enabled = false;
+            } else {
+                self.lockingUnlockingAcceptBtn(); 
+            }
 
             infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
         }
@@ -406,12 +417,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
                     if (sameDestinationFolderAndSourceFolder) {
 
-                        createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
-                        
-                        self.detinationFolder = null;
-                        UI.btnRadDestFold.same.notify();
-    
-                        alert("Source folder and target folder are the same.\nNext time choose more wisely");
+                        sameSourceFolderAndDestFolderOutcome(UI, self);
 
                     } else {
 
@@ -501,7 +507,7 @@ EventHandlerBuilderMain.prototype.onBtnRadDestFoldOther = function() {
     var UI = this.UI;
     var self = this;
 
-    //Copy and Add canvas in other folder
+    //Copy and Change file in other folder
     UI.btnRadDestFold.other.onClick = function() {
 
         btnChooseFilesDestFoldEnabled(true, UI);
@@ -603,10 +609,10 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
             throw new Error('Wrongly formated name of "var executeScript" in controlPanel.jsx in folder: ' + scriptFolder);
         }
 
-        var verbPastParticiple = scriptName.split(" ")[0] + "ed"; //"ed" regular form
+        var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
         var noun = scriptName.split(" ")[1];
 
-        if(self.counterChangedFilesTrue < 1) {
+        if(self.counterChangedFilesTrue < 0) {
             throw new Error("Counter can't be less than integer = 1");
         }
         if(self.counterChangedFilesFalse < 0) {
@@ -732,6 +738,37 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
         UI.mainWindow.show();
 
     }
+}
+
+function simplePastRegularForm(scriptName) { // https://www.lawlessenglish.com/learn-english/grammar/simple-past-regular-verbs/ //It works in most cases for regular verbs
+
+    var verb = scriptName.split(" ")[0];
+
+    var lastCharOfVerb = verb.slice(-1);
+
+    var TwolastCharOfVerb = verb.slice(-2);
+
+    var ThirdLastCharOfVerb = verb.charAt(verb.length -3).toLowerCase();;
+
+    if(lastCharOfVerb === "e") {
+        var verbInPastSimple = verb.slice(0, -1) + "ed";
+
+    } else if (TwolastCharOfVerb === "ay" || TwolastCharOfVerb === "ey" || TwolastCharOfVerb === "iy" || TwolastCharOfVerb === "oy" || TwolastCharOfVerb === "uy") {
+        var verbInPastSimple = verb + "ed";
+
+    } else if (lastCharOfVerb === "y") {
+        var verbInPastSimple = verb.slice(0, -1) + "ied";
+
+    } else if ( ( isNaN(parseInt(ThirdLastCharOfVerb, 10)) === true )  && (lastCharOfVerb !== "a" && lastCharOfVerb !== "e" && lastCharOfVerb !== "i" && lastCharOfVerb !== "o" && lastCharOfVerb !== "u") &&
+    (ThirdLastCharOfVerb !== "a" && ThirdLastCharOfVerb !== "e" && ThirdLastCharOfVerb !== "i" && ThirdLastCharOfVerb !== "o" && ThirdLastCharOfVerb !== "u")) {
+
+        var verbInPastSimple = verb + lastCharOfVerb + "ed"
+    
+    } else {
+        var verbInPastSimple = verb + "ed";
+    }
+
+    return verbInPastSimple;
 }
 
 function createPrefFilePath() {
@@ -887,7 +924,17 @@ function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
     onOffValueNextToButton.text = updateValue;
 
     alert(alertText); //Show user value of changed preference
-} 
+}
+
+function sameSourceFolderAndDestFolderOutcome(UI, self) {
+
+    createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
+    self.detinationFolder = null; //to avoid bug
+    UI.btnRadDestFold.same.notify();
+    
+    alert("Source folder and target folder are the same.\nNext time choose more wisely");
+
+}
 
 function filterSourceFilesCheckboxByExpressionEnabled(UI) {
     if (UI.filterSourceFilesCheckbox.byExpression.value === true) {
@@ -1103,12 +1150,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
     var self_detinationFolder = destinationFolderSelection;
     } else if ( destinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
 
-    UI.btnRadDestFold.same.notify();
-
-    createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
-    alert("Source folder and target folder are the same.\nNext time choose more wisely");
-
-    var self_detinationFolder = null; //to avoid bug
+        sameSourceFolderAndDestFolderOutcome(UI, self);
     }
 
     return self_detinationFolder;
@@ -1208,7 +1250,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
     var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
 
-    self.startingFunction();
+    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.pnlChangeFile // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
@@ -1223,14 +1265,14 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
             app.activeDocument = docsToProcess[i]; //setting active document from filtered files
             var doc = app.activeDocument;
-            
-            var doNothingWithThisFile = self.changeFile();
-            if (doNothingWithThisFile === "continue") {
-                doc.close();
-                continue;
-            } // sometimes when some properties of document don't fit you, you can always leave untouched file
 
-            //If you choose radio button "Add canvas in the same folder", saves the same files in original location
+            var doNothingWithThisFile = self.changeFile();
+            if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file
+
+                continue; //doc.close(); <=== this shouldn't be there. If you add this it will conflict with function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs)
+            }
+
+            //If you choose radio button "Change file in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
 
                 try {
@@ -1260,7 +1302,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                     writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
                 }
 
-            //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
+            //If you choose radio button "Copy and Change file to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
                 saveInDestFolder(detinationFolder);
                 var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
@@ -1300,9 +1342,12 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             var openedDocPath = doc.fullName;
             
             var doNothingWithThisFile = self.changeFile();
-            if (doNothingWithThisFile === "continue") continue;
+            if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file
+                doc.close();
+                continue;
+            }
 
-            //If you choose radio button "Add canvas in the same folder", saves the same files in original location
+            //If you choose radio button "Change file in the same folder", saves the same files in original location
             if (btnRadSameFolder.value === true) {
                 doc.save();
 
@@ -1316,7 +1361,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                     writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
                 }
 
-            //If you choose radio button "Copy and Add canvas to other folder", save files in other folder
+            //If you choose radio button "Copy and Change file to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
 
                 saveInDestFolder(detinationFolder);
@@ -1632,15 +1677,15 @@ function main(executeScript) {
     var eventHandler = new EventHandlerBuilderMain( UI );
 
     if (executeScript === "Add canvas") {
-        #include "./Add canvas/eventHandler.jsx";
+        #include "./Add canvas/Add canvas - eventHandler.jsx";
     }
 
     if (executeScript === "Resize image"){
-        #include "./Resize image/eventHandler.jsx"; //todo change logic of files
+        #include "./Resize image/Resize image - eventHandler.jsx"; //todo change logic of files
     }
 
     if (executeScript === "2^n canvas"){
-        #include "./2^n canvas/eventHandler.jsx"; //todo change logic of files
+        #include "./2^n canvas/2^n canvas - eventHandler.jsx"; //todo change logic of files
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------

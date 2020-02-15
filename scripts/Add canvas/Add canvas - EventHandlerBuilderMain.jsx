@@ -227,6 +227,8 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
         ErrorDiffrentUnitTypes(UI.grpWidth.unitsDropDown, unitsTypes);
     
         self.units = unitsTypes[parseInt(UI.grpWidth.unitsDropDown.selection, 10)][1];
+
+        return self.sourceFilesToProcess; // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
     }
 }
 

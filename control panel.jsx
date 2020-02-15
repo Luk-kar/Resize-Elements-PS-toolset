@@ -36,8 +36,8 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = funct
             throw new Error("Wrongly formated name. It should consist of a verb and a noun");
         }
 
-        #include "./scripts/Add canvas/functions.jsx";
-        #include "./scripts/Add canvas/EventHandlerBuilderMain.jsx";
+        #include "./scripts/Add canvas/Add canvas - functions.jsx";
+        #include "./scripts/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     };
@@ -53,8 +53,8 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnResizeImage = fun
             throw new Error("Wrongly formated name. It should consist of a verb and a noun");
         }
 
-        #include "./scripts/Resize image/functions.jsx";
-        #include "./scripts/Resize image/EventHandlerBuilderMain.jsx";
+        #include "./scripts/Resize image/Resize image - functions.jsx";
+        #include "./scripts/Resize image/Resize image - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     };
@@ -70,8 +70,8 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtn2toNcanvas = func
             throw new Error("Wrongly formated name. It should consist of a verb and a noun");
         }
 
-        #include "./scripts/2^n canvas/functions.jsx";
-        #include "./scripts/2^n canvas/EventHandlerBuilderMain.jsx";
+        #include "./scripts/2^n canvas/2^n canvas - functions.jsx";
+        #include "./scripts/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     };
