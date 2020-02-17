@@ -8,7 +8,7 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 #include "./scripts/control panel/control panel - EventHandlerBuilderControlPanel.jsx";
 
-function controlPanel() {
+function main() {
 
     var UIctrlPanel =  new GuiBuilderControlPanel();
 
@@ -32,4 +32,4 @@ function controlPanel() {
 
 }
 
-controlPanel();
+main();
