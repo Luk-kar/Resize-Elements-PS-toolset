@@ -203,7 +203,7 @@ function btnChooseFilesSourceFoldEnabled(trueFalse, UI) {
     UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
 }
 
-function plnFilterFilesEnabled(trueFalse, UI) {
+function panelFilterFilesEnabled(trueFalse, UI) {
 
     if (trueFalse === true) {
 
@@ -397,7 +397,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
 
     createPathString(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
     self.lockingUnlockingAcceptBtn();
-    UI.pnlChangeFile.enabled = true;
+    UI.panelChangeFile.enabled = true;
 
     var self_detinationFolder = destinationFolderSelection;
     } else if ( destinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
@@ -447,9 +447,9 @@ function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, 
     prevDocNames[0] = "no files to process";
 
     if (typeof sourceFiles === "undefined") {
-        var filesNamesInfoUI = [];
+        var filesNamesInfoUI = new Array; //todo
     } else if (typeof sourceFiles !== "undefined") {
-        var filesNamesInfoUI = new Array;
+        var filesNamesInfoUI = new Array; //todo
         for (var i = 0; i < sourceFiles.length; i++) {
             filesNamesInfoUI[i] = decodeURIComponent(sourceFiles[i].name);  // string format is URl
         }
@@ -502,7 +502,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
     var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
 
-    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.pnlChangeFile // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
+    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
@@ -635,9 +635,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             }
 
             if (self.openedDocsToReopen.length > 0) {
-                var fileToRecover = appendingDocToRecover(openedDocPath, self.openedDocsToReopen);
+                var fileToRecover = appendingDocToRecover(openedDocPath, self.openedDocsToReopen); // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
                 if (fileToRecover !== null)
-                    self.openDocsToRecover.push(fileToRecover); // To avoid bug // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+                    self.openDocsToRecover.push(fileToRecover); // To avoid bug
             }
 
             doc.close();

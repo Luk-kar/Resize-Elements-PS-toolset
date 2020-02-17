@@ -4,43 +4,39 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 #include "./scripts/common functions.jsx"
 
-function GuiBuilderControlPln() {
+function GuiBuilderControlPanel() {
 
     this.buildControlPanel();
 }
 
-GuiBuilderControlPln.prototype.buildControlPanel = function () {
+GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
     this.controlPanelWindow = new Window("dialog", "Control panel");
 
-    this.controlPanelWindow.btnAddCanvas = this.controlPanelWindow.add("button", [0, 80, 190, 101], "Add canvas");
+    this.btnAddCanvas = this.controlPanelWindow.add("button", [0, 80, 190, 101], "Add canvas");
 
-    this.controlPanelWindow.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Resize image");
+    this.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Resize image");
 
-    this.controlPanelWindow.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
+    this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
-    this.controlPanelWindow.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
+    this.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
-    // this.controlPanelWindow.btnScriptListener = this.controlPanelWindow.add("button", [205, 80, 395, 101], "ScriptListener"); //Search by phrase ScriptListener to unblock
-
-    this.controlPanelWindow.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
+    this.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
 };
 
 //================================================================================================================================
 
-function EventHandlerBuilderControlPln(UIctrlPln) {
-    this.UIctrlPln = UIctrlPln;
+function EventHandlerBuilderControlPanel(UIctrlPanel) {
+    this.UIctrlPanel = UIctrlPanel;
 }
 
-EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = function () {
-    var UIctrlPln = this.UIctrlPln;
-    UIctrlPln.controlPanelWindow.btnAddCanvas.onClick = function () {
-        UIctrlPln.controlPanelWindow.close();
+EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+    UIctrlPanel.btnAddCanvas.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "Add canvas";
-        if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
-            throw new Error("Wrongly formated name. It should consist of a verb and a noun");
-        }
+        checkIfScriptNameIsRight(executeScript);
 
         #include "./scripts/Add canvas/Add canvas - functions.jsx";
         #include "./scripts/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
@@ -49,15 +45,13 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnAddCanvas = funct
     }
 }
 
-EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnResizeImage = function () {
-    var UIctrlPln = this.UIctrlPln;
-    UIctrlPln.controlPanelWindow.btnResizeImage.onClick = function () {
-        UIctrlPln.controlPanelWindow.close();
+EventHandlerBuilderControlPanel.prototype.onBtnResizeImage = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+    UIctrlPanel.btnResizeImage.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "Resize image";
-        if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
-            throw new Error("Wrongly formated name. It should consist of a verb and a noun");
-        }
+        checkIfScriptNameIsRight(executeScript);
 
         #include "./scripts/Resize image/Resize image - functions.jsx";
         #include "./scripts/Resize image/Resize image - EventHandlerBuilderMain.jsx";
@@ -66,15 +60,13 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnResizeImage = fun
     }
 }
 
-EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtn2toNcanvas = function () {
-    var UIctrlPln = this.UIctrlPln;
-    UIctrlPln.controlPanelWindow.btn2toNcanvas.onClick = function () {
-        UIctrlPln.controlPanelWindow.close();
+EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+    UIctrlPanel.btn2toNcanvas.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "2^n canvas";
-        if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
-            throw new Error("Wrongly formated name. It should consist of a verb and a noun");
-        }
+        checkIfScriptNameIsRight(executeScript);
 
         #include "./scripts/2^n canvas/2^n canvas - functions.jsx";
         #include "./scripts/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
@@ -83,69 +75,56 @@ EventHandlerBuilderControlPln.prototype.onControlPanelWindowbtn2toNcanvas = func
     }
 }
 
-EventHandlerBuilderControlPln.prototype.onPanelSettings = function () {
-    var UIctrlPln = this.UIctrlPln;
+EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
+    var UIctrlPanel = this.UIctrlPanel;
 
-    UIctrlPln.controlPanelWindow.btnSettings.onClick = function () {
+    UIctrlPanel.btnSettings.onClick = function () {
 
-        UIctrlPln.controlPanelWindow.close();
+        UIctrlPanel.controlPanelWindow.close();
 
         #include "./scripts/settings.jsx"
     }
 }
-/*
-EventHandlerBuilderControlPln.prototype.onPanelScriptListener = function () {
-    var UIctrlPln = this.UIctrlPln;
 
-    UIctrlPln.controlPanelWindow.btnScriptListener.onClick = function () {
-        UIctrlPln.controlPanelWindow.close();
+EventHandlerBuilderControlPanel.prototype.onBtnClose = function () {
+    var UIctrlPanel = this.UIctrlPanel;
 
-        var executeScript = "Execute scriptListener";
-        if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
-            throw new Error("Wrongly formated name. It should consist of a verb and a noun");
-        }
-
-        #include "./scripts/Execute scriptListener/Execute scriptListener - functions.jsx"
-        #include "./scripts/Execute scriptListener/Execute scriptListener - EventHandlerBuilderMain.jsx"
-        #include "./scripts/main.jsx"
-    }
-}
-*/
-EventHandlerBuilderControlPln.prototype.onControlPanelWindowBtnClose = function () {
-    var UIctrlPln = this.UIctrlPln;
-
-    UIctrlPln.controlPanelWindow.btnClose.onClick = function () {
-        UIctrlPln.controlPanelWindow.close();
+    UIctrlPanel.btnClose.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
     }
 }
 
-GuiBuilderControlPln.prototype.showControlPanel = function () {
+GuiBuilderControlPanel.prototype.showControlPanel = function () {
     this.controlPanelWindow.show();
+}
+
+function checkIfScriptNameIsRight(executeScript) {
+    if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
+        throw new Error("Wrongly formated name. It should consist of a verb and a noun");
+    }
 }
 
 function controlPanel() {
 
-    var UIctrlPln =  new GuiBuilderControlPln();
+    var UIctrlPanel =  new GuiBuilderControlPanel();
 
-    UIctrlPln.buildControlPanel();
+    UIctrlPanel.buildControlPanel();
 
 //================================================================================================================================
 
-    var eventHandler = new EventHandlerBuilderControlPln( UIctrlPln );
+    var eventHandler = new EventHandlerBuilderControlPanel( UIctrlPanel );
 
-    eventHandler.onControlPanelWindowBtnAddCanvas();
+    eventHandler.onBtnAddCanvas();
 
-    eventHandler.onControlPanelWindowBtnResizeImage();
+    eventHandler.onBtnResizeImage();
 
-    eventHandler.onControlPanelWindowbtn2toNcanvas();
+    eventHandler.onBtn2toNcanvas();
 
-    //eventHandler.onPanelScriptListener()
+    eventHandler.onBtnPanelSettings();
 
-    eventHandler.onPanelSettings();
+    eventHandler.onBtnClose();
 
-    eventHandler.onControlPanelWindowBtnClose();
-
-    UIctrlPln.showControlPanel();
+    UIctrlPanel.showControlPanel();
 
 }
 

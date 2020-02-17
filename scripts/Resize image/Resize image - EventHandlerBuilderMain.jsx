@@ -5,8 +5,8 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     self.lockingUnlockingAcceptBtn = function checkingIfWidthAndHeightIsNot0UnlockingBtn() {
 
-        if ((UI.grpWidth.numb.text.match(/[0-9]+/) !== null) && (UI.grpHeight.numb.text.match(/[0-9]+/) !== null) &&
-            ((parseInt(UI.grpWidth.numb.text, 10) !== 0) || (parseInt(UI.grpHeight.numb.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
+        if ((UI.groupWidth.numb.text.match(/[0-9]+/) !== null) && (UI.groupHeight.numb.text.match(/[0-9]+/) !== null) &&
+            ((parseInt(UI.groupWidth.numb.text, 10) !== 0) || (parseInt(UI.groupHeight.numb.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
     
             UI.btnAccept.enabled = true;
     
@@ -47,9 +47,9 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
             ["ADD %", "PERCENT"],
         ];
 
-        ErrorDiffrentUnitTypes(UI.grpWidth.unitsDropDown, unitsTypes);
+        ErrorDiffrentUnitTypes(UI.groupWidth.unitsDropDown, unitsTypes);
     
-        self.units = unitsTypes[parseInt(UI.grpWidth.unitsDropDown.selection, 10)][1];
+        self.units = unitsTypes[parseInt(UI.groupWidth.unitsDropDown.selection, 10)][1];
 
         return self.sourceFilesToProcess; // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
     }
@@ -63,7 +63,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     
         var doc = app.activeDocument;
     
-        var mathWidthAndHeightResult = mathSumWidthAndHeight(self.units, UI.grpWidth.numb.text, UI.grpHeight.numb.text, doc);
+        var mathWidthAndHeightResult = mathSumWidthAndHeight(self.units, UI.groupWidth.numb.text, UI.groupHeight.numb.text, doc);
         var sumWidth = mathWidthAndHeightResult[1];
         var sumHeight = mathWidthAndHeightResult[0];
     
@@ -91,11 +91,11 @@ EventHandlerBuilderMain.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
     var self = this;
 
-    blockKeysInEdittext(UI.grpWidth.numb);
+    blockKeysInEdittext(UI.groupWidth.numb);
 
-    UI.grpWidth.numb.onChanging = function() {
+    UI.groupWidth.numb.onChanging = function() {
 
-        sameInputField(UI.constrainsProportionsCheckbox, UI.grpWidth.numb, UI.grpHeight.numb);
+        sameInputField(UI.constrainsProportionsCheckbox, UI.groupWidth.numb, UI.groupHeight.numb);
 
         self.lockingUnlockingAcceptBtn();
     }
@@ -105,9 +105,9 @@ EventHandlerBuilderMain.prototype.onGrpWidthUnitsDropDown  = function() {
     var UI = this.UI;
 
     //Dropdownlist: setting the same units: "ADD %" and "ADD %"
-    UI.grpWidth.unitsDropDown.onChange = function() {
+    UI.groupWidth.unitsDropDown.onChange = function() {
 
-        sameDropDown(UI.grpWidth.unitsDropDown, UI.grpHeight.unitDropDown);
+        sameDropDown(UI.groupWidth.unitsDropDown, UI.groupHeight.unitDropDown);
     }
 
 }
@@ -116,12 +116,12 @@ EventHandlerBuilderMain.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
     var self = this;
 
-    blockKeysInEdittext(UI.grpHeight.numb);
+    blockKeysInEdittext(UI.groupHeight.numb);
 
     //Group Height
-    UI.grpHeight.numb.onChanging = function() {
+    UI.groupHeight.numb.onChanging = function() {
 
-        sameInputField(UI.constrainsProportionsCheckbox, UI.grpHeight.numb, UI.grpWidth.numb);
+        sameInputField(UI.constrainsProportionsCheckbox, UI.groupHeight.numb, UI.groupWidth.numb);
 
         self.lockingUnlockingAcceptBtn();
     }
@@ -130,8 +130,8 @@ EventHandlerBuilderMain.prototype.onGrpHeightNumb = function() {
 EventHandlerBuilderMain.prototype.onGrpHeightUnitDropDown = function() {
     var UI = this.UI;
 
-    UI.grpHeight.unitDropDown.onChange = function() {
-        sameDropDown(UI.grpHeight.unitDropDown, UI.grpWidth.unitsDropDown);
+    UI.groupHeight.unitDropDown.onChange = function() {
+        sameDropDown(UI.groupHeight.unitDropDown, UI.groupWidth.unitsDropDown);
     }
 }
 
@@ -142,14 +142,14 @@ EventHandlerBuilderMain.prototype.tooltipWidthAndHeightImage = function() {
                         "Only characters avaible are: digits: [0-9] and signs: '-', '+'.\n" + 
                         "The only accepted value inside input field is integer."
 
-    UI.grpWidth.imageTooltip.helpTip = tooltipValue;
-    UI.grpHeight.imageTooltip.helpTip = tooltipValue;
+    UI.groupWidth.imageTooltip.helpTip = tooltipValue;
+    UI.groupHeight.imageTooltip.helpTip = tooltipValue;
 }
 
 EventHandlerBuilderMain.prototype.onGrpDlgUnitValImage = function() {
     var UI = this.UI;
 
-    createTooltipToImage(UI.constrainsProportionsCheckbox, UI.grpDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
+    createTooltipToImage(UI.constrainsProportionsCheckbox, UI.groupDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
 }
 
 EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
@@ -157,25 +157,25 @@ EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
 
     UI.constrainsProportionsCheckbox.onClick = function() {
         //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
-        createTooltipToImage(UI.constrainsProportionsCheckbox, UI.grpDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
+        createTooltipToImage(UI.constrainsProportionsCheckbox, UI.groupDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
 
         //Set the same "highest" value in "Height" and "Width"
         if (UI.constrainsProportionsCheckbox.value === true) {
             //If Height and Width is negative or equal 0, it set in both most negative number
-            if((parseInt(UI.grpWidth.numb.text, 10) <= 0) && (parseInt(UI.grpHeight.numb.text, 10) <= 0)) {
-                if (parseInt(UI.grpWidth.numb.text, 10) < parseInt(UI.grpHeight.numb.text, 10)) {
-                    UI.grpWidth.numb.onChanging();
+            if((parseInt(UI.groupWidth.numb.text, 10) <= 0) && (parseInt(UI.groupHeight.numb.text, 10) <= 0)) {
+                if (parseInt(UI.groupWidth.numb.text, 10) < parseInt(UI.groupHeight.numb.text, 10)) {
+                    UI.groupWidth.numb.onChanging();
                 }
                 //If some value is positive, set in both most positive number
                 else {
-                    UI.grpHeight.numb.onChanging();
+                    UI.groupHeight.numb.onChanging();
                 }
             //If all values are positive set the highest one
-            } else if ((parseInt(UI.grpWidth.numb.text, 10) > 0) || (parseInt(UI.grpHeight.numb.text, 10) > 0)) {
-                if (parseInt(UI.grpWidth.numb.text, 10) > parseInt(UI.grpHeight.numb.text, 10)) {
-                    UI.grpWidth.numb.onChanging();
+            } else if ((parseInt(UI.groupWidth.numb.text, 10) > 0) || (parseInt(UI.groupHeight.numb.text, 10) > 0)) {
+                if (parseInt(UI.groupWidth.numb.text, 10) > parseInt(UI.groupHeight.numb.text, 10)) {
+                    UI.groupWidth.numb.onChanging();
                 } else {
-                    UI.grpHeight.numb.onChanging();
+                    UI.groupHeight.numb.onChanging();
                 }
             }
         }

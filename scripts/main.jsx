@@ -20,9 +20,9 @@ GuiBuilderMain.prototype.baseLayout = function(executeScript) {
     //Creating groups to populate with main UI
     this.mainWindow = new Window("dialog", executeScript);
 
-    this.grpMain = this.mainWindow.add("group")
+    this.groupMain = this.mainWindow.add("group")
 
-    this.grpInfo = createGroupUI(this.grpMain, "column", "left");
+    this.groupInfo = createGroupUI(this.groupMain, "column", "left");
     this.panelWidth = 40; // Do not use creation property size in px for panels due to issues with bugs
 
 }
@@ -33,7 +33,7 @@ GuiBuilderMain.prototype.images = function() {
 
     var imageFolderDestination = scriptParentFolder + "images/";
 
-    this.pnlTitleFont = "Arial-Bold:13";
+    this.panelTitleFont = "Arial-Bold:13";
 
     //Image: InfoHover.png
     this.imageInfHov = File(imageFolderDestination + "InfoHover.png");
@@ -50,34 +50,34 @@ GuiBuilderMain.prototype.images = function() {
 
 GuiBuilderMain.prototype.buildPanelSourceFiles = function() {
     //Creating group to populate with main UI
-    this.plnSourceFiles = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelSourceFiles = createPanelUI(this.groupInfo, undefined, "left");
 
     //Source files title
-    this.plnSourceFiles.title = this.plnSourceFiles.add("statictext", undefined, "Source files:");
-    this.plnSourceFiles.title.graphics.font = this.pnlTitleFont;
+    this.panelSourceFiles.title = this.panelSourceFiles.add("statictext", undefined, "Source files:");
+    this.panelSourceFiles.title.graphics.font = this.panelTitleFont;
 
     //Creating radial button group
-    this.btnRadSourceFiles = createGroupUI(this.plnSourceFiles, "column", "left", "left");
+    this.btnRadSourceFiles = createGroupUI(this.panelSourceFiles, "column", "left", "left");
 
     //Radial button choose active files/target folder
     this.btnRadSourceFiles.chooseOpenedFiles = this.btnRadSourceFiles.add("radiobutton", undefined, "Opened files");
     this.btnRadSourceFiles.chooseFilesSourceFold = this.btnRadSourceFiles.add("radiobutton", undefined, "Choose folder");
 
     //Add button to choose target folder
-    this.grpBtnChooseFilesSourceFold = this.plnSourceFiles.add("group");
+    this.groupBtnChooseFilesSourceFold = this.panelSourceFiles.add("group");
 
-    this.btnChooseFilesSourceFold =  this.grpBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
-    this.btnChooseFilesSourceFold.title = this.grpBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
+    this.btnChooseFilesSourceFold =  this.groupBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
+    this.btnChooseFilesSourceFold.title = this.groupBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
 
-    this.btnChooseFilesSourceFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+    this.btnChooseFilesSourceFold.title.characters = this.panelWidth; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 }
 
 GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
 
     //Create panel
-    this.plnFilterFiles = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelFilterFiles = createPanelUI(this.groupInfo, undefined, "left");
 
-    this.filterSourceFilesCheckbox = createGroupUI(this.plnFilterFiles, "column", "left", "left");
+    this.filterSourceFilesCheckbox = createGroupUI(this.panelFilterFiles, "column", "left", "left");
     //Create checkbox
     this.filterSourceFilesCheckbox.PNG = this.filterSourceFilesCheckbox.add("checkbox", undefined, "Process only PNG");
 
@@ -89,7 +89,7 @@ GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
     this.filterSourceFilesCheckbox.byExpression = this.filterSourceFilesCheckbox.add("checkbox", undefined, "filter files by expression");
 
 
-    this.filterSourceFilesByExpression = this.plnFilterFiles.add("group"); //Why it is not part of this.filterSourceFilesCheckbox.byExpression, thou ask? Becouse only checkbox of filterSourceFilesCheckbox.byExpression enable or disable this group
+    this.filterSourceFilesByExpression = this.panelFilterFiles.add("group"); //Why it is not part of this.filterSourceFilesCheckbox.byExpression, thou ask? Becouse only checkbox of filterSourceFilesCheckbox.byExpression enable or disable this group
         //Create statictext
         this.filterSourceFilesByExpression.title = this.filterSourceFilesByExpression.add("statictext", undefined, "Filter by:");
         //Create editText
@@ -99,31 +99,31 @@ GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
         this.filterSourceFilesByExpression.imageTooltip = this.filterSourceFilesByExpression.add("image", undefined, this.imageInfHov);
 
         this.filterSourceFilesByExpression.panelWidth = this.filterSourceFilesByExpression.add("statictext", undefined, "");
-        this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth -32; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+        this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth -32; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 
 }
 
 GuiBuilderMain.prototype.buildPanelDestinationFolder = function() {
 
-    this.pnlDestFold = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelDestFold = createPanelUI(this.groupInfo, undefined, "left");
 
     //Title
-    this.pnlDestFold.title = this.pnlDestFold.add("statictext", undefined, "Destination folder:");
-    this.pnlDestFold.title.graphics.font = this.pnlTitleFont;
+    this.panelDestFold.title = this.panelDestFold.add("statictext", undefined, "Destination folder:");
+    this.panelDestFold.title.graphics.font = this.panelTitleFont;
 
     //Creating group radial button choose destination folder
-    this.btnRadDestFold = createGroupUI(this.pnlDestFold, "column", "left", "left");
+    this.btnRadDestFold = createGroupUI(this.panelDestFold, "column", "left", "left");
 
     //Radial buttons choose destination folder
     this.btnRadDestFold.same = this.btnRadDestFold.add("radiobutton", undefined, executeScript + " in the same folder");
     this.btnRadDestFold.other = this.btnRadDestFold.add("radiobutton", undefined, executeScript + " and copy files to other folder");
 
     //Browse button destination folder
-    this.grpBtnDestFold = this.pnlDestFold.add("group");
+    this.groupBtnDestFold = this.panelDestFold.add("group");
 
-    this.btnChooseFilesDestFold = this.grpBtnDestFold.add("button", undefined, "Browse...");
-    this.btnChooseFilesDestFold.title = this.grpBtnDestFold.add("statictext", undefined, "Destination folder...");
-    this.btnChooseFilesDestFold.title.characters = this.panelWidth; //Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+    this.btnChooseFilesDestFold = this.groupBtnDestFold.add("button", undefined, "Browse...");
+    this.btnChooseFilesDestFold.title = this.groupBtnDestFold.add("statictext", undefined, "Destination folder...");
+    this.btnChooseFilesDestFold.title.characters = this.panelWidth; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 }
 
 GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
@@ -140,38 +140,33 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     if (executeScript === "2^n canvas"){
         #include "./2^n canvas/2^n canvas - UI.jsx"; 
     }
-    /*
-    if (executeScript === "Execute scriptListener"){
-        #include "./Execute scriptListener/Execute scriptListener - UI.jsx"; 
-    }
-    */
 }
 
 GuiBuilderMain.prototype.buildPanelInfoUI = function(){
 
-    this.pnlDocInfo = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelDocInfo = createPanelUI(this.groupInfo, undefined, "left");
 
     //Number of files displayed in "Info UI"
     this.numbOfDisplayedFiles = 2;
 
     //Creating empty lines of text to fill with files names later
-    this.plnDocInfoLines = new Array; //plnDocInfo.lines -> "undefined not as object"
+    this.panelDocInfoLines = new Array; //panelDocInfo.lines -> "undefined not as object"
 
     for (var i = 0; i < (this.numbOfDisplayedFiles + 1); i++) {
-        this.plnDocInfoLines[i] = this.pnlDocInfo.add("statictext");
-        this.plnDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+        this.panelDocInfoLines[i] = this.panelDocInfo.add("statictext");
+        this.panelDocInfoLines[i].characters = this.panelWidth + 13;//Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
     }
 }
 
 GuiBuilderMain.prototype.buildAcceptCancelReturnButtons = function() {
 
-        this.grpBtns = createGroupUI(this.grpMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
+        this.groupBtns = createGroupUI(this.groupMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
-        this.btnAccept = this.grpBtns.add("button", undefined, "Accept");
+        this.btnAccept = this.groupBtns.add("button", undefined, "Accept");
 
-        this.btnCancel = this.grpBtns.add("button", undefined, "Close");
+        this.btnCancel = this.groupBtns.add("button", undefined, "Close");
 
-        this.btnReturn = this.grpBtns.add("button", undefined, "Return");
+        this.btnReturn = this.groupBtns.add("button", undefined, "Return");
 }
 
 function EventHandlerBuilderMain(UI) {
@@ -187,16 +182,16 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         btnChooseFilesSourceFoldEnabled(false, UI);
 
-        plnFilterFilesEnabled(false, UI);
+        panelFilterFilesEnabled(false, UI);
 
-        UI.pnlDestFold.title.enabled = true;
+        UI.panelDestFold.title.enabled = true;
 
         btnsRadDestFoldEnabled(true, UI);
 
         self.lockingUnlockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
 
-        if (UI.pnlChangeFile.enabled === false) {
-            UI.pnlChangeFile.enabled = true;
+        if (UI.panelChangeFile.enabled === false) {
+            UI.panelChangeFile.enabled = true;
         }
 
         if (UI.btnRadDestFold.other.value === true) {
@@ -204,7 +199,7 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
             UI.btnRadDestFold.other.onClick();
         } 
 
-        infoFilesUIUpdate(docsOpenedFiles(), UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoFilesUIUpdate(docsOpenedFiles(), UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
     }
 }
@@ -221,15 +216,15 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             btnChooseFilesSourceFoldEnabled(true, UI);
 
-            UI.pnlDestFold.title.enabled = false;
+            UI.panelDestFold.title.enabled = false;
 
             btnsRadDestFoldEnabled(false, UI);
 
             btnChooseFilesDestFoldEnabled(false, UI);
 
-            UI.pnlChangeFile.enabled = false;
+            UI.panelChangeFile.enabled = false;
 
-            infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
             UI.btnAccept.enabled = false;
         
@@ -237,9 +232,9 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             btnChooseFilesSourceFoldEnabled(true, UI);
 
-            plnFilterFilesEnabled(true, UI);
+            panelFilterFilesEnabled(true, UI);
 
-            UI.pnlDestFold.title.enabled = true;
+            UI.panelDestFold.title.enabled = true;
 
             btnsRadDestFoldEnabled(true, UI);
             
@@ -262,7 +257,7 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
                 self.lockingUnlockingAcceptBtn(); 
             }
 
-            infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+            infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
         }
 
         ErrorWrongStringInputPath(UI.btnChooseFilesSourceFold.title.text);
@@ -273,7 +268,7 @@ EventHandlerBuilderMain.prototype.startSettingsUINumbofActiveDocs = function() {
     var UI = this.UI;
     var self = this;
 
-    plnFilterFilesEnabled(false, UI);
+    panelFilterFilesEnabled(false, UI);
 
     UI.numbOfActiveDocuments = docsOpenedFiles().length; //Save later to use in summary alert
 
@@ -331,19 +326,19 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 createPathString(UI.btnChooseFilesSourceFold.title, "Source folder...");
 
-                plnFilterFilesEnabled(false, UI);
+                panelFilterFilesEnabled(false, UI);
 
-                UI.pnlDestFold.title.enabled = false;
+                UI.panelDestFold.title.enabled = false;
 
                 btnsRadDestFoldEnabled(false, UI);
 
                 btnChooseFilesDestFoldEnabled(false, UI);
 
-                UI.pnlChangeFile.enabled = false;
+                UI.panelChangeFile.enabled = false;
                 
                 UI.btnAccept.enabled = false;
 
-                infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
                 alert("In choosed folder there is no files to process");
                 
@@ -357,13 +352,13 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
                 createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
 
-                plnFilterFilesEnabled(true, UI);
+                panelFilterFilesEnabled(true, UI);
                 
-                UI.pnlDestFold.title.enabled = true;
+                UI.panelDestFold.title.enabled = true;
                 
                 btnsRadDestFoldEnabled(true, UI);
                 
-                infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+                infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
                 if (typeof self.detinationFolder === "undefined") {
 
@@ -413,7 +408,7 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxPNG = function() {
 
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
-        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
     }
 }
 
@@ -428,7 +423,7 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxByExpression = func
         
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
-        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
     }
 }
 
@@ -445,7 +440,7 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesByExpressionInput = functio
 
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
-        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.pnlDocInfo, UI.plnDocInfoLines);
+        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
     }
 
@@ -461,7 +456,7 @@ EventHandlerBuilderMain.prototype.onBtnRadDestFoldSame = function() {
 
         self.lockingUnlockingAcceptBtn()
 
-        UI.pnlChangeFile.enabled = true;
+        UI.panelChangeFile.enabled = true;
     }
 }
 
@@ -479,11 +474,11 @@ EventHandlerBuilderMain.prototype.onBtnRadDestFoldOther = function() {
         if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
 
             UI.btnAccept.enabled = false;
-            UI.pnlChangeFile.enabled = false;
+            UI.panelChangeFile.enabled = false;
 
         } else if (UI.btnChooseFilesDestFold.title.text !== "Destination folder...") {
 
-            UI.pnlChangeFile.enabled = true;
+            UI.panelChangeFile.enabled = true;
         }
 
         ErrorWrongStringInputPath(Folder(UI.btnChooseFilesDestFold.title.text));
@@ -512,7 +507,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
 
                 self.detinationFolder = detinationFolderSelection;
                 createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
-                UI.pnlChangeFile.enabled = true;
+                UI.panelChangeFile.enabled = true;
 
                 self.lockingUnlockingAcceptBtn();
 
@@ -628,7 +623,7 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
     UI.btnReturn.onClick = function() {
 
         UI.mainWindow.close();
-        UIctrlPln.controlPanelWindow.show();
+        UIctrlPanel.controlPanelWindow.show();
     }
 }
 
@@ -671,11 +666,6 @@ function main(executeScript) {
     if (executeScript === "2^n canvas"){
         #include "./2^n canvas/2^n canvas - eventHandler.jsx"; 
     }
-        /*
-    if (executeScript === "Execute scriptListener"){
-        #include "./Execute scriptListener/Execute scriptListener - eventHandler.jsx";
-    }
-    */
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
 

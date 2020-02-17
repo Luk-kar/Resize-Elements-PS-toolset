@@ -1,62 +1,62 @@
     ///Add canvas UI
-    this.pnlChangeFile = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 
     //Title
-    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, executeScript + ":");
-    this.pnlChangeFile.title.characters = this.panelWidth + 1;
-    this.pnlChangeFile.title.graphics.font = this.pnlTitleFont;
+    this.panelChangeFile.title = this.panelChangeFile.add("statictext", undefined, executeScript + ":");
+    this.panelChangeFile.title.characters = this.panelWidth + 1;
+    this.panelChangeFile.title.graphics.font = this.panelTitleFont;
 
     //Group units value
-    this.grpUnitVal = this.pnlChangeFile.add("group");
+    this.groupUnitVal = this.panelChangeFile.add("group");
 
         //Group dialog units value
-        this.grpUnitValDlg = createGroupUI(this.grpUnitVal, "column", "left");
+        this.groupUnitValDlg = createGroupUI(this.groupUnitVal, "column", "left");
 
             //Group width
-            this.grpWidth = this.grpUnitValDlg.add("group");
+            this.groupWidth = this.groupUnitValDlg.add("group");
 
                 //Edittext: Width
-                this.grpWidth.title = this.grpWidth.add("statictext", undefined, "Width:  ");
-                this.grpWidth.numb =  this.grpWidth.add("edittext", undefined, 0);
-                this.grpWidth.numb.characters = 9;
+                this.groupWidth.title = this.groupWidth.add("statictext", undefined, "Width:  ");
+                this.groupWidth.numb =  this.groupWidth.add("edittext", undefined, 0);
+                this.groupWidth.numb.characters = 9;
 
                 //Update also unitsTypes
                 var AddCanvasDocUnits = [
                     "ADD PX", 
                     "ADD %",
                     ];
-                this.grpWidth.unitsDropDown = this.grpWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.grpWidth.unitsDropDown.selection = 0;
+                this.groupWidth.unitsDropDown = this.groupWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
+                this.groupWidth.unitsDropDown.selection = 0;
 
                 //Crating tooltip
-                this.grpWidth.imageTooltip = this.grpWidth.add("image", undefined, this.imageInfHov);
+                this.groupWidth.imageTooltip = this.groupWidth.add("image", undefined, this.imageInfHov);
 
             //Group height
-            this.grpHeight = this.grpUnitValDlg.add("group");
+            this.groupHeight = this.groupUnitValDlg.add("group");
 
                 //Edittext: Height
-                this.grpHeight.title = this.grpHeight.add("statictext", undefined, "Height: ");
-                this.grpHeight.numb =  this.grpHeight.add("edittext", undefined, 0);
-                this.grpHeight.numb.characters = 9;
+                this.groupHeight.title = this.groupHeight.add("statictext", undefined, "Height: ");
+                this.groupHeight.numb =  this.groupHeight.add("edittext", undefined, 0);
+                this.groupHeight.numb.characters = 9;
 
                 //Dropdownlist: Add PX, add %
-                this.grpHeight.unitDropDown = this.grpHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.grpHeight.unitDropDown.selection = 0;
+                this.groupHeight.unitDropDown = this.groupHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
+                this.groupHeight.unitDropDown.selection = 0;
 
                 //Image: InfoHover.png
-                this.grpHeight.imageTooltip = this.grpHeight.add("image", undefined, this.imageInfHov);
+                this.groupHeight.imageTooltip = this.groupHeight.add("image", undefined, this.imageInfHov);
 
         //Graphic element proportions constrains (true, false)
 
             //Add constrain image next to dialog
-            this.grpDlgUnitValImage = this.grpUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
-            this.grpDlgUnitValImage.alignment = "right";
+            this.groupDlgUnitValImage = this.groupUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
+            this.groupDlgUnitValImage.alignment = "right";
 
     //Constrains proportions
-    this.constrainsProportionsCheckbox = this.pnlChangeFile.add("checkbox", undefined, "Same Height and Width");
+    this.constrainsProportionsCheckbox = this.panelChangeFile.add("checkbox", undefined, "Same Height and Width");
 
     //Canvas color extension
-    this.canvResampleImage = this.pnlChangeFile.add("group");
+    this.canvResampleImage = this.panelChangeFile.add("group");
 
         this.canvResampleImage.title = this.canvResampleImage.add("statictext", undefined, "Resample image: ");
 

@@ -44,22 +44,22 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
     var UI = this.UI;
     var self = this;
 
-    restrictInputKeys(UI.grpBiggerThan.valueLowest);
+    restrictInputKeys(UI.groupBiggerThan.valueLowest);
 
-    UI.grpBiggerThan.valueLowest.onChanging = function() {
+    UI.groupBiggerThan.valueLowest.onChanging = function() {
 
-        restrictValueUpTo(UI.maxResValue, UI.grpBiggerThan.valueLowest);
+        restrictValueUpTo(UI.maxResValue, UI.groupBiggerThan.valueLowest);
 
         self.lockingUnlockingAcceptBtn();
     }
 
-    UI.grpBiggerThan.valueLowest.onChange = function() {
+    UI.groupBiggerThan.valueLowest.onChange = function() {
 
-        setMinimalValueAt1(UI.grpBiggerThan.valueLowest);
+        setMinimalValueAt1(UI.groupBiggerThan.valueLowest);
 
-        if(parseInt(UI.grpLowerThan.valueHighest.text, 10) < parseInt(UI.grpBiggerThan.valueLowest.text, 10)) {
+        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
             alert('"bigger than:" value can' + "'" + '"t be higher than "smaller than:" value')
-            UI.grpBiggerThan.valueLowest.text = UI.grpLowerThan.valueHighest.text;
+            UI.groupBiggerThan.valueLowest.text = UI.groupLowerThan.valueHighest.text;
         }
     }
 }
@@ -69,8 +69,8 @@ EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function()
 
     var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px';
 
-    UI.grpBiggerThan.imageTooltip.helpTip = tooltipValue;
-    UI.grpLowerThan.imageTooltip.helpTip = tooltipValue;
+    UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
+    UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
 }
 
 EventHandlerBuilderMain.prototype.tooltipCanvExtendColor = function() {
@@ -83,23 +83,23 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     var UI = this.UI;
     var self = this;
 
-    restrictInputKeys(UI.grpLowerThan.valueHighest);
+    restrictInputKeys(UI.groupLowerThan.valueHighest);
 
     //Group Height
-    UI.grpLowerThan.valueHighest.onChanging = function() {
+    UI.groupLowerThan.valueHighest.onChanging = function() {
 
-        restrictValueUpTo(UI.maxResValue, UI.grpLowerThan.valueHighest);
+        restrictValueUpTo(UI.maxResValue, UI.groupLowerThan.valueHighest);
 
         self.lockingUnlockingAcceptBtn();
     }
 
-    UI.grpLowerThan.valueHighest.onChange = function() {
+    UI.groupLowerThan.valueHighest.onChange = function() {
 
-        setMinimalValueAt1(UI.grpLowerThan.valueHighest);
+        setMinimalValueAt1(UI.groupLowerThan.valueHighest);
 
-        if(parseInt(UI.grpLowerThan.valueHighest.text, 10) < parseInt(UI.grpBiggerThan.valueLowest.text, 10)) {
+        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
             alert('"smaller than:" value can' + "'" + '"t be lower than "bigger than:" value')
-            UI.grpLowerThan.valueHighest.text = UI.grpBiggerThan.valueLowest.text;
+            UI.groupLowerThan.valueHighest.text = UI.groupBiggerThan.valueLowest.text;
         }
     }
 }
@@ -172,7 +172,7 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                 
                     var highestValueSide = Math.max( width, height );
 
-                    if (highestValueSide >= parseInt(UI.grpBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.grpLowerThan.valueHighest.text, 10) ) { 
+                    if (highestValueSide >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.groupLowerThan.valueHighest.text, 10) ) { 
                         sourceFilesTemp.push(self.sourceFilesToProcess[i]);
                     }
                 } else { // This files does not have EXIF dimensions, so they will be checked during opening files
@@ -197,7 +197,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
 
         var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
 
-        if (highestValueSide < parseInt(UI.grpBiggerThan.valueLowest.text, 10) || highestValueSide > parseInt(UI.grpLowerThan.valueHighest.text, 10) ) { //todo
+        if (highestValueSide < parseInt(UI.groupBiggerThan.valueLowest.text, 10) || highestValueSide > parseInt(UI.groupLowerThan.valueHighest.text, 10) ) {
             return "continue";
         }
     

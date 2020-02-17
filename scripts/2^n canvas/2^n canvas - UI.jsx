@@ -1,43 +1,43 @@
     this.maxResValue = 8192;
     
     ///2^n canvas
-    this.pnlChangeFile = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 
     //Title
-    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, executeScript + ":");
-    this.pnlChangeFile.title.graphics.font = this.pnlTitleFont;
+    this.panelChangeFile.title = this.panelChangeFile.add("statictext", undefined, executeScript + ":");
+    this.panelChangeFile.title.graphics.font = this.panelTitleFont;
 
     //Group dialog units value
 
-    this.grpBiggerThan = createGroupUI(this.pnlChangeFile, undefined, "left", "left");
+    this.groupBiggerThan = createGroupUI(this.panelChangeFile, undefined, "left", "left");
 
-    this.grpBiggerThan.title001 = this.grpBiggerThan.add("statictext", undefined, "For images bigger than:");
-    this.grpBiggerThan.title001.characters = 18;
+    this.groupBiggerThan.title001 = this.groupBiggerThan.add("statictext", undefined, "For images bigger than:");
+    this.groupBiggerThan.title001.characters = 18;
 
-    this.grpBiggerThan.valueLowest = this.grpBiggerThan.add("edittext", undefined, "1");
-    this.grpBiggerThan.valueLowest.characters = 4;
+    this.groupBiggerThan.valueLowest = this.groupBiggerThan.add("edittext", undefined, "1");
+    this.groupBiggerThan.valueLowest.characters = 4;
 
-    this.grpBiggerThan.title002 = this.grpBiggerThan.add("statictext", undefined, "px");
+    this.groupBiggerThan.title002 = this.groupBiggerThan.add("statictext", undefined, "px");
 
-    this.grpBiggerThan.imageTooltip = this.grpBiggerThan.add("image", undefined, this.imageInfHov);
+    this.groupBiggerThan.imageTooltip = this.groupBiggerThan.add("image", undefined, this.imageInfHov);
 
 //------------------------------------------------------------------------------
 
-    this.grpLowerThan = createGroupUI(this.pnlChangeFile, undefined, "left", "left");
+    this.groupLowerThan = createGroupUI(this.panelChangeFile, undefined, "left", "left");
 
-    this.grpLowerThan.title001 = this.grpLowerThan.add("statictext", undefined, "and also smaller than:");
-    this.grpLowerThan.title001.characters = 18;
+    this.groupLowerThan.title001 = this.groupLowerThan.add("statictext", undefined, "and also smaller than:");
+    this.groupLowerThan.title001.characters = 18;
 
-    this.grpLowerThan.valueHighest = this.grpLowerThan.add("edittext", undefined, this.maxResValue);
-    this.grpLowerThan.valueHighest.characters = 4;
+    this.groupLowerThan.valueHighest = this.groupLowerThan.add("edittext", undefined, this.maxResValue);
+    this.groupLowerThan.valueHighest.characters = 4;
 
-    this.grpLowerThan.title002 = this.grpLowerThan.add("statictext", undefined, "px");
+    this.groupLowerThan.title002 = this.groupLowerThan.add("statictext", undefined, "px");
 
-    this.grpLowerThan.imageTooltip = this.grpLowerThan.add("image", undefined, this.imageInfHov);
+    this.groupLowerThan.imageTooltip = this.groupLowerThan.add("image", undefined, this.imageInfHov);
 
     //Canvas color extension
 
-    this.canvExtendColor = this.pnlChangeFile.add("group");
+    this.canvExtendColor = this.panelChangeFile.add("group");
 
         this.canvExtendColor.title = this.canvExtendColor.add("statictext", undefined, "Canvas extension color:");
 
@@ -55,11 +55,11 @@
 
         this.canvExtendColor.imageTooltip = this.canvExtendColor.add("image", undefined, this.imageInfHov);
 
-    this.marginesSpaceBottom = this.pnlChangeFile.add("statictext");
+    this.marginesSpaceBottom = this.panelChangeFile.add("statictext");
 
 
     //Images display number with fulfilling resolution conditions
-    this.pnlImagesFulfillingResConditions = createPanelUI(this.pnlChangeFile, undefined, "left");
+    this.panelImagesFulfillingResConditions = createPanelUI(this.panelChangeFile, undefined, "left");
 
-        this.pnlImagesFulfillingResConditions.title = this.pnlImagesFulfillingResConditions.add("statictext", undefined, "Max image resolution input is " + this.maxResValue.toString() + " px in both sides"); // To make visually diffrence than other modules
-        this.pnlImagesFulfillingResConditions.title.characters = this.panelWidth + 8;
+        this.panelImagesFulfillingResConditions.title = this.panelImagesFulfillingResConditions.add("statictext", undefined, "Max image resolution input is " + this.maxResValue.toString() + " px in both sides"); // To make visually diffrence than other modules
+        this.panelImagesFulfillingResConditions.title.characters = this.panelWidth + 8;

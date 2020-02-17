@@ -1,95 +1,95 @@
     ///Add canvas UI
-    this.pnlChangeFile = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 
     //Title
-    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, executeScript + ":");
-    this.pnlChangeFile.title.graphics.font = this.pnlTitleFont;
+    this.panelChangeFile.title = this.panelChangeFile.add("statictext", undefined, executeScript + ":");
+    this.panelChangeFile.title.graphics.font = this.panelTitleFont;
 
     //Group units value
-    this.grpUnitVal = this.pnlChangeFile.add("group");
+    this.groupUnitVal = this.panelChangeFile.add("group");
 
         //Group dialog units value
-        this.grpUnitValDlg = createGroupUI(this.grpUnitVal, "column", "left");
+        this.groupUnitValDlg = createGroupUI(this.groupUnitVal, "column", "left");
 
             //Group width
-            this.grpWidth = this.grpUnitValDlg.add("group");
+            this.groupWidth = this.groupUnitValDlg.add("group");
 
                 //Edittext: Width
-                this.grpWidth.title = this.grpWidth.add("statictext", undefined, "Width:  ");
-                this.grpWidth.numb =  this.grpWidth.add("edittext", undefined, 0);
-                this.grpWidth.numb.characters = 9;
+                this.groupWidth.title = this.groupWidth.add("statictext", undefined, "Width:  ");
+                this.groupWidth.numb =  this.groupWidth.add("edittext", undefined, 0);
+                this.groupWidth.numb.characters = 9;
 
                 //Update also unitsTypes
                 var AddCanvasDocUnits = [
                     "ADD PX", 
                     "ADD %",
                     ];
-                this.grpWidth.unitsDropDown = this.grpWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.grpWidth.unitsDropDown.selection = 0;
+                this.groupWidth.unitsDropDown = this.groupWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
+                this.groupWidth.unitsDropDown.selection = 0;
 
                 //Crating tooltip
-                this.grpWidth.imageTooltip = this.grpWidth.add("image", undefined, this.imageInfHov);
+                this.groupWidth.imageTooltip = this.groupWidth.add("image", undefined, this.imageInfHov);
 
             //Group height
-            this.grpHeight = this.grpUnitValDlg.add("group");
+            this.groupHeight = this.groupUnitValDlg.add("group");
 
                 //Edittext: Height
-                this.grpHeight.title = this.grpHeight.add("statictext", undefined, "Height: ");
-                this.grpHeight.numb =  this.grpHeight.add("edittext", undefined, 0);
-                this.grpHeight.numb.characters = 9;
+                this.groupHeight.title = this.groupHeight.add("statictext", undefined, "Height: ");
+                this.groupHeight.numb =  this.groupHeight.add("edittext", undefined, 0);
+                this.groupHeight.numb.characters = 9;
 
                 //Dropdownlist: Add PX, add %
-                this.grpHeight.unitDropDown = this.grpHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.grpHeight.unitDropDown.selection = 0;
+                this.groupHeight.unitDropDown = this.groupHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
+                this.groupHeight.unitDropDown.selection = 0;
 
                 //Image: InfoHover.png
-                this.grpHeight.imageTooltip = this.grpHeight.add("image", undefined, this.imageInfHov);
+                this.groupHeight.imageTooltip = this.groupHeight.add("image", undefined, this.imageInfHov);
 
         //Graphic element proportions constrains (true, false)
 
             //Add constrain image next to dialog
-            this.grpDlgUnitValImage = this.grpUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
-            this.grpDlgUnitValImage.alignment = "right";
+            this.groupDlgUnitValImage = this.groupUnitVal.add("image", undefined, this.imageCnstrnsProportionFalse);
+            this.groupDlgUnitValImage.alignment = "right";
 
     //Constrains proportions
-    this.constrainsProportionsCheckbox = this.pnlChangeFile.add("checkbox", undefined, "Same Height and Width");
+    this.constrainsProportionsCheckbox = this.panelChangeFile.add("checkbox", undefined, "Same Height and Width");
 
     //Anchor display
-    this.grpAnchorMarginesSpaceTop =  [this.pnlChangeFile.add("group", undefined, ""),
-                                       this.pnlChangeFile.add("group", undefined, "")];
+    this.groupAnchorMarginesSpaceTop =  [this.panelChangeFile.add("group", undefined, ""),
+                                       this.panelChangeFile.add("group", undefined, "")];
 
-    this.grpAnchor = this.pnlChangeFile.add("group");
-    this.grpAnchor.title = this.grpAnchor.add("statictext", undefined, "Anchor: ");
-    this.grpAnchor.title.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
+    this.groupAnchor = this.panelChangeFile.add("group");
+    this.groupAnchor.title = this.groupAnchor.add("statictext", undefined, "Anchor: ");
+    this.groupAnchor.title.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
 
         //Creating anchor group box
-        this.grpAnchor.boxBtns = createGroupUI(this.grpAnchor, "column");
+        this.groupAnchor.boxBtns = createGroupUI(this.groupAnchor, "column");
 
         //Creating anchor gorup lines inside box
-        this.grpAnchor.boxBtns.line001 = this.grpAnchor.boxBtns.add("group");
-        this.grpAnchor.boxBtns.line002 = this.grpAnchor.boxBtns.add("group");
-        this.grpAnchor.boxBtns.line003 = this.grpAnchor.boxBtns.add("group");
+        this.groupAnchor.boxBtns.line001 = this.groupAnchor.boxBtns.add("group");
+        this.groupAnchor.boxBtns.line002 = this.groupAnchor.boxBtns.add("group");
+        this.groupAnchor.boxBtns.line003 = this.groupAnchor.boxBtns.add("group");
 
             //Adding 001 line of buttons
-            this.anchorPositionTOPLEFT = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionTOPCENTER = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionTOPRIGHT = this.grpAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionTOPLEFT = this.groupAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionTOPCENTER = this.groupAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionTOPRIGHT = this.groupAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
 
             //Adding 002 line of buttons
-            this.anchorPositionMIDDLELEFT = this.grpAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionMIDDLECENTER = this.grpAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorTrue);
-            this.anchorPositionMIDDLERIGHT = this.grpAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionMIDDLELEFT = this.groupAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionMIDDLECENTER = this.groupAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorTrue);
+            this.anchorPositionMIDDLERIGHT = this.groupAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
 
             //Adding 003 line of buttons
-            this.anchorPositionBOTTOMLEFT = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionBOTTOMCENTER = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionBOTTOMRIGHT = this.grpAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionBOTTOMLEFT = this.groupAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionBOTTOMCENTER = this.groupAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
+            this.anchorPositionBOTTOMRIGHT = this.groupAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
 
-    this.grpAnchorMarginesSpaceBottom = this.pnlChangeFile.add("statictext", undefined, "");
-    this.grpAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.plnSourceFiles, this.plnFilterFiles, this.pnlDestFold
+    this.groupAnchorMarginesSpaceBottom = this.panelChangeFile.add("statictext", undefined, "");
+    this.groupAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 
     //Canvas color extension
-    this.canvExtendColor = this.pnlChangeFile.add("group");
+    this.canvExtendColor = this.panelChangeFile.add("group");
 
         this.canvExtendColor.title = this.canvExtendColor.add("statictext", undefined, "Canvas extension color: ");
 

@@ -1,14 +1,14 @@
 
     ///2^n canvas
-    this.pnlChangeFile = createPanelUI(this.grpInfo, undefined, "left");
+    this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 
     //Title
-    this.pnlChangeFile.title = this.pnlChangeFile.add("statictext", undefined, executeScript + ":");
-    this.pnlChangeFile.title.graphics.font = this.pnlTitleFont;
-    this.pnlChangeFile.add("statictext");
+    this.panelChangeFile.title = this.panelChangeFile.add("statictext", undefined, executeScript + ":");
+    this.panelChangeFile.title.graphics.font = this.panelTitleFont;
+    this.panelChangeFile.add("statictext");
 
-    this.pnlExplain = createPanelUI(this.pnlChangeFile, undefined, "center");
-    this.pnlExplain.title = this.pnlExplain.add("statictext", undefined, "Now, here will be excuted scriptListener for choosed all files");
-    this.pnlExplain.title.characters = this.panelWidth + 8;
+    this.panelExplain = createPanelUI(this.panelChangeFile, undefined, "center");
+    this.panelExplain.title = this.panelExplain.add("statictext", undefined, "Now, here will be excuted scriptListener for choosed all files");
+    this.panelExplain.title.characters = this.panelWidth + 8;
 
-    this.pnlChangeFile.add("statictext");
+    this.panelChangeFile.add("statictext");
