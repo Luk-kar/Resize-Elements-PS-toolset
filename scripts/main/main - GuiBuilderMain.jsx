@@ -18,7 +18,7 @@ GuiBuilderMain.prototype.baseLayout = function(executeScript) {
 
 GuiBuilderMain.prototype.images = function() {
 
-    var scriptParentFolder = getParentfolder(); // slice negative numb is length of file folder
+    var scriptParentFolder = getGrandParentfolder(); // slice negative numb is length of file folder
 
     var imageFolderDestination = scriptParentFolder + "images/";
 

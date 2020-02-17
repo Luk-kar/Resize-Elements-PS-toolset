@@ -9,6 +9,8 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 //================================================================================================================================
 
+#include "./main - functions.jsx";
+
 #include "./main - GuiBuilderMain.jsx";
 
 #include "./main - EventHandlerBuilderMain.jsx";
