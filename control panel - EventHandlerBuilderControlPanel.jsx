@@ -54,7 +54,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
 
         UIctrlPanel.controlPanelWindow.close();
 
-        #include "./scripts/settings.jsx"
+        #include "./scripts/settings/settings.jsx"
     }
 }
 
