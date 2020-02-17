@@ -12,7 +12,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
 
         #include "./scripts/executeScript/Add canvas/Add canvas - functions.jsx";
         #include "./scripts/executeScript/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
-        #include "./scripts/main.jsx"
+        #include "./scripts/main/main.jsx"
 
     }
 }
@@ -27,7 +27,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnResizeImage = function () {
 
         #include "./scripts/executeScript/Resize image/Resize image - functions.jsx";
         #include "./scripts/executeScript/Resize image/Resize image - EventHandlerBuilderMain.jsx";
-        #include "./scripts/main.jsx"
+        #include "./scripts/main/main.jsx"
 
     }
 }
@@ -42,7 +42,7 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
 
         #include "./scripts/executeScript/2^n canvas/2^n canvas - functions.jsx";
         #include "./scripts/executeScript/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
-        #include "./scripts/main.jsx"
+        #include "./scripts/main/main.jsx"
 
     }
 }

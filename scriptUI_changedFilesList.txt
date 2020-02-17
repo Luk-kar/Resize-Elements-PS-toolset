@@ -201,3 +201,31 @@ Processed files list:
 000008 save :true <0> 008.tif <1> Resize image <2> Mon Feb 17 2020 11:55:00 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
 000009 save :true <0> 009.tif <1> Resize image <2> Mon Feb 17 2020 11:55:00 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
 
+==== Mon Feb 17 2020 13:26:25 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 003.png <1> Add canvas <2> Mon Feb 17 2020 13:26:25 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+
+==== Mon Feb 17 2020 13:26:49 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> Resize image <2> Mon Feb 17 2020 13:26:50 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> Resize image <2> Mon Feb 17 2020 13:26:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> Resize image <2> Mon Feb 17 2020 13:26:51 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> Resize image <2> Mon Feb 17 2020 13:26:52 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> Resize image <2> Mon Feb 17 2020 13:26:52 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> Resize image <2> Mon Feb 17 2020 13:26:53 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> Resize image <2> Mon Feb 17 2020 13:26:53 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> Resize image <2> Mon Feb 17 2020 13:26:54 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> Resize image <2> Mon Feb 17 2020 13:26:54 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
+==== Mon Feb 17 2020 13:27:40 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 001.psd <1> 2^n canvas <2> Mon Feb 17 2020 13:27:41 GMT+0100 <3> ~/Desktop/test folder/test target folder/001.psd
+000002 save :true <0> 002.psd <1> 2^n canvas <2> Mon Feb 17 2020 13:27:42 GMT+0100 <3> ~/Desktop/test folder/test target folder/002.psd
+000003 save :true <0> 003.png <1> 2^n canvas <2> Mon Feb 17 2020 13:27:42 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+000004 save :true <0> 004.psd <1> 2^n canvas <2> Mon Feb 17 2020 13:27:43 GMT+0100 <3> ~/Desktop/test folder/test target folder/004.psd
+000005 save :true <0> 005.psd <1> 2^n canvas <2> Mon Feb 17 2020 13:27:43 GMT+0100 <3> ~/Desktop/test folder/test target folder/005.psd
+000006 save :true <0> 006.bmp <1> 2^n canvas <2> Mon Feb 17 2020 13:27:44 GMT+0100 <3> ~/Desktop/test folder/test target folder/006.bmp
+000007 save :true <0> 007.jpg <1> 2^n canvas <2> Mon Feb 17 2020 13:27:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/007.jpg
+000008 save :true <0> 008.tif <1> 2^n canvas <2> Mon Feb 17 2020 13:27:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
+000009 save :true <0> 009.tif <1> 2^n canvas <2> Mon Feb 17 2020 13:27:46 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
+
