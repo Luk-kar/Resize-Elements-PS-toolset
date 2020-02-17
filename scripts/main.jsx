@@ -38,15 +38,15 @@ function main(executeScript) {
     var eventHandler = new EventHandlerBuilderMain( UI );
 
     if (executeScript === "Add canvas") {
-        #include "./Add canvas/Add canvas - eventHandler.jsx";
+        #include "./executeScript/Add canvas/Add canvas - eventHandler.jsx";
     }
 
     if (executeScript === "Resize image"){
-        #include "./Resize image/Resize image - eventHandler.jsx"; 
+        #include "./executeScript/Resize image/Resize image - eventHandler.jsx"; 
     }
 
     if (executeScript === "2^n canvas"){
-        #include "./2^n canvas/2^n canvas - eventHandler.jsx"; 
+        #include "./executeScript/2^n canvas/2^n canvas - eventHandler.jsx"; 
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------

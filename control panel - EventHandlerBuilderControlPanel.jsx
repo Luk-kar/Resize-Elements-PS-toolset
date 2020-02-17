@@ -10,8 +10,8 @@ EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
         var executeScript = "Add canvas";
         checkIfScriptNameIsRight(executeScript);
 
-        #include "./scripts/Add canvas/Add canvas - functions.jsx";
-        #include "./scripts/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
+        #include "./scripts/executeScript/Add canvas/Add canvas - functions.jsx";
+        #include "./scripts/executeScript/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     }
@@ -25,8 +25,8 @@ EventHandlerBuilderControlPanel.prototype.onBtnResizeImage = function () {
         var executeScript = "Resize image";
         checkIfScriptNameIsRight(executeScript);
 
-        #include "./scripts/Resize image/Resize image - functions.jsx";
-        #include "./scripts/Resize image/Resize image - EventHandlerBuilderMain.jsx";
+        #include "./scripts/executeScript/Resize image/Resize image - functions.jsx";
+        #include "./scripts/executeScript/Resize image/Resize image - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     }
@@ -40,8 +40,8 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
         var executeScript = "2^n canvas";
         checkIfScriptNameIsRight(executeScript);
 
-        #include "./scripts/2^n canvas/2^n canvas - functions.jsx";
-        #include "./scripts/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
+        #include "./scripts/executeScript/2^n canvas/2^n canvas - functions.jsx";
+        #include "./scripts/executeScript/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
         #include "./scripts/main.jsx"
 
     }
