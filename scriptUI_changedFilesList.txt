@@ -229,3 +229,7 @@ Processed files list:
 000008 save :true <0> 008.tif <1> 2^n canvas <2> Mon Feb 17 2020 13:27:45 GMT+0100 <3> ~/Desktop/test folder/test target folder/008.tif
 000009 save :true <0> 009.tif <1> 2^n canvas <2> Mon Feb 17 2020 13:27:46 GMT+0100 <3> ~/Desktop/test folder/test target folder/009.tif
 
+==== Mon Feb 17 2020 13:40:20 GMT+0100 ============================================================================================================
+
+000001 save :true <0> 003.png <1> Add canvas <2> Mon Feb 17 2020 13:40:20 GMT+0100 <3> ~/Desktop/test folder/test target folder/003.png
+

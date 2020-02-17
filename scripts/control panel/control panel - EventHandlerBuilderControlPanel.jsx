@@ -10,9 +10,9 @@ EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
         var executeScript = "Add canvas";
         checkIfScriptNameIsRight(executeScript);
 
-        #include "./scripts/executeScript/Add canvas/Add canvas - functions.jsx";
-        #include "./scripts/executeScript/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
-        #include "./scripts/main/main.jsx"
+        #include "../executeScript/Add canvas/Add canvas - functions.jsx";
+        #include "../executeScript/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx"
 
     }
 }
@@ -25,9 +25,9 @@ EventHandlerBuilderControlPanel.prototype.onBtnResizeImage = function () {
         var executeScript = "Resize image";
         checkIfScriptNameIsRight(executeScript);
 
-        #include "./scripts/executeScript/Resize image/Resize image - functions.jsx";
-        #include "./scripts/executeScript/Resize image/Resize image - EventHandlerBuilderMain.jsx";
-        #include "./scripts/main/main.jsx"
+        #include "../executeScript/Resize image/Resize image - functions.jsx";
+        #include "../executeScript/Resize image/Resize image - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx"
 
     }
 }
@@ -40,9 +40,9 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
         var executeScript = "2^n canvas";
         checkIfScriptNameIsRight(executeScript);
 
-        #include "./scripts/executeScript/2^n canvas/2^n canvas - functions.jsx";
-        #include "./scripts/executeScript/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
-        #include "./scripts/main/main.jsx"
+        #include "../executeScript/2^n canvas/2^n canvas - functions.jsx";
+        #include "../executeScript/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx"
 
     }
 }
@@ -54,7 +54,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
 
         UIctrlPanel.controlPanelWindow.close();
 
-        #include "./scripts/settings/settings.jsx"
+        #include "../settings/settings.jsx"
     }
 }
 
