@@ -63,7 +63,7 @@ function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSour
 
     if (condition.value === true) {
         picture.image = pictureSourceTrue;
-        picture.helpTip = "Width and Height same value anabled";
+        picture.helpTip = "Width and Height same value enabled";
     }
     else if (condition.value === false) {
         picture.image = pictureSourceFalse;
@@ -108,19 +108,19 @@ function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
     }
 }
 
-function itHasBackgroundLayerChecker() {
+function doesItHaveBackgroundLayer() {
 
     var doc = app.activeDocument;
     var docLastLayer = doc.artLayers[doc.artLayers.length - 1];
-    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer;
+    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer; //Background layer is PS document property;
     return itHasbackgroundLayer;
     
 }
 
 function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
 
-    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10);
-    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
+    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
 
     if (units === "PERCENT") {
         var sumWidth = 100 + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function

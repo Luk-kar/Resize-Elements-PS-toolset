@@ -18,20 +18,20 @@ function createGroupUI(objectParent, orientationChildren, alignChildren, alignme
     return objectChildGroup;
 }
 
-function btnChooseFilesSourceFoldEnabled(trueFalse, UI) {
-    UI.btnChooseFilesSourceFold.enabled = trueFalse;
-    UI.btnChooseFilesSourceFold.title.enabled = trueFalse;
+function btnChooseFilesSourceFoldEnabled(booleanValue, UI) {
+    UI.btnChooseFilesSourceFold.enabled = booleanValue;
+    UI.btnChooseFilesSourceFold.title.enabled = booleanValue;
 }
 
-function panelFilterFilesEnabled(trueFalse, UI) {
+function panelFilterFilesEnabled(booleanValue, UI) {
 
-    if (trueFalse === true) {
+    if (booleanValue === true) {
 
         UI.filterSourceFilesCheckbox.enabled = true;
         UI.filterSourceFilesCheckbox.byExpression.enabled = true;
         filterSourceFilesCheckboxByExpressionEnabled(UI); // set to true
 
-    } else if (trueFalse === false){
+    } else if (booleanValue === false){
 
         UI.filterSourceFilesCheckbox.enabled = false;
         UI.filterSourceFilesByExpression.enabled = false;
@@ -48,17 +48,17 @@ function filterSourceFilesCheckboxByExpressionEnabled(UI) {
     }
 }
 
-function btnChooseFilesDestFoldEnabled(trueFalse, UI) {
-    UI.btnChooseFilesDestFold.enabled = trueFalse;
-    UI.btnChooseFilesDestFold.title.enabled = trueFalse;
+function btnChooseFilesDestFoldEnabled(booleanValue, UI) {
+    UI.btnChooseFilesDestFold.enabled = booleanValue;
+    UI.btnChooseFilesDestFold.title.enabled = booleanValue;
 }
 
-function btnsRadDestFoldEnabled(trueFalse, UI) {
-    UI.btnRadDestFold.same.enabled = trueFalse;
-    UI.btnRadDestFold.other.enabled = trueFalse;
+function btnsRadDestFoldEnabled(booleanValue, UI) {
+    UI.btnRadDestFold.same.enabled = booleanValue;
+    UI.btnRadDestFold.other.enabled = booleanValue;
 }
 
-function createPathString(textObject, path) {
+function createFolderPath(textObject, path) {
 
     if (typeof path !== "string") {
         var string = decodeURIComponent(path.toString());  // string format is URl
@@ -76,8 +76,8 @@ function createPathString(textObject, path) {
 
 function sameSourceFolderAndDestFolderOutcome(UI, self) {
 
-    createPathString(UI.btnChooseFilesDestFold.title, "Destination folder...");
-    self.detinationFolder = null; //to avoid bug
+    createFolderPath(UI.btnChooseFilesDestFold.title, "Destination folder...");
+    self.detinationFolder = null; //to avoid bug; It has to be reset becouse there could be possibility that old path could be passed;
     UI.btnRadDestFold.same.notify();
     
     alert("Source folder and target folder are the same.\nNext time choose more wisely");
@@ -110,7 +110,7 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
 
             if (sourceFileToMatch.match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
 
-                sourceFilesFiltered[i] = sourceFilePathString; //You have to do in this way (not use push method), becouse later you need index value to match certain string with certain file in addingFilteredFilesToSourceFiles();
+                sourceFilesFiltered[i] = sourceFilePathString;//You have to do in this way (not use push method), becouse later you need index value to match certain string with certain file in addingFilteredFilesToSourceFiles();
             } else {
                 sourceFilesFiltered[i] = "";
             }
@@ -125,7 +125,7 @@ function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
 
 function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFilesCheckbox_byExpression, UI_filterSourceFilesCheckbox_PNG) {
 
-    var regex = convertStringIntoRegex(UI.filterSourceFilesByExpression.input);
+    var regex = convertTextInputIntoRegex(UI.filterSourceFilesByExpression.input);
 
     var sourceFilesByExpression = filterFilesByExpression(regex, sourceFilesPSDformat);
 
@@ -161,7 +161,7 @@ function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFiles
     return sourceFilesToProcess;
 }
 
-function convertStringIntoRegex(input) {
+function convertTextInputIntoRegex(input) {
 
     var string = input.text;
 
@@ -189,7 +189,7 @@ function filterFilesByExpression(regex, unfilteredFiles) {
 
 function filterFilesByPNG(unfilteredFiles) {
 
-    var properFilesPNG = /.png$/;
+    var properFilesPNG = /\.png$/;
     var sourceFilesFiltered = filteringSourceFiles(unfilteredFiles, properFilesPNG);
     var sourceFilesPNG = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
 
@@ -215,7 +215,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
 
     if ( destinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
 
-    createPathString(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
+    createFolderPath(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
     self.lockingUnlockingAcceptBtn();
     UI.panelChangeFile.enabled = true;
 
@@ -320,7 +320,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     self.counterChangedFilesTrue = new Number(0);
     self.counterChangedFilesFalse = new Number(0);
 
-    var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+    var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
 
     sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
 
@@ -358,7 +358,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                             "If you choose source files folder with the same file as opened files in destination folder, it could cause bugs later.\n" + 
                             "And opened file couldn't be saved threfore.\n" + 
                             "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.txt in script folder:\n' + 
-                            $.fileName.slice(0, -16) ); // parent directory
+                            getGrandParentfolder($.fileName) ); 
 
                         self.alertPreviousAppearance === true;
                     }
@@ -368,9 +368,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
                 var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc[i], currentSaveTime, doc);
                 
-                counterSavedFiles(isFileSaved, self);
+                countSavedFiles(isFileSaved, self);
 
-                if (logFiles_ON_OFF === ':  ON ') {
+                if (logFiles_Value === ':  ON ') {
                     writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
                 }
 
@@ -387,9 +387,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
                 var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
                 
-                counterSavedFiles(isFileSaved, self);
+                countSavedFiles(isFileSaved, self);
 
-                if (logFiles_ON_OFF === ':  ON ') {
+                if (logFiles_Value === ':  ON ') {
                     writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
                 }
             }
@@ -427,9 +427,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
                 var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc, currentSaveTime, doc);
                 
-                counterSavedFiles(isFileSaved, self);
+                countSavedFiles(isFileSaved, self);
                 
-                if (logFiles_ON_OFF === ':  ON ') {
+                if (logFiles_Value === ':  ON ') {
                     writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
                 }
 
@@ -447,9 +447,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             
                 var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
                 
-                counterSavedFiles(isFileSaved, self);
+                countSavedFiles(isFileSaved, self);
 
-                if (logFiles_ON_OFF === ':  ON ') {
+                if (logFiles_Value === ':  ON ') {
                     writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
                 }
             }
@@ -457,7 +457,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             if (self.openedDocsToReopen.length > 0) {
                 var fileToRecover = appendingDocToRecover(openedDocPath, self.openedDocsToReopen); // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
                 if (fileToRecover !== null)
-                    self.openDocsToRecover.push(fileToRecover); // To avoid bug
+                    self.openDocsToRecover.push(fileToRecover);
             }
 
             doc.close();
@@ -466,7 +466,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
 }
 
-function counterSavedFiles(isFileSaved, self) { 
+function countSavedFiles(isFileSaved, self) { 
     
     if (isFileSaved)
         self.counterChangedFilesTrue++;
@@ -543,12 +543,12 @@ function saveInDestFolder(detinationFolder) {
     }
 
     var imageTypes = [
-        [/.png$/, savePNG],
-        [/.psd$/, savePSD],
-        [/.jpg$/, saveJPEG],
-        [/.tif$/, saveTIFF],
-        [/.bmp$/, saveBMP],
-        [/.gif$/, saveGIF],
+        [/\.png$/, savePNG],
+        [/\.psd$/, savePSD],
+        [/\.jpg$/, saveJPEG],
+        [/\.tif$/, saveTIFF],
+        [/\.bmp$/, saveBMP],
+        [/\.gif$/, saveGIF],
     ];
 
     for( var j = 0 ; j < imageTypes.length; j++ ){
@@ -714,9 +714,9 @@ function saveFileValidation(previousSaveTime, currentSaveTime, savedFile) {
         var previousSaveTime = dateAdd(currentSaveTime, 'second', -1); // add one second to accept validation when you saveAs source document/open document in target director 
     }
 
-    if (checktime(previousSaveTime, currentSaveTime)) {
+    if (previousSaveTime < currentSaveTime) {
         //Call the file exists function
-        var isFileSaved = imageExistsValidation(savedFile);
+        var isFileSaved = fileExists(savedFile);
 
     } else {
         var isFileSaved = false;
@@ -726,18 +726,10 @@ function saveFileValidation(previousSaveTime, currentSaveTime, savedFile) {
     return isFileSaved;
 }
 
-function checktime(previousSaveTime, currentSaveTime) {
-    return previousSaveTime < currentSaveTime;
-}
-
 //Check to see if the file actually exists
-function imageExistsValidation(savedFile) {
+function fileExists(savedFile) {
     var file = File(savedFile.path);
-    if (file.exists) {
-        return true;
-    } else {
-        return false;
-    }
+    return file.exists
 }
 
 /**

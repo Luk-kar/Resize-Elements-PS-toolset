@@ -97,7 +97,7 @@ EventHandlerBuilderMain.prototype.startSettingsUINumbofActiveDocs = function() {
 
     UI.numbOfActiveDocuments = docsOpenedFiles().length; //Save later to use in summary alert
 
-    self.openedDocsToReopen = gettingFilesOpenedDocsToReopen(); // To avoid bug with unability with "saving as" opened files again after evoking script again
+    self.openedDocsToReopen = gettingFilesOpenedDocsToReopen(); //To avoid bug with unability with "saving as" opened files again after evoking script again
     
 
     //Start setting. If there is no active docs, set to choose folder
@@ -147,9 +147,9 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
             if (sourceFilesFiltered.length === 0) {
 
-                self.sourceFolder === null;// to avoid bug
+                self.sourceFolder === null;// to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
                 
-                createPathString(UI.btnChooseFilesSourceFold.title, "Source folder...");
+                createFolderPath(UI.btnChooseFilesSourceFold.title, "Source folder...");
 
                 panelFilterFilesEnabled(false, UI);
 
@@ -175,7 +175,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
                 self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
 
-                createPathString(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
+                createFolderPath(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
 
                 panelFilterFilesEnabled(true, UI);
                 
@@ -189,7 +189,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
                     UI.btnRadDestFold.same.notify();
 
-                } else if ( (typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug
+                } else if ( (typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
 
                     if(( !self.detinationFolder.toString().match(/\//) && !self.sourceFolder.toString().match(/\//) )){
                         throw new Error("Invalid strings. Strings are not paths");
@@ -323,7 +323,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
 
             if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
                 alert("You have not selected target folder");
-                self.detinationFolder = null; //to avoid bug
+                self.detinationFolder = null; //to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
             } //else {if you have already have had selected folder destination, then it remains status quo}
 
         } else if (detinationFolderSelection !== null) {
@@ -331,7 +331,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
             if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true ) {
 
                 self.detinationFolder = detinationFolderSelection;
-                createPathString(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
+                createFolderPath(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
                 UI.panelChangeFile.enabled = true;
 
                 self.lockingUnlockingAcceptBtn();
@@ -352,9 +352,9 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        var logFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG')
+        var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG')
 
-        if (logFiles_ON_OFF === ':  ON ') {
+        if (logFiles_Value === ':  ON ') {
 
         var listFile = createFilePath("scriptUI_changedFilesList.txt");
         var b = listFile;
@@ -373,7 +373,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
             UI, self, executeScript
             );
 
-        if (logFiles_ON_OFF === ':  ON ') {
+        if (logFiles_Value === ':  ON ') {
 
         var listFile = createFilePath("scriptUI_changedFilesList.txt");
         var d = listFile;

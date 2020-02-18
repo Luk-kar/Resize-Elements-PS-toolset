@@ -68,18 +68,6 @@ function nearestPow2( n ){
     return Math.pow( 2, Math.ceil( Math.log( n ) / Math.log( 2 ) ) ); // Prefer this way than bitwise, becouse you need more readability than efficiency IMHO
 }
 
-function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSourceFalse) {
-
-    if (condition.value === true) {
-        picture.image = pictureSourceTrue;
-        picture.helpTip = "Width and Height same value anabled";
-    }
-    else if (condition.value === false) {
-        picture.image = pictureSourceFalse;
-        picture.helpTip = "Width and Height same value disabled";
-    }
-}
-
 function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
 
     if (canvExtendColorDropDwn_IsLeftUpperCroner) {
@@ -99,19 +87,19 @@ function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
     }
 }
 
-function itHasBackgroundLayerChecker() {
+function doesItHaveBackgroundLayer() {
 
     var doc = app.activeDocument;
     var docLastLayer = doc.artLayers[doc.artLayers.length - 1];
-    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer;
+    var itHasbackgroundLayer = docLastLayer.isBackgroundLayer; //Background layer is PS document property;
     return itHasbackgroundLayer;
     
 }
 
 function mathSumWidthAndHeight(units, addWidth, addHeight, doc) {
 
-    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10);
-    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
+    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
 
     if (units === "PERCENT") {
         var sumWidth = 100 + parseInt(addWidth, 10); //It can't has to be number, without decimals becouse it will cause bugs in resizeCanvas() function

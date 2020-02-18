@@ -112,36 +112,44 @@ EventHandlerBuilderMain.prototype.onCanvExtendColorDropDwn = function() {
         var canvExtendColorDropDwn = UI.canvExtendColor.dropDwn.selection.toString();//Full list to select canvExtendColor.values
 
         if (canvExtendColorDropDwn === "Foreground") { //:1
+
             app.foregroundColor = self.bgColor;
             app.backgroundColor = self.fgColor;
 
         } else if (canvExtendColorDropDwn === "Background") { //:2
+
             app.foregroundColor = self.fgColor;
             app.backgroundColor = self.bgColor;
 
         } else if (canvExtendColorDropDwn === "White") { //:3
+
             app.backgroundColor.rgb.red = 255;
             app.backgroundColor.rgb.green = 255;
             app.backgroundColor.rgb.blue = 255;
 
         } else if (canvExtendColorDropDwn === "Black") { //:4
+
             app.backgroundColor.rgb.red = 0;
             app.backgroundColor.rgb.green = 0;
             app.backgroundColor.rgb.blue = 0;
 
         } else if (canvExtendColorDropDwn === "Grey") { //:5
+
             app.backgroundColor.rgb.red = 128;
             app.backgroundColor.rgb.green = 128;
             app.backgroundColor.rgb.blue = 128;
 
         } else if (canvExtendColorDropDwn === "Select color") { //:6
+
             showColorPicker();
             app.backgroundColor = app.foregroundColor;
             app.foregroundColor = self.fgColor;
         } //else if (canvExtendColorDropDwn === "Left upper corner color") {leftUpperCornerColorBGSet() invoked in function changeFileAndSave} //:7
     }
 
-    if (UI.canvExtendColor.dropDwn.children.length !== 7) { //Update this value if you make any changes Look↑↑↑
+    var occurrenceIFCount = UI.canvExtendColor.dropDwn.onChange.toString().match(/if \(/gm).length;
+
+    if (UI.canvExtendColor.dropDwn.children.length !== occurrenceIFCount) { //Update this value if you make any changes Look↑↑↑
         throw new Error("Not all dropdowns items have assigned outcomes")
     }
 }
@@ -192,8 +200,8 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
 
         var doc = app.activeDocument;
 
-        var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10);
-        var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10);
+        var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+        var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
 
         var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
 
@@ -201,7 +209,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
             return "continue";
         }
     
-        if( itHasBackgroundLayerChecker() ) { // To avoid bug with picking empty layer
+        if( doesItHaveBackgroundLayer() ) { // To avoid bug with picking empty layer
     
             leftUpperCornerColorBGSet(UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color");
     
@@ -213,7 +221,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
             ValueOfSides = UI.maxResValue;
         }
     
-        if ( isNaN(ValueOfSides) ) {
+        if ( isNaN(ValueOfSides) ) { // Giving other input value than typeof "number" in resizeCanvas() couses bug in which canvas is trimed to 1px in respective axis.
             throw new Error ("object is not a Number");
         }
     
