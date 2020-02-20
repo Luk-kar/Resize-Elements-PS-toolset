@@ -1,58 +1,58 @@
 <h1 align="center">🚀 UI Photoshop toolSet 🚀 </h1>
 
 <div align="center">
-_This is small plugin to automate repetetive and boring task connected with work with UI_ </br>
+This is small plugin to automate repetetive and boring task connected with work with UI </br>
 </div>
 <div align="center">
-Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS
+Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></br>
 </div>
 
 ## Getting Started
 
-Toolset consist of:
-- Add canvas.
-- Resize image.
-- 2^n canvas (add canvas for both sides by nearest value of power of 2).
-- Settings.
-- Template (not implemented).
+**Toolset consist of:**
+- **Add canvas**
+- **Resize image**
+- **2^n canvas** (add canvas for both sides by nearest value of power of 2)
+- **Settings**
+- **Template** (not implemented)
 
 ### Prerequisites
 
-To run this script you need at least Photshop CS6 32bit Version: 13.0.
+To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 ### Installing
 
-1. Download "UI-Photoshop-toolSet-master.zip".
+1. Download "UI-Photoshop-toolSet-master.zip"
 
-2. Unzip file in preffered directory (syggested place is: ...\Adobe\Adobe Photoshop CS6 (64 Bit)\Presets\Scripts).
+2. Unzip file in preffered directory (suggested place is: ...\Adobe\Adobe Photoshop CS6 (64 Bit)\Presets\Scripts)
 
-3. Open "Photoshop".
+3. Open "Photoshop"
 
-4. Push keys: Alt+F9.
+4. Push keys: Alt+F9
 
-5. Chose "Action" tabbed panel in the left upper corner.
+5. Chose "Action" tabbed panel in the left upper corner
 
-6. (If is it not yet) Disable "Button mode" by clicking icon in right upper corner.
+6. (If is it not yet) Disable "Button mode" by clicking icon in right upper corner
 
-5. "Create new action" (right bottom corner of Action window).
+5. "Create new action" (right bottom corner of Action window)
 
-6. Name script (e. g. UI toolset), optionally assign key to it (e. g. F12) or add color (e. g. Green).
+6. Name script (e. g. UI toolset), optionally assign key to it (e. g. F12) or add color (e. g. Green)
 
-7. Click "ok".
+7. Click "ok"
 
 7. Choose in upper main menu: "File -> Scripts -> Browse..."
 
-8. Navigate to unziped folder directory.
+8. Navigate to unziped folder directory
 
-9. Open "control panel.jsx".
+9. Open "control panel.jsx"
 
-10. Click "Close" button in UI toolset.
+10. Click "Close" button in UI toolset
 
-11. Click "Stop\playing recording" (small grey square in the left bottom corner).
+11. Click "Stop\playing recording" (small grey square in the left bottom corner)
 
-12. Enable "Button mode" (right upper corner).
+12. Enable "Button mode" (right upper corner)
 
-13. Now your script is ready to use (Click button with your newly created action).
+13. Now your script is ready to use (Click button with your newly created action)
 
 14. Enjoy!
 
@@ -63,10 +63,10 @@ Click test.exe
 ### Break down into end to end tests
 
 Test check if all modules work:
-- Add canvas.
-- Resize image.
-- 2^n canvas (add canvas for both sides by nearest value of power of 2).
-- Settings.
+- Add canvas
+- Resize image
+- 2^n canvas (add canvas for both sides by nearest value of power of 2)
+- Settings
 
 ## Built With
 
@@ -80,11 +80,11 @@ Test check if all modules work:
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/tree/master) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/tree/master) for details on our code of conduct, and the process for submitting pull requests to us
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning.
+We use [SemVer](http://semver.org/) for versioning
 
 ## Authors
 
