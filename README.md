@@ -56,6 +56,8 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 14. **Enjoy!**
 
+![make script as button](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/make%20script%20as%20button.gif)
+
 ## Running the tests 🧪
 
 Click **test.exe** to check modules:
