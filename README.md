@@ -1,8 +1,10 @@
 <h1 align="center">🚀 UI Photoshop toolSet 🚀 </h1>
 
 <div align="center">
-Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS.
-This is small plugin to automate repetetive and boring task connected with work with UI.
+This is small plugin to automate repetetive and boring task connected with work with UI
+</div>
+<div align="center">
+Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS
 </div>
 
 ## Getting Started
