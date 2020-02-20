@@ -58,7 +58,7 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 ## Running the tests 🧪
 
-Click **test.exe** for:
+Click **test.exe** to check modules:
 
 * **Add canvas**
 * **Resize image**
@@ -67,9 +67,9 @@ Click **test.exe** for:
 
 ## Built With 🧰
 
-* [Visual Studio Code]: https://code.visualstudio.com/
-* [Adobe Phtoshop CS6 SDK Win]: http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
-* [ExtendScript Debugger Extension for Visual Studio Code]: https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
+* [Visual Studio Code][Visual Studio Code]: https://code.visualstudio.com/
+* [Adobe Phtoshop CS6 SDK Win][Adobe Phtoshop CS6 SDK Win]: http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
+* [ExtendScript Debugger Extension for Visual Studio Code][ExtendScript Debugger Extension for Visual Studio Code]: https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
 
 ## Structure of the code 🧭
 
@@ -77,11 +77,11 @@ Click **test.exe** for:
 
 ## Contributing 📬
 
-Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/CONTRIBUTING.md.md) for details on our code of conduct, and the process for submitting pull requests to us
+Please read [CONTRIBUTING.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/CONTRIBUTING.md.md) for details on our code of conduct, and the process for submitting pull requests to us
 
 ## Versioning 🗓️
 
-We use [**SemVer**](http://semver.org/) for versioning
+We use [SemVer](http://semver.org/) for versioning
 
 ## Authors 🎈
 
@@ -89,7 +89,7 @@ We use [**SemVer**](http://semver.org/) for versioning
 
 ## License 📜
 
-This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/MIT%20License.txt) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/MIT%20License.txt) file for details
 
 ## Acknowledgments 👍
 
