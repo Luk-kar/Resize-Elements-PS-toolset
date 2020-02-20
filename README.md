@@ -1,11 +1,11 @@
 <h1 align="center">🚀 UI Photoshop toolSet 🚀 </h1>
 
-<div align="center"><font size="1">
-This is small plugin to automate repetetive and boring task connected with work with UI </br>
+<div align="center">
+<font size="1">This is small plugin to automate repetetive and boring task connected with work with UI </br></font>
 </div>
 <div align="center"><i>
 Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></br>
-</i></div></font>
+</i></div>
 
 ## Getting Started 😍
 
@@ -58,9 +58,8 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 ## Running the tests 🧪
 
-Click **test.exe**
+Click **test.exe** for:
 
-To test:
 * **Add canvas**
 * **Resize image**
 * **2^n canvas** (add canvas for both sides by nearest value of power of 2)
@@ -68,9 +67,9 @@ To test:
 
 ## Built With 🧰
 
-* https://code.visualstudio.com/
-* http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
-* https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
+* [Visual Studio Code]: https://code.visualstudio.com/
+* [Adobe Phtoshop CS6 SDK Win]: http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
+* [ExtendScript Debugger Extension for Visual Studio Code]: https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
 
 ## Structure of the code 🧭
 
@@ -78,11 +77,11 @@ To test:
 
 ## Contributing 📬
 
-Please read [CONTRIBUTING.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/tree/master) for details on our code of conduct, and the process for submitting pull requests to us
+Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/CONTRIBUTING.md.md) for details on our code of conduct, and the process for submitting pull requests to us
 
 ## Versioning 🗓️
 
-We use [SemVer](http://semver.org/) for versioning
+We use [**SemVer**](http://semver.org/) for versioning
 
 ## Authors 🎈
 
@@ -90,10 +89,12 @@ We use [SemVer](http://semver.org/) for versioning
 
 ## License 📜
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/MIT%20License.txt) file for details
 
 ## Acknowledgments 👍
 
 * _README-template.md, CONTRIBUTING-template.md_ by [ PurpleBooth](https://gist.github.com/PurpleBooth)
-* _dateAdd()_(https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753) by [Kip](https://stackoverflow.com/users/18511/kip)
+* _dateAdd()[add canvas] by [Kip](https://stackoverflow.com/users/18511/kip)
+
+[add canvas](https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753)
 
