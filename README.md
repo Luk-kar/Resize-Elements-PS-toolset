@@ -67,9 +67,9 @@ Click **test.exe** to check modules:
 
 ## Built With 🧰
 
-* [Visual Studio Code][Visual Studio Code]: https://code.visualstudio.com/
-* [Adobe Phtoshop CS6 SDK Win][Adobe Phtoshop CS6 SDK Win]: http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
-* [ExtendScript Debugger Extension for Visual Studio Code][ExtendScript Debugger Extension for Visual Studio Code]: https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Adobe Phtoshop CS6 SDK Win](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip)
+* [ExtendScript Debugger Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug)
 
 ## Structure of the code 🧭
 
@@ -93,7 +93,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 ## Acknowledgments 👍
 
-* _README-template.md, CONTRIBUTING-template.md_ by [ PurpleBooth](https://gist.github.com/PurpleBooth)
+* _README-template.md, CONTRIBUTING-template.md_ by [PurpleBooth](https://gist.github.com/PurpleBooth)
 * _dateAdd()[add canvas] by [Kip](https://stackoverflow.com/users/18511/kip)
 
 [add canvas](https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753)
