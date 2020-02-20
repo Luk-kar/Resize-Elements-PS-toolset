@@ -38,19 +38,19 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 6. **Name script** (e. g. UI toolset), optionally assign key to it (e. g. F12) or add color (e. g. Green)
 
-7. Click "**ok**"
+7. Click **"ok"**
 
-7. Choose in upper main menu: "**File -> Scripts -> Browse...**"
+7. Choose in upper main menu: **"File -> Scripts -> Browse..."**
 
 8. **Navigate** to unziped folder directory
 
 9. **Open "control panel.jsx"**
 
-10. Click "**Close**" button in UI toolset
+10. Click **"Close"** button in UI toolset
 
-11. Click "**Stop\playing recording**" (small grey square in the left bottom corner)
+11. Click **"Stop\playing recording"** (small grey square in the left bottom corner)
 
-12. Enable "**Button mode**" (right upper corner)
+12. Enable **"Button mode"** (right upper corner)
 
 13. Now your script is **ready to use** (Click button with your newly created action)
 
@@ -58,15 +58,15 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 ## Running the tests
 
-Click test.exe
+Click **test.exe**
 
 ### Break down into end to end tests
 
 Test check if all modules work:
-- Add canvas
-- Resize image
-- 2^n canvas (add canvas for both sides by nearest value of power of 2)
-- Settings
+- **Add canvas**
+- **Resize image**
+- **2^n canvas** (add canvas for both sides by nearest value of power of 2)
+- **Settings**
 
 ## Built With
 
@@ -76,7 +76,7 @@ Test check if all modules work:
 
 ## Structure of the code
 
-![Flow diagram](Flow Diagram.png)
+![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png)
 
 ## Contributing
 
