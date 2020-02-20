@@ -67,13 +67,17 @@ Click **test.exe** to check modules:
 
 ## Built With 🧰
 
-* [Visual Studio Code](https://code.visualstudio.com)
-* [Adobe Phtoshop CS6 SDK Win](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip)
-* [ExtendScript Debugger Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug)
+* [**Visual Studio Code**](https://code.visualstudio.com)
+* [**Adobe Phtoshop CS6 SDK Win**](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip)
+* [**ExtendScript Debugger Extension for Visual Studio Code**](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug)
 
 ## Structure of the code 🧭
 
 ![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png)
+
+## How to make own module ✨
+
+Just open [How to make own module.md]()
 
 ## Contributing 📬
 
