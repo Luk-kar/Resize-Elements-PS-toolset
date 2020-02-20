@@ -67,7 +67,7 @@ Click **test.exe** to check modules:
 
 ## Built With 🧰
 
-* [Visual Studio Code](https://code.visualstudio.com/)
+* [Visual Studio Code](https://code.visualstudio.com)
 * [Adobe Phtoshop CS6 SDK Win](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip)
 * [ExtendScript Debugger Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug)
 
