@@ -94,7 +94,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 ## Acknowledgments 👍
 
 * _README-template.md, CONTRIBUTING-template.md_ by [PurpleBooth](https://gist.github.com/PurpleBooth)
-* _dateAdd()[add canvas] by [Kip](https://stackoverflow.com/users/18511/kip)
+* [_dateAdd()_](https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753) by [Kip](https://stackoverflow.com/users/18511/kip)
 
-[add canvas](https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753)
 
