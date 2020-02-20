@@ -1,12 +1,10 @@
-# Project Title
-
-UI Photoshop toolSet
-
-## Getting Started
+# UI Photoshop toolSet
 
 Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS.
 
 This is small plugin to automate repetetive and boring task connected with work with UI.
+
+## Getting Started
 
 Toolset consist of:
 - Add canvas.
