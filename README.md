@@ -22,39 +22,39 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 ### Installing
 
-1. Download "UI-Photoshop-toolSet-master.zip"
+1. **Download "UI-Photoshop-toolSet-master.zip"**
 
-2. Unzip file in preffered directory (suggested place is: ...\Adobe\Adobe Photoshop CS6 (64 Bit)\Presets\Scripts)
+2. **Unzip file** in preffered directory (suggested place is: ...\Adobe\Adobe Photoshop CS6 (64 Bit)\Presets\Scripts)
 
-3. Open "Photoshop"
+3. **Open "Photoshop"**
 
-4. Push keys: Alt+F9
+4. Push keys: **Alt+F9**
 
-5. Chose "Action" tabbed panel in the left upper corner
+5. Chose **"Action"** tabbed panel in the left upper corner
 
-6. (If is it not yet) Disable "Button mode" by clicking icon in right upper corner
+6. (If is it not yet) **Disable "Button mode"** by clicking icon in right upper corner
 
-5. "Create new action" (right bottom corner of Action window)
+5. "**Create new action**" (right bottom corner of Action window)
 
-6. Name script (e. g. UI toolset), optionally assign key to it (e. g. F12) or add color (e. g. Green)
+6. **Name script** (e. g. UI toolset), optionally assign key to it (e. g. F12) or add color (e. g. Green)
 
-7. Click "ok"
+7. Click "**ok**"
 
-7. Choose in upper main menu: "File -> Scripts -> Browse..."
+7. Choose in upper main menu: "**File -> Scripts -> Browse...**"
 
-8. Navigate to unziped folder directory
+8. **Navigate** to unziped folder directory
 
-9. Open "control panel.jsx"
+9. **Open "control panel.jsx"**
 
-10. Click "Close" button in UI toolset
+10. Click "**Close**" button in UI toolset
 
-11. Click "Stop\playing recording" (small grey square in the left bottom corner)
+11. Click "**Stop\playing recording**" (small grey square in the left bottom corner)
 
-12. Enable "Button mode" (right upper corner)
+12. Enable "**Button mode**" (right upper corner)
 
-13. Now your script is ready to use (Click button with your newly created action)
+13. Now your script is **ready to use** (Click button with your newly created action)
 
-14. Enjoy!
+14. **Enjoy!**
 
 ## Running the tests
 
