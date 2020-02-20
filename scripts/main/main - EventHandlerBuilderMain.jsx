@@ -152,15 +152,11 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
                 createFolderPath(UI.btnChooseFilesSourceFold.title, "Source folder...");
 
                 panelFilterFilesEnabled(false, UI);
-
                 UI.panelDestFold.title.enabled = false;
-
                 btnsRadDestFoldEnabled(false, UI);
-
                 btnChooseFilesDestFoldEnabled(false, UI);
 
                 UI.panelChangeFile.enabled = false;
-                
                 UI.btnAccept.enabled = false;
 
                 infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
@@ -171,7 +167,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
             } else if (sourceFilesFiltered.length > 0) {
 
                 self.sourceFilesPSDformat = null; 
-                self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered);
+                self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesFiltered);
 
                 self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
 

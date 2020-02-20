@@ -93,33 +93,26 @@ function checkingIfItIsTheSameSourceFolderAsBefore(self) {
     return sameChoosedSourceFolderAsBefore;
 }
 
-function filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles) {
+function filteringSourceFiles(sourceFilesUnfiltered, regex) {
 
     var sourceFilesFiltered = new Array;
 
-    if(typeof properFilesExtPSfiles === "undefined") {
+    if(typeof regex === "undefined") {
         throw new Error("RegEx is undefined");
     }
 
     for (var i = 0; i < sourceFilesUnfiltered.length; i++) { 
-        if (sourceFilesUnfiltered[i] instanceof File) {
             
             var sourceFilePathString = sourceFilesUnfiltered[i].toString();
 
             var sourceFileToMatch = decodeURIComponent(sourceFilePathString);
 
-            if (sourceFileToMatch.match(properFilesExtPSfiles)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
+            if (sourceFileToMatch.match(regex)) {// decodeURIComponent(), to avoid problem when you have special signs in source files and in byExpression
 
-                sourceFilesFiltered[i] = sourceFilePathString;//You have to do in this way (not use push method), becouse later you need index value to match certain string with certain file in addingFilteredFilesToSourceFiles();
-            } else {
-                sourceFilesFiltered[i] = "";
-            }
-
-        } else {
-            sourceFilesFiltered[i] = "";
+                sourceFilesFiltered.push(File(sourceFilePathString));
         }
     }
-
+    
     return sourceFilesFiltered;
 }
 
@@ -181,8 +174,7 @@ function filterFilesByExpression(regex, unfilteredFiles) {
 
     var properFilesByExpression = regex;
 
-    var sourceFilesFiltered = filteringSourceFiles( unfilteredFiles, properFilesByExpression);
-    var sourceFilesByExpression = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
+    var sourceFilesByExpression = filteringSourceFiles( unfilteredFiles, properFilesByExpression);
 
     return sourceFilesByExpression;
 }
@@ -190,22 +182,17 @@ function filterFilesByExpression(regex, unfilteredFiles) {
 function filterFilesByPNG(unfilteredFiles) {
 
     var properFilesPNG = /\.png$/;
-    var sourceFilesFiltered = filteringSourceFiles(unfilteredFiles, properFilesPNG);
-    var sourceFilesPNG = addingFilteredFilesToSourceFiles(unfilteredFiles, sourceFilesFiltered);
+    var sourceFilesPNG = filteringSourceFiles(unfilteredFiles, properFilesPNG);
 
     return sourceFilesPNG;
 }
 
-function addingFilteredFilesToSourceFiles(sourceFilesUnfiltered, sourceFilesFiltered) {
+function addingFilteredFilesToSourceFiles(sourceFilesFiltered) {
 
     var sourceFiles = new Array;
 
-    for (var i = 0; i < sourceFilesUnfiltered.length; i++) {
-
-            if (sourceFilesFiltered[i] === sourceFilesUnfiltered[i].toString()) {
-                sourceFiles.push(sourceFilesUnfiltered[i]);
-            
-        }
+    for (var i = 0; i < sourceFilesFiltered.length; i++) {
+                sourceFiles.push(File(sourceFilesFiltered[i]));
     }
 
     return sourceFiles;
