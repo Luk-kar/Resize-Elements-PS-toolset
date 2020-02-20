@@ -320,7 +320,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     self.counterChangedFilesTrue = new Number(0);
     self.counterChangedFilesFalse = new Number(0);
 
-    var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+    var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG');
 
     sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
 
@@ -357,7 +357,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                         alert("You have earlier opened file in destination folder.\n" + 
                             "If you choose source files folder with the same file as opened files in destination folder, it could cause bugs later.\n" + 
                             "And opened file couldn't be saved threfore.\n" + 
-                            "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.txt in script folder:\n' + 
+                            "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.log in script folder:\n' + 
                             getGrandParentfolder($.fileName) ); 
 
                         self.alertPreviousAppearance === true;
@@ -511,7 +511,7 @@ function writeLnOfFile(executeScript, index, doc, currentSaveTime, isFileSaved) 
     var docName = decodeURIComponent(doc.name); // if doc is not objects of documents, but not opened in PS file somewhere in hard drive, you get URl format which you have to decode
     var docFullName = decodeURIComponent(doc.fullName);
 
-    var listFile = createFilePath("scriptUI_changedFilesList.txt");
+    var listFile = createFilePath("scriptUI_changedFilesList.log");
     var c = listFile;
 
     if (typeof isFileSaved !== "boolean") {
@@ -703,7 +703,7 @@ function recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self_openDocsToR
 function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
 
     if (self_counterChangedFilesFalse > 0) {
-        alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.txt" in folder: ' + scriptFolder);
+        alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.log" in folder: ' + scriptFolder);
     }
 }
 

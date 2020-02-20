@@ -70,7 +70,7 @@ GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
     //Create checkbox
     this.filterSourceFilesCheckbox.PNG = this.filterSourceFilesCheckbox.add("checkbox", undefined, "Process only PNG");
 
-    var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile('"FILTER BY PNG"- CHECKBOX = TRUE');
+    var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile('"FILTER BY PNG"- CHECKBOX TRUE');
     if (PNGbyDefault_ON_OFF === ':  ON ') {
         this.filterSourceFilesCheckbox.PNG.value = true;
     }

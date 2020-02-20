@@ -352,11 +352,11 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG')
+        var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG')
 
         if (logFiles_Value === ':  ON ') {
 
-        var listFile = createFilePath("scriptUI_changedFilesList.txt");
+        var listFile = createFilePath("scriptUI_changedFilesList.log");
         var b = listFile;
         var date = new Date;
 
@@ -375,7 +375,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         if (logFiles_Value === ':  ON ') {
 
-        var listFile = createFilePath("scriptUI_changedFilesList.txt");
+        var listFile = createFilePath("scriptUI_changedFilesList.log");
         var d = listFile;
 
         d.open("a");

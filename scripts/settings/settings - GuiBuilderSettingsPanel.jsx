@@ -12,7 +12,7 @@ GuiBuilderSettingsPanel.prototype.buildSettingsPanel = function() {
     this.PNGbyDefault = this.settingsWindow.add("group");
     this.PNGbyDefault.btn = this.PNGbyDefault.add("button", [0,80,290,101], '"Filter files by PNG" By default');
 
-    var PNGbyDefault_boolValue = readValueOfSeetingsFromPrefFile('"FILTER BY PNG"- CHECKBOX = TRUE');
+    var PNGbyDefault_boolValue = readValueOfSeetingsFromPrefFile('"FILTER BY PNG"- CHECKBOX TRUE');
     this.PNGbyDefault.title = this.PNGbyDefault.add("statictext", undefined, PNGbyDefault_boolValue);
 
 
@@ -24,9 +24,9 @@ GuiBuilderSettingsPanel.prototype.buildSettingsPanel = function() {
 
 
     this.logFiles = this.settingsWindow.add("group");
-    this.logFiles.btn = this.logFiles.add("button", [205,80,495,101], '"scriptUI_changedFilesList.txt" Log');
+    this.logFiles.btn = this.logFiles.add("button", [205,80,495,101], '"scriptUI_changedFilesList.log" Log');
 
-    var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+    var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG');
     this.logFiles.title = this.logFiles.add("statictext", undefined, logFiles_Value);
 
     this.btnReturn = this.settingsWindow.add("button", [205,120,495,141], "Return");

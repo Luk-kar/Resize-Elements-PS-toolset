@@ -1,7 +1,7 @@
 function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath("scriptUI_preferences.txt");
+    var prefFile = createFilePath("scriptUI_preferences.ini");
     var b = prefFile;
 
     b.open('r');
@@ -11,12 +11,12 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
         textArrayToWritie[numbOfTextLines] = b.readln();
 
-        if (textArrayToWritie[numbOfTextLines].search('OFF: ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
+        if (textArrayToWritie[numbOfTextLines].search( searchedPhrase + '=OFF') != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
             var textToReplace = ':  OFF';
             break;
 
         }
-        else if (textArrayToWritie[numbOfTextLines].search('ON : ' + searchedPhrase) != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
+        else if (textArrayToWritie[numbOfTextLines].search( searchedPhrase + '=ON') != -1) { //It can't be == 1 and it can't work that way, but I have no idea why
             var textToReplace = ':  ON ';
             break;
 
@@ -32,10 +32,10 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
 function appDataBuilder() {
 
-    var listFile = createFilePath("scriptUI_changedFilesList.txt");
+    var listFile = createFilePath("scriptUI_changedFilesList.log");
     buildListFilesIfItDoesntExists(listFile);
 
-    var prefFile = createFilePath("scriptUI_preferences.txt");
+    var prefFile = createFilePath("scriptUI_preferences.ini");
     buildPrefFilesIfItDoesntExists(prefFile);
 
 }
@@ -80,20 +80,19 @@ function buildListFilesIfItDoesntExists(listFile) {
     }
 }
 
-function buildPrefFilesIfItDoesntExists(listFile) {
+function buildPrefFilesIfItDoesntExists(prefFile) {
 
-    if (!listFile.exists) {
+    if (!prefFile.exists) {
 
-        var a = listFile;
+        var a = prefFile; //https://en.wikipedia.org/wiki/INI_file
         a.open("w");
+        a.writeln("[ENABLED/DISABLED options]");
         a.writeln("");
-        a.writeln("ENABLED/DISABLED:");
+        a.writeln('"FILTER BY PNG"- CHECKBOX TRUE=OFF');
         a.writeln("");
-        a.writeln('OFF: "FILTER BY PNG"- CHECKBOX = TRUE');
+        a.writeln('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG=ON');
         a.writeln("");
-        a.writeln('ON : "DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
-        a.writeln("");
-        a.writeln('OFF: "SCRIPTUI_CHANGEDFILESLIST.TXT"- WRITE LOG');
+        a.writeln('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG=OFF');
 
         a.close();
     }
@@ -102,7 +101,7 @@ function buildPrefFilesIfItDoesntExists(listFile) {
 function changeValueOffOnInPrefFile(searchedPhrase) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath("scriptUI_preferences.txt");
+    var prefFile = createFilePath("scriptUI_preferences.ini");
     var b = prefFile;
 
     b.open('r');
@@ -113,15 +112,15 @@ function changeValueOffOnInPrefFile(searchedPhrase) {
 
         textArrayToWritie[numbOfTextLines] = b.readln();
 
-        if (textArrayToWritie[numbOfTextLines].search('ON : ' + searchedPhrase ) != -1) { //It can't be == 1 and can't work that way, but I have no idea why
-            var textToReplace = 'OFF: ' + searchedPhrase;
+        if (textArrayToWritie[numbOfTextLines].search( searchedPhrase + '=ON') != -1) { //It can't be == 1 and can't work that way, but I have no idea why
+            var textToReplace = searchedPhrase + '=OFF';
 
             textArrayToWritie[numbOfTextLines] = textToReplace;
             var alertText = textToReplace;
         }
 
-        else if (textArrayToWritie[numbOfTextLines].search('OFF: ' + searchedPhrase) != -1) { //It can't be == 1 and can't work that way, but I have no idea why
-            var textToReplace = 'ON : ' + searchedPhrase;
+        else if (textArrayToWritie[numbOfTextLines].search( searchedPhrase + '=OFF') != -1) { //It can't be == 1 and can't work that way, but I have no idea why
+            var textToReplace = searchedPhrase + '=ON';
 
             textArrayToWritie[numbOfTextLines] = textToReplace;
             var alertText = textToReplace;
