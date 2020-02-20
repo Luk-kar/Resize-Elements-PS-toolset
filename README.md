@@ -3,11 +3,11 @@
 <div align="center">
 This is small plugin to automate repetetive and boring task connected with work with UI </br>
 </div>
-<div align="center">
+<div align="center"><i>
 Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></br>
-</div>
+</i></div>
 
-## Getting Started
+## Getting Started 😍
 
 **Toolset consist of:**
 - **Add canvas**
@@ -16,15 +16,15 @@ Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></b
 - **Settings**
 - **Template** (not implemented)
 
-### Prerequisites
+### Prerequisites 💪
 
 To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
-### Installing
+### Installing 🔨
 
 1. **Download "UI-Photoshop-toolSet-master.zip"**
 
-2. **Unzip file** in preffered directory (suggested place is: ...\Adobe\Adobe Photoshop CS6 (64 Bit)\Presets\Scripts)
+2. **Unzip file** in preffered directory (suggested place is: _...\Adobe\Adobe Photoshop CS6 (64 Bit)\Presets\Scripts_)
 
 3. **Open "Photoshop"**
 
@@ -56,7 +56,7 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 14. **Enjoy!**
 
-## Running the tests
+## Running the tests ⚗️
 
 Click **test.exe**
 
@@ -68,33 +68,33 @@ Test check if all modules work:
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
 - **Settings**
 
-## Built With
+## Built With 🧰
 
 * https://code.visualstudio.com/
 * http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
 * https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
 
-## Structure of the code
+## Structure of the code 🧬
 
 ![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png)
 
-## Contributing
+## Contributing 📬
 
 Please read [CONTRIBUTING.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/tree/master) for details on our code of conduct, and the process for submitting pull requests to us
 
-## Versioning
+## Versioning 📦
 
 We use [SemVer](http://semver.org/) for versioning
 
-## Authors
+## Authors 🎉
 
 * **Karol Łukaszczyk** - *Initial work* - [Lukkar](https://github.com/Lukkar90)
 
-## License
+## License 📜
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
+## Acknowledgments 👍
 
 * README-template.md, CONTRIBUTING-template.md [ PurpleBooth](https://gist.github.com/PurpleBooth)
 * dateAdd() https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753
