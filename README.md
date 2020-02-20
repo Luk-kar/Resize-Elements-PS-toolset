@@ -1,6 +1,6 @@
 <h1 align="center">🚀 UI Photoshop toolSet 🚀 </h1>
 
-<div align="center"><font size="6">
+<div align="center"><font size="1">
 This is small plugin to automate repetetive and boring task connected with work with UI </br>
 </div>
 <div align="center"><i>
@@ -94,6 +94,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments 👍
 
-* README-template.md, CONTRIBUTING-template.md by [ PurpleBooth](https://gist.github.com/PurpleBooth)
-* dateAdd() https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753
+* _README-template.md, CONTRIBUTING-template.md_ by [ PurpleBooth](https://gist.github.com/PurpleBooth)
+* _dateAdd()_(https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753) by [Kip](https://stackoverflow.com/users/18511/kip)
 
