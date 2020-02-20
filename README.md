@@ -73,11 +73,13 @@ Click **test.exe** to check modules:
 
 ## Structure of the code 🧭
 
+
 ![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png)
 
-## How to make own module ✨
 
-Just open [How to make own module.md]()
+## How to make own module 🪓
+
+Just open [How to make own module.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/How%20to%20make%20own%20module.md)
 
 ## Contributing 📬
 
