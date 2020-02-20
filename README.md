@@ -9,7 +9,7 @@ Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></b
 
 ## Getting Started 😍
 
-**Toolset consist of:**
+Toolset consist of:
 - **Add canvas**
 - **Resize image**
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
@@ -56,17 +56,15 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 14. **Enjoy!**
 
-## Running the tests ⚗️
+## Running the tests 🧪
 
 Click **test.exe**
 
-### Break down into end to end tests
-
-Test check if all modules work:
-- **Add canvas**
-- **Resize image**
-- **2^n canvas** (add canvas for both sides by nearest value of power of 2)
-- **Settings**
+To test modules work:
+* **Add canvas**
+* **Resize image**
+* **2^n canvas** (add canvas for both sides by nearest value of power of 2)
+* **Settings**
 
 ## Built With 🧰
 
@@ -74,7 +72,7 @@ Test check if all modules work:
 * http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip
 * https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug
 
-## Structure of the code 🧬
+## Structure of the code 🧭
 
 ![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png)
 
@@ -86,7 +84,7 @@ Please read [CONTRIBUTING.md](https://github.com/Lukkar90/UI-Photoshop-toolSet/t
 
 We use [SemVer](http://semver.org/) for versioning
 
-## Authors 🎉
+## Authors 🏆
 
 * **Karol Łukaszczyk** - *Initial work* - [Lukkar](https://github.com/Lukkar90)
 
