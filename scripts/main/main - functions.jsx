@@ -308,24 +308,24 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
     var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG');
 
-    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
+    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
         var docsToProcess = docsOpenedFiles();
 
-        var previousSaveTimeSourceDoc = getModificationDate(docsToProcess); // This script must be executed first, because it will not be able to read the date value correctly if it will be executed just before save() or saveAs()
+        var previousSaveTimeSourceDoc = getModificationDate(docsToProcess); //This script must be executed first, because it will not be able to read the date value correctly if it will be executed just before save() or saveAs() it will be not enough time
 
-        self.alertPreviousAppearance = false; //declared value
+        var alertPreviousAppearance = false; 
 
         for (var i = 0; i < docsToProcess.length; i++) {
 
-            app.activeDocument = docsToProcess[i]; //setting active document from filtered files
+            app.activeDocument = docsToProcess[i]; //choosing active document from source files
             var doc = app.activeDocument;
 
-            var doNothingWithThisFile = self.changeFile();
-            if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file
+            var doNothingWithThisFile = self.changeFile(); //Custom function depending on executeScript
+            if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file, do move to the next one
 
                 continue; //doc.close(); <=== this shouldn't be there. If you add this it will conflict with function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs)
             }
@@ -339,14 +339,16 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                     $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
                 }
                 catch(e) {
-                    if(self.alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
+                    if(alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
                         alert("You have earlier opened file in destination folder.\n" + 
-                            "If you choose source files folder with the same file as opened files in destination folder, it could cause bugs later.\n" + 
-                            "And opened file couldn't be saved threfore.\n" + 
+                            "You have choosed source files folder with the same file name as in destination folder.\n" + 
+                            "You overwrote the file and now your opened file doesn't exist on drive.\n" + 
+                            "Therefore you can't save it in original place, becouse it doesn't exist now\n" + 
                             "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.log in script folder:\n' + 
-                            getGrandParentfolder($.fileName) ); 
+                            getGrandParentfolder($.fileName) + "\n" +
+                            "to find file which wasn't saved"); 
 
-                        self.alertPreviousAppearance === true;
+                        alertPreviousAppearance === true;
                     }
                 }
 
@@ -363,7 +365,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             //If you choose radio button "Copy and Change file to other folder", save files in other folder
             } else if (btnRadDestFoldOther.value === true) {
                 saveInDestFolder(detinationFolder);
-                var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
+                var currentSaveTime = new Date; // It couldn't retrieve correctly this information from the path file
 
                 var name = doc.name;
                 var path = detinationFolder;
@@ -379,15 +381,13 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                     writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
                 }
             }
-
-            self.endingFunction();
         }
     
     //If you choose  radio button "Source folder"
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
-        if (self.openedDocsToReopen.length > 0) {
-            self.openDocsToRecover = new Array; // To avoid bug when source files are the same what opened. And reopen them at the end of script
+        if (self.openedDocsToReopen.length > 0) { // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+            self.openDocsToRecover = new Array;
         }
 
         for(var i = 0; i < sourceFiles.length; i++) {
@@ -397,9 +397,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
             open(sourceFiles[i]);
 
             var doc = app.activeDocument;
-            var openedDocPath = doc.fullName;
+            var activeDoc = doc.fullName;
             
-            var doNothingWithThisFile = self.changeFile();
+            var doNothingWithThisFile = self.changeFile(); //Custom function depending on executeScript
             if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file
                 doc.close();
                 continue;
@@ -440,8 +440,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 }
             }
 
-            if (self.openedDocsToReopen.length > 0) {
-                var fileToRecover = appendingDocToRecover(openedDocPath, self.openedDocsToReopen); // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+            if (self.openedDocsToReopen.length > 0) {// There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+                var fileToRecover = matchDocs(activeDoc, self.openedDocsToReopen);
                 if (fileToRecover !== null)
                     self.openDocsToRecover.push(fileToRecover);
             }
@@ -450,6 +450,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
         }
     }
 
+    self.endingFunction(); //Custom function depending on executeScript
 }
 
 function countSavedFiles(isFileSaved, self) { 
@@ -460,14 +461,14 @@ function countSavedFiles(isFileSaved, self) {
         self.counterChangedFilesFalse++;
 }
 
-function appendingDocToRecover(docToAppendPath, openedDocsPaths) {
+function matchDocs(activeDocFile, openedDocsFiles) {
 
     var recoverDocs = null;
 
-    for (var i = 0; i < openedDocsPaths.length; i++) {
+    for (var i = 0; i < openedDocsFiles.length; i++) {
 
-        if ( docToAppendPath.toString() === openedDocsPaths[i].toString() ) {
-            var recoverDocs = openedDocsPaths[i];
+        if ( activeDocFile.toString() === openedDocsFiles[i].toString() ) {
+            var recoverDocs = openedDocsFiles[i];
 
             if (!recoverDocs.exists) {
                 throw new Error("Invalid Path file. File doesn't exist");

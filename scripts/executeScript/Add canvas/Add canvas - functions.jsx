@@ -29,7 +29,7 @@ function blockKeysInEdittext(editTextInstance) {
         key.preventDefault();
     }
     });
-  }
+}
   
 /**
  * Determines whether an array includes a certain value among its elements.
