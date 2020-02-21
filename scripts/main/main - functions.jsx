@@ -127,9 +127,9 @@ function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFiles
     var sourceFilesPNGandByExpression = filterFilesByExpression(regex, sourceFilesPNG);
 
 
-    if ((UI_filterSourceFilesCheckbox_byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) {
+    if ((UI_filterSourceFilesCheckbox_byExpression.value === true) && (UI.filterSourceFilesByExpression.input.text !== "")) { //Filtering by expression is ON by text inputed by User and choosed checkbox, if filtering by PNG is choosed also, it could be filtered additionally.
 
-        if (UI_filterSourceFilesCheckbox_PNG.value === false) {
+        if (UI_filterSourceFilesCheckbox_PNG.value === false) { 
 
             var sourceFilesToProcess = sourceFilesByExpression;
         }
@@ -139,7 +139,7 @@ function filterFilesByCheckboxes( sourceFilesPSDformat, UI, UI_filterSourceFiles
         }
 
     }
-    else if ((UI_filterSourceFilesCheckbox_byExpression.value === false) || (UI.filterSourceFilesByExpression.input.text === "")) {
+    else if ((UI_filterSourceFilesCheckbox_byExpression.value === false) || (UI.filterSourceFilesByExpression.input.text === "")) { //Filtering by expression is OFF when there is no text input or checkbox is not choosed, the only options left are files from source folder or source files filtered by PNG.
 
         if (UI_filterSourceFilesCheckbox_PNG.value === false) {
 
@@ -159,7 +159,7 @@ function convertTextInputIntoRegex(input) {
     var string = input.text;
 
     try {
-        $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+        $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "Syntax error".
         var regex = new RegExp(string);
         $.level = 1; //Set to level: 1 to reset debug
     }
@@ -253,10 +253,9 @@ function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, 
     }
     prevDocNames[0] = "no files to process";
 
-    if (typeof sourceFiles === "undefined") {
-        var filesNamesInfoUI = new Array; //todo
-    } else if (typeof sourceFiles !== "undefined") {
-        var filesNamesInfoUI = new Array; //todo
+    var filesNamesInfoUI = new Array(0);
+
+    if (typeof sourceFiles !== "undefined") {
         for (var i = 0; i < sourceFiles.length; i++) {
             filesNamesInfoUI[i] = decodeURIComponent(sourceFiles[i].name);  // string format is URl
         }
@@ -679,7 +678,7 @@ function simplePastRegularForm(scriptName) { // https://www.lawlessenglish.com/l
     return verbInPastSimple;
 }
 
-function recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self_openDocsToRecover) {
+function openFiles(self_openDocsToRecover) {
 
     for (var i = 0; i < self_openDocsToRecover.length; i++) {
 

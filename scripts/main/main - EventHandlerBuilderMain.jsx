@@ -423,7 +423,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
             showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
 
             if (typeof self.openDocsToRecover !== "undefined" && self.openDocsToRecover !== null) {
-                recoverOpenedFilesIfTheyWhereTheSameLikeInSourceFolder(self.openDocsToRecover);
+                openFiles(self.openDocsToRecover);
             }
         }
 
