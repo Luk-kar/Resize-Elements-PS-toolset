@@ -348,7 +348,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG')
+        var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog)
 
         if (logFiles_Value === ':  ON ') {
 

@@ -80,6 +80,11 @@ function buildListFilesIfItDoesntExists(listFile) {
     }
 }
 
+var prefFileKeys = {};
+prefFileKeys.filterByPNG = '"FILTER BY PNG"- CHECKBOX TRUE';
+prefFileKeys.closeDialogOpenFiles = '"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG';
+prefFileKeys.changedFileListLog = '"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG';
+
 function buildPrefFilesIfItDoesntExists(prefFile) {
 
     if (!prefFile.exists) {
@@ -88,11 +93,11 @@ function buildPrefFilesIfItDoesntExists(prefFile) {
         a.open("w");
         a.writeln("[ENABLED/DISABLED options]");
         a.writeln("");
-        a.writeln('"FILTER BY PNG"- CHECKBOX TRUE=OFF');
+        a.writeln(prefFileKeys.filterByPNG + '=OFF');
         a.writeln("");
-        a.writeln('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG=ON');
+        a.writeln(prefFileKeys.closeDialogOpenFiles + '=ON');
         a.writeln("");
-        a.writeln('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG=OFF');
+        a.writeln(prefFileKeys.changedFileListLog + '=OFF');
 
         a.close();
     }

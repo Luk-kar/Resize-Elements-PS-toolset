@@ -306,7 +306,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     self.counterChangedFilesTrue = new Number(0);
     self.counterChangedFilesFalse = new Number(0);
 
-    var logFiles_Value = readValueOfSeetingsFromPrefFile('"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG');
+    var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog);
 
     sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
 
@@ -611,7 +611,7 @@ function saveGIF(saveFile) {
 
 function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
 
-    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile('"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG');
+    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile(prefFileKeys.closeDialogOpenFiles);
 
     if (DoNotShowCloseOpenedFiles_ON_OFF === ':  ON ') {
         var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");

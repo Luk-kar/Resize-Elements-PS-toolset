@@ -3,7 +3,7 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
     var UI = this.UI;
     var self = this;
 
-    self.lockingUnlockingAcceptBtn = function checkingIfAreAnyDocsToProcess() {
+    self.lockingUnlockingAcceptBtn = function checkingIfAreAnyDocsToProcess() { //this object has to be declared as function
 
         if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
@@ -33,10 +33,6 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
             }
         }
 
-    }
-
-    if (typeof self.lockingUnlockingAcceptBtn !== "function") {
-        throw new Error('Object "self.lockingUnlockingAcceptBtn" is not a function');
     }
 }
 

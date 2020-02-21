@@ -11,7 +11,7 @@ EventHandlerBuilderSettingsPanel.prototype.onPGNbyDefault = function() {
 
     UISetPanel.PNGbyDefault.btn.onClick = function() {
 
-        var changedPreference = '"FILTER BY PNG"- CHECKBOX TRUE';
+        var changedPreference = prefFileKeys.filterByPNG;
 
         setValuesOfPrefs(changedPreference, UISetPanel.PNGbyDefault.title);// Show user made change
 
@@ -24,7 +24,7 @@ EventHandlerBuilderSettingsPanel.prototype.onDoNotShowCloseOpenedFiles = functio
 
     UISetPanel.DoNotShowCloseOpenedFiles.btn.onClick = function() {
 
-        var changedPreference = '"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG';
+        var changedPreference = prefFileKeys.closeDialogOpenFiles;
 
         setValuesOfPrefs(changedPreference, UISetPanel.DoNotShowCloseOpenedFiles.title);// Show user made change
 
@@ -37,7 +37,7 @@ EventHandlerBuilderSettingsPanel.prototype.onLogFiles = function() {
 
     UISetPanel.logFiles.btn.onClick = function() {
 
-        var changedPreference = '"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG';
+        var changedPreference = prefFileKeys.changedFileListLog;
 
         setValuesOfPrefs(changedPreference, UISetPanel.logFiles.title);// Show user made change
 

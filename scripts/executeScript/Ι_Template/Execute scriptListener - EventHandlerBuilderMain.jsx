@@ -36,5 +36,3 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
         //nothing happen; this function has to be declared
     }
 }
-
-

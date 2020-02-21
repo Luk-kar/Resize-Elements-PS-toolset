@@ -56,10 +56,5 @@
         this.canvExtendColor.imageTooltip = this.canvExtendColor.add("image", undefined, this.imageInfHov);
 
     this.marginesSpaceBottom = this.panelChangeFile.add("statictext");
+    this.marginesSpaceBottom.characters = this.panelWidth + 13;
 
-
-    //Images display number with fulfilling resolution conditions
-    this.panelImagesFulfillingResConditions = createPanelUI(this.panelChangeFile, undefined, "left");
-
-        this.panelImagesFulfillingResConditions.title = this.panelImagesFulfillingResConditions.add("statictext", undefined, "Max image resolution input is " + this.maxResValue.toString() + " px in both sides"); // To make visually diffrence than other modules
-        this.panelImagesFulfillingResConditions.title.characters = this.panelWidth + 8;
