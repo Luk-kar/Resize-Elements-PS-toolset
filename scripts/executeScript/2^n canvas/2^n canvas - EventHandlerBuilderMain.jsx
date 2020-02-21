@@ -5,36 +5,27 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     self.lockingUnlockingAcceptBtn = function checkingIfAreAnyDocsToProcess() { //this object has to be declared as function
 
-        if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
+        if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) { //To be avaible to check this radiobutton you have to have at least one open document, so it is always true when checked
 
-            if (docsOpenedFiles().length > 0) {
-        
-                UI.btnAccept.enabled = true;
-        
-            } else if (docsOpenedFiles().length === 0) {
-        
-                UI.btnAccept.enabled = false;
-            }
+            UI.btnAccept.enabled = true;
 
-        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
-
-            if (typeof self.sourceFilesToProcess !== "undefined" && self.sourceFilesToProcess.length > 0 ) {
+        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true &&
+                   typeof self.sourceFilesToProcess !== "undefined" && self.sourceFilesToProcess.length > 0 ) {
                 
                 if ( (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...") || UI.btnRadDestFold.same.value === true) {
 
                     UI.btnAccept.enabled = true;
                 } else {
-
                     UI.btnAccept.enabled = false;
                 }
-            } else if (typeof self.sourceFilesToProcess === "undefined" || self.sourceFilesToProcess.length === 0) {
+                
+        } else if (typeof self.sourceFilesToProcess === "undefined" || self.sourceFilesToProcess.length === 0) {
 
                 UI.btnAccept.enabled = false;
-            }
         }
-
     }
 }
+
 
 EventHandlerBuilderMain.prototype.onValueLowest = function() {
     var UI = this.UI;

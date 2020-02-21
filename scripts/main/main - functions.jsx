@@ -303,8 +303,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     btnRadSameFolder, btnRadDestFoldOther, 
     UI, self, executeScript) {
 
-    self.counterChangedFilesTrue = new Number(0);
-    self.counterChangedFilesFalse = new Number(0);
+    self.countChangedFilesTrue = new Number(0);
+    self.countChangedFilesFalse = new Number(0);
 
     var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog);
 
@@ -392,7 +392,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 
         for(var i = 0; i < sourceFiles.length; i++) {
 
-            var previousSaveTimeSourceDoc = sourceFiles[i].path.modified;
+            var previousSaveTimeSourceDoc = sourceFiles[i].path.modified; //read this value before you open file to avoid false reading
 
             open(sourceFiles[i]);
 
@@ -440,7 +440,8 @@ function changeFileAndSave(sourceFiles, detinationFolder,
                 }
             }
 
-            if (self.openedDocsToReopen.length > 0) {// There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+            // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+            if (self.openedDocsToReopen.length > 0) {
                 var fileToRecover = matchDocs(activeDoc, self.openedDocsToReopen);
                 if (fileToRecover !== null)
                     self.openDocsToRecover.push(fileToRecover);
@@ -456,9 +457,9 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 function countSavedFiles(isFileSaved, self) { 
     
     if (isFileSaved)
-        self.counterChangedFilesTrue++;
+        self.countChangedFilesTrue++;
     if (!isFileSaved)
-        self.counterChangedFilesFalse++;
+        self.countChangedFilesFalse++;
 }
 
 function matchDocs(activeDocFile, openedDocsFiles) {
@@ -687,10 +688,10 @@ function openFiles(self_openDocsToRecover) {
     }
 }
 
-function showUnsavedFilesAlert(self_counterChangedFilesFalse, scriptFolder) {
+function showUnsavedFilesAlert(self_countChangedFilesFalse, scriptFolder) {
 
-    if (self_counterChangedFilesFalse > 0) {
-        alert("Save of " + self_counterChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.log" in folder: ' + scriptFolder);
+    if (self_countChangedFilesFalse > 0) {
+        alert("Save of " + self_countChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.log" in folder: ' + scriptFolder);
     }
 }
 

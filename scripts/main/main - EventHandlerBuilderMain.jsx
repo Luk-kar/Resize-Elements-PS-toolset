@@ -125,11 +125,12 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
         self.sourceFolder = Folder.selectDialog("Select folder with files to process");
 
-        //Warning when you didn't choose any folder now and before
+        //When user doesn't choose folder
         if (self.sourceFolder === null && UI.btnChooseFilesSourceFold.title.text === "Source folder...") {
             alert("You have not selected source folder");
         //else if (self.sourceFolder === null && UI.btnChooseFilesSourceFold.title.text !== "Source folder..."). Leave selected source folder -> leave status quo
 
+        //When user chooses folder
         } else if (self.sourceFolder !== null) {
 
             var sameChoosedSourceFolderAsBefore = checkingIfItIsTheSameSourceFolderAsBefore(self);
@@ -145,6 +146,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
             sourceFilesFiltered = filteringSourceFiles(sourceFilesUnfiltered, properFilesExtPSfiles);
 
+            //When user's choosed folder is empty or does not have any files to process
             if (sourceFilesFiltered.length === 0) {
 
                 self.sourceFolder === null;// to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
@@ -163,7 +165,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
 
                 alert("In choosed folder there is no files to process");
                 
-
+            //When user's choosed folder has files to process
             } else if (sourceFilesFiltered.length > 0) {
 
                 self.sourceFilesPSDformat = null; 
@@ -181,6 +183,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
                 
                 infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
+                //Actions depended on choosed or not, destination folder
                 if (typeof self.detinationFolder === "undefined") {
 
                     UI.btnRadDestFold.same.notify();
@@ -203,6 +206,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
                     }
                 }
                 
+                //If you choose new folder you will be noticed how many files are inside
                 if (sameChoosedSourceFolderAsBefore === false) {
 
                     if( self.sourceFilesToProcess.length < 0){
@@ -390,23 +394,23 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
         var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
         var noun = scriptName.split(" ")[1];
 
-        if(self.counterChangedFilesTrue < 0) {
+        if(self.countChangedFilesTrue < 0) {
             throw new Error("Counter can't be less than integer = 1");
         }
-        if(self.counterChangedFilesFalse < 0) {
+        if(self.countChangedFilesFalse < 0) {
             throw new Error("Counter can't be less than integer = 0");
         }
 
-        if (self.counterChangedFilesTrue > 1) {
+        if (self.countChangedFilesTrue > 1) {
             var files = "files"
-        } else if (self.counterChangedFilesTrue === 1) {
+        } else if (self.countChangedFilesTrue === 1) {
             var files = "file"
         }
         
         if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
-            alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files);
-            showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
+            alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files);
+            showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
 
             confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
 
@@ -419,8 +423,8 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
                 folderName = decodeURIComponent(self.detinationFolder.name); // string format is URl
             }
 
-            alert("You " + verbPastParticiple + " " + noun + " to " + self.counterChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
-            showUnsavedFilesAlert(self.counterChangedFilesFalse, scriptFolder);
+            alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+            showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
 
             if (typeof self.openDocsToRecover !== "undefined" && self.openDocsToRecover !== null) {
                 openFiles(self.openDocsToRecover);
