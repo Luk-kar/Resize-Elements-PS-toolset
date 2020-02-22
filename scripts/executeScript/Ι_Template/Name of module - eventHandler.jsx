@@ -1,4 +1,4 @@
-// n^2 canvas --------------------------------------------------------------------------------------------------------------------
+// Here you invoke functions declared in Add canvas - EventHandlerBuilderMain.jsx
 
 eventHandler.settingAcceptBtnBlock();
 

@@ -5,8 +5,9 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     self.lockingUnlockingAcceptBtn = function someConditionBlockingButton() {
 
-    // UI.btnAccept.enabled = true; // <=== button to block
+    // UI.btnAccept.enabled = true; // <=== button to unblock
     // UI.btnAccept.enabled = false; // <=== button to block
+    // Look at Add canvas - EventHandlerBuilderMain as example
 }
 
 EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = function() {
@@ -14,7 +15,9 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
     var self = this;
 
     self.startingFunction = function doSthAtBeginning() { 
-        //nothing happen; this function has to be declared
+        // This function has to be declared
+        // This function is used BEFORE you open any file
+        // Look at Add canvas - EventHandlerBuilderMain as example
     }
 }
 
@@ -24,7 +27,9 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
 
     self.changeFile = function scriptListenerFunc() {
 
-        // insert code
+        // This function is used when file is open
+        // Look at Add canvas - EventHandlerBuilderMain as example
+        // Check also scriptListener https://community.adobe.com/t5/photoshop/scriptlistener/td-p/9021353?page=1
     }
 }
 
@@ -33,6 +38,8 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
     var self = this;
 
     self.endingFunction = function doSthAtTheEnd() {
-        //nothing happen; this function has to be declared
+        // This function has to be declared
+        // This function is used AFTER you opened, changed and saved all files
+        // Look at Add canvas - EventHandlerBuilderMain as example
     }
 }
