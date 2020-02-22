@@ -1,7 +1,7 @@
 # How to make own module
 
 ### Template module's files 🗋
-_in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
+in directory: _UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 
 * Name of module - **eventHandler.jsx**
 * Name of module - **EventHandlerBuilderMain.jsx**
