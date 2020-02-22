@@ -26,6 +26,8 @@ EventHandlerBuilderMain.prototype.onGrpWidthNumb = function() {
 
     UI.groupWidth.numb.onChanging = function() {
 
+        allowMinusOnlyAtFront(this);
+
         sameInputField(UI.constrainsProportionsCheckbox, UI.groupWidth.numb, UI.groupHeight.numb);
 
         self.lockingUnlockingAcceptBtn();
@@ -62,6 +64,8 @@ EventHandlerBuilderMain.prototype.onGrpHeightNumb = function() {
 
     //Group Height
     UI.groupHeight.numb.onChanging = function() {
+
+        allowMinusOnlyAtFront(this);
 
         sameInputField(UI.constrainsProportionsCheckbox, UI.groupHeight.numb, UI.groupWidth.numb);
 
@@ -275,3 +279,4 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
         app.backgroundColor = self.bgColor;
     }
 }
+
