@@ -87,7 +87,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
 6. In module's file ""**_../executeScript/NameOfModule/Name of module - UI.jsx_**"
 
-    You create UI for panel in "main - UI.jsx"
+    You create UI for panel in "**main - UI.jsx**"
 
     Check following examples to implement your solution:
 
@@ -97,7 +97,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
 6. In module's next one ""**_../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx_**"
 
-    You create button behaviour in "main - EventHandlerBuilderMain.jsx"
+    You create button behaviour in "**main - EventHandlerBuilderMain.jsx**"
 
     Check following examples to implement your solution:
 
@@ -107,7 +107,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
 7. In module's almost final ""**_../executeScript/NameOfModule/Name of module - eventHandler.jsx_**"
 
-    You invoke eventHandler in "main.jsx"
+    You invoke eventHandler in "**main.jsx**"
 
     Check following examples to implement your solution:
 
@@ -117,7 +117,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
 8. In module's final ""**_../executeScript/NameOfModule/Name of module - functions.jsx_**"
 
-    You add functions which would be used for all our modules
+    You add functions which would be **used for all your modules**
 
     Check following examples to implement your solution:
 
@@ -125,6 +125,6 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     * Add canvas - functions.jsx
     * Resize image - functions.jsx
 
-9. Test your script if everything works ([ExtendScript Toolkit](https://flylib.com/books/en/1.513.1.60/1/))
+9. Test your script if everything works ([**ExtendScript Toolkit**](https://flylib.com/books/en/1.513.1.60/1/))
 
-10. Enjoy!
+10. **Enjoy!**
