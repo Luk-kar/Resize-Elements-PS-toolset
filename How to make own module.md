@@ -18,7 +18,7 @@ in directory: _UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 
 ## How to add your own module 🧱
 
-1. "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**"
+1. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**"
 you add new button
 
 ```
@@ -27,7 +27,7 @@ this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], 
 this.btnNameOfModule = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Name of module"); // <== Add this line of code
 ```
 
-2. "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - EventHandlerBuilderControlPanel.jsx_**"
+2. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - EventHandlerBuilderControlPanel.jsx_**"
 you add event for button in control panel
 
 ```
@@ -53,7 +53,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () { // <
 }
 ```
 
-3. "**_\UI-Photoshop-toolSet\control panel.jsx_**"
+3. In "**_\UI-Photoshop-toolSet\control panel.jsx_**"
 
 ```
 eventHandler.onBtn2toNcanvas();
@@ -61,7 +61,7 @@ eventHandler.onBtn2toNcanvas();
 eventHandler.onBtnNameOfModule(); // <== Add this line of code
 ```
 
-4. "**_\UI-Photoshop-toolSet\scripts\main\main.jsx_**"
+4. In "**_\UI-Photoshop-toolSet\scripts\main\main.jsx_**"
 
 ```
     if (executeScript === "2^n canvas"){
@@ -73,7 +73,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     }
 ```
 
-5. "**_\UI-Photoshop-toolSet\scripts\main\main - GuiBuilderMain.jsx_**"
+5. In "**_\UI-Photoshop-toolSet\scripts\main\main - GuiBuilderMain.jsx_**"
 
 ```
     if (executeScript === "2^n canvas"){
