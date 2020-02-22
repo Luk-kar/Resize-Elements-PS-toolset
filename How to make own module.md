@@ -89,6 +89,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
     You create UI for panel in "**main - UI.jsx**"
 
+
     Check following examples to implement your solution:
     * 2^n canvas - UI.jsx
     * Add canvas - UI.jsx
@@ -97,6 +98,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 6. In module's next one ""**_../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx_**"
 
     You create button behaviour in "**main - EventHandlerBuilderMain.jsx**"
+
 
     Check following examples to implement your solution:
     * 2^n canvas - EventHandlerBuilderMain.jsx
@@ -107,6 +109,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
     You invoke eventHandler in "**main.jsx**"
 
+
     Check following examples to implement your solution:
     * 2^n canvas - eventHandler.jsx
     * Add canvas - eventHandler.jsx
@@ -115,6 +118,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 8. In module's final ""**_../executeScript/NameOfModule/Name of module - functions.jsx_**"
 
     You add functions which would be **used for all your modules**
+
 
     Check following examples to implement your solution:
     * 2^n canvas - functions.jsx
