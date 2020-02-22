@@ -18,7 +18,7 @@ _in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 4. **.jsx files** have to be named: **Name of module** + "**_space_**" + "**-**" + "**_space_**" + "**_name of part in module_**"
 5. **Folder** with module's files have to be named the same like "**Name of module**"
 
-### Simplified model of module (How it works)
+### How to add own module
 
 1. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**" you add new button
 
@@ -87,7 +87,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
 6. In module's file ""**_../executeScript/NameOfModule/Name of module - UI.jsx_**"
 
-You create UI for panel in main - UI
+You create UI for panel in "main - UI.jsx"
 
 Check following examples to implement your solution:
 
@@ -97,7 +97,7 @@ Check following examples to implement your solution:
 
 6. In module's next one ""**_../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx_**"
 
-You create button behaviour in main - EventHandlerBuilderMain.jsx
+You create button behaviour in "main - EventHandlerBuilderMain.jsx"
 
 Check following examples to implement your solution:
 
@@ -105,9 +105,9 @@ Check following examples to implement your solution:
 * Add canvas - EventHandlerBuilderMain.jsx
 * Resize image - EventHandlerBuilderMain.jsx
 
-7. In module's final ""**_../executeScript/NameOfModule/Name of module - eventHandler.jsx_**"
+7. In module's almost final ""**_../executeScript/NameOfModule/Name of module - eventHandler.jsx_**"
 
-You create UI for panel in main - UI
+You invoke eventHandler in "main.jsx"
 
 Check following examples to implement your solution:
 
@@ -117,7 +117,7 @@ Check following examples to implement your solution:
 
 8. In module's final ""**_../executeScript/NameOfModule/Name of module - functions.jsx_**"
 
-You create UI for panel in main - UI
+You add functions which would be used for all our modules
 
 Check following examples to implement your solution:
 
