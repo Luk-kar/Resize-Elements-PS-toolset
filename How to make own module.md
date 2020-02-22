@@ -2,7 +2,7 @@
 
 ## Structure of module 🧱
 
-### Template module's files
+### Template module's files 🗋
 _in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 
 * Name of module - **eventHandler.jsx**
@@ -10,7 +10,7 @@ _in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 * Name of module - **functions.jsx**
 * Name of module - **UI.jsx**
 
-### You can change name of files and parent folder depending on these rules
+### You can change name of files and parent folder depending on these rules ✏️
 
 1. **Name of module** schould be constructed: "**Verb**" + "**noun**"
 2. **Verb** has to be [**_regular_**](https://conjugator.reverso.net/conjugation-english-verb-debug.html)
@@ -127,6 +127,6 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     * Add canvas - functions.jsx
     * Resize image - functions.jsx
 
-9. Test your script if everything works ([**ExtendScript Toolkit**](https://flylib.com/books/en/1.513.1.60/1/))
+9. **Test** your script if everything works ([**ExtendScript Toolkit**](https://flylib.com/books/en/1.513.1.60/1/))
 
 10. **Enjoy!**
