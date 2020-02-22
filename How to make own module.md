@@ -13,7 +13,7 @@ in directory: _UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 1. **Name of module** schould be constructed: "**Verb**" + "**noun**"
 2. **Verb** has to be [**_regular_**](https://conjugator.reverso.net/conjugation-english-verb-debug.html)
 3. **Noun** has to be **_singular_**
-4. **Files .jsx ** have to be named: **Name of module** + "**_space_**" + "**-**" + "**_space_**" + "**_name of part in module_**"
+4. **Files .jsx** have to be named: **Name of module** + "**_space_**" + "**-**" + "**_space_**" + "**_name of part in module_**"
 5. **Folder** with module's files have to be named the same like "**Name of module**"
 
 ## How to add your own module 🧱
