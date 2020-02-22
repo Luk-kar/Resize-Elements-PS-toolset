@@ -16,7 +16,7 @@ in directory: _UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 4. **Files .jsx ** have to be named: **Name of module** + "**_space_**" + "**-**" + "**_space_**" + "**_name of part in module_**"
 5. **Folder** with module's files have to be named the same like "**Name of module**"
 
-## How to add your own module 🔨
+## How to add your own module 🧱
 
 1. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**"
 you add new button
