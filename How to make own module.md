@@ -20,7 +20,8 @@ _in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 
 ## How to add your own module 🔨
 
-1. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**" you add new button
+1. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**"
+you add new button
 
 ```
 this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
@@ -28,7 +29,8 @@ this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], 
 this.btnNameOfModule = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Name of module"); // <== Add this line of code
 ```
 
-2. Later in "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - EventHandlerBuilderControlPanel.jsx_**" you add event for button in control panel
+2. Later in "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - EventHandlerBuilderControlPanel.jsx_**"
+you add event for button in control panel
 
 ```
         #include "../executeScript/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
