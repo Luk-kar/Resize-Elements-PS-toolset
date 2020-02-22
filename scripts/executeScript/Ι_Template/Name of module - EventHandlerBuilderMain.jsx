@@ -29,7 +29,8 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
 
         // This function is used when file is open
         // Look at Add canvas - EventHandlerBuilderMain as example
-        // Check also scriptListener https://community.adobe.com/t5/photoshop/scriptlistener/td-p/9021353?page=1
+        // Check also scriptListener download.adobe.com/pub/adobe/photoshop/win/13.x/Win_Scripting_Plug-In.zip
+        // And how to use it https://blogs.adobe.com/crawlspace/2006/05/installing_and_1.html
     }
 }
 
