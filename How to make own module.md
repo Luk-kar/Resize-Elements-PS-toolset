@@ -1,6 +1,4 @@
-# How to make own module 🪓
-
-## Structure of module 🧱
+# How to make own module
 
 ### Template module's files 🗋
 _in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
