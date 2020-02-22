@@ -1,6 +1,6 @@
 <h1 align="center">UI Photoshop toolSet </h1>
 
-<div align="center">🚀🚀🚀🚀🚀🚀</div>
+<div align="center">🚀🚀🚀</div>
 
 <div align="center">
 This is small plugin to automate repetetive and boring task connected with work with UI </br>
