@@ -89,8 +89,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
     You create UI for panel in "**main - UI.jsx**"
 
-
-    Check following examples to implement your solution:
+    _Check following examples to implement your solution:_
     * 2^n canvas - UI.jsx
     * Add canvas - UI.jsx
     * Resize image - UI.jsx
@@ -99,8 +98,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
     You create button behaviour in "**main - EventHandlerBuilderMain.jsx**"
 
-
-    Check following examples to implement your solution:
+    _Check following examples to implement your solution:_
     * 2^n canvas - EventHandlerBuilderMain.jsx
     * Add canvas - EventHandlerBuilderMain.jsx
     * Resize image - EventHandlerBuilderMain.jsx
@@ -109,8 +107,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
     You invoke eventHandler in "**main.jsx**"
 
-
-    Check following examples to implement your solution:
+    _Check following examples to implement your solution:_
     * 2^n canvas - eventHandler.jsx
     * Add canvas - eventHandler.jsx
     * Resize image - eventHandler.jsx
@@ -119,8 +116,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
     You add functions which would be **used for all your modules**
 
-
-    Check following examples to implement your solution:
+    _Check following examples to implement your solution:_
     * 2^n canvas - functions.jsx
     * Add canvas - functions.jsx
     * Resize image - functions.jsx
