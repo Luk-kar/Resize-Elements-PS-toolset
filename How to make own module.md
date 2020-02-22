@@ -2,7 +2,8 @@
 
 ## Structure of module 🧱
 
-### There are particular template module's files in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\
+### Template module's files
+_in directory: UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 
 * Name of module - **eventHandler**.jsx
 * Name of module - **EventHandlerBuilderMain**.jsx
@@ -21,11 +22,11 @@
 
 1. In "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**" you add new button
 
- ```
+```
 this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
 this.btnNameOfModule = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Name of module"); // <== Add this line of code
- ```
+```
 
 2. Later in "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - EventHandlerBuilderControlPanel.jsx_**" you add event for button in control panel
 
