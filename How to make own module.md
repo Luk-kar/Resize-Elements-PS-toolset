@@ -85,7 +85,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     }
 ```
 
-6. In module's "**_../executeScript/NameOfModule/Name of module - UI.jsx_**"
+6. In module "**_../executeScript/NameOfModule/Name of module - UI.jsx_**"
 
     You create UI for panel in "**main - UI.jsx**"
 
@@ -94,7 +94,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     * Add canvas - UI.jsx
     * Resize image - UI.jsx
 
-6. In module's "**_../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx_**"
+6. In module "**_../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx_**"
 
     You create button behaviour in "**main - EventHandlerBuilderMain.jsx**"
 
@@ -103,7 +103,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     * Add canvas - EventHandlerBuilderMain.jsx
     * Resize image - EventHandlerBuilderMain.jsx
 
-7. In module's "**_../executeScript/NameOfModule/Name of module - eventHandler.jsx_**"
+7. In module "**_../executeScript/NameOfModule/Name of module - eventHandler.jsx_**"
 
     You invoke eventHandler in "**main.jsx**"
 
@@ -112,7 +112,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
     * Add canvas - eventHandler.jsx
     * Resize image - eventHandler.jsx
 
-8. In module's **_../executeScript/NameOfModule/Name of module - functions.jsx_**"
+8. In module **_../executeScript/NameOfModule/Name of module - functions.jsx_**"
 
     You add functions which would be **used for all your modules**
 
