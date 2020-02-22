@@ -3,7 +3,7 @@
 <div align="center">🚀🚀🚀</div>
 
 <div align="center">
-This is small plugin to automate repetetive and boring task connected with work with UI </br>
+</br>This is small plugin to automate repetetive and boring task connected with work with UI </br>
 </div>
 <div align="center"><i>
 Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></br>
