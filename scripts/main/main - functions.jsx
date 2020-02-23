@@ -216,7 +216,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
 }
 
 //Used later to dispaly names of opened files
-function docsOpenedFiles() {
+function docsOpenedFiles() { //https://stackoverflow.com/questions/59896445/how-to-check-if-opened-file-is-saved-on-drive-cs6-script
 
     var openedDocsToProcess = new Array;
     var failed = false;
@@ -226,19 +226,16 @@ function docsOpenedFiles() {
       
         try 
         {
-            failed = false;
             $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
             temp = app.documents[i].fullName; //catching "Error 8103: The document has not yet been saved."
             $.level = 1; //Set to level: 1 to reset debug
         }
         catch(e)
         {
-            failed = true;
+            continue;
         }
-        if(!failed)
-        {
-            openedDocsToProcess.push(app.documents[i]);
-        }
+
+        openedDocsToProcess.push(app.documents[i]);
     }
   
     return openedDocsToProcess;
