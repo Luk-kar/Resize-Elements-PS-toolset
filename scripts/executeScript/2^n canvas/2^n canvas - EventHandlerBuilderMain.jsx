@@ -2,6 +2,8 @@
 
 #include "../Ι_utils/EventHandlerBuilderMain/onCanvExtendColorDropDwn.jsx";
 
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipCanvExtendColor.jsx";
+
 EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     var UI = this.UI;
@@ -57,12 +59,6 @@ EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function()
 
     UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
     UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
-}
-
-EventHandlerBuilderMain.prototype.tooltipCanvExtendColor = function() {
-    var UI = this.UI;
-
-    UI.canvExtendColor.imageTooltip.helpTip = "Color is extended only in files with background layer";
 }
 
 EventHandlerBuilderMain.prototype.onValueHighest = function() {

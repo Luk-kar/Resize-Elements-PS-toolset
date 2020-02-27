@@ -4,26 +4,20 @@
 
 #include "../Ι_utils/EventHandlerBuilderMain/onCanvExtendColorDropDwn.jsx";
 
-#include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx"
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx";
 
-#include "../Ι_utils/EventHandlerBuilderMain/onGroupUnitsDropDown.jsx"
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupUnitsDropDown.jsx";
 
-EventHandlerBuilderMain.prototype.tooltipWidthAndHeightImage = function() {
-    var UI = this.UI;
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipWidthAndHeightImage.jsx";
 
-    var tooltipValue = "You can substract number by adding '-' before value.\n" +
-                        "Only characters avaible are: digits: [0-9] and signs: '-', '+'.\n" + 
-                        "The only accepted value inside input field is integer."
+#include "../Ι_utils/EventHandlerBuilderMain/onGrpDlgUnitValImage.jsx";
 
-    UI.groupWidth.imageTooltip.helpTip = tooltipValue;
-    UI.groupHeight.imageTooltip.helpTip = tooltipValue;
-}
+#include "../Ι_utils/EventHandlerBuilderMain/onConstrainsProportionsCheckbox.jsx";
 
-EventHandlerBuilderMain.prototype.onGrpDlgUnitValImage = function() {
-    var UI = this.UI;
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipConstrainsProportionsCheckbox.jsx";
 
-    createTooltipToImage(UI.constrainsProportionsCheckbox, UI.groupDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
-}
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipCanvExtendColor.jsx";
+
 
 EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     var UI = this.UI;
@@ -47,49 +41,6 @@ EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     UI.anchorPositionBOTTOMLEFT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMLEFT, AnchorPosition.BOTTOMLEFT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
     UI.anchorPositionBOTTOMCENTER.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMCENTER, AnchorPosition.BOTTOMCENTER, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
     UI.anchorPositionBOTTOMRIGHT.onClick = function() {self.anchorPostionValue = anchorSetingNew(UI.anchorPositionBOTTOMRIGHT, AnchorPosition.BOTTOMRIGHT, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)}
-}
-
-EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
-    var UI = this.UI;
-
-    UI.constrainsProportionsCheckbox.onClick = function() {
-        //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
-        createTooltipToImage(UI.constrainsProportionsCheckbox, UI.groupDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
-
-        //Set the same "highest" value in "Height" and "Width"
-        if (UI.constrainsProportionsCheckbox.value === true) {
-            //If Height and Width is negative or equal 0, it set in both most negative number
-            if((parseInt(UI.groupWidth.numb.text, 10) <= 0) && (parseInt(UI.groupHeight.numb.text, 10) <= 0)) {
-                if (parseInt(UI.groupWidth.numb.text, 10) < parseInt(UI.groupHeight.numb.text, 10)) {
-                    UI.groupWidth.numb.onChanging();
-                }
-                //If some value is positive, set in both most positive number
-                else {
-                    UI.groupHeight.numb.onChanging();
-                }
-            //If all values are positive set the highest one
-            } else if ((parseInt(UI.groupWidth.numb.text, 10) > 0) || (parseInt(UI.groupHeight.numb.text, 10) > 0)) {
-                if (parseInt(UI.groupWidth.numb.text, 10) > parseInt(UI.groupHeight.numb.text, 10)) {
-                    UI.groupWidth.numb.onChanging();
-                } else {
-                    UI.groupHeight.numb.onChanging();
-                }
-            }
-        }
-    }
-
-}
-
-EventHandlerBuilderMain.prototype.tooltipConstrainsProportionsCheckbox = function() {
-    var UI = this.UI;
-
-    UI.constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width";
-}
-
-EventHandlerBuilderMain.prototype.tooltipCanvExtendColor = function() {
-    var UI = this.UI;
-
-    UI.canvExtendColor.imageTooltip.helpTip = "Color is extended only in files with background layer";
 }
 
 EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = function() {
