@@ -356,8 +356,30 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFil
         //If you choose radio button "Copy and Change file to other folder", save files in other folder
         } else if (btnRadDestFoldOther.value === true) {
 
-            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i);
+            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i);
         }
+    }
+}
+
+_changeFileAndSave_.btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i) {
+
+    var doc = app.activeDocument;
+
+    saveInDestFolder(detinationFolder);
+
+    var currentSaveTime = new Date; // It couldn't retrieve correctly this information from the path file
+    
+    var name = doc.name;
+    var path = detinationFolder;
+
+    var saveAsFile = File(path + "/" + name);
+    var currentSaveTime = doc.path.modified;
+
+    var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
+    countSavedFiles(isFileSaved, self);
+
+    if (logFiles_Value === ':  ON ') {
+        writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
     }
 }
 
@@ -396,28 +418,6 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (ale
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i) {
-
-    var doc = app.activeDocument;
-
-    saveInDestFolder(detinationFolder);
-
-    var currentSaveTime = new Date; // It couldn't retrieve correctly this information from the path file
-    
-    var name = doc.name;
-    var path = detinationFolder;
-
-    var saveAsFile = File(path + "/" + name);
-    var currentSaveTime = doc.path.modified;
-
-    var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
-    countSavedFiles(isFileSaved, self);
-    
-    if (logFiles_Value === ':  ON ') {
-        writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
-    }
-}
-
 _changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value) {
 
     if (self.openedDocsToReopen.length > 0) { // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
@@ -447,7 +447,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFil
         //If you choose radio button "Copy and Change file to other folder", save files in other folder
         } else if (btnRadDestFoldOther.value === true) {
 
-            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i);
+            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i);
         }
 
         // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
@@ -471,28 +471,6 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function (pre
 
     if (logFiles_Value === ':  ON ') {
         writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
-    }
-}
-
-_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i) {
-
-    var doc = app.activeDocument;
-
-    saveInDestFolder(detinationFolder);
-
-    var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
-
-    var name = doc.name;
-    var path = detinationFolder;
-
-    var saveAsFile = File(path + "/" + name);
-    var currentSaveTime = doc.path.modified;
-
-    var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
-    countSavedFiles(isFileSaved, self);
-
-    if (logFiles_Value === ':  ON ') {
-        writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
     }
 }
 
