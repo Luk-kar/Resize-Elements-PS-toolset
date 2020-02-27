@@ -5,23 +5,14 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     self.lockingUnlockingAcceptBtn = function checkingIfAreAnyDocsToProcess() { //this object has to be declared as function
 
-        if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) { //To be avaible to check this radiobutton you have to have at least one open document, so it is always true when checked
+        UI.btnAccept.enabled = true;
 
-            UI.btnAccept.enabled = true;
+        if ((UI.btnRadSourceFiles.chooseFilesSourceFold.value === true || UI.btnRadDestFold.same.value === true) && 
+            (typeof self.sourceFilesToProcess === "undefined" || self.sourceFilesToProcess.length === 0)  ||
+            (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text === "Destination folder...")
+            ){
 
-        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true &&
-                   typeof self.sourceFilesToProcess !== "undefined" && self.sourceFilesToProcess.length > 0 ) {
-                
-                if ( (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...") || UI.btnRadDestFold.same.value === true) {
-
-                    UI.btnAccept.enabled = true;
-                } else {
-                    UI.btnAccept.enabled = false;
-                }
-                
-        } else if (typeof self.sourceFilesToProcess === "undefined" || self.sourceFilesToProcess.length === 0) {
-
-                UI.btnAccept.enabled = false;
+            UI.btnAccept.enabled = false;
         }
     }
 }
@@ -31,9 +22,13 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
     var UI = this.UI;
     var self = this;
 
-    restrictInputKeys(UI.groupBiggerThan.valueLowest);
+    restrictInputKeys(UI.groupBiggerThan.valueLowest,
+                     ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                     'Minus', 'Escape', 'Backspace', 'Enter']);
 
     UI.groupBiggerThan.valueLowest.onChanging = function() {
+
+        getRidOfTooMuch0AtFront(this);
 
         restrictValueUpTo(UI.maxResValue, UI.groupBiggerThan.valueLowest);
 
@@ -70,10 +65,14 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     var UI = this.UI;
     var self = this;
 
-    restrictInputKeys(UI.groupLowerThan.valueHighest);
+    restrictInputKeys(UI.groupLowerThan.valueHighest, 
+              ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+              'Minus', 'Escape', 'Backspace', 'Enter']);
 
     //Group Height
     UI.groupLowerThan.valueHighest.onChanging = function() {
+
+        getRidOfTooMuch0AtFront(this);
 
         restrictValueUpTo(UI.maxResValue, UI.groupLowerThan.valueHighest);
 
@@ -81,6 +80,8 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     }
 
     UI.groupLowerThan.valueHighest.onChange = function() {
+
+        getRidOfTooMuch0AtFront(this);
 
         setMinimalValueAt1(UI.groupLowerThan.valueHighest);
 
@@ -131,13 +132,8 @@ EventHandlerBuilderMain.prototype.onCanvExtendColorDropDwn = function() {
             showColorPicker();
             app.backgroundColor = app.foregroundColor;
             app.foregroundColor = self.fgColor;
+
         } //else if (canvExtendColorDropDwn === "Left upper corner color") {leftUpperCornerColorBGSet() invoked in function changeFileAndSave} //:7
-    }
-
-    var occurrenceIFCount = UI.canvExtendColor.dropDwn.onChange.toString().match(/if \(/gm).length;
-
-    if (UI.canvExtendColor.dropDwn.children.length !== occurrenceIFCount) { //Update this value if you make any changes Look↑↑↑
-        throw new Error("Not all dropdowns items have assigned outcomes")
     }
 }
 
@@ -209,7 +205,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
         }
     
         if ( isNaN(ValueOfSides) ) { // Giving other input value than typeof "number" in resizeCanvas() couses bug in which canvas is trimed to 1px in respective axis.
-            throw new Error ("object is not a Number");
+            throw new Error ("Object is not a number, retrieved value of biggest side should be numerical");
         }
     
         doc.resizeCanvas(UnitValue(ValueOfSides, "PX"), UnitValue(ValueOfSides, "PX"), AnchorPosition.MIDDLECENTER);

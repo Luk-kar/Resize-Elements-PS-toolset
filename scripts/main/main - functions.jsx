@@ -202,13 +202,15 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
 
     if ( destinationFolderSelection.toString() !== self_sourceFolderPathRecent.toString() ) {
 
-    createFolderPath(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
-    self.lockingUnlockingAcceptBtn();
-    UI.panelChangeFile.enabled = true;
+        createFolderPath(UI.btnChooseFilesDestFold.title, destinationFolderSelection);
+        self.lockingUnlockingAcceptBtn();
+        UI.panelChangeFile.enabled = true;
 
-    var self_detinationFolder = destinationFolderSelection;
+        var self_detinationFolder = destinationFolderSelection;
+
     } else if ( destinationFolderSelection.toString() === self_sourceFolderPathRecent.toString() ) {
 
+        var self_detinationFolder = self_sourceFolderPathRecent;
         sameSourceFolderAndDestFolderOutcome(UI, self);
     }
 
@@ -243,18 +245,27 @@ function docsOpenedFiles() { //https://stackoverflow.com/questions/59896445/how-
 
 function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, panelInfoUIwriteLines) {
 
-    var prevDocNames = new Array;
+    var previewDocNames = new Array; //Set here to avoid scope issues
+
+    var filesNamesInfoUI = formatText(numbOfDisplayedFiles, previewDocNames, sourceFiles);
+
+    infoUIwriteText(previewDocNames, filesNamesInfoUI.length, panelInfoUITitle, panelInfoUIwriteLines);
+} 
+
+function formatText(numbOfDisplayedFiles, previewDocNames, sourceFiles) {
 
     for (var i = 0; i < (numbOfDisplayedFiles + 1); i++) {
-        prevDocNames[i] = "";
+        previewDocNames[i] = "";
     }
-    prevDocNames[0] = "no files to process";
+
+    previewDocNames[0] = "no files to process";
 
     var filesNamesInfoUI = new Array(0);
 
     if (typeof sourceFiles !== "undefined") {
+
         for (var i = 0; i < sourceFiles.length; i++) {
-            filesNamesInfoUI[i] = decodeURIComponent(sourceFiles[i].name);  // string format is URl
+            filesNamesInfoUI[i] = decodeURIComponent(sourceFiles[i].name); // string format is URl
         }
     }
 
@@ -262,25 +273,22 @@ function infoFilesUIUpdate(sourceFiles, numbOfDisplayedFiles, panelInfoUITitle, 
     if (filesNamesInfoUI.length > 0) {
 
         for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length); i++) {
-
-            prevDocNames[i] = filesNamesInfoUI[i];
+            previewDocNames[i] = filesNamesInfoUI[i];
         }
 
         var charComas = new Array;
-        for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length -1); i++) {
-
+        for (var i = 0; (i < numbOfDisplayedFiles) && (i < filesNamesInfoUI.length - 1); i++) {
             charComas[i] = ",";
-            prevDocNames[i] += charComas[i];
+            previewDocNames[i] += charComas[i];
         }
 
         if (filesNamesInfoUI.length > numbOfDisplayedFiles) {
-
-            prevDocNames[numbOfDisplayedFiles] = "(...)";
+            previewDocNames[numbOfDisplayedFiles] = "(...)";
         }
     }
 
-    infoUIwriteText(prevDocNames, filesNamesInfoUI.length, panelInfoUITitle, panelInfoUIwriteLines);
-} 
+    return filesNamesInfoUI;
+}
 
 function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUIwriteLines) {
 

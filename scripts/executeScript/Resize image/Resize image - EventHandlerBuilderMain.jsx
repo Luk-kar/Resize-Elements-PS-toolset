@@ -87,9 +87,13 @@ EventHandlerBuilderMain.prototype.onGrpWidthNumb = function() {
     var UI = this.UI;
     var self = this;
 
-    blockKeysInEdittext(UI.groupWidth.numb);
+    restrictInputKeys(UI.groupWidth.numb,
+        ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        'Minus', 'Escape', 'Backspace', 'Enter']);
 
     UI.groupWidth.numb.onChanging = function() {
+
+        getRidOfTooMuch0AtFront(this);
 
         allowMinusOnlyAtFront(this);
 
@@ -114,10 +118,14 @@ EventHandlerBuilderMain.prototype.onGrpHeightNumb = function() {
     var UI = this.UI;
     var self = this;
 
-    blockKeysInEdittext(UI.groupHeight.numb);
+    restrictInputKeys(UI.groupHeight.numb, 
+                    ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                    'Minus', 'Escape', 'Backspace', 'Enter']);
 
     //Group Height
     UI.groupHeight.numb.onChanging = function() {
+
+        getRidOfTooMuch0AtFront(this);
 
         allowMinusOnlyAtFront(this);
 
@@ -188,4 +196,3 @@ EventHandlerBuilderMain.prototype.tooltipConstrainsProportionsCheckbox = functio
 
     UI.constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width";
 }
-
