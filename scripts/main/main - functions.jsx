@@ -318,142 +318,217 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
-        var docsToProcess = docsOpenedFiles();
+        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript);
 
-        var previousSaveTimeSourceDoc = getModificationDate(docsToProcess); //This script must be executed first, because it will not be able to read the date value correctly if it will be executed just before save() or saveAs() it will be not enough time
-
-        var alertPreviousAppearance = false; 
-
-        for (var i = 0; i < docsToProcess.length; i++) {
-
-            app.activeDocument = docsToProcess[i]; //choosing active document from source files
-            var doc = app.activeDocument;
-
-            var doNothingWithThisFile = self.changeFile(); //Custom function depending on executeScript
-            if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file, do move to the next one
-
-                continue; //doc.close(); <=== this shouldn't be there. If you add this it will conflict with function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs)
-            }
-
-            //If you choose radio button "Change file in the same folder", saves the same files in original location
-            if (btnRadSameFolder.value === true) {
-
-                try {
-                    $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
-                    doc.save();
-                    $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
-                }
-                catch(e) {
-                    if(alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
-                        alert("You have earlier opened file in destination folder.\n" + 
-                            "You have choosed source files folder with the same file name as in destination folder.\n" + 
-                            "You overwrote the file and now your opened file doesn't exist on drive.\n" + 
-                            "Therefore you can't save it in original place, becouse it doesn't exist now\n" + 
-                            "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.log in script folder:\n' + 
-                            getGrandParentfolder($.fileName) + "\n" +
-                            "to find file which wasn't saved"); 
-
-                        alertPreviousAppearance === true;
-                    }
-                }
-
-                var currentSaveTime = doc.path.modified;
-            
-                var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc[i], currentSaveTime, doc);
-                
-                countSavedFiles(isFileSaved, self);
-
-                if (logFiles_Value === ':  ON ') {
-                    writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
-                }
-
-            //If you choose radio button "Copy and Change file to other folder", save files in other folder
-            } else if (btnRadDestFoldOther.value === true) {
-                saveInDestFolder(detinationFolder);
-                var currentSaveTime = new Date; // It couldn't retrieve correctly this information from the path file
-
-                var name = doc.name;
-                var path = detinationFolder;
-                var saveAsFile = File(path + "/" + name)
-
-                var currentSaveTime = doc.path.modified;
-            
-                var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
-                
-                countSavedFiles(isFileSaved, self);
-
-                if (logFiles_Value === ':  ON ') {
-                    writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
-                }
-            }
-        }
-    
     //If you choose  radio button "Source folder"
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
-        if (self.openedDocsToReopen.length > 0) { // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
-            self.openDocsToRecover = new Array;
+        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value);
+    }
+
+    self.endingFunction(); //Custom function depending on executeScript
+}
+
+var _changeFileAndSave_ = {};
+
+_changeFileAndSave_.btnRadChooseFilesActiveDocs = function(self, self_changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript) {
+    
+    var docsToProcess = docsOpenedFiles();
+
+    var previousSaveTimeSourceDoc = getModificationDate(docsToProcess); //This script must be executed first, because it will not be able to read the date value correctly if it will be executed just before save() or saveAs() it will be not enough time
+
+    var alertPreviousAppearance = false; 
+
+    for (var i = 0; i < docsToProcess.length; i++) {
+
+        app.activeDocument = docsToProcess[i]; //choosing active document from source files
+
+        var doNothingWithThisFile = self_changeFile(); //Custom function depending on executeScript
+        
+        if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file, do move to the next one
+            continue; //doc.close(); <=== this shouldn't be there. If you add this it will conflict with function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs)
         }
 
-        for(var i = 0; i < sourceFiles.length; i++) {
+        //If you choose radio button "Change file in the same folder", saves the same files in original location
+        if (btnRadSameFolder.value === true) {
 
-            var previousSaveTimeSourceDoc = sourceFiles[i].path.modified; //read this value before you open file to avoid false reading
+            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript);
 
-            open(sourceFiles[i]);
+        //If you choose radio button "Copy and Change file to other folder", save files in other folder
+        } else if (btnRadDestFoldOther.value === true) {
 
-            var doc = app.activeDocument;
-            var activeDoc = doc.fullName;
-            
-            var doNothingWithThisFile = self.changeFile(); //Custom function depending on executeScript
-            if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file
-                doc.close();
-                continue;
-            }
+            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i);
+        }
+    }
+}
 
-            //If you choose radio button "Change file in the same folder", saves the same files in original location
-            if (btnRadSameFolder.value === true) {
-                doc.save();
+_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript) { // btnRadChooseFilesActiveDocs_btnRadSameFolder has to be separate object, becouse when btnRadSameFolder will be part of btnRadChooseFilesActiveDocs then there is propability of oversave
 
-                var currentSaveTime = doc.path.modified;
-            
-                var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc, currentSaveTime, doc);
-                
-                countSavedFiles(isFileSaved, self);
-                
-                if (logFiles_Value === ':  ON ') {
-                    writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
-                }
+    var doc = app.activeDocument;
+    
+    try {
+        $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+        doc.save();
+        $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+    }
 
-            //If you choose radio button "Copy and Change file to other folder", save files in other folder
-            } else if (btnRadDestFoldOther.value === true) {
+    catch (e) {
+        if (alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
 
-                saveInDestFolder(detinationFolder);
-                var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
+            alert("You have earlier opened file in destination folder.\n" +
+                "You have choosed source files folder with the same file name as in destination folder.\n" +
+                "You overwrote the file and now your opened file doesn't exist on drive.\n" +
+                "Therefore you can't save it in original place, becouse it doesn't exist now\n" +
+                "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.log in script folder:\n' +
+                getGrandParentfolder($.fileName) + "\n" +
+                "to find file which wasn't saved");
 
-                var name = doc.name;
-                var path = detinationFolder;
-                var saveAsFile = File(path + "/" + name);
+            alertPreviousAppearance === true;
+        }
+    }
 
-                var currentSaveTime = doc.path.modified;
-            
-                var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
-                
-                countSavedFiles(isFileSaved, self);
+    var currentSaveTime = doc.path.modified;
+    var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc[i], currentSaveTime, doc);
+    countSavedFiles(isFileSaved, self);
 
-                if (logFiles_Value === ':  ON ') {
-                    writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
-                }
-            }
+    if (logFiles_Value === ':  ON ') {
 
-            // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
-            if (self.openedDocsToReopen.length > 0) {
-                var fileToRecover = matchDocs(activeDoc, self.openedDocsToReopen);
-                if (fileToRecover !== null)
-                    self.openDocsToRecover.push(fileToRecover);
-            }
+        writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
+    }
+}
 
+_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadDestFoldOther = function(detinationFolder, self, logFiles_Value, executeScript, i) {
+
+    var doc = app.activeDocument;
+
+    saveInDestFolder(detinationFolder);
+
+    var currentSaveTime = new Date; // It couldn't retrieve correctly this information from the path file
+    
+    var name = doc.name;
+    var path = detinationFolder;
+
+    var saveAsFile = File(path + "/" + name);
+    var currentSaveTime = doc.path.modified;
+
+    var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
+    countSavedFiles(isFileSaved, self);
+    
+    if (logFiles_Value === ':  ON ') {
+        writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
+    }
+}
+
+_changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value) {
+
+    if (self.openedDocsToReopen.length > 0) { // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+        self.openDocsToRecover = new Array;
+    }
+
+    for(var i = 0; i < sourceFiles.length; i++) {
+
+        var previousSaveTimeSourceDoc = sourceFiles[i].path.modified; //read this value before you open file to avoid false reading
+
+        open(sourceFiles[i]);
+
+        var doc = app.activeDocument;
+        var activeDoc = doc.fullName;
+        
+        var doNothingWithThisFile = self_changeFile(); //Custom function depending on executeScript
+        if (doNothingWithThisFile === "continue") { // sometimes when some properties of document don't fit you, you can always leave untouched file
             doc.close();
+            continue;
         }
+
+        //If you choose radio button "Change file in the same folder", saves the same files in original location
+        if (btnRadSameFolder.value === true) {
+
+            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i);
+
+        //If you choose radio button "Copy and Change file to other folder", save files in other folder
+        } else if (btnRadDestFoldOther.value === true) {
+
+            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i);
+        }
+
+        // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
+        _changeFileAndSave_.btnRadChooseFilesSourceFold.openDocsToRecover(self, activeDoc);
+
+        doc.close();
+    }
+}
+
+_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i) {
+
+    var doc = app.activeDocument;
+
+    doc.save();
+
+    var currentSaveTime = doc.path.modified;
+
+    var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc, currentSaveTime, doc);
+
+    countSavedFiles(isFileSaved, self);
+
+    if (logFiles_Value === ':  ON ') {
+        writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
+    }
+}
+
+_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther = function(detinationFolder, self, logFiles_Value, executeScript, i) {
+
+    var doc = app.activeDocument;
+
+    saveInDestFolder(detinationFolder);
+
+    var currentSaveTime = new Date; // It couldn't retrieve this information from the path file
+
+    var name = doc.name;
+    var path = detinationFolder;
+
+    var saveAsFile = File(path + "/" + name);
+    var currentSaveTime = doc.path.modified;
+    
+    var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
+    countSavedFiles(isFileSaved, self);
+
+    if (logFiles_Value === ':  ON ') {
+        writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
+    }
+}
+
+_changeFileAndSave_.btnRadChooseFilesSourceFold.openDocsToRecover = function(self, activeDoc) {
+
+    if (self.openedDocsToReopen.length > 0) {
+
+        var fileToRecover = matchDocs(activeDoc, self.openedDocsToReopen);
+
+        if (fileToRecover !== null)
+            self.openDocsToRecover.push(fileToRecover);
+    }
+}
+
+function changeFileAndSave(sourceFiles, detinationFolder, 
+    btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
+    btnRadSameFolder, btnRadDestFoldOther, 
+    UI, self, executeScript) {
+
+    self.countChangedFilesTrue = new Number(0);
+    self.countChangedFilesFalse = new Number(0);
+
+    var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog);
+
+    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
+
+    //If you choose radio button "Opened files"
+    if (btnRadChooseFilesActiveDocs.value === true){
+
+        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript);
+
+    //If you choose  radio button "Source folder"
+    } else if (btnRadChooseFilesSourceFold.value === true) {
+
+        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value);
     }
 
     self.endingFunction(); //Custom function depending on executeScript
