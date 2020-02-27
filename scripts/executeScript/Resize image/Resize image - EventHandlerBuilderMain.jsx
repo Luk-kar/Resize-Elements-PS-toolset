@@ -1,22 +1,6 @@
-EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
+#include "../Ι_utils/EventHandlerBuilderMain/settingAcceptBtnBlock.jsx";
 
-    var UI = this.UI;
-    var self = this;
-
-    self.lockingUnlockingAcceptBtn = function checkingIfWidthAndHeightIsNot0UnlockingBtn() { //this object has to be declared as function
-
-        if ((UI.groupWidth.numb.text.match(/[0-9]+$/) !== null) && (UI.groupHeight.numb.text.match(/[0-9]+$/) !== null) &&
-            ((parseInt(UI.groupWidth.numb.text, 10) !== 0) || (parseInt(UI.groupHeight.numb.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
-    
-            UI.btnAccept.enabled = true;
-    
-        } else {
-    
-            UI.btnAccept.enabled = false;
-        }
-    
-    }
-}
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx"
 
 EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = function() {
     var UI = this.UI;
@@ -63,13 +47,10 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
         var sumWidth = mathWidthAndHeightResult[1];
         var sumHeight = mathWidthAndHeightResult[0];
     
-        if ( isNaN(sumWidth) ) {
-            throw new Error ("object is not a Number");
+        if ( isNaN(sumWidth) || isNaN(sumHeight) ) {
+            throw new Error ("object is not a Number. Width of file or added value or both should be numerical");
         }
-        if ( isNaN(sumHeight) ) {
-            throw new Error ("object is not a Number");
-        }
-    
+
         doc.resizeImage(UnitValue(sumWidth, self.units), UnitValue(sumHeight, self.units), undefined, self.resampleMethod);
     }
 }
@@ -83,25 +64,7 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
     }
 }
 
-EventHandlerBuilderMain.prototype.onGrpWidthNumb = function() {
-    var UI = this.UI;
-    var self = this;
 
-    restrictInputKeys(UI.groupWidth.numb,
-        ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        'Minus', 'Escape', 'Backspace', 'Enter']);
-
-    UI.groupWidth.numb.onChanging = function() {
-
-        getRidOfTooMuch0AtFront(this);
-
-        allowMinusOnlyAtFront(this);
-
-        sameInputField(UI.constrainsProportionsCheckbox, UI.groupWidth.numb, UI.groupHeight.numb);
-
-        self.lockingUnlockingAcceptBtn();
-    }
-}
 
 EventHandlerBuilderMain.prototype.onGrpWidthUnitsDropDown  = function() {
     var UI = this.UI;

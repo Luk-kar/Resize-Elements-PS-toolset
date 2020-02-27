@@ -1,14 +1,14 @@
-#include "../Ι_utils/restrictInputKeys.jsx"
+#include "../Ι_utils/functions/restrictInputKeys.jsx"
 
-#include "../Ι_utils/leftUpperCornerColorBGSet.jsx";
+#include "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx";
 
-#include "../Ι_utils/doesItHaveBackgroundLayer.jsx";
+#include "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx";
 
-#include "../Ι_utils/mathSumWidthAndHeight.jsx";
+#include "../Ι_utils/functions/mathSumWidthAndHeight.jsx";
 
-#include "../Ι_utils/ErrorDiffrentUnitTypes.jsx";
+#include "../Ι_utils/functions/ErrorDiffrentUnitTypes.jsx";
 
-#include "../Ι_utils/getRidOfTooMuch0AtFront.jsx";
+#include "../Ι_utils/functions/getRidOfTooMuch0AtFront.jsx";
 
 function restrictValueUpTo(maxResValue, valueInEdittext) {
     if (parseInt(valueInEdittext.text, 10) > maxResValue) {

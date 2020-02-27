@@ -1,53 +1,12 @@
-EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
+#include "../Ι_utils/EventHandlerBuilderMain/settingAcceptBtnBlock.jsx";
 
-    var UI = this.UI;
-    var self = this;
+#include "../Ι_utils/EventHandlerBuilderMain/savingBGandFGtoRestoreLater.jsx";
 
-    self.lockingUnlockingAcceptBtn = function checkingIfWidthAndHeightIsNot0UnlockingBtn() { //this object has to be declared as function
+#include "../Ι_utils/EventHandlerBuilderMain/onCanvExtendColorDropDwn.jsx";
 
-        if ((UI.groupWidth.numb.text.match(/[0-9]+$/) !== null) && (UI.groupHeight.numb.text.match(/[0-9]+$/) !== null) &&
-            ((parseInt(UI.groupWidth.numb.text, 10) !== 0) || (parseInt(UI.groupHeight.numb.text, 10) !== 0)) ) { //there is only one possible bug when is equasion = 0, e. g. passing value = 1-1 = 0. In worst case scenario it happens nothing.
-    
-            UI.btnAccept.enabled = true;
-    
-        } else {
-    
-            UI.btnAccept.enabled = false;
-        }
-    
-    }
-}
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx"
 
-EventHandlerBuilderMain.prototype.onGrpWidthNumb = function() {
-    var UI = this.UI;
-    var self = this;
-
-    restrictInputKeys(UI.groupWidth.numb, 
-                    ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                    'Minus', 'Escape', 'Backspace', 'Enter']);
-
-    UI.groupWidth.numb.onChanging = function() {
-
-        getRidOfTooMuch0AtFront(this);
-
-        allowMinusOnlyAtFront(this);
-
-        sameInputField(UI.constrainsProportionsCheckbox, UI.groupWidth.numb, UI.groupHeight.numb);
-
-        self.lockingUnlockingAcceptBtn();
-    }
-}
-
-EventHandlerBuilderMain.prototype.onGrpWidthUnitsDropDown  = function() {
-    var UI = this.UI;
-
-    //Dropdownlist: setting the same units: "ADD %" and "ADD %"
-    UI.groupWidth.unitsDropDown.onChange = function() {
-
-        sameDropDown(UI.groupWidth.unitsDropDown, UI.groupHeight.unitDropDown);
-    }
-
-}
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupUnitsDropDown.jsx"
 
 EventHandlerBuilderMain.prototype.tooltipWidthAndHeightImage = function() {
     var UI = this.UI;
@@ -58,35 +17,6 @@ EventHandlerBuilderMain.prototype.tooltipWidthAndHeightImage = function() {
 
     UI.groupWidth.imageTooltip.helpTip = tooltipValue;
     UI.groupHeight.imageTooltip.helpTip = tooltipValue;
-}
-
-EventHandlerBuilderMain.prototype.onGrpHeightNumb = function() {
-    var UI = this.UI;
-    var self = this;
-
-    restrictInputKeys(UI.groupHeight.numb,
-                    ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                    'Minus', 'Escape', 'Backspace', 'Enter']);
-
-    //Group Height
-    UI.groupHeight.numb.onChanging = function() {
-
-        getRidOfTooMuch0AtFront(this);
-
-        allowMinusOnlyAtFront(this);
-
-        sameInputField(UI.constrainsProportionsCheckbox, UI.groupHeight.numb, UI.groupWidth.numb);
-
-        self.lockingUnlockingAcceptBtn();
-    }
-}
-
-EventHandlerBuilderMain.prototype.onGrpHeightUnitDropDown = function() {
-    var UI = this.UI;
-
-    UI.groupHeight.unitDropDown.onChange = function() {
-        sameDropDown(UI.groupHeight.unitDropDown, UI.groupWidth.unitsDropDown);
-    }
 }
 
 EventHandlerBuilderMain.prototype.onGrpDlgUnitValImage = function() {
@@ -156,75 +86,6 @@ EventHandlerBuilderMain.prototype.tooltipConstrainsProportionsCheckbox = functio
     UI.constrainsProportionsCheckbox.helpTip =  "Check to constrain Height and Width";
 }
 
-EventHandlerBuilderMain.prototype.savingBGandFGtoRestoreLater = function() {
-    var self = this;
-
-    ///Saving BG and FG bucket color
-    //Foregound bucket color
-    self.bgColor = new SolidColor();
-    self.bgColor.rgb.red = app.backgroundColor.rgb.red;
-    self.bgColor.rgb.green = app.backgroundColor.rgb.green;
-    self.bgColor.rgb.blue = app.backgroundColor.rgb.blue;
-
-    //Background bucket color
-    self.fgColor = new SolidColor();
-    self.fgColor.rgb.red = app.foregroundColor.rgb.red;
-    self.fgColor.rgb.green = app.foregroundColor.rgb.green;
-    self.fgColor.rgb.blue = app.foregroundColor.rgb.blue;
-
-}
-
-EventHandlerBuilderMain.prototype.onCanvExtendColorDropDwn = function() {
-    var UI = this.UI;
-    var self = this;
-
-    UI.canvExtendColor.dropDwn.onChange = function() {
-        var canvExtendColorDropDwn = UI.canvExtendColor.dropDwn.selection.toString();//Full list to select canvExtendColor.values
-
-        if (canvExtendColorDropDwn === "Foreground") { //:1
-
-            app.foregroundColor = self.bgColor;
-            app.backgroundColor = self.fgColor;
-
-        } else if (canvExtendColorDropDwn === "Background") { //:2
-
-            app.foregroundColor = self.fgColor;
-            app.backgroundColor = self.bgColor;
-
-        } else if (canvExtendColorDropDwn === "White") { //:3
-
-            app.backgroundColor.rgb.red = 255;
-            app.backgroundColor.rgb.green = 255;
-            app.backgroundColor.rgb.blue = 255;
-
-        } else if (canvExtendColorDropDwn === "Black") { //:4
-
-            app.backgroundColor.rgb.red = 0;
-            app.backgroundColor.rgb.green = 0;
-            app.backgroundColor.rgb.blue = 0;
-
-        } else if (canvExtendColorDropDwn === "Grey") { //:5
-
-            app.backgroundColor.rgb.red = 128;
-            app.backgroundColor.rgb.green = 128;
-            app.backgroundColor.rgb.blue = 128;
-
-        } else if (canvExtendColorDropDwn === "Select color") { //:6
-
-            showColorPicker();
-            app.backgroundColor = app.foregroundColor;
-            app.foregroundColor = self.fgColor;
-
-        } //else if (canvExtendColorDropDwn === "Left upper corner color") {leftUpperCornerColorBGSet() invoked in function changeFileAndSave} //:7
-    }
-
-    var occurrenceIFCount = UI.canvExtendColor.dropDwn.onChange.toString().match(/if \(/gm).length;
-
-    if (UI.canvExtendColor.dropDwn.children.length !== occurrenceIFCount) { //Update this value if you make any changes Look↑↑↑
-        throw new Error("Not all dropdowns items have assigned outcomes")
-    }
-}
-
 EventHandlerBuilderMain.prototype.tooltipCanvExtendColor = function() {
     var UI = this.UI;
 
@@ -267,11 +128,8 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
         var sumWidth = mathWidthAndHeightResult[1];
         var sumHeight = mathWidthAndHeightResult[0];
     
-        if ( isNaN(sumWidth) ) {
-            throw new Error ("object is not a Number"); // Giving other input value than typeof "number" in resizeCanvas() couses bug in which canvas is trimed to 1px in respective axis.
-        }
-        if ( isNaN(sumHeight) ) {
-            throw new Error ("object is not a Number"); // Giving other input value than typeof "number" in resizeCanvas() couses bug in which canvas is trimed to 1px in respective axis.
+        if ( isNaN(sumWidth) || isNaN(sumHeight) ) {
+            throw new Error ("object is not a Number. Width of file or added value or both should be numerical");
         }
     
         doc.resizeCanvas(UnitValue(sumWidth, self.units), UnitValue(sumHeight, self.units), self.anchorPostionValue);

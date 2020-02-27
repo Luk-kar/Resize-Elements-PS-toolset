@@ -1,16 +1,16 @@
-#include "../Ι_utils/restrictInputKeys.jsx"
+#include "../Ι_utils/functions/restrictInputKeys.jsx"
 
-#include "../Ι_utils/sameInputField.jsx";
+#include "../Ι_utils/functions/sameInputField.jsx";
 
-#include "../Ι_utils/sameDropDown.jsx";
+#include "../Ι_utils/functions/sameDropDown.jsx";
 
-#include "../Ι_utils/createTooltipToImage.jsx";
+#include "../Ι_utils/functions/createTooltipToImage.jsx";
 
-#include "../Ι_utils/mathSumWidthAndHeight.jsx";
+#include "../Ι_utils/functions/mathSumWidthAndHeight.jsx";
 
-#include "../Ι_utils/ErrorDiffrentUnitTypes.jsx";
+#include "../Ι_utils/functions/ErrorDiffrentUnitTypes.jsx";
 
-#include "../Ι_utils/getRidOfTooMuch0AtFront.jsx";
+#include "../Ι_utils/functions/getRidOfTooMuch0AtFront.jsx";
 
 function allowMinusOnlyAtFront(UI_group_numb) {
 

@@ -8,13 +8,13 @@ eventHandler.settingChangeFile();
 
 eventHandler.settingChangeFileAndSaveEndingFunction();
 
-eventHandler.onGrpWidthNumb();
+eventHandler.onGroupNumb(UI.groupWidth.numb, UI.groupWidth.numb, UI.groupHeight.numb);
 
-eventHandler.onGrpWidthUnitsDropDown();
+eventHandler.onGroupUnitsDropDown(UI.groupWidth.unitsDropDown, UI.groupWidth.unitsDropDown, UI.groupHeight.unitDropDown);
 
-eventHandler.onGrpHeightNumb();
+eventHandler.onGroupNumb(UI.groupHeight.numb, UI.groupHeight.numb, UI.groupWidth.numb);
 
-eventHandler.onGrpHeightUnitDropDown();
+eventHandler.onGroupUnitsDropDown(UI.groupHeight.unitDropDown, UI.groupHeight.unitDropDown, UI.groupWidth.unitsDropDown);
 
 eventHandler.tooltipWidthAndHeightImage();
 
