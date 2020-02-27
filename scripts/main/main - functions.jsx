@@ -330,8 +330,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
 }
 
 var _changeFileAndSave_ = {};
-
-_changeFileAndSave_.btnRadChooseFilesActiveDocs = function(self, self_changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript) {
+_changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript) {
     
     var docsToProcess = docsOpenedFiles();
 
@@ -362,7 +361,7 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs = function(self, self_changeFile
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript) { // btnRadChooseFilesActiveDocs_btnRadSameFolder has to be separate object, becouse when btnRadSameFolder will be part of btnRadChooseFilesActiveDocs then there is propability of oversave
+_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript) { // btnRadChooseFilesActiveDocs_btnRadSameFolder has to be separate object, becouse when btnRadSameFolder will be part of btnRadChooseFilesActiveDocs then there is propability of oversave
 
     var doc = app.activeDocument;
     
@@ -397,7 +396,7 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function(aler
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadDestFoldOther = function(detinationFolder, self, logFiles_Value, executeScript, i) {
+_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i) {
 
     var doc = app.activeDocument;
 
@@ -458,7 +457,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFil
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i) {
+_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function (previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i) {
 
     var doc = app.activeDocument;
 
@@ -475,7 +474,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function(prev
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther = function(detinationFolder, self, logFiles_Value, executeScript, i) {
+_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i) {
 
     var doc = app.activeDocument;
 
@@ -488,7 +487,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther = function(d
 
     var saveAsFile = File(path + "/" + name);
     var currentSaveTime = doc.path.modified;
-    
+
     var isFileSaved = saveFileValidation(undefined, currentSaveTime, doc);
     countSavedFiles(isFileSaved, self);
 
@@ -497,7 +496,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadDestFoldOther = function(d
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesSourceFold.openDocsToRecover = function(self, activeDoc) {
+_changeFileAndSave_.btnRadChooseFilesSourceFold.openDocsToRecover = function (self, activeDoc) {
 
     if (self.openedDocsToReopen.length > 0) {
 
@@ -506,32 +505,6 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold.openDocsToRecover = function(sel
         if (fileToRecover !== null)
             self.openDocsToRecover.push(fileToRecover);
     }
-}
-
-function changeFileAndSave(sourceFiles, detinationFolder, 
-    btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
-    btnRadSameFolder, btnRadDestFoldOther, 
-    UI, self, executeScript) {
-
-    self.countChangedFilesTrue = new Number(0);
-    self.countChangedFilesFalse = new Number(0);
-
-    var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog);
-
-    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
-
-    //If you choose radio button "Opened files"
-    if (btnRadChooseFilesActiveDocs.value === true){
-
-        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript);
-
-    //If you choose  radio button "Source folder"
-    } else if (btnRadChooseFilesSourceFold.value === true) {
-
-        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value);
-    }
-
-    self.endingFunction(); //Custom function depending on executeScript
 }
 
 function countSavedFiles(isFileSaved, self) { 
