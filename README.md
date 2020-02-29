@@ -96,7 +96,7 @@ Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolS
 
 ## Versioning 🗓️
 
-We use [**SemVer**](http://semver.org/) for versioning in []
+We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/CHANGELOG.md)
 
 ## Authors 🎈
 
