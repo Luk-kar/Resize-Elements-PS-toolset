@@ -11,12 +11,17 @@ Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></b
 
 ## Getting Started 😍
 
+You choose: opened files in PS or folder with files, to process
+Later you decide if you want to save files in source directory or in choosed folder
+At the end you process files by (**Add canvas**, **Resize image** or **2^n canvas**) with inputed values
+List of changed files are written in **ChangedFilesList.log** if value in **Preferences.ini** is **"CHANGEDFILESLIST.LOG"- WRITE LOG=ON**
+You can change this value by clicking **Settings**, and later **ChangedFilesList.log" Log** button.
+
 Toolset consist of:
 - **Add canvas**
 - **Resize image**
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
-- **Settings**
-- **Template** (not implemented)
+- **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing files in "ChangedFilesList.log")
 
 ### Prerequisites 💪
 
