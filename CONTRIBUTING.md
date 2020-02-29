@@ -11,7 +11,8 @@ Please note we have a code of conduct, please follow it in all your interactions
    build.
 2. Update the [README.md][READ] with details of changes to the interface, this includes new environment 
    variables, exposed ports, useful file locations and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this
+3. Update the [Flow Diagram][Diagram] with details of changes of flow.
+3. Increase the version numbers in any examples files and the [README.md][READ] to the new version that this
    Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
    do not have permission to do that, you may request the second reviewer to merge it for you.
@@ -91,3 +92,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
 [READ]: https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/README.md
+[Diagram]: 
