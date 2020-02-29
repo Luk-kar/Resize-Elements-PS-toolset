@@ -92,4 +92,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
 [READ]: https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/README.md
-[Diagram]: 
+[Diagram]: https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png
