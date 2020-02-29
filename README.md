@@ -62,12 +62,7 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 ## Running the tests 🧪
 
-Click **test.exe** to check modules:
-
-* **Add canvas**
-* **Resize image**
-* **2^n canvas** (add canvas for both sides by nearest value of power of 2)
-* **Settings**
+For now only manual testing is avaible. Use [**Adobe Phtoshop CS6 SDK Win**](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip) to find bugs during running script
 
 ## Built With 🧰
 
@@ -96,7 +91,7 @@ Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolS
 
 ## Versioning 🗓️
 
-We use [**SemVer**](http://semver.org/) for versioning
+We use [**SemVer**](http://semver.org/) for versioning in []
 
 ## Authors 🎈
 
@@ -104,7 +99,7 @@ We use [**SemVer**](http://semver.org/) for versioning
 
 ## License 📜
 
-This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/MIT%20License.txt) file for details
+This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/License.md) file for details
 
 ## Acknowledgments 👍
 

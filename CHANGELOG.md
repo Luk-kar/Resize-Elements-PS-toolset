@@ -1,4 +1,4 @@
-# UI-Photoshop-toolSet Change Log
+# UI-Photoshop-toolSet Change Log 🗓️
 
 All notable changes to this project will be documented in this file.
 
@@ -22,3 +22,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Flow Diagram.png
 - CONTRIBUTING.md.md
 - How to make own module.md
+- MIT License.txt (to avoid unnecessary questions)
