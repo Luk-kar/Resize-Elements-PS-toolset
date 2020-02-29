@@ -1,7 +1,7 @@
 function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath("scriptUI_preferences.ini");
+    var prefFile = createFilePath("Preferences.ini");
     var b = prefFile;
 
     b.open('r');
@@ -32,10 +32,10 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
 function appDataBuilder() {
 
-    var listFile = createFilePath("scriptUI_changedFilesList.log");
+    var listFile = createFilePath("ChangedFilesList.log");
     buildListFilesIfItDoesntExists(listFile);
 
-    var prefFile = createFilePath("scriptUI_preferences.ini");
+    var prefFile = createFilePath("Preferences.ini");
     buildPrefFilesIfItDoesntExists(prefFile);
 
 }
@@ -83,7 +83,7 @@ function buildListFilesIfItDoesntExists(listFile) {
 var prefFileKeys = {};
 prefFileKeys.filterByPNG = '"FILTER BY PNG"- CHECKBOX TRUE';
 prefFileKeys.closeDialogOpenFiles = '"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG';
-prefFileKeys.changedFileListLog = '"SCRIPTUI_CHANGEDFILESLIST.LOG"- WRITE LOG';
+prefFileKeys.changedFileListLog = '"CHANGEDFILESLIST.LOG"- WRITE LOG';
 
 function buildPrefFilesIfItDoesntExists(prefFile) {
 
@@ -106,7 +106,7 @@ function buildPrefFilesIfItDoesntExists(prefFile) {
 function changeValueOffOnInPrefFile(searchedPhrase) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath("scriptUI_preferences.ini");
+    var prefFile = createFilePath("Preferences.ini");
     var b = prefFile;
 
     b.open('r');

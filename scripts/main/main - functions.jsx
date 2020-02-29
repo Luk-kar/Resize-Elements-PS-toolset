@@ -400,7 +400,7 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (ale
                 "You have choosed source files folder with the same file name as in destination folder.\n" +
                 "You overwrote the file and now your opened file doesn't exist on drive.\n" +
                 "Therefore you can't save it in original place, becouse it doesn't exist now\n" +
-                "Check files " + '"save :false"' + ' in scriptUI_changedFilesList.log in script folder:\n' +
+                "Check files " + '"save :false"' + ' in ChangedFilesList.log in script folder:\n' +
                 getGrandParentfolder($.fileName) + "\n" +
                 "to find file which wasn't saved");
 
@@ -530,7 +530,7 @@ function writeLnOfFile(executeScript, index, doc, currentSaveTime, isFileSaved) 
     var docName = decodeURIComponent(doc.name); // if doc is not objects of documents, but not opened in PS file somewhere in hard drive, you get URl format which you have to decode
     var docFullName = decodeURIComponent(doc.fullName);
 
-    var listFile = createFilePath("scriptUI_changedFilesList.log");
+    var listFile = createFilePath("ChangedFilesList.log");
     var c = listFile;
 
     if (typeof isFileSaved !== "boolean") {
@@ -722,7 +722,7 @@ function openFiles(self_openDocsToRecover) {
 function showUnsavedFilesAlert(self_countChangedFilesFalse, scriptFolder) {
 
     if (self_countChangedFilesFalse > 0) {
-        alert("Save of " + self_countChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"scriptUI_changedFilesList.log" in folder: ' + scriptFolder);
+        alert("Save of " + self_countChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"ChangedFilesList.log" in folder: ' + scriptFolder);
     }
 }
 

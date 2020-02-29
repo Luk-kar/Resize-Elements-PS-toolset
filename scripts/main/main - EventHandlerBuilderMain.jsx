@@ -356,7 +356,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         if (logFiles_Value === ':  ON ') {
 
-        var listFile = createFilePath("scriptUI_changedFilesList.log");
+        var listFile = createFilePath("ChangedFilesList.log");
         var b = listFile;
         var date = new Date;
 
@@ -375,7 +375,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         if (logFiles_Value === ':  ON ') {
 
-        var listFile = createFilePath("scriptUI_changedFilesList.log");
+        var listFile = createFilePath("ChangedFilesList.log");
         var d = listFile;
 
         d.open("a");
