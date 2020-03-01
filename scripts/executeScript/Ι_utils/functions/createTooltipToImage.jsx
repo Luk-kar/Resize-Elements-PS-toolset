@@ -1,4 +1,4 @@
-function createTooltipToImage(condition, picture, pictureSourceTrue, pictureSourceFalse) {
+function changeTooltipAndImageToAnother(condition, picture, pictureSourceTrue, pictureSourceFalse) {
     if (condition.value === true) {
         picture.image = pictureSourceTrue;
         picture.helpTip = "Width and Height same value enabled";
