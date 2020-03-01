@@ -2,6 +2,8 @@
 
 #include "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx";
 
+#include "../Ι_utils/functions/setMaxNumber.jsx";
+
 #include "../Ι_utils/functions/sameInputField.jsx";
 
 #include "../Ι_utils/functions/sameDropDown.jsx";
