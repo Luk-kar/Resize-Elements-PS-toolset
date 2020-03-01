@@ -9,7 +9,7 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
     var UI = this.UI;
     var self = this;
 
-    self.lockingUnlockingAcceptBtn = function checkingIfAreAnyDocsToProcess() { //this object has to be declared as function
+    self.lockingUnlockingAcceptBtn = function() { //this object has to be declared as function
 
         UI.btnAccept.enabled = true;
 
@@ -56,7 +56,7 @@ EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function()
     var UI = this.UI;
 
     var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px\n' +
-    "Filtered files are not displayed dynamicaly in preview at the bottom of window";
+    "Filtered files are not updated dynamicaly in preview at the bottom of window, check log to be sure which files were processed";
 
     UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
     UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;

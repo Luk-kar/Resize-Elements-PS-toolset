@@ -234,6 +234,8 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxPNG = function() {
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
         infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+
+        self.lockingUnlockingAcceptBtn(); //Number of files to process could be 0
     }
 }
 
@@ -249,6 +251,8 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxByExpression = func
         self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
         infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+
+        self.lockingUnlockingAcceptBtn(); //Number of files to process could be 0
     }
 }
 
@@ -267,6 +271,7 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesByExpressionInput = functio
         
         infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
+        self.lockingUnlockingAcceptBtn(); //Number of files to process could be 0
     }
 
 }
