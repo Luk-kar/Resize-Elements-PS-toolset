@@ -14,7 +14,7 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
         UI.btnAccept.enabled = true;
 
         if ((UI.btnRadSourceFiles.chooseFilesSourceFold.value === true || UI.btnRadDestFold.same.value === true) && 
-            (typeof self.sourceFilesToProcess === "undefined" || self.sourceFilesToProcess.length === 0)  ||
+            (isUndefined(self.sourceFilesToProcess) || self.sourceFilesToProcess.length === 0)  ||
             (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text === "Destination folder...")
             ){
 
@@ -98,7 +98,7 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
 
     self.startingFunction = function filteringFilesByHeightAndWidthWithoutOpeningThemInPS() { // https://stackoverflow.com/questions/60191804/getting-width-and-height-of-image-without-need-of-opening-it-in-ps-cs6-script?noredirect=1#comment106489010_60191804
 
-        if (typeof self.sourceFilesToProcess !== "undefined" && self.sourceFilesToProcess.length > 0) {
+        if (!isUndefined(self.sourceFilesToProcess) && self.sourceFilesToProcess.length > 0) {
 
             ExternalObject.AdobeXMPScript = new ExternalObject("lib:AdobeXMPScript");
 

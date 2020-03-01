@@ -1,9 +1,9 @@
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     
     var objectChildGroup = objectParent.add("panel");
-    if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren; //to add possiblity to set only one property
-    if (typeof alignChildren !== "undefined") objectChildGroup.alignChildren = alignChildren; //to add possiblity to set only one property
-    objectChildGroup.alignment = alignmentObject;
+    if (!isUndefined(orientationChildren)) objectChildGroup.orientation = orientationChildren; //to add possiblity to set only one property
+    if (!isUndefined(alignChildren)) objectChildGroup.alignChildren = alignChildren; //to add possiblity to set only one property
+    objectChildGroup.alignment = alignmentObject;  
 
     return objectChildGroup;
 }
@@ -11,8 +11,8 @@ function createPanelUI(objectParent, orientationChildren, alignChildren, alignme
 function createGroupUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
 
     var objectChildGroup = objectParent.add("group");
-    if (typeof orientationChildren !== "undefined") objectChildGroup.orientation = orientationChildren; //to add possiblity to set only one property
-    if (typeof alignChildren !== "undefined") objectChildGroup.alignChildren = alignChildren; //to add possiblity to set only one property
+    if (!isUndefined(orientationChildren)) objectChildGroup.orientation = orientationChildren; //to add possiblity to set only one property
+    if (!isUndefined(alignChildren)) objectChildGroup.alignChildren = alignChildren; //to add possiblity to set only one property
     objectChildGroup.alignment = alignmentObject;
 
     return objectChildGroup;
@@ -87,7 +87,7 @@ function sameSourceFolderAndDestFolderOutcome(UI, self) {
 function checkingIfItIsTheSameSourceFolderAsBefore(self) {
 
     var sameChoosedSourceFolderAsBefore = false;
-    if ((typeof self.sourceFolderPathRecent !== "undefined") && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) { //typeof self.sourceFolderPathRecent !== "undefined" if you choose folder first time
+    if ((!isUndefined(self.sourceFolderPathRecent)) && (self.sourceFolder.toString() === self.sourceFolderPathRecent.toString())) { //typeof self.sourceFolderPathRecent !== "undefined" if you choose folder first time
         sameChoosedSourceFolderAsBefore = true;
     }
     return sameChoosedSourceFolderAsBefore;
@@ -97,7 +97,7 @@ function filteringSourceFiles(sourceFilesUnfiltered, regex) {
 
     var sourceFilesFiltered = new Array;
 
-    if(typeof regex === "undefined") {
+    if(isUndefined(regex)) {
         throw new Error("RegEx is undefined");
     }
 
@@ -262,7 +262,7 @@ function formatText(numbOfDisplayedFiles, previewDocNames, sourceFiles) {
 
     var filesNamesInfoUI = new Array(0);
 
-    if (typeof sourceFiles !== "undefined") {
+    if (!isUndefined(sourceFiles)) {
 
         for (var i = 0; i < sourceFiles.length; i++) {
             filesNamesInfoUI[i] = decodeURIComponent(sourceFiles[i].name); // string format is URl
@@ -729,7 +729,7 @@ function showUnsavedFilesAlert(self_countChangedFilesFalse, scriptFolder) {
 //Check the time of PREVIOUS save of the file against the save time of the CURRENT file
 function saveFileValidation(previousSaveTime, currentSaveTime, savedFile) {
     
-    if (typeof previousSaveTime === "undefined") {
+    if (isUndefined(previousSaveTime)) {
         var previousSaveTime = dateAdd(currentSaveTime, 'second', -1); // add one second to accept validation when you saveAs source document/open document in target director 
     }
 
@@ -781,3 +781,7 @@ function dateAdd(date, interval, units) {
   }
 
 //==========================================
+
+function isUndefined(variable) {
+    return typeof variable === "undefined";
+}

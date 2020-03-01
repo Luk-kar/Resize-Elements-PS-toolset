@@ -27,7 +27,7 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
      //Setting cliked button to anchor
     btnAnchorClickedOn.image = imageAnchorTrue;
 
-    if(anchorPositionValue === undefined) {
+    if(isUndefined(anchorPositionValue)) {
         throw new Error("anchorPositionValue doesn't have declared value");
     }
 

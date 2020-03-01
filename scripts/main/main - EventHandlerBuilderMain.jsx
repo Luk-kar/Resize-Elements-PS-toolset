@@ -184,11 +184,11 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
                 infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
                 //Actions depended on choosed or not, destination folder
-                if (typeof self.detinationFolder === "undefined") {
+                if (isUndefined(self.detinationFolder)) {
 
                     UI.btnRadDestFold.same.notify();
 
-                } else if ( (typeof self.detinationFolder !== "undefined") && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
+                } else if ( (!isUndefined( self.detinationFolder)) && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
 
                     if(( !self.detinationFolder.toString().match(/\//) && !self.sourceFolder.toString().match(/\//) )){
                         throw new Error("Invalid strings. Strings are not paths");
@@ -426,7 +426,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
             alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
             showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
 
-            if (typeof self.openDocsToRecover !== "undefined" && self.openDocsToRecover !== null) {
+            if (!isUndefined(self.openDocsToRecover) && self.openDocsToRecover !== null) {
                 openFiles(self.openDocsToRecover);
             }
         }

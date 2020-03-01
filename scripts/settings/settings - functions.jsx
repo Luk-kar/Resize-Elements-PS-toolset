@@ -134,7 +134,7 @@ function changeValueOffOnInPrefFile(searchedPhrase) {
         numbOfTextLines++;
     }
 
-    if (typeof textToReplace === "undefined") {
+    if (isUndefined(textToReplace)) {
         throw new Error("Couldn't find value of expression: " + searchedPhrase + "in" + prefFile + "\n. Check correct spelling again.")
     }
 
