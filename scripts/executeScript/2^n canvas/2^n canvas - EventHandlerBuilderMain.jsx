@@ -55,7 +55,8 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
 EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
     var UI = this.UI;
 
-    var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px';
+    var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px\n' +
+    "Filtered files are not displayed dynamicaly in preview at the bottom of window";
 
     UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
     UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
