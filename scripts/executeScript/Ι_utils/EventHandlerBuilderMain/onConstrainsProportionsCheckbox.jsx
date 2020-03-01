@@ -7,21 +7,28 @@ EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
 
         //Set the same "highest" value in "Height" and "Width"
         if (UI.constrainsProportionsCheckbox.value === true) {
+
+            var width = parseInt(UI.groupWidth.numb.text, 10);
+            var height = parseInt(UI.groupHeight.numb.text, 10);
+
+            var setWidthValueForBoth = function() { UI.groupWidth.numb.onChanging() };
+            var setHeightValueForBoth = function() { UI.groupHeight.numb.onChanging() };
+
             //If Height and Width is negative or equal 0, it set in both most negative number
-            if((parseInt(UI.groupWidth.numb.text, 10) <= 0) && (parseInt(UI.groupHeight.numb.text, 10) <= 0)) {
-                if (parseInt(UI.groupWidth.numb.text, 10) < parseInt(UI.groupHeight.numb.text, 10)) {
-                    UI.groupWidth.numb.onChanging();
+            if(width <= 0 && height <= 0) {
+                if (width < height) {
+                    setWidthValueForBoth();
                 }
                 //If some value is positive, set in both most positive number
                 else {
-                    UI.groupHeight.numb.onChanging();
+                    setHeightValueForBoth();
                 }
             //If all values are positive set the highest one
-            } else if ((parseInt(UI.groupWidth.numb.text, 10) > 0) || (parseInt(UI.groupHeight.numb.text, 10) > 0)) {
-                if (parseInt(UI.groupWidth.numb.text, 10) > parseInt(UI.groupHeight.numb.text, 10)) {
-                    UI.groupWidth.numb.onChanging();
+            } else if (width > 0 || height > 0) {
+                if (width > height) {
+                    setWidthValueForBoth();
                 } else {
-                    UI.groupHeight.numb.onChanging();
+                    setHeightValueForBoth();
                 }
             }
         }

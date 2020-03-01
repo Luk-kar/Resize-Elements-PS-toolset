@@ -1,12 +1,12 @@
-EventHandlerBuilderMain.prototype.onGroupNumb = function(_onChanging_, inputFieldToCopy, inputFieldToPasteIn) {
+EventHandlerBuilderMain.prototype.onGroupNumb = function(objectText, inputFieldToCopy, inputFieldToPasteIn) {
     var UI = this.UI;
     var self = this;
 
-    restrictInputKeys(_onChanging_,
+    restrictInputKeys(objectText,
         ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         'Minus', 'Escape', 'Backspace', 'Enter']);
 
-    _onChanging_.onChanging = function() {
+    objectText.onChanging = function() {
 
         getRidOfTooMuch0AtFront(this);
 
