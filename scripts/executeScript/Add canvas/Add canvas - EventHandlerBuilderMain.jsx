@@ -66,11 +66,10 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     var self = this;
 
     self.changeFile = function AddCanvas() {
+
+        if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) {// To avoid bug with picking empty layer
     
-        if( doesItHaveBackgroundLayer() ) {// To avoid bug with picking empty layer
-    
-            leftUpperCornerColorBGSet(UI.groupWidth.unitsDropDown.selection.toString() === "Left upper corner color");
-    
+            leftUpperCornerColorBGSet();
         }
     
         var doc = app.activeDocument;

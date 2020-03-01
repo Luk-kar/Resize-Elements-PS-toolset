@@ -8,7 +8,7 @@
 
 #include "../Ι_utils/functions/sameDropDown.jsx";
 
-#include "../Ι_utils/functions/createTooltipToImage.jsx";
+#include "../Ι_utils/functions/changeTooltipAndImageToAnother.jsx";
 
 #include "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx";
 

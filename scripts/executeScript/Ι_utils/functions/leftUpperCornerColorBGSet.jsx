@@ -1,6 +1,4 @@
-function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
-
-    if (canvExtendColorDropDwn_IsLeftUpperCroner) {
+function leftUpperCornerColorBGSet() {
 
         var doc = app.activeDocument;
         
@@ -14,5 +12,4 @@ function leftUpperCornerColorBGSet(canvExtendColorDropDwn_IsLeftUpperCroner) {
 
         app.backgroundColor = sampledColor;
         colorSampleRef.remove();
-    }
 }

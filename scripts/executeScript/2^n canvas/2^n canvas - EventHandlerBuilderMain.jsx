@@ -148,10 +148,9 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
             return "continue";
         }
     
-        if( doesItHaveBackgroundLayer() ) { // To avoid bug with picking empty layer
+        if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) { // To avoid bug with picking empty layer
     
-            leftUpperCornerColorBGSet(UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color");
-    
+            leftUpperCornerColorBGSet();
         }
 
         var ValueOfSides = nearestPow2( highestValueSide );
