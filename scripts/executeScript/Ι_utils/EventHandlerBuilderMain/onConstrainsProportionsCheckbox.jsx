@@ -16,6 +16,7 @@ EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
 
             //If Height and Width is negative or equal 0, it set in both most negative number
             if(width <= 0 && height <= 0) {
+
                 if (width < height) {
                     setWidthValueForBoth();
                 }
@@ -25,8 +26,10 @@ EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
                 }
             //If all values are positive set the highest one
             } else if (width > 0 || height > 0) {
+
                 if (width > height) {
                     setWidthValueForBoth();
+
                 } else {
                     setHeightValueForBoth();
                 }
