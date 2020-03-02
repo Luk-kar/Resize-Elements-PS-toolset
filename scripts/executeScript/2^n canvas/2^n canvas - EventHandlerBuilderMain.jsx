@@ -36,7 +36,7 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
 
         getRidOfTooMuch0AtFront(this);
 
-        restrictValueUpTo(UI.maxResValue, UI.groupBiggerThan.valueLowest);
+        restrictValueUpTo(UI.maxResValue, this);
 
         self.lockingUnlockingAcceptBtn();
 
@@ -44,7 +44,7 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
 
     UI.groupBiggerThan.valueLowest.onChange = function() {
 
-        restrictMinimalValueAt1(UI.groupBiggerThan.valueLowest);
+        setMinimalValueAt(0, this);
 
         if(parseInt(UI.groupLowerThan.valueHighest.text, 10) - 2 < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
             alert('"bigger than:" value can' + "'" + '"t be higher than "smaller than:" value')
@@ -56,7 +56,7 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
 EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
     var UI = this.UI;
 
-    var tooltipValue = "Written value in any input box has to be bigger than 1px and smaller than " + UI.maxResValue + 'px\n' +
+    var tooltipValue = "Written value in any input box has to be bigger than 0 px and smaller than " + UI.maxResValue + 'px\n' +
     "Filtered files are not updated dynamicaly in preview at the bottom of window, check log to be sure which files were processed";
 
     UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
@@ -76,16 +76,14 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
 
         getRidOfTooMuch0AtFront(this);
 
-        restrictValueUpTo(UI.maxResValue, UI.groupLowerThan.valueHighest);
+        restrictValueUpTo(UI.maxResValue, this);
 
         self.lockingUnlockingAcceptBtn();
     }
 
     UI.groupLowerThan.valueHighest.onChange = function() {
 
-        getRidOfTooMuch0AtFront(this);
-
-        restrictMinimalValueAt1(UI.groupLowerThan.valueHighest);
+        setMinimalValueAt(2, this); //todo bug engine does not see object if value UI.groupLowerThan.valueHighest.text === "0";
 
         if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10) + 2) {
             alert('"smaller than:" value can' + "'" + '"t be lower than "bigger than:" value')
