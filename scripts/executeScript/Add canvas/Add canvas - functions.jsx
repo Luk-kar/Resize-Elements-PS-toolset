@@ -6,7 +6,7 @@
 
 #include "../Ι_utils/functions/sameInputField.jsx";
 
-#include "../Ι_utils/functions/sameDropDown.jsx";
+#include "../Ι_utils/functions/setDropdownSelectionFromEvent.jsx";
 
 #include "../Ι_utils/functions/changeTooltipAndImageToAnother.jsx";
 

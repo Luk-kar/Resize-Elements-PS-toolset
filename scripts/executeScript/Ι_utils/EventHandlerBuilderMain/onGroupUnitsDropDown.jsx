@@ -1,10 +1,10 @@
-EventHandlerBuilderMain.prototype.onGroupUnitsDropDown  = function(_onChanging_, objectEvent, objectSetSameValue) {
+EventHandlerBuilderMain.prototype.onGroupUnitsDropDown  = function(_onChanging_, sourceEvent, targetDropdown) {
     var UI = this.UI;
 
     //Dropdownlist: setting the same units: "ADD %" and "ADD %"
     _onChanging_.onChange = function() {
 
-        sameDropDown(objectEvent, objectSetSameValue);
+        setDropdownSelectionFromEvent(sourceEvent, targetDropdown);
     }
 
 }

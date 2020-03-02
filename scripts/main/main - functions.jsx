@@ -781,7 +781,3 @@ function dateAdd(date, interval, units) {
   }
 
 //==========================================
-
-function isUndefined(variable) {
-    return typeof variable === "undefined";
-}

@@ -17,12 +17,12 @@ function restrictInputKeys(editTextInstance, permissibleKeys) {
         return;
     }
   
-    if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) {
+    if ((shiftKeyIsDown || altKeyIsDown) && inArray(keyName, permissibleKeys)) { // indexOf() doesn't work here on Array
         key.preventDefault();
         return;
     }
   
-    if (! inArray(keyName, permissibleKeys)) {
+    if (! inArray(keyName, permissibleKeys)) { // indexOf() doesn't work here on Array
         key.preventDefault();
     }
     });

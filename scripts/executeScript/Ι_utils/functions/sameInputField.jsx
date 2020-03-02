@@ -1,5 +1,5 @@
-function sameInputField(condition, inputFieldToCopy, inputFieldToPasteIn) {
-    if (condition.value === true) {
+function sameInputField(checkbox, inputFieldToCopy, inputFieldToPasteIn) {
+    if (checkbox.value === true) {
         inputFieldToPasteIn.text = inputFieldToCopy.text;
     }
 }

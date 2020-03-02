@@ -81,9 +81,9 @@ function buildListFilesIfItDoesntExists(listFile) {
 }
 
 var prefFileKeys = {};
-prefFileKeys.filterByPNG = '"FILTER BY PNG"- CHECKBOX TRUE';
-prefFileKeys.closeDialogOpenFiles = '"DO YOU WANT TO CLOSE ALL OPENED FILES"- DIALOG';
-prefFileKeys.changedFileListLog = '"CHANGEDFILESLIST.LOG"- WRITE LOG';
+prefFileKeys.filterByPNG = "FilterBPNGbyDefault";
+prefFileKeys.closeDialogOpenFiles = "OpenCloseFilesDialog";
+prefFileKeys.changedFileListLog = "ChangedFileListLog_WriteLog";
 
 function buildPrefFilesIfItDoesntExists(prefFile) {
 
@@ -168,4 +168,8 @@ function ErrorWrongStringInputPath(UItitlePath) {
 
         throw new Error("Invalid string. String is neither path nor default expression");
     }
+}
+
+function isUndefined(variable) {
+    return typeof variable === "undefined";
 }
