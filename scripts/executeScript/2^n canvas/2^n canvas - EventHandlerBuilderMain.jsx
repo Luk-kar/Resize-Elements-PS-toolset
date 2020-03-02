@@ -30,7 +30,7 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
 
     restrictInputKeys(UI.groupBiggerThan.valueLowest,
                      ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                     'Minus', 'Escape', 'Backspace', 'Enter']);
+                     'Escape', 'Backspace', 'Enter']);
 
     UI.groupBiggerThan.valueLowest.onChanging = function() {
 
@@ -39,15 +39,16 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
         restrictValueUpTo(UI.maxResValue, UI.groupBiggerThan.valueLowest);
 
         self.lockingUnlockingAcceptBtn();
+
     }
 
     UI.groupBiggerThan.valueLowest.onChange = function() {
 
-        setMinimalValueAt1(UI.groupBiggerThan.valueLowest);
+        restrictMinimalValueAt1(UI.groupBiggerThan.valueLowest);
 
-        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
+        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) - 2 < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
             alert('"bigger than:" value can' + "'" + '"t be higher than "smaller than:" value')
-            UI.groupBiggerThan.valueLowest.text = UI.groupLowerThan.valueHighest.text;
+            UI.groupBiggerThan.valueLowest.text = parseInt(UI.groupLowerThan.valueHighest.text, 10) -2; // between this two values you have to have 2 intreger diffrence, becouse UI.groupBiggerThan.valueLowest.text < x > UI.groupLowerThan.valueHighest.text
         }
     }
 }
@@ -68,7 +69,7 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
 
     restrictInputKeys(UI.groupLowerThan.valueHighest, 
               ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-              'Minus', 'Escape', 'Backspace', 'Enter']);
+              'Escape', 'Backspace', 'Enter']);
 
     //Group Height
     UI.groupLowerThan.valueHighest.onChanging = function() {
@@ -84,11 +85,11 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
 
         getRidOfTooMuch0AtFront(this);
 
-        setMinimalValueAt1(UI.groupLowerThan.valueHighest);
+        restrictMinimalValueAt1(UI.groupLowerThan.valueHighest);
 
-        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
+        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10) + 2) {
             alert('"smaller than:" value can' + "'" + '"t be lower than "bigger than:" value')
-            UI.groupLowerThan.valueHighest.text = UI.groupBiggerThan.valueLowest.text;
+            UI.groupLowerThan.valueHighest.text = parseInt(UI.groupBiggerThan.valueLowest.text, 10) + 2;
         }
     }
 }

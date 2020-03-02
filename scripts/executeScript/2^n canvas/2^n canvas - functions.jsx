@@ -16,8 +16,9 @@ function restrictValueUpTo(maxResValue, valueInEdittext) {
     }
 }
 
-function setMinimalValueAt1(value) {
-    if ( (parseInt(value.text, 10) === 0) || value.text === "") {
+function restrictMinimalValueAt1(value) {
+
+    if ( value.text === "0" || value.text === "") { //todo bug value.text === "0"; when value is equal "0" your engine ignore object
         alert("Written value has to be bigger than 1");
         value.text = 1;
     }

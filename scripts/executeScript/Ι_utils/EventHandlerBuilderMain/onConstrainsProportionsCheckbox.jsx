@@ -3,7 +3,7 @@ EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
 
     UI.constrainsProportionsCheckbox.onClick = function() {
         //Changing image of chains next to "Height" and "Width" edittext; Adding tolltips.
-        changeTooltipAndImageToAnother(UI.constrainsProportionsCheckbox, UI.groupDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
+        changeTooltipAndImageAccordingToState(UI.constrainsProportionsCheckbox, UI.groupDlgUnitValImage, UI.imageCnstrnsProportionTrue, UI.imageCnstrnsProportionFalse);
 
         //Set the same "highest" value in "Height" and "Width"
         if (UI.constrainsProportionsCheckbox.value === true) {

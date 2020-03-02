@@ -2,13 +2,15 @@
 
 #include "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx";
 
+#include "../Ι_utils/functions/allowMinusOnlyAtFront.jsx";
+
 #include "../Ι_utils/functions/setMaxNumber.jsx";
 
 #include "../Ι_utils/functions/sameInputField.jsx";
 
 #include "../Ι_utils/functions/setDropdownSelectionFromEvent.jsx";
 
-#include "../Ι_utils/functions/changeTooltipAndImageToAnother.jsx";
+#include "../Ι_utils/functions/changeTooltipAndImageAccordingToState.jsx";
 
 #include "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx";
 
@@ -17,7 +19,6 @@
 #include "../Ι_utils/functions/ErrorDiffrentUnitTypes.jsx";
 
 #include "../Ι_utils/functions/getRidOfTooMuch0AtFront.jsx";
-
 
 //Anchor button functionality
 function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionButtons, imageAnchorTrue, imageAnchorFalse) {
@@ -35,13 +36,4 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionValue, anchorPostionB
 
     //Sending information which anchor is marked for resizeCanvas()
     return anchorPositionValue;
-}
-
-function allowMinusOnlyAtFront(UI_group_numb) {
-
-    var indexOfMinus = UI_group_numb.text.slice(1).indexOf('-');
-    
-    if (indexOfMinus >= 0) {
-        UI_group_numb.text = UI_group_numb.text.slice(0, 1) + UI_group_numb.text.slice(1).replace(/\-/g, "");
-    }
 }
