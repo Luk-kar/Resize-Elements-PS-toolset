@@ -42,13 +42,30 @@ function appDataBuilder() {
 
 function createFilePath(file) {
 
-    var scriptParentFolder = getGrandParentfolder(); // slice negative numb is length of file folder
+    var userDataFolder = new Folder("~/Documents/UI-Photoshop-toolSet");
 
-    var listFile = new File(scriptParentFolder + file);
+    createFolderIfItDoesntExist(userDataFolder, file);
+
+    alertUserWhenNewFileIsCreated(userDataFolder, file);
+
+    var listFile = new File(userDataFolder.toString() + "/" + file);
 
     ErrorWrongStringInputPath(listFile);
     
     return listFile;
+}
+
+function alertUserWhenNewFileIsCreated(scriptFolder, file) {
+
+    if (!File(scriptFolder.toString() + "/" + file).exists) {
+        alert('You created file "' + file + '" in: ' + scriptFolder.toString() + "/");
+    }
+}
+
+function createFolderIfItDoesntExist(Folder) {
+    if (!Folder.exists) {
+        Folder.create();
+    }
 }
 
 function getGrandParentfolder() {
