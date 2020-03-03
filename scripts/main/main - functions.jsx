@@ -18,6 +18,85 @@ function createGroupUI(objectParent, orientationChildren, alignChildren, alignme
     return objectChildGroup;
 }
 
+var _btnChooseFilesSourceFold_= {};
+
+_btnChooseFilesSourceFold_.filesEqual0 = function(self, UI) {
+
+    self.sourceFolder === null; // to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
+
+    createFolderPath(UI.btnChooseFilesSourceFold.title, "Source folder...");
+
+    panelFilterFilesEnabled(false, UI);
+    UI.panelDestFold.title.enabled = false;
+    btnsRadDestFoldEnabled(false, UI);
+
+    btnChooseFilesDestFoldEnabled(false, UI);
+
+    UI.panelChangeFile.enabled = false;
+    UI.btnAccept.enabled = false;
+
+    infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+    
+    alert("In choosed folder there is no files to process");
+}
+
+_btnChooseFilesSourceFold_.filesMoreThan0 = function(self, UI, sourceFilesFiltered, sameChoosedSourceFolderAsBefore) {
+
+    self.sourceFilesPSDformat = null;
+    self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesFiltered);
+    self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
+
+    createFolderPath(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
+
+    panelFilterFilesEnabled(true, UI);
+    UI.panelDestFold.title.enabled = true;
+    btnsRadDestFoldEnabled(true, UI);
+
+    infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+
+    //Actions depended on choosed or not, destination folder
+    outcomeChoosedDestinationFolder(self.detinationFolder, self.sourceFolder, UI.btnRadDestFold.same, UI.btnRadDestFold.other, self, UI);
+
+    //If you choose new folder you will be noticed how many files are inside
+    if (sameChoosedSourceFolderAsBefore === false) {
+        alertUserHowManyFilesAreInFolder(self.sourceFilesToProcess);
+    }
+}
+
+function outcomeChoosedDestinationFolder(detinationFolder, sourceFolder, btnRadDestFold_same, btnRadDestFold_other, self, UI) {
+
+    if (isUndefined(detinationFolder)) {
+        btnRadDestFold_same.notify();
+    }
+
+    else if ((!isUndefined(detinationFolder)) && (detinationFolder !== null)) { //(detinationFolder !== null) to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
+
+        if ((!detinationFolder.toString().match(/\//) && !sourceFolder.toString().match(/\//))) {
+            throw new Error("Invalid strings. Strings are not paths");
+        }
+
+        if (detinationFolder.toString() === sourceFolder.toString()) {
+            sameSourceFolderAndDestFolderOutcome(UI, self);
+        }
+        else {
+            btnRadDestFold_other.notify();
+        }
+    }
+}
+
+function alertUserHowManyFilesAreInFolder(sourceFilesToProcess) {
+
+    if (sourceFilesToProcess.length < 0) {
+        throw new Error("Array should contain at least one File");
+    }
+    if (sourceFilesToProcess.length > 1) {
+        alert("In folder are " + sourceFilesToProcess.length + " files");
+    }
+    else if (sourceFilesToProcess.length === 1) {
+        alert("In folder is 1 file");
+    }
+}
+
 function btnChooseFilesSourceFoldEnabled(booleanValue, UI) {
     UI.btnChooseFilesSourceFold.enabled = booleanValue;
     UI.btnChooseFilesSourceFold.title.enabled = booleanValue;
