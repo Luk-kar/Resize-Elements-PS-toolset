@@ -184,40 +184,12 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesSourceFold = function() {
                 infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
                 //Actions depended on choosed or not, destination folder
-                if (isUndefined(self.detinationFolder)) {
-
-                    UI.btnRadDestFold.same.notify();
-
-                } else if ( (!isUndefined( self.detinationFolder)) && (self.detinationFolder !== null) ) { //(self.detinationFolder !== null) to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
-
-                    if(( !self.detinationFolder.toString().match(/\//) && !self.sourceFolder.toString().match(/\//) )){
-                        throw new Error("Invalid strings. Strings are not paths");
-                    }
-
-                    var sameDestinationFolderAndSourceFolder = ( self.detinationFolder.toString() === self.sourceFolder.toString() );
-
-                    if (sameDestinationFolderAndSourceFolder) {
-
-                        sameSourceFolderAndDestFolderOutcome(UI, self);
-
-                    } else {
-
-                        UI.btnRadDestFold.other.notify();
-                    }
-                }
+                outcomeChoosedDestinationFolder(self.detinationFolder, self.sourceFolder, UI.btnRadDestFold.same, UI.btnRadDestFold.other, self, UI);
                 
                 //If you choose new folder you will be noticed how many files are inside
                 if (sameChoosedSourceFolderAsBefore === false) {
 
-                    if( self.sourceFilesToProcess.length < 0){
-                        throw new Error("Array should contain at least one File");
-                    }
-
-                    if (self.sourceFilesToProcess.length > 1) {
-                        alert("In folder are " + self.sourceFilesToProcess.length + " files");
-                    } else if (self.sourceFilesToProcess.length === 1) {
-                        alert("In folder is 1 file");
-                    }
+                    alertUserHowManyFilesAreInFolder(self.sourceFilesToProcess);
                 }
             }
         } 
@@ -454,5 +426,39 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
 
         UI.mainWindow.close();
         UIctrlPanel.controlPanelWindow.show();
+    }
+}
+
+function outcomeChoosedDestinationFolder(detinationFolder, sourceFolder, btnRadDestFold_same, btnRadDestFold_other, self, UI) {
+
+    if (isUndefined(detinationFolder)) {
+        btnRadDestFold_same.notify();
+    }
+
+    else if ((!isUndefined(detinationFolder)) && (detinationFolder !== null)) { //(detinationFolder !== null) to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
+
+        if ((!detinationFolder.toString().match(/\//) && !sourceFolder.toString().match(/\//))) {
+            throw new Error("Invalid strings. Strings are not paths");
+        }
+
+        if (detinationFolder.toString() === sourceFolder.toString()) {
+            sameSourceFolderAndDestFolderOutcome(UI, self);
+        }
+        else {
+            btnRadDestFold_other.notify();
+        }
+    }
+}
+
+function alertUserHowManyFilesAreInFolder(sourceFilesToProcess) {
+
+    if (sourceFilesToProcess.length < 0) {
+        throw new Error("Array should contain at least one File");
+    }
+    if (sourceFilesToProcess.length > 1) {
+        alert("In folder are " + sourceFilesToProcess.length + " files");
+    }
+    else if (sourceFilesToProcess.length === 1) {
+        alert("In folder is 1 file");
     }
 }
