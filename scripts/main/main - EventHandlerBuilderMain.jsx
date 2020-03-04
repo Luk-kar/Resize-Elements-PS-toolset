@@ -313,9 +313,9 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         } // OFF -> do nothing
 
-        showUserSummaryOfProcessedFiles(executeScript, self, UI);
+        showUserSummaryOfProcessedFiles(executeScript, self.countChangedFilesTrue, self.countChangedFilesFalse, self.sourceFolderNameRecent, self.detinationFolder, UI.btnRadSourceFiles, UI.btnRadDestFold);
 
-        retrievePreviuslyOpenedFiles(UI, self);
+        retrievePreviuslyOpenedFiles(UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, self.openDocsToRecover, self.openedDocsToReopen);
     }
 }
 
@@ -337,16 +337,18 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
     }
 }
 
-function retrievePreviuslyOpenedFiles(UI, self) {
-    if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
-        confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
+function retrievePreviuslyOpenedFiles(btnRadSourceFiles_chooseOpenedFiles, btnRadSourceFiles_chooseFilesSourceFold, openDocsToRecover, openedDocsToReopen) {
+
+    if (btnRadSourceFiles_chooseOpenedFiles.value === true) {
+        confrimDialog_DoYouWantCloseOpenedFiles(openedDocsToReopen);
     }
-    else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.openDocsToRecover) && self.openDocsToRecover !== null) {
-        openFiles(self.openDocsToRecover);
+
+    else if (btnRadSourceFiles_chooseFilesSourceFold.value === true && !isUndefined(openDocsToRecover) && openDocsToRecover !== null) {
+        openFiles(openDocsToRecover);
     }
 }
 
-function showUserSummaryOfProcessedFiles(executeScript, self, UI) {
+function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, countChangedFilesFalse, sourceFolderNameRecent, detinationFolder, btnRadSourceFiles, btnRadDestFold) {
 
     var scriptName = executeScript;
     var scriptFolder = $.fileName.slice(0, -16);
@@ -358,42 +360,42 @@ function showUserSummaryOfProcessedFiles(executeScript, self, UI) {
     var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
     var noun = scriptName.split(" ")[1];
 
-    if (self.countChangedFilesTrue < 0) {
+    if (countChangedFilesTrue < 0) {
         throw new Error("Counter can't be less than integer = 1");
     }
 
-    if (self.countChangedFilesFalse < 0) {
+    if (countChangedFilesFalse < 0) {
         throw new Error("Counter can't be less than integer = 0");
     }
 
-    if (self.countChangedFilesTrue > 1) {
+    if (countChangedFilesTrue > 1) {
         var files = "files";
     }
 
-    else if (self.countChangedFilesTrue === 1) {
+    else if (countChangedFilesTrue === 1) {
         var files = "file";
     }
 
-    if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
+    if (btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
-        alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files);
-        showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
+        alert("You " + verbPastParticiple + " " + noun + " to " + countChangedFilesTrue + " " + files);
+        showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
     }
 
-    else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
+    else if (btnRadSourceFiles.chooseFilesSourceFold.value === true) {
         var folderName = "";
 
-        if (UI.btnRadDestFold.same.value === true) {
+        if (btnRadDestFold.same.value === true) {
 
-            folderName = decodeURIComponent(self.sourceFolderNameRecent); // string format is URl
+            folderName = decodeURIComponent(sourceFolderNameRecent); // string format is URl
         }
-        else if (UI.btnRadDestFold.other.value === true) {
+        else if (btnRadDestFold.other.value === true) {
 
-            folderName = decodeURIComponent(self.detinationFolder.name); // string format is URl
+            folderName = decodeURIComponent(detinationFolder.name); // string format is URl
         }
-        
-        alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
-        showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
+
+        alert("You " + verbPastParticiple + " " + noun + " to " + countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+        showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
     }
 }
 
