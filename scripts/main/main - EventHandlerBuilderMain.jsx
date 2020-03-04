@@ -297,14 +297,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         if (logFiles_Value === ':  ON ') {
 
-        var listFile = createFilePath("ChangedFilesList.log");
-        var b = listFile;
-        var date = new Date;
-
-        b.open("a");
-        b.writeln("==== " + date + " ============================================================================================================");
-        b.writeln("");
-        b.close();
+            changedFileList_001_writeDate();
 
         } // OFF -> do nothing
 
@@ -316,62 +309,13 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         if (logFiles_Value === ':  ON ') {
 
-        var listFile = createFilePath("ChangedFilesList.log");
-        var d = listFile;
-
-        d.open("a");
-        d.writeln("");
-        d.close();
+            changedFileList_003_writeEmptyMarginLine();
 
         } // OFF -> do nothing
 
-        var scriptName = executeScript;
-        var scriptFolder = $.fileName.slice(0, -16);
+        showUserSummaryOfProcessedFiles(executeScript, self, UI);
 
-        if (scriptName.split(" ").length !== 2 || !scriptName.match(/[a-z]/i)) {
-            throw new Error('Wrongly formated name of "var executeScript" in controlPanel.jsx in folder: ' + scriptFolder);
-        }
-
-        var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
-        var noun = scriptName.split(" ")[1];
-
-        if(self.countChangedFilesTrue < 0) {
-            throw new Error("Counter can't be less than integer = 1");
-        }
-        if(self.countChangedFilesFalse < 0) {
-            throw new Error("Counter can't be less than integer = 0");
-        }
-
-        if (self.countChangedFilesTrue > 1) {
-            var files = "files"
-        } else if (self.countChangedFilesTrue === 1) {
-            var files = "file"
-        }
-        
-        if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
-
-            alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files);
-            showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
-
-            confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
-
-        } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
-
-            var folderName = "";
-            if (UI.btnRadDestFold.same.value === true) {
-                folderName = decodeURIComponent(self.sourceFolderNameRecent); // string format is URl
-            } else if (UI.btnRadDestFold.other.value === true) {
-                folderName = decodeURIComponent(self.detinationFolder.name); // string format is URl
-            }
-
-            alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
-            showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
-
-            if (!isUndefined(self.openDocsToRecover) && self.openDocsToRecover !== null) {
-                openFiles(self.openDocsToRecover);
-            }
-        }
-
+        retrievePreviuslyOpenedFiles(UI, self);
     }
 }
 
@@ -391,4 +335,87 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
         UI.mainWindow.close();
         UIctrlPanel.controlPanelWindow.show();
     }
+}
+
+function retrievePreviuslyOpenedFiles(UI, self) {
+    if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
+        confrimDialog_DoYouWantCloseOpenedFiles(self.openedDocsToReopen);
+    }
+    else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.openDocsToRecover) && self.openDocsToRecover !== null) {
+        openFiles(self.openDocsToRecover);
+    }
+}
+
+function showUserSummaryOfProcessedFiles(executeScript, self, UI) {
+
+    var scriptName = executeScript;
+    var scriptFolder = $.fileName.slice(0, -16);
+
+    if (scriptName.split(" ").length !== 2 || !scriptName.match(/[a-z]/i)) {
+        throw new Error('Wrongly formated name of "var executeScript" in controlPanel.jsx in folder: ' + scriptFolder);
+    }
+
+    var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
+    var noun = scriptName.split(" ")[1];
+
+    if (self.countChangedFilesTrue < 0) {
+        throw new Error("Counter can't be less than integer = 1");
+    }
+
+    if (self.countChangedFilesFalse < 0) {
+        throw new Error("Counter can't be less than integer = 0");
+    }
+
+    if (self.countChangedFilesTrue > 1) {
+        var files = "files";
+    }
+
+    else if (self.countChangedFilesTrue === 1) {
+        var files = "file";
+    }
+
+    if (UI.btnRadSourceFiles.chooseOpenedFiles.value === true) {
+
+        alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files);
+        showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
+    }
+
+    else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
+        var folderName = "";
+
+        if (UI.btnRadDestFold.same.value === true) {
+
+            folderName = decodeURIComponent(self.sourceFolderNameRecent); // string format is URl
+        }
+        else if (UI.btnRadDestFold.other.value === true) {
+
+            folderName = decodeURIComponent(self.detinationFolder.name); // string format is URl
+        }
+        
+        alert("You " + verbPastParticiple + " " + noun + " to " + self.countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+        showUnsavedFilesAlert(self.countChangedFilesFalse, scriptFolder);
+    }
+}
+
+function changedFileList_001_writeDate() {
+
+    var listFile = createFilePath("ChangedFilesList.log");
+    var b = listFile;
+
+    var date = new Date;
+
+    b.open("a");
+    b.writeln("==== " + date + " ============================================================================================================");
+    b.writeln("");
+    b.close();
+}
+
+function changedFileList_003_writeEmptyMarginLine() {
+
+    var listFile = createFilePath("ChangedFilesList.log");
+    var d = listFile;
+    
+    d.open("a");
+    d.writeln("");
+    d.close();
 }

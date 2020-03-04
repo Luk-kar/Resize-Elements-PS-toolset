@@ -458,7 +458,7 @@ _changeFileAndSave_.btnRadDestFoldOther = function (detinationFolder, self, logF
     countSavedFiles(isFileSaved, self);
 
     if (logFiles_Value === ':  ON ') {
-        writeLnOfFile(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
+        changedFileList_002_WriteCurrentFileData(executeScript, i, saveAsFile, currentSaveTime, isFileSaved);
     }
 }
 
@@ -493,7 +493,7 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (ale
 
     if (logFiles_Value === ':  ON ') {
 
-        writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
+        changedFileList_002_WriteCurrentFileData(executeScript, i, doc, currentSaveTime, isFileSaved);
     }
 }
 
@@ -549,7 +549,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function (pre
     countSavedFiles(isFileSaved, self);
 
     if (logFiles_Value === ':  ON ') {
-        writeLnOfFile(executeScript, i, doc, currentSaveTime, isFileSaved);
+        changedFileList_002_WriteCurrentFileData(executeScript, i, doc, currentSaveTime, isFileSaved);
     }
 }
 
@@ -600,7 +600,7 @@ function getModificationDate(docsToProcess) {
     return previousSaveTime;
 }
 
-function writeLnOfFile(executeScript, index, doc, currentSaveTime, isFileSaved) {
+function changedFileList_002_WriteCurrentFileData(executeScript, index, doc, currentSaveTime, isFileSaved) {
 
     var scriptName = executeScript;
 
