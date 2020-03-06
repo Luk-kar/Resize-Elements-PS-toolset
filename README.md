@@ -17,7 +17,7 @@ At the end you process files by (**Add canvas**, **Resize image** or **2^n canva
 List of changed files are written in **ChangedFilesList.log** if value in **Preferences.ini** is **"CHANGEDFILESLIST.LOG"- WRITE LOG=ON**
 You can change this value by clicking **Settings**, and later **ChangedFilesList.log" Log** button.
 
-Toolset consist of:
+#### Toolset consist of:
 - **Add canvas**
 
 - **Resize image**
@@ -26,7 +26,7 @@ Toolset consist of:
 
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
 
-In your **~Documents/UI-Photoshop-toolSet** folder, are:
+#### In your **~Documents/UI-Photoshop-toolSet** are:
 - **ChangedFilesList.log**
 
 - **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in file:
