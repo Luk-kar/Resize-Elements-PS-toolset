@@ -50,10 +50,8 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
             UI.panelChangeFile.enabled = false;
 
             infoFilesUIUpdate(undefined, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
-
-            UI.btnAccept.enabled = false;
         
-        } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder..."){
+        } else if (UI.btnChooseFilesSourceFold.title.text !== "Source folder...") {
 
             btnChooseFilesSourceFoldEnabled(true, UI);
 
@@ -74,18 +72,13 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
                 sameSourceFolderAndDestFolderOutcome(UI, self);
 
             }
-            
-            if (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
-                
-                UI.btnAccept.enabled = false;
-            } else {
-                self.lockingUnlockingAcceptBtn(); 
-            }
 
             infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
         }
 
         ErrorWrongStringInputPath(UI.btnChooseFilesSourceFold.title.text);
+
+        self.lockingUnlockingAcceptBtn(); 
     }
 }
 
