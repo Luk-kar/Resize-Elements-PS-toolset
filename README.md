@@ -23,6 +23,10 @@ Toolset consist of:
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
 
+In your **~Documents** directory, in **UI-Photoshop-toolSet** folder, there are appData:
+- **ChangedFilesList.log** list of changed files
+- **Preferences.ini** Preferences which you can change by **Settings** buttons or rewrite their values in file. Options are: **ON/OFF**(**Filter files by PNG" By default**, **"Do you want to close all opened files?" Dialog**, **"ChangedFilesList.log"** Log)
+
 ### Prerequisites 💪
 
 To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
@@ -112,5 +116,3 @@ This project is licensed under the MIT License - see the [**LICENSE.md**](https:
 * [**_dateAdd()_**](https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1214753#1214753) by [**Kip**](https://stackoverflow.com/users/18511/kip)
 * [**_restrictInputKeys()_**](https://stackoverflow.com/questions/59697920/is-possible-to-lock-certain-keys-in-keyboard-during-input-in-edittext-box-ph) by [**RobC**](https://stackoverflow.com/users/1611459/robc)
 * persistent reviewer [**Ikulis**](https://github.com/ikulis)
-
-
