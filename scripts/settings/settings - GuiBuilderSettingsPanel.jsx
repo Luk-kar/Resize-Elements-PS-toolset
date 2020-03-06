@@ -24,7 +24,7 @@ GuiBuilderSettingsPanel.prototype.buildSettingsPanel = function() {
 
 
     this.logFiles = this.settingsWindow.add("group");
-    this.logFiles.btn = this.logFiles.add("button", [205,80,495,101], " " + appData.preferencesFile + " " + " Log");
+    this.logFiles.btn = this.logFiles.add("button", [205,80,495,101], '"' + appData.preferencesFile + "'" + " Log");
 
     var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog);
     this.logFiles.title = this.logFiles.add("statictext", undefined, logFiles_Value);
