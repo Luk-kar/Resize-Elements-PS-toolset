@@ -11,11 +11,11 @@ Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10 OS</br></b
 
 ## Getting Started 😍
 
-You choose: opened files in PS or folder with files, to process
-Later you decide if you want to save files in source directory or in choosed folder
-At the end you process files by (**Add canvas**, **Resize image** or **2^n canvas**) with inputed values
-List of changed files are written in **ChangedFilesList.log** if value in **Preferences.ini** is **"CHANGEDFILESLIST.LOG"- WRITE LOG=ON**
-You can change this value by clicking **Settings**, and later **ChangedFilesList.log" Log** button.
+You choose: opened files in PS or folder with files, to process  
+Later you decide if you want to save files in source directory or in choosed folder  
+At the end you process files by (**Add canvas**, **Resize image** or **2^n canvas**) with inputed values  
+List of changed files are written in **ChangedFilesList.log** if value in **Preferences.ini** is **"CHANGEDFILESLIST.LOG"- WRITE LOG=ON**  
+You can change this value by clicking **Settings**, and later **ChangedFilesList.log" Log** button  
 
 #### Toolset consist of:
 - **Add canvas**
@@ -26,11 +26,11 @@ You can change this value by clicking **Settings**, and later **ChangedFilesList
 
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
 
-#### AppData are in _~Documents/UI-Photoshop-toolSet_:
+#### AppData are in: _~Documents/UI-Photoshop-toolSet_:
 - **ChangedFilesList.log**
 
 - **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in file:
-    - Filter files by PNG" By default
+    - "Filter files by PNG" By default
     - "Do you want to close all opened files?" Dialog
     - "ChangedFilesList.log" Log)
 
