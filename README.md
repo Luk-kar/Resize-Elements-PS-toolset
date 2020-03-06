@@ -29,7 +29,7 @@ Toolset consist of:
 In your **~Documents/UI-Photoshop-toolSet** folder, are:
 - **ChangedFilesList.log**
 
-- **Preferences.ini** in which you can change values by **Settings** buttons or rewrite them inside file:
+- **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in file:
     - Filter files by PNG" By default
     - "Do you want to close all opened files?" Dialog
     - "ChangedFilesList.log" Log)
