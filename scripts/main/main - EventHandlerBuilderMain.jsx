@@ -401,7 +401,7 @@ function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, c
 
 function changedFileList_001_writeDate() {
 
-    var listFile = createFilePath("ChangedFilesList.log");
+    var listFile = createFilePath(appData.changedFilesList);
     var b = listFile;
 
     var date = new Date;
@@ -414,7 +414,7 @@ function changedFileList_001_writeDate() {
 
 function changedFileList_003_writeEmptyMarginLine() {
 
-    var listFile = createFilePath("ChangedFilesList.log");
+    var listFile = createFilePath(appData.changedFilesList);
     var d = listFile;
     
     d.open("a");

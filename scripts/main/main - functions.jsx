@@ -609,7 +609,7 @@ function changedFileList_002_WriteCurrentFileData(executeScript, index, doc, cur
     var docName = decodeURIComponent(doc.name); // if doc is not objects of documents, but not opened in PS file somewhere in hard drive, you get URl format which you have to decode
     var docFullName = decodeURIComponent(doc.fullName);
 
-    var listFile = createFilePath("ChangedFilesList.log");
+    var listFile = createFilePath(appData.changedFilesList);
     var c = listFile;
 
     if (typeof isFileSaved !== "boolean") {
@@ -801,7 +801,7 @@ function openFiles(self_openDocsToRecover) {
 function showUnsavedFilesAlert(self_countChangedFilesFalse, scriptFolder) {
 
     if (self_countChangedFilesFalse > 0) {
-        alert("Save of " + self_countChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + '"ChangedFilesList.log" in folder: ' + scriptFolder);
+        alert("Save of " + self_countChangedFilesFalse + " files was unseccesful.\nPlease check list of unsaved files in " + appData.changedFilesList + " in folder: " + scriptFolder);
     }
 }
 

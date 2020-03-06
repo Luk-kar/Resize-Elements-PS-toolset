@@ -1,7 +1,11 @@
+var appData = {};
+appData.preferencesFile = "Preferences.ini";
+appData.changedFilesList = "ChangedFilesList.log";
+
 function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath("Preferences.ini");
+    var prefFile = createFilePath(appData.preferencesFile);
     var b = prefFile;
 
     b.open('r');
@@ -32,10 +36,10 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
 function appDataBuilder() {
 
-    var listFile = createFilePath("ChangedFilesList.log");
+    var listFile = createFilePath(appData.changedFilesList);
     buildListFilesIfItDoesntExists(listFile);
 
-    var prefFile = createFilePath("Preferences.ini");
+    var prefFile = createFilePath(appData.preferencesFile);
     buildPrefFilesIfItDoesntExists(prefFile);
 
 }
@@ -123,7 +127,7 @@ function buildPrefFilesIfItDoesntExists(prefFile) {
 function changeValueOffOnInPrefFile(searchedPhrase) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath("Preferences.ini");
+    var prefFile = createFilePath(appData.preferencesFile);
     var b = prefFile;
 
     b.open('r');
