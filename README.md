@@ -19,8 +19,11 @@ You can change this value by clicking **Settings**, and later **ChangedFilesList
 
 Toolset consist of:
 - **Add canvas**
+
 - **Resize image**
+
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
+
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
 
 In your **~Documents/UI-Photoshop-toolSet** folder, are:
