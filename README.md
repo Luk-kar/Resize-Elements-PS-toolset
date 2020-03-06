@@ -26,7 +26,7 @@ You can change this value by clicking **Settings**, and later **ChangedFilesList
 
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
 
-#### In your **~Documents/UI-Photoshop-toolSet** are:
+#### AppData are in _~Documents/UI-Photoshop-toolSet_:
 - **ChangedFilesList.log**
 
 - **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in file:
