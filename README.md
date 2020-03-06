@@ -27,9 +27,9 @@ In your **~Documents** directory, in **UI-Photoshop-toolSet** folder, there are 
 - **ChangedFilesList.log** list of changed files
 - **Preferences.ini** Preferences which you can change by **Settings** buttons or rewrite their values in file. 
     Options are:
-    - **ON/OFF**(**Filter files by PNG" By default**
-    - **"Do you want to close all opened files?" Dialog**
-    - **"ChangedFilesList.log"** Log)
+    - Filter files by PNG" By default
+    - "Do you want to close all opened files?" Dialog
+    - "ChangedFilesList.log" Log)
 
 ### Prerequisites 💪
 
