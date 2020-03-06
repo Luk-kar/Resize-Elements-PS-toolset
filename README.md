@@ -23,10 +23,10 @@ Toolset consist of:
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
 
-In your **~Documents** directory, in **UI-Photoshop-toolSet** folder, there are appData:
+In your **~Documents/UI-Photoshop-toolSet** folder, are:
 - **ChangedFilesList.log** list of changed files
-- **Preferences.ini** Preferences which you can change by **Settings** buttons or rewrite their values in file. 
-    Options are:
+
+- **Preferences.ini** in which you can change values by **Settings** buttons or rewrite them inside file:
     - Filter files by PNG" By default
     - "Do you want to close all opened files?" Dialog
     - "ChangedFilesList.log" Log)
