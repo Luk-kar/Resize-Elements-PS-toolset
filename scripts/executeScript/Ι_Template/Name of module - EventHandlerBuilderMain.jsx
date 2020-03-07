@@ -17,16 +17,18 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
             UI.btnAccept.enabled = false;
         }
+/**
+ * Look at opened script on some example (Add canvas, Resize image, 2^n canvas) in Photoshop
+ * UI.btnRadSourceFiles.chooseOpenedFiles <=== radio button "Opened files"
+ * UI.btnRadSourceFiles.chooseFilesSourceFold <=== radio button "Choose folder"
+ * UI.btnRadDestFold.same <=== radio button "Add canvas in the same folder"
+ * UI.btnRadDestFold.other <=== radio button "Add canvas and copy files to another folder"
+ * self.sourceFolderFilesToProcess <=== array of files which will be processed
+ * UI.btnChooseFilesDestFold <=== button by which you choose destination folder
+ * UI.btnAccept <=== button by which you start processing files
+ * Look at Add canvas - EventHandlerBuilderMain file as example
+ */
 
-    // Look at opened script on some example (Add canvas, Resize image, 2^n canvas) in Photoshop
-    // UI.btnRadSourceFiles.chooseOpenedFiles <=== radio button "Opened files"
-    // UI.btnRadSourceFiles.chooseFilesSourceFold <=== radio button "Choose folder"
-    // UI.btnRadDestFold.same <=== radio button "Add canvas in the same folder"
-    // UI.btnRadDestFold.other <=== radio button "Add canvas and copy files to another folder"
-    // self.sourceFolderFilesToProcess <=== array of files which will be processed
-    // UI.btnChooseFilesDestFold <=== button by which you choose destination folder
-    // UI.btnAccept <=== button by which you start processing files
-    // Look at Add canvas - EventHandlerBuilderMain as example
 }
 
 EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = function() {
