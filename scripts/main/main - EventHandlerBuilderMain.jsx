@@ -20,7 +20,6 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
         }
 
         if (UI.btnRadDestFold.other.value === true) {
-
             UI.btnRadDestFold.other.onClick();
         } 
 
@@ -232,7 +231,6 @@ EventHandlerBuilderMain.prototype.onBtnRadDestFoldOther = function() {
 
         if (UI.btnChooseFilesDestFold.title.text === "Destination folder...") {
 
-            UI.btnAccept.enabled = false;
             UI.panelChangeFile.enabled = false;
 
         } else if (UI.btnChooseFilesDestFold.title.text !== "Destination folder...") {
@@ -268,14 +266,13 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
                 createFolderPath(UI.btnChooseFilesDestFold.title, detinationFolderSelection);
                 UI.panelChangeFile.enabled = true;
 
-                self.lockingUnlockingAcceptBtn();
-
             } else if (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true) {
 
                 self.detinationFolder = checkingIfDestFoldAndSourceFoldAreTheSame(UI, detinationFolderSelection, self.sourceFolderPathRecent, self);
-
             }
         }
+
+        self.lockingUnlockingAcceptBtn();
     }
 }
 
