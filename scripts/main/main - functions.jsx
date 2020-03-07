@@ -44,7 +44,7 @@ _btnChooseFilesSourceFold_.filesMoreThan0 = function(self, UI, sourceFilesFilter
 
     self.sourceFilesPSDformat = null;
     self.sourceFilesPSDformat = addingFilteredFilesToSourceFiles(sourceFilesFiltered);
-    self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
+    self.sourceFolderFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG); // if any boxes are checked, then it is filtered by ceratain checkboxes; if it is not, then you have only psd format
 
     createFolderPath(UI.btnChooseFilesSourceFold.title, self.sourceFolder);
 
@@ -52,14 +52,14 @@ _btnChooseFilesSourceFold_.filesMoreThan0 = function(self, UI, sourceFilesFilter
     UI.panelDestFold.title.enabled = true;
     btnsRadDestFoldEnabled(true, UI);
 
-    infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+    infoFilesUIUpdate(self.sourceFolderFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
     //Actions depended on choosed or not, destination folder
     outcomeChoosedDestinationFolder(self.detinationFolder, self.sourceFolder, UI.btnRadDestFold.same, UI.btnRadDestFold.other, self, UI);
 
     //If you choose new folder you will be noticed how many files are inside
     if (sameChoosedSourceFolderAsBefore === false) {
-        alertUserHowManyFilesAreInFolder(self.sourceFilesToProcess);
+        alertUserHowManyFilesAreInFolder(self.sourceFolderFilesToProcess);
     }
 }
 
@@ -382,17 +382,17 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
     panelInfoUITitle.text =  "Files to process: " + filesNumbers;
 }
 
-function changeFileAndSave(sourceFiles, detinationFolder, 
+function changeFileAndSave(sourceFolderFiles, detinationFolder, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    UI, self, executeScript) {
+    self, executeScript) {
 
     self.countChangedFilesTrue = new Number(0);
     self.countChangedFilesFalse = new Number(0);
 
     var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog);
 
-    sourceFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
+    sourceFolderFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
 
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
@@ -402,7 +402,7 @@ function changeFileAndSave(sourceFiles, detinationFolder,
     //If you choose  radio button "Source folder"
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
-        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value);
+        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value);
     }
 
     self.endingFunction(); //Custom function depending on executeScript
@@ -497,17 +497,17 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (ale
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFile, sourceFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value) {
+_changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value) {
 
     if (self.openedDocsToReopen.length > 0) { // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
         self.openDocsToRecover = new Array;
     }
 
-    for(var i = 0; i < sourceFiles.length; i++) {
+    for(var i = 0; i < sourceFolderFiles.length; i++) {
 
-        var previousSaveTimeSourceDoc = sourceFiles[i].path.modified; //read this value before you open file to avoid false reading
+        var previousSaveTimeSourceDoc = sourceFolderFiles[i].path.modified; //read this value before you open file to avoid false reading
 
-        open(sourceFiles[i]);
+        open(sourceFolderFiles[i]);
 
         var doc = app.activeDocument;
         var activeDoc = doc.fullName;

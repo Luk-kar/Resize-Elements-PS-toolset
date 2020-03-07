@@ -12,7 +12,7 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
     self.lockingUnlockingAcceptBtn = function() { //this object has to be declared as function
 
         if (((UI.btnRadSourceFiles.chooseOpenedFiles.value === true) || 
-            (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.sourceFilesToProcess) && (self.sourceFilesToProcess.length > 0))) && 
+            (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.sourceFolderFilesToProcess) && (self.sourceFolderFilesToProcess.length > 0))) && 
                 ((UI.btnRadDestFold.same.value === true) || (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...")) 
         ) {
 
@@ -100,15 +100,15 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
 
     self.startingFunction = function filteringFilesByHeightAndWidthWithoutOpeningThemInPS() { // https://stackoverflow.com/questions/60191804/getting-width-and-height-of-image-without-need-of-opening-it-in-ps-cs6-script?noredirect=1#comment106489010_60191804
 
-        if (!isUndefined(self.sourceFilesToProcess) && self.sourceFilesToProcess.length > 0) {
+        if (!isUndefined(self.sourceFolderFilesToProcess) && self.sourceFolderFilesToProcess.length > 0) {
 
             ExternalObject.AdobeXMPScript = new ExternalObject("lib:AdobeXMPScript");
 
             var sourceFilesTemp = new Array;
 
-            for(var i = 0; i < self.sourceFilesToProcess.length; i++) {
+            for(var i = 0; i < self.sourceFolderFilesToProcess.length; i++) {
 
-                var file = new XMPFile(File(self.sourceFilesToProcess[i]).fsName, XMPConst.FILE_UNKNOWN, XMPConst.OPEN_FOR_READ);
+                var file = new XMPFile(File(self.sourceFolderFilesToProcess[i]).fsName, XMPConst.FILE_UNKNOWN, XMPConst.OPEN_FOR_READ);
 
                 var xmp = file.getXMP();
 
@@ -121,10 +121,10 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                     var highestValueSide = Math.max( width, height );
 
                     if (highestValueSide >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.groupLowerThan.valueHighest.text, 10) ) { 
-                        sourceFilesTemp.push(self.sourceFilesToProcess[i]);
+                        sourceFilesTemp.push(self.sourceFolderFilesToProcess[i]);
                     }
                 } else { // This files does not have EXIF dimensions, so they will be checked during opening files
-                    sourceFilesTemp.push(self.sourceFilesToProcess[i]);
+                    sourceFilesTemp.push(self.sourceFolderFilesToProcess[i]);
                 }    
             }
             return sourceFilesTemp;

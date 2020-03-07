@@ -72,7 +72,7 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesSourceFold = function() {
 
             }
 
-            infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+            infoFilesUIUpdate(self.sourceFolderFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
         }
 
         ErrorWrongStringInputPath(UI.btnChooseFilesSourceFold.title.text);
@@ -159,9 +159,9 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxPNG = function() {
 
     UI.filterSourceFilesCheckbox.PNG.onClick = function() {
 
-        self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
+        self.sourceFolderFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
-        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+        infoFilesUIUpdate(self.sourceFolderFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
         self.lockingUnlockingAcceptBtn(); //Number of files to process could be 0
     }
@@ -176,9 +176,9 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesCheckboxByExpression = func
 
         filterSourceFilesCheckboxByExpressionEnabled(UI);
         
-        self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
+        self.sourceFolderFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
-        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+        infoFilesUIUpdate(self.sourceFolderFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
         self.lockingUnlockingAcceptBtn(); //Number of files to process could be 0
     }
@@ -195,9 +195,9 @@ EventHandlerBuilderMain.prototype.onFilterSourceFilesByExpressionInput = functio
 
     UI.filterSourceFilesByExpression.input.onChanging = function() {
 
-        self.sourceFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
+        self.sourceFolderFilesToProcess = filterFilesByCheckboxes(self.sourceFilesPSDformat, UI, UI.filterSourceFilesCheckbox.byExpression, UI.filterSourceFilesCheckbox.PNG);
         
-        infoFilesUIUpdate(self.sourceFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
+        infoFilesUIUpdate(self.sourceFolderFilesToProcess, UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
         self.lockingUnlockingAcceptBtn(); //Number of files to process could be 0
     }
@@ -291,10 +291,10 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
 
         } // OFF -> do nothing
 
-        changeFileAndSave(self.sourceFilesToProcess, self.detinationFolder, 
+        changeFileAndSave(self.sourceFolderFilesToProcess, self.detinationFolder, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            UI, self, executeScript
+            self, executeScript
             );
 
         if (logFiles_Value === ':  ON ') {
