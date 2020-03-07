@@ -4,10 +4,10 @@ appData.changedFilesList = "ChangedFilesList.log";
 
 var userDataFolder = new Folder("~/Documents/UI-Photoshop-toolSet");
 
-function readValueOfSeetingsFromPrefFile(searchedPhrase, userDataFolder) {
+function readValueOfSeetingsFromPrefFile(searchedPhrase, preferencesFile, userDataFolder) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath(appData.preferencesFile, userDataFolder);
+    var prefFile = createFilePath(preferencesFile, userDataFolder);
     var b = prefFile;
 
     b.open('r');
@@ -111,10 +111,10 @@ function buildPrefFilesIfItDoesntExists(prefFile) {
     }
 }
 
-function changeValueOffOnInPrefFile(searchedPhrase, userDataFolder) {
+function changeValueOffOnInPrefFile(searchedPhrase,  preferencesFile, userDataFolder) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath(appData.preferencesFile, userDataFolder);
+    var prefFile = createFilePath(preferencesFile, userDataFolder);
     var b = prefFile;
 
     b.open('r');
@@ -159,11 +159,11 @@ function changeValueOffOnInPrefFile(searchedPhrase, userDataFolder) {
     return alertText;
 }
 
-function setValuesOfPrefs(changedPreference, onOffValueNextToButton, userDataFolder) {
+function setValuesOfPrefs(changedPreference, onOffValueNextToButton, preferencesFile, userDataFolder) {
 
-    var alertText = changeValueOffOnInPrefFile(changedPreference, userDataFolder);
+    var alertText = changeValueOffOnInPrefFile(changedPreference, preferencesFile, userDataFolder);
 
-    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference, userDataFolder);
+    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference, preferencesFile, userDataFolder);
     onOffValueNextToButton.text = updateValue;
 
     alert(alertText); //Show user value of changed preference

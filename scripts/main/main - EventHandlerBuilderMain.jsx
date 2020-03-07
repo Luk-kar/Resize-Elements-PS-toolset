@@ -283,7 +283,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, userData
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog, userDataFolder)
+        var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog, appData.preferencesFile, userDataFolder)
 
         if (logFiles_Value === ':  ON ') {
 
@@ -294,7 +294,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, userData
         changeFileAndSave(self.sourceFolderFilesToProcess, self.detinationFolder, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self, executeScript, userDataFolder
+            self, executeScript, appData.changeFileAndSave, userDataFolder
             );
 
         if (logFiles_Value === ':  ON ') {
@@ -305,7 +305,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, userData
 
         showUserSummaryOfProcessedFiles(executeScript, self.countChangedFilesTrue, self.countChangedFilesFalse, self.sourceFolderNameRecent, self.detinationFolder, UI.btnRadSourceFiles, UI.btnRadDestFold);
 
-        retrievePreviuslyOpenedFiles(UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, self.openDocsToRecover, self.openedDocsToReopen);
+        retrievePreviuslyOpenedFiles(UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, self.openDocsToRecover, self.openedDocsToReopen, appData.preferencesFile);
     }
 }
 
@@ -327,10 +327,10 @@ EventHandlerBuilderMain.prototype.onReturn = function() {
     }
 }
 
-function retrievePreviuslyOpenedFiles(btnRadSourceFiles_chooseOpenedFiles, btnRadSourceFiles_chooseFilesSourceFold, openDocsToRecover, openedDocsToReopen) {
+function retrievePreviuslyOpenedFiles(btnRadSourceFiles_chooseOpenedFiles, btnRadSourceFiles_chooseFilesSourceFold, openDocsToRecover, openedDocsToReopen, preferencesFile) {
 
     if (btnRadSourceFiles_chooseOpenedFiles.value === true) {
-        confrimDialog_DoYouWantCloseOpenedFiles(openedDocsToReopen);
+        confrimDialog_DoYouWantCloseOpenedFiles(openedDocsToReopen, preferencesFile);
     }
 
     else if (btnRadSourceFiles_chooseFilesSourceFold.value === true && !isUndefined(openDocsToRecover) && openDocsToRecover !== null) {

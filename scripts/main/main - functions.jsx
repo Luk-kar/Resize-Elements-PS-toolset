@@ -398,12 +398,12 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
 function changeFileAndSave(sourceFolderFiles, detinationFolder, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    self, executeScript, userDataFolder) {
+    self, executeScript, preferencesFile, userDataFolder) {
 
     self.countChangedFilesTrue = new Number(0);
     self.countChangedFilesFalse = new Number(0);
 
-    var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog, userDataFolder);
+    var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog, preferencesFile, userDataFolder);
 
     sourceFolderFiles = self.startingFunction(); // sourceFiles = self.startingFunction() if you want to filter files again due to conditions contained in UI.panelChangeFile // returning this value is faster than checking condition in each file when you have to open them
 
@@ -733,9 +733,9 @@ function saveGIF(saveFile) {
 
 }
 
-function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs) {
+function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs, preferencesFile) {
 
-    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile(prefFileKeys.closeDialogOpenFiles, userDataFolder);
+    var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile(prefFileKeys.closeDialogOpenFiles, preferencesFile, userDataFolder);
 
     if (DoNotShowCloseOpenedFiles_ON_OFF === ':  ON ') {
         var closeOpenedFilesConfirmation = confirm("Do you want to close all opened files?");
