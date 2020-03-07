@@ -4,9 +4,9 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 #include "./scripts/settings/settings - functions.jsx"; //this has to be declared here becouse some functions are used both in main and in settings
 
-#include "./scripts/control panel/control panel - GuiBuilderControlPanel.jsx";
+#include "./scripts/control panel/control panel - GuiBuilderControlPanel.jsx"; // For all UIctrlPanel objects
 
-#include "./scripts/control panel/control panel - EventHandlerBuilderControlPanel.jsx";
+#include "./scripts/control panel/control panel - EventHandlerBuilderControlPanel.jsx"; // For all eventHandler objects
 
 function main() {
 
