@@ -57,8 +57,6 @@ function main(executeScript) {
 
     eventHandler.onBtnRadChooseFilesSourceFold();
 
-    eventHandler.startSettingsUINumbofActiveDocs();
-
     eventHandler.onBtnChooseFilesSourceFold();
 
     eventHandler.onFilterSourceFilesCheckboxPNG();
@@ -78,6 +76,8 @@ function main(executeScript) {
     eventHandler.onBtnCancel();
 
     eventHandler.onReturn();
+
+    eventHandler.startSettingsUINumbofActiveDocs();
 
     UI.showMainWindow();
 
