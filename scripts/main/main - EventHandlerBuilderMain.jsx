@@ -13,8 +13,6 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
 
         btnsRadDestFoldEnabled(true, UI);
 
-        self.lockingUnlockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
-
         if (UI.panelChangeFile.enabled === false) {
             UI.panelChangeFile.enabled = true;
         }
@@ -22,6 +20,8 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
         if (UI.btnRadDestFold.other.value === true) {
             UI.btnRadDestFold.other.onClick();
         } 
+
+        self.lockingUnlockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
 
         infoFilesUIUpdate(docsOpenedFiles(), UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 
@@ -102,7 +102,8 @@ EventHandlerBuilderMain.prototype.startSettingsUINumbofActiveDocs = function() {
     } else if (UI.numbOfActiveDocuments > 0) {
 
         UI.btnRadSourceFiles.chooseOpenedFiles.notify();
-        UI.btnRadDestFold.same.notify();
+        UI.btnRadDestFold.same.onClick(); // If you make it as notify, the outcome will be the same like like onClick. In this case outcome of onClick() is not executed. Propably there is undocummented bug that you can't execute two notify one after another correctly
+        self.lockingUnlockingAcceptBtn();
         btnChooseFilesDestFoldEnabled(false, UI);
         
     }
@@ -209,6 +210,8 @@ EventHandlerBuilderMain.prototype.onBtnRadDestFoldSame = function() {
     var self = this;
 
     UI.btnRadDestFold.same.onClick = function() {
+
+        alert("dupa");
 
         btnChooseFilesDestFoldEnabled(false, UI);
 

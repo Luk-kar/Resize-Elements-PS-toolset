@@ -11,12 +11,14 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     self.lockingUnlockingAcceptBtn = function() { //this object has to be declared as function
 
-        UI.btnAccept.enabled = true;
+        if (((UI.btnRadSourceFiles.chooseOpenedFiles.value === true) || 
+            (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.sourceFilesToProcess) && (self.sourceFilesToProcess.length > 0))) && 
+                ((UI.btnRadDestFold.same.value === true) || (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...")) 
+        ) {
 
-        if ((UI.btnRadSourceFiles.chooseFilesSourceFold.value === true || UI.btnRadDestFold.same.value === true) && 
-            (isUndefined(self.sourceFilesToProcess) || self.sourceFilesToProcess.length === 0)  ||
-            (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text === "Destination folder...")
-            ){
+            UI.btnAccept.enabled = true;
+    
+        } else {
 
             UI.btnAccept.enabled = false;
         }
