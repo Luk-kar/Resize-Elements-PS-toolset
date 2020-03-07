@@ -13,7 +13,7 @@ EventHandlerBuilderSettingsPanel.prototype.onPGNbyDefault = function() {
 
         var changedPreference = prefFileKeys.filterByPNG;
 
-        setValuesOfPrefs(changedPreference, UISetPanel.PNGbyDefault.title);// Show user made change
+        setValuesOfPrefs(changedPreference, UISetPanel.PNGbyDefault.title, userDataFolder);// Show user made change
 
     }
 }
@@ -26,7 +26,7 @@ EventHandlerBuilderSettingsPanel.prototype.onDoNotShowCloseOpenedFiles = functio
 
         var changedPreference = prefFileKeys.closeDialogOpenFiles;
 
-        setValuesOfPrefs(changedPreference, UISetPanel.DoNotShowCloseOpenedFiles.title);// Show user made change
+        setValuesOfPrefs(changedPreference, UISetPanel.DoNotShowCloseOpenedFiles.title, userDataFolder);// Show user made change
 
     }
 }
@@ -39,7 +39,7 @@ EventHandlerBuilderSettingsPanel.prototype.onLogFiles = function() {
 
         var changedPreference = prefFileKeys.changedFileListLog;
 
-        setValuesOfPrefs(changedPreference, UISetPanel.logFiles.title);// Show user made change
+        setValuesOfPrefs(changedPreference, UISetPanel.logFiles.title, userDataFolder);// Show user made change
 
     }
 } 

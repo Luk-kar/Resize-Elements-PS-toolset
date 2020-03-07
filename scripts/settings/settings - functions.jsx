@@ -2,10 +2,12 @@ var appData = {};
 appData.preferencesFile = "Preferences.ini";
 appData.changedFilesList = "ChangedFilesList.log";
 
-function readValueOfSeetingsFromPrefFile(searchedPhrase) {
+var userDataFolder = new Folder("~/Documents/UI-Photoshop-toolSet");
+
+function readValueOfSeetingsFromPrefFile(searchedPhrase, userDataFolder) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath(appData.preferencesFile);
+    var prefFile = createFilePath(appData.preferencesFile, userDataFolder);
     var b = prefFile;
 
     b.open('r');
@@ -36,21 +38,19 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase) {
 
 function appDataBuilder() {
 
-    var listFile = createFilePath(appData.changedFilesList);
+    var listFile = createFilePath(appData.changedFilesList, userDataFolder);
     buildListFilesIfItDoesntExists(listFile);
 
-    var prefFile = createFilePath(appData.preferencesFile);
+    var prefFile = createFilePath(appData.preferencesFile, userDataFolder);
     buildPrefFilesIfItDoesntExists(prefFile);
 
 }
 
-function createFilePath(file) {
+function createFilePath(file, userDataFolder) {
 
-    var userDataFolder = new Folder("~/Documents/UI-Photoshop-toolSet");
+    createFolderIfItDoesntExist(userDataFolder);
 
-    createFolderIfItDoesntExist(userDataFolder, file);
-
-    alertUserWhenNewFileIsCreated(userDataFolder, file);
+    alertUserWhenNewFileIsCreated(file, userDataFolder);
 
     var listFile = new File(userDataFolder.toString() + "/" + file);
 
@@ -59,7 +59,7 @@ function createFilePath(file) {
     return listFile;
 }
 
-function alertUserWhenNewFileIsCreated(scriptFolder, file) {
+function alertUserWhenNewFileIsCreated(file, scriptFolder) {
 
     if (!File(scriptFolder.toString() + "/" + file).exists) {
         alert('You created file "' + file + '" in: ' + scriptFolder.toString() + "/");
@@ -70,19 +70,6 @@ function createFolderIfItDoesntExist(Folder) {
     if (!Folder.exists) {
         Folder.create();
     }
-}
-
-function getGrandParentfolder() {
-
-    var sriptPath = decodeURIComponent($.fileName); // "./" or ".//" can be used only in #include to give relative script path directory. There is undocumented bug, when you use it in File/Folder object it gives path to PS program directory
-
-    var scriptFolder = getScriptFolder(sriptPath).toString().slice(0, -1); // slice(0, -1) is last char "/", you remove this
-
-    var scriptParentFolder = getScriptFolder(scriptFolder).toString().slice(0, -1);
-
-    var scriptGrandParentFolder = getScriptFolder(scriptParentFolder);
-    
-    return scriptGrandParentFolder;
 }
 
 function getScriptFolder(scriptPath) {
@@ -124,10 +111,10 @@ function buildPrefFilesIfItDoesntExists(prefFile) {
     }
 }
 
-function changeValueOffOnInPrefFile(searchedPhrase) {
+function changeValueOffOnInPrefFile(searchedPhrase, userDataFolder) {
 
     var textArrayToWritie = [];
-    var prefFile = createFilePath(appData.preferencesFile);
+    var prefFile = createFilePath(appData.preferencesFile, userDataFolder);
     var b = prefFile;
 
     b.open('r');
@@ -172,11 +159,11 @@ function changeValueOffOnInPrefFile(searchedPhrase) {
     return alertText;
 }
 
-function setValuesOfPrefs(changedPreference, onOffValueNextToButton) {
+function setValuesOfPrefs(changedPreference, onOffValueNextToButton, userDataFolder) {
 
-    var alertText = changeValueOffOnInPrefFile(changedPreference);
+    var alertText = changeValueOffOnInPrefFile(changedPreference, userDataFolder);
 
-    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference);
+    var updateValue = readValueOfSeetingsFromPrefFile(changedPreference, userDataFolder);
     onOffValueNextToButton.text = updateValue;
 
     alert(alertText); //Show user value of changed preference

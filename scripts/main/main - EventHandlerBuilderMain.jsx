@@ -276,30 +276,30 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
     }
 }
 
-EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript) {
+EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, userDataFolder) {
     var UI = this.UI;
     var self = this;
 
     UI.btnAccept.onClick = function() {
         UI.mainWindow.close();
 
-        var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog)
+        var logFiles_Value = readValueOfSeetingsFromPrefFile(prefFileKeys.changedFileListLog, userDataFolder)
 
         if (logFiles_Value === ':  ON ') {
 
-            changedFileList_001_writeDate();
+            changedFileList_001_writeDate(appData.changedFilesList, userDataFolder);
 
         } // OFF -> do nothing
 
         changeFileAndSave(self.sourceFolderFilesToProcess, self.detinationFolder, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self, executeScript
+            self, executeScript, userDataFolder
             );
 
         if (logFiles_Value === ':  ON ') {
 
-            changedFileList_003_writeEmptyMarginLine();
+            changedFileList_003_writeEmptyMarginLine(appData.changedFilesList, userDataFolder);
 
         } // OFF -> do nothing
 
@@ -389,9 +389,9 @@ function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, c
     }
 }
 
-function changedFileList_001_writeDate() {
+function changedFileList_001_writeDate(changedFilesList, userDataFolder) {
 
-    var listFile = createFilePath(appData.changedFilesList);
+    var listFile = createFilePath(changedFilesList, userDataFolder);
     var b = listFile;
 
     var date = new Date;
@@ -402,9 +402,9 @@ function changedFileList_001_writeDate() {
     b.close();
 }
 
-function changedFileList_003_writeEmptyMarginLine() {
+function changedFileList_003_writeEmptyMarginLine(changedFilesList, userDataFolder) {
 
-    var listFile = createFilePath(appData.changedFilesList);
+    var listFile = createFilePath(changedFilesList, userDataFolder);
     var d = listFile;
     
     d.open("a");
