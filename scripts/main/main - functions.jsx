@@ -733,6 +733,90 @@ function saveGIF(saveFile) {
 
 }
 
+function changedFileList_001_writeDate(changedFilesList, userDataFolder) {
+
+    var listFile = createFilePath(changedFilesList, userDataFolder);
+    var b = listFile;
+
+    var date = new Date;
+
+    b.open("a");
+    b.writeln("==== " + date + " ============================================================================================================");
+    b.writeln("");
+    b.close();
+}
+
+function changedFileList_003_writeEmptyMarginLine(changedFilesList, userDataFolder) {
+
+    var listFile = createFilePath(changedFilesList, userDataFolder);
+    var d = listFile;
+    
+    d.open("a");
+    d.writeln("");
+    d.close();
+}
+function retrievePreviuslyOpenedFiles(btnRadSourceFiles_chooseOpenedFiles, btnRadSourceFiles_chooseFilesSourceFold, openDocsToRecover, openedDocsToReopen, preferencesFile) {
+
+    if (btnRadSourceFiles_chooseOpenedFiles.value === true) {
+        confrimDialog_DoYouWantCloseOpenedFiles(openedDocsToReopen, preferencesFile);
+    }
+
+    else if (btnRadSourceFiles_chooseFilesSourceFold.value === true && !isUndefined(openDocsToRecover) && openDocsToRecover !== null) {
+        openFiles(openDocsToRecover);
+    }
+}
+
+function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, countChangedFilesFalse, sourceFolderNameRecent, detinationFolder, btnRadSourceFiles, btnRadDestFold) {
+
+    var scriptName = executeScript;
+    var scriptFolder = $.fileName.slice(0, -16);
+
+    if (scriptName.split(" ").length !== 2 || !scriptName.match(/[a-z]/i)) {
+        throw new Error('Wrongly formated name of "var executeScript" in controlPanel.jsx in folder: ' + scriptFolder);
+    }
+
+    var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
+    var noun = scriptName.split(" ")[1];
+
+    if (countChangedFilesTrue < 0) {
+        throw new Error("Counter can't be less than integer = 0");
+    }
+
+    if (countChangedFilesFalse < 0) {
+        throw new Error("Counter can't be less than integer = 0");
+    }
+
+    if (countChangedFilesTrue > 1 || countChangedFilesTrue === 0) { //Yes, there is possibility that you do not process any files if you can filter files only when the are open
+        var files = "files";
+    }
+
+    else if (countChangedFilesTrue === 1) {
+        var files = "file";
+    }
+
+    if (btnRadSourceFiles.chooseOpenedFiles.value === true) {
+
+        alert("You " + verbPastParticiple + " " + noun + " to " + countChangedFilesTrue + " " + files);
+        showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
+    }
+
+    else if (btnRadSourceFiles.chooseFilesSourceFold.value === true) {
+        var folderName = "";
+
+        if (btnRadDestFold.same.value === true) {
+
+            folderName = decodeURIComponent(sourceFolderNameRecent); // string format is URl
+        }
+        else if (btnRadDestFold.other.value === true) {
+
+            folderName = decodeURIComponent(detinationFolder.name); // string format is URl
+        }
+
+        alert("You " + verbPastParticiple + " " + noun + " to " + countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+        showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
+    }
+}
+
 function confrimDialog_DoYouWantCloseOpenedFiles(openedDocs, preferencesFile) {
 
     var DoNotShowCloseOpenedFiles_ON_OFF = readValueOfSeetingsFromPrefFile(prefFileKeys.closeDialogOpenFiles, preferencesFile, userDataFolder);
