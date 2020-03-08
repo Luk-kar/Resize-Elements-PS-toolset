@@ -443,17 +443,17 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFil
         //If you choose radio button "Change file in the same folder", saves the same files in original location
         if (btnRadSameFolder.value === true) {
 
-            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, userDataFolder);
+            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, appData.changedFilesList, userDataFolder);
 
         //If you choose radio button "Copy and Change file to other folder", save files in other folder
         } else if (btnRadDestFoldOther.value === true) {
 
-            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i ,userDataFolder);
+            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i ,appData.changedFilesList ,userDataFolder);
         }
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, userDataFolder) { // btnRadChooseFilesActiveDocs_btnRadSameFolder has to be separate object, becouse when btnRadSameFolder will be part of btnRadChooseFilesActiveDocs then there is propability of oversave
+_changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, appData_changedFilesList, userDataFolder) { // btnRadChooseFilesActiveDocs_btnRadSameFolder has to be separate object, becouse when btnRadSameFolder will be part of btnRadChooseFilesActiveDocs then there is propability of oversave
 
     var doc = app.activeDocument;
     
@@ -484,11 +484,11 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (ale
 
     if (logFiles_Value === ':  ON ') {
 
-        changedFileList_002_WriteCurrentFileData(executeScript, i, doc, currentSaveTime, isFileSaved, userDataFolder);
+        changedFileList_002_WriteCurrentFileData(executeScript, i, doc, currentSaveTime, isFileSaved, appData_changedFilesList, userDataFolder);
     }
 }
 
-_changeFileAndSave_.btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i, userDataFolder) {
+_changeFileAndSave_.btnRadDestFoldOther = function (detinationFolder, self, logFiles_Value, executeScript, i, appData_changedFilesList, userDataFolder) {
 
     var doc = app.activeDocument;
 
@@ -506,7 +506,7 @@ _changeFileAndSave_.btnRadDestFoldOther = function (detinationFolder, self, logF
     countSavedFiles(isFileSaved, self);
 
     if (logFiles_Value === ':  ON ') {
-        changedFileList_002_WriteCurrentFileData(executeScript, i, saveAsFile, currentSaveTime, isFileSaved, userDataFolder);
+        changedFileList_002_WriteCurrentFileData(executeScript, i, saveAsFile, currentSaveTime, isFileSaved, appData_changedFilesList, userDataFolder);
     }
 }
 
@@ -534,12 +534,12 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFil
         //If you choose radio button "Change file in the same folder", saves the same files in original location
         if (btnRadSameFolder.value === true) {
 
-            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i, userDataFolder);
+            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i, appData.changedFilesList, userDataFolder);
 
         //If you choose radio button "Copy and Change file to other folder", save files in other folder
         } else if (btnRadDestFoldOther.value === true) {
 
-            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i, userDataFolder);
+            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i, appData.changedFilesList, userDataFolder);
         }
 
         // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
@@ -549,7 +549,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFil
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function (previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i, userDataFolder) {
+_changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function (previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i, appData_changedFilesList, userDataFolder) {
 
     var doc = app.activeDocument;
 
@@ -562,7 +562,7 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder = function (pre
     countSavedFiles(isFileSaved, self);
 
     if (logFiles_Value === ':  ON ') {
-        changedFileList_002_WriteCurrentFileData(executeScript, i, doc, currentSaveTime, isFileSaved, userDataFolder);
+        changedFileList_002_WriteCurrentFileData(executeScript, i, doc, currentSaveTime, isFileSaved, appData_changedFilesList, userDataFolder);
     }
 }
 
@@ -613,7 +613,7 @@ function getModificationDate(docsToProcess) {
     return previousSaveTime;
 }
 
-function changedFileList_002_WriteCurrentFileData(executeScript, index, doc, currentSaveTime, isFileSaved, userDataFolder) {
+function changedFileList_002_WriteCurrentFileData(executeScript, index, doc, currentSaveTime, isFileSaved, appData_changedFilesList, userDataFolder) {
 
     var scriptName = executeScript;
 
@@ -622,7 +622,7 @@ function changedFileList_002_WriteCurrentFileData(executeScript, index, doc, cur
     var docName = decodeURIComponent(doc.name); // if doc is not objects of documents, but not opened in PS file somewhere in hard drive, you get URl format which you have to decode
     var docFullName = decodeURIComponent(doc.fullName);
 
-    var listFile = createFilePath(appData.changedFilesList, userDataFolder);
+    var listFile = createFilePath(appData_changedFilesList, userDataFolder);
     var c = listFile;
 
     if (typeof isFileSaved !== "boolean") {
