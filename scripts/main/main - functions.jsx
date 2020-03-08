@@ -398,7 +398,7 @@ function infoUIwriteText(filesNames, filesNumbers, panelInfoUITitle, panelInfoUI
 function changeFileAndSave(sourceFolderFiles, detinationFolder, 
     btnRadChooseFilesActiveDocs, btnRadChooseFilesSourceFold, 
     btnRadSameFolder, btnRadDestFoldOther, 
-    self, executeScript, preferencesFile, userDataFolder) {
+    self, executeScript, preferencesFile, appData_changedFilesList, userDataFolder) {
 
     self.countChangedFilesTrue = new Number(0);
     self.countChangedFilesFalse = new Number(0);
@@ -410,12 +410,12 @@ function changeFileAndSave(sourceFolderFiles, detinationFolder,
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
-        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript, appData.changedFilesList, userDataFolder);
+        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript, appData_changedFilesList, userDataFolder);
 
     //If you choose  radio button "Source folder"
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
-        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, appData.changedFilesList, userDataFolder);
+        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, appData_changedFilesList, userDataFolder);
     }
 
     self.endingFunction(); //Custom function depending on executeScript

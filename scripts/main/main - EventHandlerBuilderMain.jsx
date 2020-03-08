@@ -294,7 +294,7 @@ EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, appData,
         changeFileAndSave(self.sourceFolderFilesToProcess, self.detinationFolder, 
             UI.btnRadSourceFiles.chooseOpenedFiles, UI.btnRadSourceFiles.chooseFilesSourceFold, 
             UI.btnRadDestFold.same, UI.btnRadDestFold.other,
-            self, executeScript, appData.preferencesFile, userDataFolder
+            self, executeScript, appData.preferencesFile, appData.changedFilesList, userDataFolder
             );
 
         if (logFiles_Value === ':  ON ') {
