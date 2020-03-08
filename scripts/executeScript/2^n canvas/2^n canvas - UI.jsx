@@ -1,3 +1,5 @@
+    //Code below is injected in PanelChangeFile
+    
     this.maxResValue = 8192;
     
     ///2^n canvas
