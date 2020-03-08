@@ -6,13 +6,13 @@ settingsPanel()
 
 function settingsPanel() {
 
-appDataBuilder();
+appDataBuilder(appData, prefFileKeys, userDataFolder);
 
 //================================================================================================================================
 
-var UISetPanel =  new GuiBuilderSettingsPanel();
+var UISetPanel =  new GuiBuilderSettingsPanel(prefFileKeys, appData, userDataFolder);
 
-UISetPanel.buildSettingsPanel();
+UISetPanel.buildSettingsPanel(prefFileKeys, appData, userDataFolder);
 
 //================================================================================================================================
 

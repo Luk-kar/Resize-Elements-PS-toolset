@@ -36,7 +36,7 @@ function readValueOfSeetingsFromPrefFile(searchedPhrase, preferencesFile, userDa
     return textToReplace;
 }
 
-function appDataBuilder() {
+function appDataBuilder(appData, prefFileKeys, userDataFolder) {
 
     var listFile = createFilePath(appData.changedFilesList, userDataFolder);
     buildListFilesIfItDoesntExists(listFile);

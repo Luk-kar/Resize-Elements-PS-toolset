@@ -15,11 +15,11 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 #include "./main - EventHandlerBuilderMain.jsx";
 
-main(executeScript);
+main(executeScript, appData, prefFileKeys, userDataFolder);
 
-function main(executeScript) {
+function main(executeScript, appData, prefFileKeys, userDataFolder) {
 
-    appDataBuilder();
+    appDataBuilder(appData, prefFileKeys, userDataFolder);
     
     var UI = new GuiBuilderMain();
 

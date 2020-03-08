@@ -1,9 +1,9 @@
-function GuiBuilderSettingsPanel() {
+function GuiBuilderSettingsPanel(prefFileKeys, appData, userDataFolder) {
 
-    this.buildSettingsPanel();
+    this.buildSettingsPanel(prefFileKeys, appData, userDataFolder);
 }
 
-GuiBuilderSettingsPanel.prototype.buildSettingsPanel = function() {
+GuiBuilderSettingsPanel.prototype.buildSettingsPanel = function(prefFileKeys, appData, userDataFolder) {
 
     this.settingsWindow = new Window("dialog", "Enabled/Disabled");
     this.settingsWindow.alignChildren = "left";
