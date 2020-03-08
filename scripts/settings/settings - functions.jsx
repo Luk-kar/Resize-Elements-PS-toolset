@@ -42,7 +42,7 @@ function appDataBuilder() {
     buildListFilesIfItDoesntExists(listFile);
 
     var prefFile = createFilePath(appData.preferencesFile, userDataFolder);
-    buildPrefFilesIfItDoesntExists(prefFile);
+    buildPrefFilesIfItDoesntExists(prefFile, prefFileKeys);
 
 }
 
@@ -93,7 +93,7 @@ prefFileKeys.filterByPNG = "FilterBPNGbyDefault";
 prefFileKeys.closeDialogOpenFiles = "OpenCloseFilesDialog";
 prefFileKeys.changedFileListLog = "ChangedFileListLog_WriteLog";
 
-function buildPrefFilesIfItDoesntExists(prefFile) {
+function buildPrefFilesIfItDoesntExists(prefFile, prefFileKeys) {
 
     if (!prefFile.exists) {
 

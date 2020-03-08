@@ -276,7 +276,7 @@ EventHandlerBuilderMain.prototype.onBtnChooseFilesDestFold = function() {
     }
 }
 
-EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, userDataFolder) {
+EventHandlerBuilderMain.prototype.onBtnAccept = function(executeScript, appData, userDataFolder) {
     var UI = this.UI;
     var self = this;
 

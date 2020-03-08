@@ -71,7 +71,7 @@ function main(executeScript) {
 
     eventHandler.onBtnChooseFilesDestFold();
 
-    eventHandler.onBtnAccept(executeScript, userDataFolder);
+    eventHandler.onBtnAccept(executeScript, appData, userDataFolder);
 
     eventHandler.onBtnCancel();
 
