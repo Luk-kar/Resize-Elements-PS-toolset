@@ -25,9 +25,9 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
 
     UI.buildPanelSourceFiles();
 
-    UI.buildPanelSourceFilesFilter();
+    UI.buildPanelSourceFilesFilter(prefFileKeys.filterByPNG, appData.preferencesFile);
 
-    UI.buildPanelDestinationFolder();
+    UI.buildPanelDestinationFolder(executeScript);
 
     UI.buildPanelChangeFile(executeScript);
 

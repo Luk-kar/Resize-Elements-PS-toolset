@@ -61,7 +61,7 @@ GuiBuilderMain.prototype.buildPanelSourceFiles = function() {
     this.btnChooseFilesSourceFold.title.characters = this.panelWidth; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 }
 
-GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
+GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function(prefFileKeys_filterByPNG, appData_preferencesFile) {
 
     //Create panel
     this.panelFilterFiles = createPanelUI(this.groupInfo, undefined, "left");
@@ -70,7 +70,7 @@ GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
     //Create checkbox
     this.filterSourceFilesCheckbox.PNG = this.filterSourceFilesCheckbox.add("checkbox", undefined, "Process only PNG");
 
-    var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile(prefFileKeys.filterByPNG, appData.preferencesFile, userDataFolder);
+    var PNGbyDefault_ON_OFF = readValueOfSeetingsFromPrefFile(prefFileKeys_filterByPNG, appData_preferencesFile, userDataFolder);
     if (PNGbyDefault_ON_OFF === ':  ON ') {
         this.filterSourceFilesCheckbox.PNG.value = true;
     }
@@ -92,7 +92,7 @@ GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function() {
 
 }
 
-GuiBuilderMain.prototype.buildPanelDestinationFolder = function() {
+GuiBuilderMain.prototype.buildPanelDestinationFolder = function(executeScript) {
 
     this.panelDestFold = createPanelUI(this.groupInfo, undefined, "left");
 
