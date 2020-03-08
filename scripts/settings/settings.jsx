@@ -18,11 +18,11 @@ UISetPanel.buildSettingsPanel();
 
 var eventHandler = new EventHandlerBuilderSettingsPanel( UISetPanel );
 
-eventHandler.onPGNbyDefault();
+eventHandler.onPGNbyDefault(prefFileKeys.filterByPNG, appData.preferencesFile);
 
-eventHandler.onDoNotShowCloseOpenedFiles();
+eventHandler.onDoNotShowCloseOpenedFiles(prefFileKeys.closeDialogOpenFiles, appData.preferencesFile);
 
-eventHandler.onLogFiles();
+eventHandler.onLogFiles(prefFileKeys.changedFileListLog, appData.preferencesFile);
 
 eventHandler.onReturn();
 

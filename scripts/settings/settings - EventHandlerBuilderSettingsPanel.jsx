@@ -2,7 +2,7 @@ function EventHandlerBuilderSettingsPanel(UISetPanel) {
     this.UISetPanel = UISetPanel;
 }
 
-EventHandlerBuilderSettingsPanel.prototype.onPGNbyDefault = function() {
+EventHandlerBuilderSettingsPanel.prototype.onPGNbyDefault = function(prefFileKeys_filterByPNG, appData_preferencesFile) {
 
     var UISetPanel = this.UISetPanel;
     var self = this;
@@ -11,35 +11,35 @@ EventHandlerBuilderSettingsPanel.prototype.onPGNbyDefault = function() {
 
     UISetPanel.PNGbyDefault.btn.onClick = function() {
 
-        var changedPreference = prefFileKeys.filterByPNG;
+        var changedPreference = prefFileKeys_filterByPNG;
 
-        setValuesOfPrefs(changedPreference, UISetPanel.PNGbyDefault.title, appData.preferencesFile, userDataFolder);// Show user made change
+        setValuesOfPrefs(changedPreference, UISetPanel.PNGbyDefault.title, appData_preferencesFile, userDataFolder);// Show user made change
 
     }
 }
 
-EventHandlerBuilderSettingsPanel.prototype.onDoNotShowCloseOpenedFiles = function() {
+EventHandlerBuilderSettingsPanel.prototype.onDoNotShowCloseOpenedFiles = function(prefFileKeys_closeDialogOpenFiles, appData_preferencesFile) {
 
     var UISetPanel = this.UISetPanel;
 
     UISetPanel.DoNotShowCloseOpenedFiles.btn.onClick = function() {
 
-        var changedPreference = prefFileKeys.closeDialogOpenFiles;
+        var changedPreference = prefFileKeys_closeDialogOpenFiles;
 
-        setValuesOfPrefs(changedPreference, UISetPanel.DoNotShowCloseOpenedFiles.title, appData.preferencesFile, userDataFolder);// Show user made change
+        setValuesOfPrefs(changedPreference, UISetPanel.DoNotShowCloseOpenedFiles.title, appData_preferencesFile, userDataFolder);// Show user made change
 
     }
 }
 
-EventHandlerBuilderSettingsPanel.prototype.onLogFiles = function() {
+EventHandlerBuilderSettingsPanel.prototype.onLogFiles = function(prefFileKeys_changedFileListLog, appData_preferencesFile) {
     
     var UISetPanel = this.UISetPanel;
 
     UISetPanel.logFiles.btn.onClick = function() {
 
-        var changedPreference = prefFileKeys.changedFileListLog;
+        var changedPreference = prefFileKeys_changedFileListLog;
 
-        setValuesOfPrefs(changedPreference, UISetPanel.logFiles.title, appData.preferencesFile, userDataFolder);// Show user made change
+        setValuesOfPrefs(changedPreference, UISetPanel.logFiles.title, appData_preferencesFile, userDataFolder);// Show user made change
 
     }
 } 
