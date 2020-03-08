@@ -410,19 +410,19 @@ function changeFileAndSave(sourceFolderFiles, detinationFolder,
     //If you choose radio button "Opened files"
     if (btnRadChooseFilesActiveDocs.value === true){
 
-        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript, userDataFolder);
+        _changeFileAndSave_.btnRadChooseFilesActiveDocs(self, self.changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript, appData.changedFilesList, userDataFolder);
 
     //If you choose  radio button "Source folder"
     } else if (btnRadChooseFilesSourceFold.value === true) {
 
-        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, userDataFolder);
+        _changeFileAndSave_.btnRadChooseFilesSourceFold(self, self.changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, appData.changedFilesList, userDataFolder);
     }
 
     self.endingFunction(); //Custom function depending on executeScript
 }
 
 var _changeFileAndSave_ = {};
-_changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript, userDataFolder) {
+_changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFile, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, executeScript, appData_changedFilesList, userDataFolder) {
     
     var docsToProcess = docsOpenedFiles();
 
@@ -443,7 +443,7 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFil
         //If you choose radio button "Change file in the same folder", saves the same files in original location
         if (btnRadSameFolder.value === true) {
 
-            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, appData.changedFilesList, userDataFolder);
+            _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder(alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, appData_changedFilesList, userDataFolder);
 
         //If you choose radio button "Copy and Change file to other folder", save files in other folder
         } else if (btnRadDestFoldOther.value === true) {
@@ -510,7 +510,7 @@ _changeFileAndSave_.btnRadDestFoldOther = function (detinationFolder, self, logF
     }
 }
 
-_changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, userDataFolder) {
+_changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFile, sourceFolderFiles, executeScript, btnRadSameFolder, btnRadDestFoldOther, detinationFolder, logFiles_Value, appData_changedFilesList, userDataFolder) {
 
     if (self.openedDocsToReopen.length > 0) { // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
         self.openDocsToRecover = new Array;
@@ -534,12 +534,12 @@ _changeFileAndSave_.btnRadChooseFilesSourceFold = function (self, self_changeFil
         //If you choose radio button "Change file in the same folder", saves the same files in original location
         if (btnRadSameFolder.value === true) {
 
-            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i, appData.changedFilesList, userDataFolder);
+            _changeFileAndSave_.btnRadChooseFilesSourceFold_btnRadSameFolder(previousSaveTimeSourceDoc, self, logFiles_Value, executeScript, i, appData_changedFilesList, userDataFolder);
 
         //If you choose radio button "Copy and Change file to other folder", save files in other folder
         } else if (btnRadDestFoldOther.value === true) {
 
-            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i, appData.changedFilesList, userDataFolder);
+            _changeFileAndSave_.btnRadDestFoldOther(detinationFolder, self, logFiles_Value, executeScript, i, appData_changedFilesList, userDataFolder);
         }
 
         // There is possiblity that previously opened doc in PS and in source folder are the same. So to prevend this, closed opened doc is retrieved at the end of work of script
