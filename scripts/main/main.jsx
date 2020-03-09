@@ -1,12 +1,12 @@
-﻿/*
+﻿/*********************************************************************************
+Photoshop script written by Karol Łukaszczyk, 01.2020
+Permits you to use, modify, and distribute this file according to licence
+**********************************************************************************/
+
+/*
 using from "../control panel/control panel - EventHandlerBuilderControlPanel.jsx":
 - executeScript
 
-Photoshop script written by Karol Łukaszczyk, 01.2020
-Permits you to use, modify, and distribute this file according to licence
-*/
-
-/*
 using from "../settings/settings - functions.jsx":
 - appData
 - prefFileKeys

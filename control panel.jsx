@@ -1,7 +1,7 @@
-/**
- * Photoshop script written by Karol Łukaszczyk, 01.2020
- * Permits you to use, modify, and distribute this file
- */
+/*********************************************************************************
+Photoshop script written by Karol Łukaszczyk, 01.2020
+Permits you to use, modify, and distribute this file according to licence
+**********************************************************************************/
 
 #target photoshop
 
