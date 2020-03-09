@@ -1,5 +1,7 @@
 /*
-using setValuesOfPrefs() from "./settings - functions.jsx"
+using from "./settings - functions.jsx":
+- userDataFolder
+- setValuesOfPrefs()
 */
 
 function EventHandlerBuilderSettingsPanel(UISetPanel) {

@@ -2,6 +2,7 @@
 using from "../settings/settings - functions.jsx":
 - appData
 - prefFileKeys
+- userDataFolder
 */
 
 #include "./settings - GuiBuilderSettingsPanel.jsx";
