@@ -1,3 +1,11 @@
+/*
+using from "../settings/settings - functions.jsx":
+- isUndefined()
+- readValueOfSeetingsFromPrefFile()
+- createFilePath()
+- getScriptFolder()
+*/
+
 function createPanelUI(objectParent, orientationChildren, alignChildren, alignmentObject) {
     
     var objectChildGroup = objectParent.add("panel");

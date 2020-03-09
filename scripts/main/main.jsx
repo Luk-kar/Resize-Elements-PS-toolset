@@ -1,7 +1,7 @@
-﻿/**
- * Photoshop script written by Karol Łukaszczyk, 01.2020
- * Permits you to use, modify, and distribute this file
- */
+﻿/*
+Photoshop script written by Karol Łukaszczyk, 01.2020
+Permits you to use, modify, and distribute this file according to licence
+*/
 
 #target photoshop
 
@@ -9,11 +9,11 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 //================================================================================================================================
 
-#include "./main - functions.jsx";
+#include "./main - functions.jsx"; // For to use for main module and it's children
 
-#include "./main - GuiBuilderMain.jsx";
+#include "./main - GuiBuilderMain.jsx"; // For all UI objects
 
-#include "./main - EventHandlerBuilderMain.jsx";
+#include "./main - EventHandlerBuilderMain.jsx"; // For all EventHandler objects
 
 main(executeScript, appData, prefFileKeys, userDataFolder);
 

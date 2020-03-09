@@ -1,3 +1,36 @@
+/*
+using from "../executeScript/(2^n canvas) || (Add canvas) || (Resize image)/(2^n canvas) || (Add canvas) || (Resize image) - EventHandlerBuilderMain.jsx":
+- self.lockingUnlockingAcceptBtn()
+
+using from "../settings/settings - functions.jsx":
+- ErrorWrongStringInputPath()
+- readValueOfSeetingsFromPrefFile()
+
+using from "./main - functions.jsx":
+- panelFilterFilesEnabled()
+- btnsRadDestFoldEnabled()
+- infoFilesUIUpdate()
+- docsOpenedFiles()
+- btnChooseFilesSourceFoldEnabled()
+- btnsRadDestFoldEnabled()
+- btnChooseFilesDestFoldEnabled()
+- infoFilesUIUpdate()
+- gettingFilesOpenedDocsToReopen()
+- checkingIfItIsTheSameSourceFolderAsBefore()
+- filteringSourceFiles()
+- _btnChooseFilesSourceFold_.filesEqual0()
+- _btnChooseFilesSourceFold_.filesMoreThan0()
+- filterFilesByCheckboxes()
+- filterSourceFilesCheckboxByExpressionEnabled()
+- createFolderPath()
+- checkingIfDestFoldAndSourceFoldAreTheSame()
+- changedFileList_001_writeDate()
+- changeFileAndSave()
+- changedFileList_003_writeEmptyMarginLine()
+- showUserSummaryOfProcessedFiles()
+- retrievePreviuslyOpenedFiles()
+*/
+
 EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
     var UI = this.UI;
     var self = this;
@@ -21,7 +54,7 @@ EventHandlerBuilderMain.prototype.onBtnRadChooseFilesActiveDocs = function() {
             UI.btnRadDestFold.other.onClick();
         } 
 
-        self.lockingUnlockingAcceptBtn(); //it has to be in that order, becouse UI.btnRadDestFold.other.onClick() check also values of numbs
+        self.lockingUnlockingAcceptBtn(); //it has to be in that order
 
         infoFilesUIUpdate(docsOpenedFiles(), UI.numbOfDisplayedFiles, UI.panelDocInfo, UI.panelDocInfoLines);
 

@@ -1,3 +1,13 @@
+/*
+using from "../settings/settings - functions.jsx":
+- readValueOfSeetingsFromPrefFile()
+
+using from "./main - functions.jsx":
+- createGroupUI()
+- getGrandParentfolder()
+- createPanelUI()
+*/
+
 function GuiBuilderMain() {
 
     this.baseLayout(executeScript);
