@@ -1,3 +1,5 @@
+// using self.lockingUnlockingAcceptBtn() from: "../EventHandlerBuilderMain/settingAcceptBtnBlock.jsx"
+
 EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
     var UI = this.UI;

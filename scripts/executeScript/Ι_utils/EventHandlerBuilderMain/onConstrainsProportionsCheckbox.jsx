@@ -1,3 +1,5 @@
+// using changeTooltipAndImageAccordingToState() from "../function/changeTooltipAndImageAccordingToState.jsx"
+
 EventHandlerBuilderMain.prototype.onConstrainsProportionsCheckbox = function() {
     var UI = this.UI;
 

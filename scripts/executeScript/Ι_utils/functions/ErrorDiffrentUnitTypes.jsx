@@ -1,7 +1,12 @@
+/* 
+var unitsTypes is used in scripts\executeScript\("Resize image" || "Add canvas")\("Resize image" || "Add canvas") - EventHandlerBuilderMain.jsx
+canvExtendColorDropDwn is used in scripts\executeScript\("Resize image" || "Add canvas")\("Resize image" || "Add canvas") - UI.jsx
+*/
+
 function ErrorDiffrentUnitTypes(canvExtendColorDropDwn, unitsTypes) {
 
     if (canvExtendColorDropDwn.children.length !== unitsTypes.length) {
-        throw new Error("var unitsTypes has diffrent diffrent number of items than var AddCanvasDocUnits");
+        throw new Error("var unitsTypes has different number of items than canvExtendColorDropDwn");
     }
 
     var theSameTypes = true;
@@ -14,6 +19,6 @@ function ErrorDiffrentUnitTypes(canvExtendColorDropDwn, unitsTypes) {
     }
 
     if (theSameTypes === false) {
-        throw new Error("var unitsTypes has diffrent values than var AddCanvasDocUnits");
+        throw new Error("var unitsTypes has different value than canvExtendColorDropDwn item");
     }
 }

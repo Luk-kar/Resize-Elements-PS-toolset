@@ -1,2 +1,2 @@
-// Function will be declared in global scope at the beginning in the "control panel.jsx"
-// You declare them here to be used in whole module
+// Here you declare function which will be used in your whole module
+// Look at "2^n canvas - functions.jsx" as example

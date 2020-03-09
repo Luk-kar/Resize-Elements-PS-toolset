@@ -3,7 +3,7 @@ EventHandlerBuilderMain.prototype.onCanvExtendColorDropDwn = function() {
     var self = this;
 
     UI.canvExtendColor.dropDwn.onChange = function() {
-        var canvExtendColorDropDwn = UI.canvExtendColor.dropDwn.selection.toString();//Full list to select canvExtendColor.values
+        var canvExtendColorDropDwn = UI.canvExtendColor.dropDwn.selection.toString();
 
         if (canvExtendColorDropDwn === "Foreground") {
 

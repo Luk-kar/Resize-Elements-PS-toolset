@@ -1,3 +1,12 @@
+/*
+using isUndefined() from "../../settings/settings - functions.jsx"
+using anchorSetingNew() from "./anchorSetingNew.jsx
+using ErrorDiffrentUnitTypes() from "../Ι_utils/functions/ErrorDiffrentUnitTypes.jsx"
+using doesItHaveBackgroundLayer() from "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx"
+using leftUpperCornerColorBGSet() from "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx"
+suing mathSumWidthAndHeight() from "../Ι_utils/functions/mathSumWidthAndHeight.jsx"
+*/
+
 #include "../Ι_utils/EventHandlerBuilderMain/settingAcceptBtnBlock.jsx";
 
 #include "../Ι_utils/EventHandlerBuilderMain/savingBGandFGtoRestoreLater.jsx";

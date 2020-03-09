@@ -1,3 +1,14 @@
+/*
+using isUndefined() from "../../settings/settings - functions.jsx"
+using restrictInputKeys() from "../Ι_utils/functions/restrictInputKeys.jsx"
+using getRidOfTooMuch0AtFront() from "../Ι_utils/functions/getRidOfTooMuch0AtFront.jsx"
+using restrictValueUpTo() from "./2^n canvas - functions.jsx"
+using setMinimalValueAt() from "./2^n canvas - functions.jsx"
+using doesItHaveBackgroundLayer() from "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx"
+using leftUpperCornerColorBGSet() from "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx"
+using nearestPow2() from "./2^n canvas - functions.jsx"
+*/
+
 #include "../Ι_utils/EventHandlerBuilderMain/savingBGandFGtoRestoreLater.jsx";
 
 #include "../Ι_utils/EventHandlerBuilderMain/onCanvExtendColorDropDwn.jsx";

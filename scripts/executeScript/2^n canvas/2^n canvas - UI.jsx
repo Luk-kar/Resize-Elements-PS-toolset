@@ -1,3 +1,9 @@
+/*
+using from "../../main/main - functions.jsx":
+- createPanelUI()
+- createGroupUI()
+*/
+    
     //Code below is injected in PanelChangeFile
     
     this.maxResValue = 8192;

@@ -1,4 +1,4 @@
-// Here you invoke functions declared in Add canvas - EventHandlerBuilderMain.jsx
+// Here you invoke functions in "../../main/main.jsx"
 
 eventHandler.settingAcceptBtnBlock();
 
