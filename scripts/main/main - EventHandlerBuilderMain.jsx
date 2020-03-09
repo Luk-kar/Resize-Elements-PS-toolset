@@ -1,5 +1,5 @@
 /*
-using from "../executeScript/(2^n canvas) || (Add canvas) || (Resize image)/(2^n canvas) || (Add canvas) || (Resize image) - EventHandlerBuilderMain.jsx":
+using from "../executeScript/((2^n canvas) || (Add canvas) || (Resize image))/((2^n canvas) || (Add canvas) || (Resize image)) - EventHandlerBuilderMain.jsx":
 - self.lockingUnlockingAcceptBtn()
 
 using from "../settings/settings - functions.jsx":
@@ -7,6 +7,7 @@ using from "../settings/settings - functions.jsx":
 - readValueOfSeetingsFromPrefFile()
 
 using from "./main - functions.jsx":
+- appData
 - panelFilterFilesEnabled()
 - btnsRadDestFoldEnabled()
 - infoFilesUIUpdate()

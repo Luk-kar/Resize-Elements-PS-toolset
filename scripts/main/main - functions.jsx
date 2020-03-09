@@ -1,5 +1,6 @@
 /*
 using from "../settings/settings - functions.jsx":
+- appData
 - isUndefined()
 - readValueOfSeetingsFromPrefFile()
 - createFilePath()

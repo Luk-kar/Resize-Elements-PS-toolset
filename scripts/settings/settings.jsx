@@ -1,3 +1,8 @@
+/*
+using from "../settings/settings - functions.jsx":
+- appData
+*/
+
 #include "./settings - GuiBuilderSettingsPanel.jsx";
 
 #include "./settings - EventHandlerBuilderSettingsPanel.jsx";

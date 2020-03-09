@@ -1,5 +1,7 @@
 /*
-using readValueOfSeetingsFromPrefFile() from "./settings - functions.jsx"
+using from "../settings/settings - functions.jsx":
+- appData
+- readValueOfSeetingsFromPrefFile()
 */
 
 function GuiBuilderSettingsPanel(prefFileKeys, appData, userDataFolder) {

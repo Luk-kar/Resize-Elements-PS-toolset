@@ -3,6 +3,11 @@ Photoshop script written by Karol Łukaszczyk, 01.2020
 Permits you to use, modify, and distribute this file according to licence
 */
 
+/*
+using from "../settings/settings - functions.jsx":
+- appData
+*/
+
 #target photoshop
 
 $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break
