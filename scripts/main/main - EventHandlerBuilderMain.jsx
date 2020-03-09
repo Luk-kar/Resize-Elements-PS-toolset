@@ -1,4 +1,7 @@
 /*
+using from "../control panel/control panel - EventHandlerBuilderControlPanel.jsx":
+- executeScript
+
 using from "../executeScript/((2^n canvas) || (Add canvas) || (Resize image))/((2^n canvas) || (Add canvas) || (Resize image)) - EventHandlerBuilderMain.jsx":
 - self.lockingUnlockingAcceptBtn()
 

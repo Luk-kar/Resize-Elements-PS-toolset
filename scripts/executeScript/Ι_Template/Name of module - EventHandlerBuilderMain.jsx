@@ -1,8 +1,7 @@
 /*
-using isUndefined() from "../../settings/settings - functions.jsx"
+using from "../../settings/settings - functions.jsx":
+- isUndefined()
 */
-
-EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
 /*
 Look at opened script in Photoshop, on some examples (Add canvas, Resize image, 2^n canvas)
@@ -14,7 +13,7 @@ self.sourceFolderFilesToProcess <=== array of files which will be processed
 UI.btnChooseFilesDestFold <=== button by which you choose destination folder
 UI.btnAccept <=== button by which you start processing files
 */
-
+EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
     var UI = this.UI;
     var self = this;
 
