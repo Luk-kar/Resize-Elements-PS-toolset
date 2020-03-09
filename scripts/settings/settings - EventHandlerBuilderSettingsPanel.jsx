@@ -1,3 +1,7 @@
+/*
+using setValuesOfPrefs() from "./settings - functions.jsx"
+*/
+
 function EventHandlerBuilderSettingsPanel(UISetPanel) {
     this.UISetPanel = UISetPanel;
 }

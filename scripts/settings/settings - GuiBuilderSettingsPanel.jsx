@@ -1,3 +1,7 @@
+/*
+using readValueOfSeetingsFromPrefFile() from "./settings - functions.jsx"
+*/
+
 function GuiBuilderSettingsPanel(prefFileKeys, appData, userDataFolder) {
 
     this.buildSettingsPanel(prefFileKeys, appData, userDataFolder);
