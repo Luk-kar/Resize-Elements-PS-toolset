@@ -6,6 +6,7 @@ Permits you to use, modify, and distribute this file according to licence
 /*
 using from "../settings/settings - functions.jsx":
 - appData
+- prefFileKeys
 */
 
 #target photoshop

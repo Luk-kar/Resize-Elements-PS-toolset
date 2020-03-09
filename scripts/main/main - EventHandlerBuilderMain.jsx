@@ -8,6 +8,7 @@ using from "../settings/settings - functions.jsx":
 
 using from "./main - functions.jsx":
 - appData
+- prefFileKeys
 - panelFilterFilesEnabled()
 - btnsRadDestFoldEnabled()
 - infoFilesUIUpdate()
