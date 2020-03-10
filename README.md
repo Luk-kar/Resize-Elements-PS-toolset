@@ -76,7 +76,7 @@ To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
 
 14. **Enjoy!**
 
-![make script as button](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/make%20script%20as%20button.gif)
+![make script as button](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/make%20script%20as%20button.gif)
 
 ## Running the tests 🧪
 
@@ -96,7 +96,7 @@ For now only manual testing is avaible. Use [**Adobe Phtoshop CS6 SDK Win**](htt
 
 ## Structure of the code 🧭
 
-![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/Flow%20Diagram.png)
+![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/Flow%20Diagram.png)
 
 
 ## How to make own module 🪓
