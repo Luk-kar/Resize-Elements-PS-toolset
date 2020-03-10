@@ -9,7 +9,7 @@
 Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10</br></br>
 </i></div>
 
-## Getting Started
+## Getting Started 💡
 
 You choose opened files in PS or source folder with files to process  
 Later you decide if you want to save them in original directory or in choosed destination folder  
