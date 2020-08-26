@@ -29,6 +29,8 @@ main(executeScript, appData, prefFileKeys, userDataFolder);
 
 function main(executeScript, appData, prefFileKeys, userDataFolder) {
 
+    app.displayDialogs = DialogModes.NO; // to avoid bugs with pop-up windows
+
     appDataBuilder(appData, prefFileKeys, userDataFolder);
     
     var UI = new GuiBuilderMain();

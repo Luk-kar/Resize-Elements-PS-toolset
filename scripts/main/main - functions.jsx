@@ -49,7 +49,7 @@ var _btnChooseFilesSourceFold_= {};
 
 _btnChooseFilesSourceFold_.filesEqual0 = function(self, UI) {
 
-    self.sourceFolder === null; // to avoid bug It has to be reset becouse there could be possibility that old path could be passed;
+    self.sourceFolder === null; // to avoid bug It has to be reset because there could be possibility that old path could be passed;
 
     createFolderPath(UI.btnChooseFilesSourceFold.title, "Source folder...");
 
@@ -323,7 +323,7 @@ function checkingIfDestFoldAndSourceFoldAreTheSame(UI, destinationFolderSelectio
     return self_detinationFolder;
 }
 
-//Used later to dispaly names of opened files
+//Used later to display names of opened files
 function docsOpenedFiles() { //https://stackoverflow.com/questions/59896445/how-to-check-if-opened-file-is-saved-on-drive-cs6-script
 
     var openedDocsToProcess = new Array;
