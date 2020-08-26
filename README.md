@@ -26,7 +26,7 @@ You can change this value by clicking button **Settings**, then button **Changed
 
 - **2^n canvas** (add canvas for both sides by nearest value of power of 2)
 
-- **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed files in "ChangedFilesList.log")
+- **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed names of files in "ChangedFilesList.log")
 
 #### AppData are in: _~Documents/UI-Photoshop-toolSet_:
 - **ChangedFilesList.log**
@@ -34,7 +34,7 @@ You can change this value by clicking button **Settings**, then button **Changed
 - **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in file:
     - "Filter files by PNG" By default
     - "Do you want to close all opened files?" Dialog
-    - "ChangedFilesList.log" Log)
+    - "ChangedFilesList.log" Writing in log
 
 ### Prerequisites 💪
 
