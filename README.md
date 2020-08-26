@@ -101,15 +101,15 @@ For now only manual testing is avaible. Use [**Adobe Phtoshop CS6 SDK Win**](htt
 
 ## How to make own module 🪓
 
-Just open [**How to make own module.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/How%20to%20make%20own%20module.md)
+Just open [**How to make own module.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/How%20to%20make%20own%20module.md)
 
 ## Contributing 📬
 
-Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/CONTRIBUTING.md.md) for details on our code of conduct, and the process for submitting pull requests to us
+Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us
 
 ## Versioning 🗓️
 
-We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/CHANGELOG.md)
+We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/CHANGELOG.md)
 
 ## Authors 🎈
 
@@ -117,7 +117,7 @@ We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](htt
 
 ## License 📜
 
-This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/Ikulis--updates/License.md) file for details
+This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/License.md) file for details
 
 ## Acknowledgments 👍
 
