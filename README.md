@@ -38,7 +38,7 @@ You can change this value by clicking button **Settings**, then button **Changed
 
 ### Prerequisites 💪
 
-To run this script you need at least **Photoshop CS6 32bit Version: 13.0**
+To run this script you need at least **Photoshop CS6 64bit Version: 13.0** other versions of PS could not work
 
 ### Installing 🔨
 
