@@ -6,7 +6,7 @@
 </br>This is small plugin to automate repetetive and boring tasks connected with UI elements</br>
 </div>
 <div align="center"><i>
-Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10</br></br>
+Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10</br></br>
 </i></div>
 
 ## Getting Started 💡
