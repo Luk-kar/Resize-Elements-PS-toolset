@@ -13,6 +13,10 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 
 ![add canvas](docs/images/add_canvas.gif)
 
+![resize image](docs/images/resize_image.gif)
+
+![2n canvas](docs/images/2n_canvas.gif)
+
 ## Getting Started 💡
 
 You choose opened files in PS or source folder with files to process  
