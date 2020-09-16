@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ## [1.0.0-initial]
+
 ### Added
 
 - Add canvas module
@@ -19,7 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Preferences.ini
 - README.md
 - CHANGELOG.md
-- Flow Diagram.png
+- Flow_Diagram.png
 - CONTRIBUTING.md.md
-- How to make own module.md
-- MIT License.txt (to avoid unnecessary questions)
+- How_to_make_own_module.md
+- MIT LICENSE (to avoid unnecessary questions)

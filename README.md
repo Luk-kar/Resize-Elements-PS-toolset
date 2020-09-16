@@ -9,6 +9,8 @@
 Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10</br></br>
 </i></div>
 
+![How the program works](docs/images/How_it_works.png)
+
 ## Getting Started 💡
 
 You choose opened files in PS or source folder with files to process  
@@ -77,7 +79,7 @@ To run this script you need at least **Photoshop CS6 64bit Version: 13.0** other
 
 17. **Enjoy!**
 
-![make script as button](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/make%20script%20as%20button.gif)
+![make script as button](docs/images/make_script_as_button.gif)
 
 ## Running the tests 🧪
 
@@ -97,19 +99,19 @@ For now only manual testing is available. Use [**Adobe Phtoshop CS6 SDK Win**](h
 
 ## Structure of the code 🧭
 
-![Flow diagram](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/Flow%20Diagram.png)
+![Flow diagram](docs/images/Flow_Diagram.png)
 
 ## How to make own module 🪓
 
-Just open [**How to make own module.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/How%20to%20make%20own%20module.md)
+Just open [**How_to_make_own_module.md**](docs/How_to_make_own_module.md)
 
 ## Contributing 📬
 
-Please read [**CONTRIBUTING.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us
+Please read [**CONTRIBUTING.md**](docs/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us
 
 ## Versioning 🗓️
 
-We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/CHANGELOG.md)
+We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](docs/CHANGELOG.md)
 
 ## Authors 🎈
 
@@ -117,7 +119,7 @@ We use [**SemVer**](http://semver.org/) for versioning in [**CHANGELOG.md**](htt
 
 ## License 📜
 
-This project is licensed under the MIT License - see the [**LICENSE.md**](https://github.com/Lukkar90/UI-Photoshop-toolSet/blob/master/License.md) file for details
+This project is licensed under the MIT License - see the [**LICENSE**](docs/LICENSE) file for details
 
 ## Acknowledgments 👍
 
