@@ -13,11 +13,11 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 
 <div display: inline-block>
 
-![add canvas](docs/images/add_canvas.gif)
+<span>![add canvas](docs/images/add_canvas.gif)</span>
 
-![resize image](docs/images/resize_image.gif)
+<span>![resize image](docs/images/resize_image.gif)</span>
 
-![2n canvas](docs/images/2n_canvas.gif)
+<span>![2n canvas](docs/images/2n_canvas.gif)</span>
 
 </div>
 
