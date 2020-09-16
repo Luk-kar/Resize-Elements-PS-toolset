@@ -11,6 +11,8 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 
 ![How the program works](docs/images/How_it_works.png)
 
+![add canvas](docs/images/add_canvas.gif)
+
 ## Getting Started 💡
 
 You choose opened files in PS or source folder with files to process  
