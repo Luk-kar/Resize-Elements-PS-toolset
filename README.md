@@ -9,6 +9,7 @@
 Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10</br></br>
 </i></div>
 
+<div align="center">
 ![How the program works](docs/images/How_it_works.png)
 
 ![add canvas](docs/images/add_canvas.gif)
@@ -16,6 +17,8 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 ![resize image](docs/images/resize_image.gif)
 
 ![2n canvas](docs/images/2n_canvas.gif)
+
+</div>
 
 ## Getting Started 💡
 
