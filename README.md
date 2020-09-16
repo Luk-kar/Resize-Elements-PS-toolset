@@ -9,8 +9,9 @@
 Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10</br></br>
 </i></div>
 
-<div align="center">
 ![How the program works](docs/images/How_it_works.png)
+
+<div display: inline-block>
 
 ![add canvas](docs/images/add_canvas.gif)
 
