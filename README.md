@@ -1,4 +1,4 @@
-<h1 align="center">UI Photoshop toolSet </h1>
+<h1 align="center">Resize Elements - PS toolset</h1>
 
 <div align="center">🚀🚀🚀</div>
 
@@ -11,10 +11,9 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 
 ![How the program works](docs/images/How_it_works.png)
 
-
-|                Add canvas                 |                 Resize image                  |                2^n canvas             |
-| :---------------------------------------: | :-------------------------------------------: |:-------------------------------------:|
-| ![add canvas](docs/images/add_canvas.gif) | ![resize image](docs/images/resize_image.gif) |![2n canvas](docs/images/2n_canvas.gif)|
+|                Add canvas                 |                 Resize image                  |               2^n canvas                |
+| :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: |
+| ![add canvas](docs/images/add_canvas.gif) | ![resize image](docs/images/resize_image.gif) | ![2n canvas](docs/images/2n_canvas.gif) |
 
 ## Getting Started 💡
 

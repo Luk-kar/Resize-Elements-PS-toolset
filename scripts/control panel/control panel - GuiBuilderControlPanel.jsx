@@ -5,7 +5,7 @@ function GuiBuilderControlPanel() {
 
 GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
-    this.controlPanelWindow = new Window("dialog", "UI toolset");
+    this.controlPanelWindow = new Window("dialog", "Resize Elements");
 
     this.btnAddCanvas = this.controlPanelWindow.add("button", [0, 80, 190, 101], "Add canvas");
 
