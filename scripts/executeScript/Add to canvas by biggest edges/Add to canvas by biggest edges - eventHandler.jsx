@@ -1,4 +1,4 @@
-// Here you invoke functions in "../../main/main.jsx"
+// Add canvas --------------------------------------------------------------------------------------------------------------------
 
 eventHandler.settingAcceptBtnBlock();
 
@@ -8,3 +8,4 @@ eventHandler.settingChangeFile();
 
 eventHandler.settingChangeFileAndSaveEndingFunction();
 
+alert("event")

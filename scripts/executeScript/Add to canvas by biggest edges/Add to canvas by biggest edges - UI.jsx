@@ -22,3 +22,5 @@ using from "../../main/main - functions.jsx":
     this.panelExplain.title.characters = this.panelWidth + 8; //making module width the same as rest panels in window
 
     this.panelChangeFile.add("statictext");
+
+alert("UI")

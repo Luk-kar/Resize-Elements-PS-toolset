@@ -188,4 +188,6 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
     }
 }
 
+alert("Event")
+
 

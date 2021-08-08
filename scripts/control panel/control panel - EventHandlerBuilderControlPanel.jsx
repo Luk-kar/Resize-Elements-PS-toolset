@@ -53,7 +53,6 @@ EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () {
         UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "Add to canvas by biggest edges";
-        // checkIfScriptNameIsRight(executeScript);
 
         #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - functions.jsx";
         #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - EventHandlerBuilderMain.jsx";
