@@ -52,7 +52,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () {
     UIctrlPanel.btnNameOfModule.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
         
-        var executeScript = "NameOfModule";
+        var executeScript = "Add to canvas by biggest edges";
         // checkIfScriptNameIsRight(executeScript);
 
         #include "../executeScript/NameOfModule/Name of module - functions.jsx";
