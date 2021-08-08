@@ -145,7 +145,7 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     }
 
     if (executeScript === "Name of module"){
-        #include "../executeScript/Add to canvas by biggest edges/Name of module - UI.jsx";
+        #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - UI.jsx";
     }
 }
 

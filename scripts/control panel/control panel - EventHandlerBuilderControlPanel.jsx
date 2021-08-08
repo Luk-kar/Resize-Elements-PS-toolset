@@ -55,8 +55,8 @@ EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () {
         var executeScript = "Add to canvas by biggest edges";
         // checkIfScriptNameIsRight(executeScript);
 
-        #include "../executeScript/Add to canvas by biggest edges/Name of module - functions.jsx";
-        #include "../executeScript/Add to canvas by biggest edges/Name of module - EventHandlerBuilderMain.jsx";
+        #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - functions.jsx";
+        #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - EventHandlerBuilderMain.jsx";
         #include "../main/main.jsx";
 
     }
