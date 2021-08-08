@@ -6,7 +6,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
     var UIctrlPanel = this.UIctrlPanel;
     UIctrlPanel.btnAddCanvas.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
-        
+
         var executeScript = "Add canvas";
         checkIfScriptNameIsRight(executeScript);
 
@@ -17,11 +17,26 @@ EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
     }
 }
 
+EventHandlerBuilderControlPanel.prototype.onBtnSetBiggestEdgesOnCanvas = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+
+    UIctrlPanel.btnSetBiggestEdgesOnCanvas.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
+
+        var executeScript = "Set biggest edges on canvas";
+        checkIfScriptNameIsRight(executeScript);
+
+        #include "../executeScript/Set biggest edges on canvas/Set biggest edges on canvas - functions.jsx";
+        #include "../executeScript/Set biggest edges on canvas/Set biggest edges on canvas - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx";
+    }
+}
+
 EventHandlerBuilderControlPanel.prototype.onBtnResizeImage = function () {
     var UIctrlPanel = this.UIctrlPanel;
     UIctrlPanel.btnResizeImage.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
-        
+
         var executeScript = "Resize image";
         checkIfScriptNameIsRight(executeScript);
 
@@ -36,7 +51,7 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
     var UIctrlPanel = this.UIctrlPanel;
     UIctrlPanel.btn2toNcanvas.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
-        
+
         var executeScript = "2^n canvas";
         checkIfScriptNameIsRight(executeScript);
 

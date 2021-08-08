@@ -18,7 +18,7 @@ function GuiBuilderMain() {
     this.images();
 }
 
-GuiBuilderMain.prototype.baseLayout = function(executeScript) {
+GuiBuilderMain.prototype.baseLayout = function (executeScript) {
 
     //Creating groups to populate with main UI
     this.mainWindow = new Window("dialog", executeScript);
@@ -30,7 +30,7 @@ GuiBuilderMain.prototype.baseLayout = function(executeScript) {
 
 }
 
-GuiBuilderMain.prototype.images = function() {
+GuiBuilderMain.prototype.images = function () {
 
     var scriptParentFolder = getGrandParentfolder(); // slice negative numb is length of file folder
 
@@ -51,7 +51,7 @@ GuiBuilderMain.prototype.images = function() {
 
 }
 
-GuiBuilderMain.prototype.buildPanelSourceFiles = function() {
+GuiBuilderMain.prototype.buildPanelSourceFiles = function () {
     //Creating group to populate with main UI
     this.panelSourceFiles = createPanelUI(this.groupInfo, undefined, "left");
 
@@ -69,13 +69,13 @@ GuiBuilderMain.prototype.buildPanelSourceFiles = function() {
     //Add button to choose target folder
     this.groupBtnChooseFilesSourceFold = this.panelSourceFiles.add("group");
 
-    this.btnChooseFilesSourceFold =  this.groupBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
+    this.btnChooseFilesSourceFold = this.groupBtnChooseFilesSourceFold.add("button", undefined, "Browse...");
     this.btnChooseFilesSourceFold.title = this.groupBtnChooseFilesSourceFold.add("statictext", undefined, "Source folder...");
 
     this.btnChooseFilesSourceFold.title.characters = this.panelWidth; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 }
 
-GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function(prefFileKeys_filterByPNG, appData_preferencesFile) {
+GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function (prefFileKeys_filterByPNG, appData_preferencesFile) {
 
     //Create panel
     this.panelFilterFiles = createPanelUI(this.groupInfo, undefined, "left");
@@ -93,20 +93,20 @@ GuiBuilderMain.prototype.buildPanelSourceFilesFilter = function(prefFileKeys_fil
 
 
     this.filterSourceFilesByExpression = this.panelFilterFiles.add("group"); //Why it is not part of this.filterSourceFilesCheckbox.byExpression, thou ask? Becouse only checkbox of filterSourceFilesCheckbox.byExpression enable or disable this group
-        //Create statictext
-        this.filterSourceFilesByExpression.title = this.filterSourceFilesByExpression.add("statictext", undefined, "Filter by:");
-        //Create editText
-        this.filterSourceFilesByExpression.input = this.filterSourceFilesByExpression.add("edittext", undefined, "");
-        this.filterSourceFilesByExpression.input.characters = 30;
+    //Create statictext
+    this.filterSourceFilesByExpression.title = this.filterSourceFilesByExpression.add("statictext", undefined, "Filter by:");
+    //Create editText
+    this.filterSourceFilesByExpression.input = this.filterSourceFilesByExpression.add("edittext", undefined, "");
+    this.filterSourceFilesByExpression.input.characters = 30;
 
-        this.filterSourceFilesByExpression.imageTooltip = this.filterSourceFilesByExpression.add("image", undefined, this.imageInfHov);
+    this.filterSourceFilesByExpression.imageTooltip = this.filterSourceFilesByExpression.add("image", undefined, this.imageInfHov);
 
-        this.filterSourceFilesByExpression.panelWidth = this.filterSourceFilesByExpression.add("statictext", undefined, "");
-        this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth -32; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
+    this.filterSourceFilesByExpression.panelWidth = this.filterSourceFilesByExpression.add("statictext", undefined, "");
+    this.filterSourceFilesByExpression.panelWidth.characters = this.panelWidth - 32; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 
 }
 
-GuiBuilderMain.prototype.buildPanelDestinationFolder = function(executeScript) {
+GuiBuilderMain.prototype.buildPanelDestinationFolder = function (executeScript) {
 
     this.panelDestFold = createPanelUI(this.groupInfo, undefined, "left");
 
@@ -129,23 +129,27 @@ GuiBuilderMain.prototype.buildPanelDestinationFolder = function(executeScript) {
     this.btnChooseFilesDestFold.title.characters = this.panelWidth; //Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold
 }
 
-GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
+GuiBuilderMain.prototype.buildPanelChangeFile = function (executeScript) {
     var UI = this.UI;
 
-    if (executeScript === "Add canvas"){
+    if (executeScript === "Add canvas") {
         #include "../executeScript/Add canvas/Add canvas - UI.jsx";
     }
 
-    if (executeScript === "Resize image"){
-        #include "../executeScript/Resize image/Resize image - UI.jsx"; 
+    if (executeScript === "Set biggest edges on canvas") {
+        #include "../executeScript/Set biggest edges on canvas/Set biggest edges on canvas - UI.jsx";
     }
 
-    if (executeScript === "2^n canvas"){
-        #include "../executeScript/2^n canvas/2^n canvas - UI.jsx"; 
+    if (executeScript === "Resize image") {
+        #include "../executeScript/Resize image/Resize image - UI.jsx";
+    }
+
+    if (executeScript === "2^n canvas") {
+        #include "../executeScript/2^n canvas/2^n canvas - UI.jsx";
     }
 }
 
-GuiBuilderMain.prototype.buildPanelInfoUI = function(){
+GuiBuilderMain.prototype.buildPanelInfoUI = function () {
 
     this.panelDocInfo = createPanelUI(this.groupInfo, undefined, "left");
 
@@ -161,15 +165,15 @@ GuiBuilderMain.prototype.buildPanelInfoUI = function(){
     }
 }
 
-GuiBuilderMain.prototype.buildAcceptCancelReturnButtons = function() {
+GuiBuilderMain.prototype.buildAcceptCancelReturnButtons = function () {
 
-        this.groupBtns = createGroupUI(this.groupMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
+    this.groupBtns = createGroupUI(this.groupMain, "column", undefined, [ScriptUI.Alignment.RIGHT, ScriptUI.Alignment.TOP]);
 
-        this.btnAccept = this.groupBtns.add("button", undefined, "Accept");
+    this.btnAccept = this.groupBtns.add("button", undefined, "Accept");
 
-        this.btnCancel = this.groupBtns.add("button", undefined, "Close");
+    this.btnCancel = this.groupBtns.add("button", undefined, "Close");
 
-        this.btnReturn = this.groupBtns.add("button", undefined, "Return");
+    this.btnReturn = this.groupBtns.add("button", undefined, "Return");
 }
 
 function EventHandlerBuilderMain(UI) {

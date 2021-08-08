@@ -15,15 +15,17 @@ $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate B
 
 function main() {
 
-    var UIctrlPanel =  new GuiBuilderControlPanel();
+    var UIctrlPanel = new GuiBuilderControlPanel();
 
     UIctrlPanel.buildControlPanel();
 
-//================================================================================================================================
+    //================================================================================================================================
 
-    var eventHandler = new EventHandlerBuilderControlPanel( UIctrlPanel );
+    var eventHandler = new EventHandlerBuilderControlPanel(UIctrlPanel);
 
     eventHandler.onBtnAddCanvas();
+
+    eventHandler.onBtnSetBiggestEdgesOnCanvas();
 
     eventHandler.onBtnResizeImage();
 

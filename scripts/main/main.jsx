@@ -32,7 +32,7 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
     app.displayDialogs = DialogModes.NO; // to avoid bugs with pop-up windows
 
     appDataBuilder(appData, prefFileKeys, userDataFolder);
-    
+
     var UI = new GuiBuilderMain();
 
     UI.buildPanelSourceFiles();
@@ -47,23 +47,27 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
 
     UI.buildAcceptCancelReturnButtons();
 
-//================================================================================================================================
-    
-    var eventHandler = new EventHandlerBuilderMain( UI );
+    //================================================================================================================================
+
+    var eventHandler = new EventHandlerBuilderMain(UI);
 
     if (executeScript === "Add canvas") {
         #include "../executeScript/Add canvas/Add canvas - eventHandler.jsx";
     }
 
-    if (executeScript === "Resize image"){
-        #include "../executeScript/Resize image/Resize image - eventHandler.jsx"; 
+    if (executeScript === "Set biggest edges on canvas") {
+        #include "../executeScript/Set biggest edges on canvas/Set biggest edges on canvas - eventHandler.jsx";
     }
 
-    if (executeScript === "2^n canvas"){
-        #include "../executeScript/2^n canvas/2^n canvas - eventHandler.jsx"; 
+    if (executeScript === "Resize image") {
+        #include "../executeScript/Resize image/Resize image - eventHandler.jsx";
     }
 
-// Main mechanics -------------------------------------------------------------------------------------------------------------------
+    if (executeScript === "2^n canvas") {
+        #include "../executeScript/2^n canvas/2^n canvas - eventHandler.jsx";
+    }
+
+    // Main mechanics -------------------------------------------------------------------------------------------------------------------
 
     eventHandler.onBtnRadChooseFilesActiveDocs();
 
