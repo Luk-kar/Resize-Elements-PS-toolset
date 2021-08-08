@@ -63,8 +63,8 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
         #include "../executeScript/2^n canvas/2^n canvas - eventHandler.jsx"; 
     }
 
-    if (executeScript === "Name of module"){ // <== Add code below
-        #include "../executeScript/NameOfModule/Name of module - eventHandler.jsx";
+    if (executeScript === "Name of module"){
+        #include "../executeScript/Add to canvas by biggest edges/Name of module - eventHandler.jsx";
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
