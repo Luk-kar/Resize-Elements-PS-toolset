@@ -143,6 +143,10 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     if (executeScript === "2^n canvas"){
         #include "../executeScript/2^n canvas/2^n canvas - UI.jsx"; 
     }
+
+    if (executeScript === "Name of module"){
+        #include "../executeScript/NameOfModule/Name of module - UI.jsx";
+    }
 }
 
 GuiBuilderMain.prototype.buildPanelInfoUI = function(){

@@ -47,6 +47,21 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
     }
 }
 
+EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+    UIctrlPanel.btnNameOfModule.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
+        
+        var executeScript = "NameOfModule";
+        // checkIfScriptNameIsRight(executeScript);
+
+        #include "../executeScript/NameOfModule/Name of module - functions.jsx";
+        #include "../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx";
+
+    }
+}
+
 EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
     var UIctrlPanel = this.UIctrlPanel;
 

@@ -29,6 +29,8 @@ function main() {
 
     eventHandler.onBtn2toNcanvas();
 
+    eventHandler.onBtnNameOfModule();
+
     eventHandler.onBtnPanelSettings();
 
     eventHandler.onBtnClose();

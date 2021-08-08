@@ -13,6 +13,8 @@ GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
     this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
+    this.btnNameOfModule = this.controlPanelWindow.add("button", [205, 80, 395, 101], "NameOfModule")
+
     this.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
     this.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
