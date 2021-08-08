@@ -43,5 +43,3 @@ function anchorSetingNew(btnAnchorClickedOn, anchorPositionAtributes, anchorPost
     //Sending information which anchor is marked for resizeCanvas()
     return anchorPositionValue;
 }
-
-alert("func")
