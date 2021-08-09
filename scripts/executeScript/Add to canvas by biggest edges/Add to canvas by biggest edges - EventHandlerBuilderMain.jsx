@@ -166,6 +166,18 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                     }
 
                 } else { // This files does not have EXIF dimensions, so they will be checked during opening files
+
+                    var activeDoc = open(File(self.sourceFolderFilesToProcess[i]));
+                    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+                    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+
+                    if (biggestWidth < activeDocWidth) {
+                        biggestWidth = activeDocWidth
+                    }
+                    if (biggestHeight < activeDocHeight) {
+                        biggestHeight = activeDocHeight
+                    }
+                    activeDoc.close();
                     sourceFilesTemp.push(self.sourceFolderFilesToProcess[i]);
                 }    
             }
@@ -182,24 +194,16 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     var UI = this.UI;
     var self = this;
 
-    self.changeFile = function TwotoNCanvas() {
+    self.changeFile = function SetCanvas() {
 
         var doc = app.activeDocument;
 
+        if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) { // To avoid bug with picking empty layer
+            leftUpperCornerColorBGSet();
+        }
+
+        doc.resizeCanvas(UnitValue(self.biggestWidth, "PX"), UnitValue(self.biggestHeight, "PX"), self.anchorPostionValue);
     }
-
-    //     var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
-    //     var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
-
-    //     var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
-    
-    //     if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) { // To avoid bug with picking empty layer
-    
-    //         leftUpperCornerColorBGSet();
-    //     }
-    
-    //     doc.resizeCanvas(UnitValue(ValueOfSides, "PX"), UnitValue(ValueOfSides, "PX"), AnchorPosition.MIDDLECENTER);
-    // }
 }
 
 EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = function() {

@@ -31,6 +31,10 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
 
     app.displayDialogs = DialogModes.NO; // to avoid bugs with pop-up windows
 
+    // set units to px to read values of active docs later
+    var currentUnits = app.preferences.rulerUnits;
+    app.preferences.rulerUnits = Units.PIXELS;
+
     appDataBuilder(appData, prefFileKeys, userDataFolder);
     
     var UI = new GuiBuilderMain();
