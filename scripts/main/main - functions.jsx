@@ -781,7 +781,7 @@ function retrievePreviuslyOpenedFiles(btnRadSourceFiles_chooseOpenedFiles, btnRa
 }
 
 function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, countChangedFilesFalse, sourceFolderNameRecent, detinationFolder, btnRadSourceFiles, btnRadDestFold) {
-
+    // todo hardcode summary
     var scriptName = executeScript;
     var scriptFolder = $.fileName.slice(0, -16);
 
