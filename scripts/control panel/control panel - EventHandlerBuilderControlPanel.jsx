@@ -61,6 +61,20 @@ EventHandlerBuilderControlPanel.prototype.onbtnAddCanvasByBiggestEdges = functio
     }
 }
 
+EventHandlerBuilderControlPanel.prototype.onbtnSetCanvas = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+    UIctrlPanel.btnSetCanvas.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
+        
+        var executeScript = "Set canvas";
+
+        #include "../executeScript/Set canvas/Set canvas - functions.jsx";
+        #include "../executeScript/Set canvas/Set canvas - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx";
+
+    }
+}
+
 EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
     var UIctrlPanel = this.UIctrlPanel;
 

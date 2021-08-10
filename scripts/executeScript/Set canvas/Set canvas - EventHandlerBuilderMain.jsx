@@ -15,8 +15,6 @@ suing mathSumWidthAndHeight() from "../Ι_utils/functions/mathSumWidthAndHeight.
 
 #include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx";
 
-#include "../Ι_utils/EventHandlerBuilderMain/onGroupUnitsDropDown.jsx";
-
 #include "../Ι_utils/EventHandlerBuilderMain/tooltipWidthAndHeightImage.jsx";
 
 #include "../Ι_utils/EventHandlerBuilderMain/onGrpDlgUnitValImage.jsx";
@@ -52,15 +50,6 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
     var self = this;
 
     self.startingFunction = function setUnitForAddCanvas() {
-        //full list is in var AddCanvasDocUnits
-        var unitsTypes = [
-            ["ADD PX", "PX"],
-            ["ADD %", "PERCENT"],
-        ];
-        ErrorDiffrentUnitTypes(UI.groupWidth.unitsDropDown, unitsTypes);
-    
-        self.units = unitsTypes[parseInt(UI.groupWidth.unitsDropDown.selection, 10)][1];
-
         return self.sourceFolderFilesToProcess; // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
     }
 }
@@ -69,7 +58,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     var UI = this.UI;
     var self = this;
 
-    self.changeFile = function AddCanvas() {
+    self.changeFile = function SetCanvas() {
 
         if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) {// To avoid bug with picking empty layer
     
@@ -77,16 +66,16 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
         }
     
         var doc = app.activeDocument;
+        var setWidth = parseInt(UI.groupWidth.numb.text, 10)
+        var setHeight = parseInt(UI.groupHeight.numb.text, 10);
     
-        var mathWidthAndHeightResult = mathSumWidthAndHeight(self.units, UI.groupWidth.numb.text, UI.groupHeight.numb.text, doc);
-        var sumWidth = mathWidthAndHeightResult[1];
-        var sumHeight = mathWidthAndHeightResult[0];
-    
-        if ( isNaN(sumWidth) || isNaN(sumHeight) ) {
+        if ( isNaN(setWidth) || setWidth <= 0 || isNaN(setHeight) || setHeight <= 0) {
             throw new Error ("object is not a Number. Width of file or added value or both should be numerical");
         }
+
+        var unit = "PX"
     
-        doc.resizeCanvas(UnitValue(sumWidth, self.units), UnitValue(sumHeight, self.units), self.anchorPostionValue);
+        doc.resizeCanvas(UnitValue(setWidth, unit), UnitValue(setHeight, unit), self.anchorPostionValue);
     }
 }
 

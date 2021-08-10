@@ -71,6 +71,10 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
         #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - eventHandler.jsx";
     }
 
+    if (executeScript === "Set canvas"){
+        #include "../executeScript/Set canvas/Set canvas - eventHandler.jsx";
+    }
+
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
 
     eventHandler.onBtnRadChooseFilesActiveDocs();

@@ -29,12 +29,7 @@ using from "../../main/main - functions.jsx":
                 this.groupWidth.numb.characters = 9;
 
                 //Update also unitsTypes
-                var AddCanvasDocUnits = [
-                    "ADD PX", 
-                    "ADD %",
-                    ];
-                this.groupWidth.unitsDropDown = this.groupWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.groupWidth.unitsDropDown.selection = 0;
+                this.groupWidth.units = this.groupWidth.add("statictext", undefined, "PX");
 
                 //Crating tooltip
                 this.groupWidth.imageTooltip = this.groupWidth.add("image", undefined, this.imageInfHov);
@@ -48,8 +43,7 @@ using from "../../main/main - functions.jsx":
                 this.groupHeight.numb.characters = 9;
 
                 //Dropdownlist: Add PX, add %
-                this.groupHeight.unitDropDown = this.groupHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.groupHeight.unitDropDown.selection = 0;
+                this.groupHeight.units = this.groupHeight.add("statictext", undefined, "PX");
 
                 //Image: InfoHover.png
                 this.groupHeight.imageTooltip = this.groupHeight.add("image", undefined, this.imageInfHov);

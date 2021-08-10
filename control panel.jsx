@@ -31,6 +31,8 @@ function main() {
 
     eventHandler.onbtnAddCanvasByBiggestEdges();
 
+    eventHandler.onbtnSetCanvas();
+
     eventHandler.onBtnPanelSettings();
 
     eventHandler.onBtnClose();
