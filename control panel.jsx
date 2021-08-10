@@ -29,7 +29,7 @@ function main() {
 
     eventHandler.onBtn2toNcanvas();
 
-    eventHandler.onBtnNameOfModule();
+    eventHandler.onbtnAddCanvasByBiggestEdges();
 
     eventHandler.onBtnPanelSettings();
 

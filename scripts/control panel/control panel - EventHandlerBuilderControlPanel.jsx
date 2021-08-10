@@ -47,9 +47,9 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
     }
 }
 
-EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () {
+EventHandlerBuilderControlPanel.prototype.onbtnAddCanvasByBiggestEdges = function () {
     var UIctrlPanel = this.UIctrlPanel;
-    UIctrlPanel.btnNameOfModule.onClick = function () {
+    UIctrlPanel.btnAddCanvasByBiggestEdges.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "Add to canvas by biggest edges";
