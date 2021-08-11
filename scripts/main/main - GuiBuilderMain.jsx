@@ -151,6 +151,10 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
     if (executeScript === "Set canvas"){
         #include "../executeScript/Set canvas/Set canvas - UI.jsx";
     }
+
+    if (executeScript === "Trim canvas"){
+        #include "../executeScript/Trim canvas/Trim canvas - UI.jsx";
+    }
 }
 
 GuiBuilderMain.prototype.buildPanelInfoUI = function(){

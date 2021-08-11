@@ -75,6 +75,10 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
         #include "../executeScript/Set canvas/Set canvas - eventHandler.jsx";
     }
 
+    if (executeScript === "Trim canvas"){
+        #include "../executeScript/Trim canvas/Trim canvas - eventHandler.jsx";
+    }
+
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
 
     eventHandler.onBtnRadChooseFilesActiveDocs();

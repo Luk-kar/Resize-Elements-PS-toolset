@@ -61,7 +61,7 @@ EventHandlerBuilderControlPanel.prototype.onbtnAddCanvasByBiggestEdges = functio
     }
 }
 
-EventHandlerBuilderControlPanel.prototype.onbtnSetCanvas = function () {
+EventHandlerBuilderControlPanel.prototype.onBtnSetCanvas = function () {
     var UIctrlPanel = this.UIctrlPanel;
     UIctrlPanel.btnSetCanvas.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
@@ -72,6 +72,21 @@ EventHandlerBuilderControlPanel.prototype.onbtnSetCanvas = function () {
         #include "../executeScript/Set canvas/Set canvas - EventHandlerBuilderMain.jsx";
         #include "../main/main.jsx";
 
+    }
+}
+
+EventHandlerBuilderControlPanel.prototype.onBtnTrimCanvas = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+
+    UIctrlPanel.btnTrimCanvas.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
+
+        var executeScript = "Trim canvas";
+        checkIfScriptNameIsRight(executeScript);
+
+        #include "../executeScript/Trim canvas/Trim canvas - functions.jsx";
+        #include "../executeScript/Trim canvas/Trim canvas - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx";
     }
 }
 

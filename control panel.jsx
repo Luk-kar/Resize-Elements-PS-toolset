@@ -31,7 +31,9 @@ function main() {
 
     eventHandler.onbtnAddCanvasByBiggestEdges();
 
-    eventHandler.onbtnSetCanvas();
+    eventHandler.onBtnSetCanvas();
+
+    eventHandler.onBtnTrimCanvas();
 
     eventHandler.onBtnPanelSettings();
 
