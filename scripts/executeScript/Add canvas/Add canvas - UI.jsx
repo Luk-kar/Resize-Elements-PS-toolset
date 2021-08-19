@@ -7,6 +7,8 @@ using from "../../main/main - functions.jsx":
 */
 
     //Code below is injected in PanelChangeFile
+    this.maxResValue = 300000;
+
     ///Add canvas UI
     this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 
@@ -22,7 +24,7 @@ using from "../../main/main - functions.jsx":
     this.groupBiggerThan.title001.characters = 18;
 
     this.groupBiggerThan.valueLowest = this.groupBiggerThan.add("edittext", undefined, "0");
-    this.groupBiggerThan.valueLowest.characters = 4;
+    this.groupBiggerThan.valueLowest.characters = 6;
 
     this.groupBiggerThan.title002 = this.groupBiggerThan.add("statictext", undefined, "px");
 
@@ -36,7 +38,7 @@ using from "../../main/main - functions.jsx":
     this.groupLowerThan.title001.characters = 18;
 
     this.groupLowerThan.valueHighest = this.groupLowerThan.add("edittext", undefined, this.maxResValue);
-    this.groupLowerThan.valueHighest.characters = 4;
+    this.groupLowerThan.valueHighest.characters = 6;
 
     this.groupLowerThan.title002 = this.groupLowerThan.add("statictext", undefined, "px");
 
