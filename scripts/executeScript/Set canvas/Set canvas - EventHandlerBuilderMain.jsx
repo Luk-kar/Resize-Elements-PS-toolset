@@ -127,7 +127,35 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
     var self = this;
 
     self.startingFunction = function setUnitForAddCanvas() {
-        return self.sourceFolderFilesToProcess; // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
+        if (!isUndefined(self.sourceFolderFilesToProcess) && self.sourceFolderFilesToProcess.length > 0) {
+
+            ExternalObject.AdobeXMPScript = new ExternalObject("lib:AdobeXMPScript");
+
+            var sourceFilesTemp = new Array;
+
+            for(var i = 0; i < self.sourceFolderFilesToProcess.length; i++) {
+
+                var file = new XMPFile(File(self.sourceFolderFilesToProcess[i]).fsName, XMPConst.FILE_UNKNOWN, XMPConst.OPEN_FOR_READ);
+
+                var xmp = file.getXMP();
+
+                if( xmp.doesPropertyExist(XMPConst.NS_EXIF, "PixelXDimension" ) ) {
+
+                    var width = parseInt(xmp.getProperty(XMPConst.NS_EXIF, "PixelXDimension" ), 10);
+                
+                    var height = parseInt(xmp.getProperty(XMPConst.NS_EXIF, "PixelYDimension" ), 10);
+                
+                    var highestValueSide = Math.max( width, height );
+
+                    if (highestValueSide >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.groupLowerThan.valueHighest.text, 10) ) { 
+                        sourceFilesTemp.push(self.sourceFolderFilesToProcess[i]);
+                    }
+                } else { // This files does not have EXIF dimensions, so they will be checked during opening files
+                    sourceFilesTemp.push(self.sourceFolderFilesToProcess[i]);
+                }    
+            }
+            return sourceFilesTemp; // returning this value is faster than checking if function returns "undefined" in main.jsx. Assigning execution heavy computing function self.startingFunction twice could be slow
+        }
     }
 }
 
@@ -148,6 +176,15 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     
         if ( isNaN(setWidth) || setWidth <= 0 || isNaN(setHeight) || setHeight <= 0) {
             throw new Error ("object is not a Number. Width of file or added value or both should be numerical");
+        }
+
+        var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+        var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string 
+
+        var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
+
+        if (highestValueSide < parseInt(UI.groupBiggerThan.valueLowest.text, 10) || highestValueSide > parseInt(UI.groupLowerThan.valueHighest.text, 10) ) {
+            return "continue";
         }
 
         var unit = "PX"
