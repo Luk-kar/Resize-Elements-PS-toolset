@@ -144,8 +144,8 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
         #include "../executeScript/2^n canvas/2^n canvas - UI.jsx"; 
     }
 
-    if (executeScript === "Add to canvas by biggest edges"){
-        #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - UI.jsx";
+    if (executeScript === "Set canvas by biggest edges"){
+        #include "../executeScript/Set canvas by biggest edges/Set canvas by biggest edges - UI.jsx";
     }
 
     if (executeScript === "Set canvas"){

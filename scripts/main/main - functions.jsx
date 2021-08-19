@@ -785,13 +785,6 @@ function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, c
     var scriptName = executeScript;
     var scriptFolder = $.fileName.slice(0, -16);
 
-    if (scriptName.split(" ").length !== 2 || !scriptName.match(/[a-z]/i)) {
-        throw new Error('Wrongly formated name of "var executeScript" in controlPanel.jsx in folder: ' + scriptFolder);
-    }
-
-    var verbPastParticiple = simplePastRegularForm(scriptName); //"ed" regular form
-    var noun = scriptName.split(" ")[1];
-
     if (countChangedFilesTrue < 0) {
         throw new Error("Counter can't be less than integer = 0");
     }
@@ -810,7 +803,7 @@ function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, c
 
     if (btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
-        alert("You " + verbPastParticiple + " " + noun + " to " + countChangedFilesTrue + " " + files);
+        alert("You used" + '"' + scriptName + '" to ' + countChangedFilesTrue + " " + files);
         showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
     }
 
@@ -826,7 +819,7 @@ function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, c
             folderName = decodeURIComponent(detinationFolder.name); // string format is URl
         }
 
-        alert("You " + verbPastParticiple + " " + noun + " to " + countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
+        alert("You used " + '"' + scriptName + '" to ' + countChangedFilesTrue + " " + files + ",\nin folder: " + '"' + folderName + '"');
         showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
     }
 }
@@ -868,37 +861,6 @@ function gettingFilesOpenedDocsToReopen() {
     }
 
     return openedDocsToReopen;
-}
-
-function simplePastRegularForm(scriptName) { // https://www.lawlessenglish.com/learn-english/grammar/simple-past-regular-verbs/ //It works in most cases for regular verbs
-
-    var verb = scriptName.split(" ")[0];
-
-    var lastCharOfVerb = verb.slice(-1);
-
-    var TwolastCharOfVerb = verb.slice(-2);
-
-    var ThirdLastCharOfVerb = verb.charAt(verb.length -3).toLowerCase();;
-
-    if(lastCharOfVerb === "e") {
-        var verbInPastSimple = verb.slice(0, -1) + "ed";
-
-    } else if (TwolastCharOfVerb === "ay" || TwolastCharOfVerb === "ey" || TwolastCharOfVerb === "iy" || TwolastCharOfVerb === "oy" || TwolastCharOfVerb === "uy") {
-        var verbInPastSimple = verb + "ed";
-
-    } else if (lastCharOfVerb === "y") {
-        var verbInPastSimple = verb.slice(0, -1) + "ied";
-
-    } else if ( ( isNaN(parseInt(ThirdLastCharOfVerb, 10)) === true )  && (lastCharOfVerb !== "a" && lastCharOfVerb !== "e" && lastCharOfVerb !== "i" && lastCharOfVerb !== "o" && lastCharOfVerb !== "u") &&
-    (ThirdLastCharOfVerb !== "a" && ThirdLastCharOfVerb !== "e" && ThirdLastCharOfVerb !== "i" && ThirdLastCharOfVerb !== "o" && ThirdLastCharOfVerb !== "u")) {
-
-        var verbInPastSimple = verb + lastCharOfVerb + "ed"
-    
-    } else {
-        var verbInPastSimple = verb + "ed";
-    }
-
-    return verbInPastSimple;
 }
 
 function openFiles(self_openDocsToRecover) {

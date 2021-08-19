@@ -9,7 +9,7 @@ GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
     this.btnAddCanvas = this.controlPanelWindow.add("button", [0, 80, 190, 101], "Add canvas");
 
-    this.btnAddCanvasByBiggestEdges = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Add to canvas by biggest edges")
+    this.btnAddCanvasByBiggestEdges = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Set canvas by biggest edges")
 
     this.btnSetCanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Set canvas")
 

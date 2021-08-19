@@ -52,10 +52,10 @@ EventHandlerBuilderControlPanel.prototype.onbtnAddCanvasByBiggestEdges = functio
     UIctrlPanel.btnAddCanvasByBiggestEdges.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
         
-        var executeScript = "Add to canvas by biggest edges";
+        var executeScript = "Set canvas by biggest edges";
 
-        #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - functions.jsx";
-        #include "../executeScript/Add to canvas by biggest edges/Add to canvas by biggest edges - EventHandlerBuilderMain.jsx";
+        #include "../executeScript/Set canvas by biggest edges/Set canvas by biggest edges - functions.jsx";
+        #include "../executeScript/Set canvas by biggest edges/Set canvas by biggest edges - EventHandlerBuilderMain.jsx";
         #include "../main/main.jsx";
 
     }
