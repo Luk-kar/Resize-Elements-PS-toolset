@@ -168,8 +168,8 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                 } else { // This files does not have EXIF dimensions, so they will be checked during opening files
 
                     var activeDoc = open(File(self.sourceFolderFilesToProcess[i]));
-                    var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
-                    var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+                    var activeDocWidth = parseInt(activeDoc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
+                    var activeDocHeight = parseInt(activeDoc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
 
                     if (biggestWidth < activeDocWidth) {
                         biggestWidth = activeDocWidth
