@@ -95,6 +95,16 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     }
 }
 
+EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
+    var UI = this.UI;
+
+    var tooltipValue = "Written value in any input box has to be bigger than 0 px and smaller than " + UI.maxResValue + 'px\n' +
+    "Filtered files are not updated dynamicaly in preview at the bottom of window, check log to be sure which files were processed";
+
+    UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
+    UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
+}
+
 EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     var UI = this.UI;
     var self = this;

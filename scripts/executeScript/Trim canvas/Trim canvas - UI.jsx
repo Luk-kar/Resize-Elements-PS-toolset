@@ -2,6 +2,7 @@
 // Look at "Add canvas - UI.jsx" as example
 
     //Code below is injected in PanelChangeFile
+    this.maxResValue = 300000; //PS Max resolution
     this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 
     //Title

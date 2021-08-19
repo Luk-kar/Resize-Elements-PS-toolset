@@ -8,3 +8,9 @@ eventHandler.settingChangeFile();
 
 eventHandler.settingChangeFileAndSaveEndingFunction();
 
+eventHandler.onValueLowest();
+
+eventHandler.onValueHighest();
+
+eventHandler.tooltipvalueLowestAndValueHighest();
+

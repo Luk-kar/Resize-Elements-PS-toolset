@@ -7,6 +7,8 @@ using from "../../main/main - functions.jsx":
 */
 
     //Code below is injected in PanelChangeFile
+    this.maxResValue = 300000; //PS Max resolution
+
     ///Add canvas UI
     this.panelChangeFile = createPanelUI(this.groupInfo, undefined, "left");
 

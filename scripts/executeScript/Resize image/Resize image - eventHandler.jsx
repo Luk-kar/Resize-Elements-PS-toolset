@@ -8,6 +8,12 @@ eventHandler.settingChangeFile();
 
 eventHandler.settingChangeFileAndSaveEndingFunction();
 
+eventHandler.onValueLowest();
+
+eventHandler.onValueHighest();
+
+eventHandler.tooltipvalueLowestAndValueHighest();
+
 eventHandler.onGroupNumb(UI.groupWidth.numb, UI.groupWidth.numb, UI.groupHeight.numb);
 
 eventHandler.onGroupUnitsDropDown(UI.groupWidth.unitsDropDown, UI.groupWidth.unitsDropDown, UI.groupHeight.unitDropDown);

@@ -12,11 +12,12 @@ eventHandler.onValueLowest();
 
 eventHandler.onValueHighest();
 
+eventHandler.tooltipvalueLowestAndValueHighest();
+
 eventHandler.savingBGandFGtoRestoreLater();
 
 eventHandler.onCanvExtendColorDropDwn();
 
 eventHandler.tooltipCanvExtendColor();
 
-eventHandler.tooltipvalueLowestAndValueHighest();
 

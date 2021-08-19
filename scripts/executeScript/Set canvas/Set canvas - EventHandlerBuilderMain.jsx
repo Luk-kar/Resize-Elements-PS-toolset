@@ -25,6 +25,83 @@ suing mathSumWidthAndHeight() from "../Ι_utils/functions/mathSumWidthAndHeight.
 
 #include "../Ι_utils/EventHandlerBuilderMain/tooltipCanvExtendColor.jsx";
 
+EventHandlerBuilderMain.prototype.onValueLowest = function() {
+    var UI = this.UI;
+    var self = this;
+
+    restrictInputKeys(UI.groupBiggerThan.valueLowest,
+                     ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                     'Escape', 'Backspace', 'Enter']);
+
+    UI.groupBiggerThan.valueLowest.onChanging = function() {
+
+        getRidOfTooMuch0AtFront(this);
+
+        restrictValueUpTo(UI.maxResValue, this);
+
+        self.lockingUnlockingAcceptBtn();
+
+    }
+
+    UI.groupBiggerThan.valueLowest.onChange = function() {
+
+        setMinimalValueAt(0, this);
+
+        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) - 2 < parseInt(UI.groupBiggerThan.valueLowest.text, 10)) {
+            alert('"bigger than:" value can' + "'" + '"t be higher than "smaller than:" value')
+            UI.groupBiggerThan.valueLowest.text = parseInt(UI.groupLowerThan.valueHighest.text, 10) -2; // between this two values you have to have 2 intreger diffrence, becouse UI.groupBiggerThan.valueLowest.text < x > UI.groupLowerThan.valueHighest.text
+        }
+    }
+}
+
+EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
+    var UI = this.UI;
+
+    var tooltipValue = "Written value in any input box has to be bigger than 0 px and smaller than " + UI.maxResValue + 'px\n' +
+    "Filtered files are not updated dynamicaly in preview at the bottom of window, check log to be sure which files were processed";
+
+    UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
+    UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
+}
+
+EventHandlerBuilderMain.prototype.onValueHighest = function() {
+    var UI = this.UI;
+    var self = this;
+
+    restrictInputKeys(UI.groupLowerThan.valueHighest, 
+              ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+              'Escape', 'Backspace', 'Enter']);
+
+    //Group Height
+    UI.groupLowerThan.valueHighest.onChanging = function() {
+
+        getRidOfTooMuch0AtFront(this);
+
+        restrictValueUpTo(UI.maxResValue, this);
+
+        self.lockingUnlockingAcceptBtn();
+    }
+
+    UI.groupLowerThan.valueHighest.onChange = function() {
+
+        setMinimalValueAt(2, this); //todo bug engine does not see object if value UI.groupLowerThan.valueHighest.text === "0";
+
+        if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10) + 2) {
+            alert('"smaller than:" value can' + "'" + '"t be lower than "bigger than:" value')
+            UI.groupLowerThan.valueHighest.text = parseInt(UI.groupBiggerThan.valueLowest.text, 10) + 2;
+        }
+    }
+}
+
+EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
+    var UI = this.UI;
+
+    var tooltipValue = "Written value in any input box has to be bigger than 0 px and smaller than " + UI.maxResValue + 'px\n' +
+    "Filtered files are not updated dynamicaly in preview at the bottom of window, check log to be sure which files were processed";
+
+    UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
+    UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
+}
 
 EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     var UI = this.UI;
