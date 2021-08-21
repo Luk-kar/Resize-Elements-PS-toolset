@@ -5,19 +5,19 @@ function GuiBuilderControlPanel() {
 
 GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
-    this.controlPanelWindow = new Window("dialog", "Resize Elements");
+    this.controlPanelWindow = new Window("dialog", "Modify Elements");
 
     this.btnAddCanvas = this.controlPanelWindow.add("button", [0, 80, 190, 101], "Add canvas");
 
-    this.btnAddCanvasByBiggestEdges = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Set canvas by biggest edges")
-
     this.btnSetCanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Set canvas")
 
-    this.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Resize image");
+    this.btnAddCanvasByBiggestEdges = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Set canvas by biggest edges")
 
     this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
     this.btnTrimCanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Trim canvas");
+
+    this.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Resize image");
 
     this.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
