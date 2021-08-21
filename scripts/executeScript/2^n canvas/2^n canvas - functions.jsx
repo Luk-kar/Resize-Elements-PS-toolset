@@ -12,12 +12,7 @@
 
 #include "../Ι_utils/functions/restrictValueUpTo.jsx";
 
-function setMinimalValueAt(value, edittext) {
-
-    if ( edittext.text === "" || parseInt(edittext.text, 10) < value) {
-        edittext.text = value;
-    }
-}
+#include "../Ι_utils/functions/setMinimalValueAt.jsx";
 
 function nearestPow2( n ){
     return Math.pow( 2, Math.ceil( Math.log( n ) / Math.log( 2 ) ) ); // Prefer this way than bitwise, becouse you need more readability than efficiency IMHO

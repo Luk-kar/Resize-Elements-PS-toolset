@@ -18,9 +18,4 @@
 
 #include "../Ι_utils/functions/restrictValueUpTo.jsx";
 
-function setMinimalValueAt(value, edittext) {
-
-    if ( edittext.text === "" || parseInt(edittext.text, 10) < value) {
-        edittext.text = value;
-    }
-}
+#include "../Ι_utils/functions/setMinimalValueAt.jsx";
