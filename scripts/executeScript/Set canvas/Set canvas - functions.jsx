@@ -25,3 +25,5 @@
 #include "../Ι_utils/functions/setMinimalValueAt.jsx";
 
 #include "../Ι_utils/functions/anchorSetingNew.jsx";
+
+#include "../Ι_utils/functions/preFilterFilesToProcess.jsx";
