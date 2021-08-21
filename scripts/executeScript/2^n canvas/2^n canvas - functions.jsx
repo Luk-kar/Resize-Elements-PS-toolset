@@ -10,11 +10,7 @@
 
 #include "../Ι_utils/functions/getRidOfTooMuch0AtFront.jsx";
 
-function restrictValueUpTo(maxResValue, valueInEdittext) {
-    if (parseInt(valueInEdittext.text, 10) > maxResValue) {
-        valueInEdittext.text = maxResValue;
-    }
-}
+#include "../Ι_utils/functions/restrictValueUpTo.jsx";
 
 function setMinimalValueAt(value, edittext) {
 
