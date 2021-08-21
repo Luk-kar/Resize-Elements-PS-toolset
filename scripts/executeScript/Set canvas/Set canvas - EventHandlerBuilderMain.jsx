@@ -131,7 +131,8 @@ EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
 
         if (((UI.btnRadSourceFiles.chooseOpenedFiles.value === true) || 
             (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.sourceFolderFilesToProcess) && (self.sourceFolderFilesToProcess.length > 0))) && 
-                ((UI.btnRadDestFold.same.value === true) || (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...")) 
+                ((UI.btnRadDestFold.same.value === true) || (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...")) &&
+                (parseInt(UI.groupWidth.numb.text, 10) > 0 && parseInt(UI.groupHeight.numb.text, 10) > 0)
         ) {
 
             UI.btnAccept.enabled = true;
@@ -167,7 +168,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
         }
     
         var doc = app.activeDocument;
-        var setWidth = parseInt(UI.groupWidth.numb.text, 10)
+        var setWidth = parseInt(UI.groupWidth.numb.text, 10);
         var setHeight = parseInt(UI.groupHeight.numb.text, 10);
     
         if ( isNaN(setWidth) || setWidth <= 0 || isNaN(setHeight) || setHeight <= 0) {
