@@ -24,3 +24,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - CONTRIBUTING.md.md
 - How_to_make_own_module.md
 - MIT LICENSE (to avoid unnecessary questions)
+
+## [2.0.0-new features]
+
+### Added
+
+- Set canvas module
+- Set canvas by biggest edges module
+- Trim canvas module
+
+### Bugs
+- Various bug fixes
