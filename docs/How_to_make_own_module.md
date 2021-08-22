@@ -9,14 +9,6 @@ in directory: _UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 - Name of module - **functions.jsx**
 - Name of module - **UI.jsx**
 
-### You can change a name of files and parent folder depending on these rules ✏️
-
-1. **Name of module** schould be constructed: "**Verb**" + "**noun**"
-2. **Verb** has to be [**_regular_**](https://conjugator.reverso.net/conjugation-english-verb-debug.html)
-3. **Noun** has to be **_singular_**
-4. **Files .jsx** have to be named: **Name of module** + "**_space_**" + "**-**" + "**_space_**" + "**_name of part in module_**"
-5. **Folder** with module's files have to be named the same like "**Name of module**"
-
 ## How to add your own module 🧱
 
 1. In: "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - GuiBuilderControlPanel.jsx_**"
@@ -25,7 +17,7 @@ in directory: _UI-Photoshop-toolSet\scripts\executeScript\Ι_Template\\_
 ```
 this.btn2toNcanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "2^n canvas");
 
-this.btnNameOfModule = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Name of module"); // <== Add this line of code
+this.btnNameOfModule = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Name of module"); // <== Add code
 ```
 
 2. In: "**_\UI-Photoshop-toolSet\scripts\control panel\control panel - EventHandlerBuilderControlPanel.jsx_**"
@@ -59,7 +51,7 @@ EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () { // <
 ```
 eventHandler.onBtn2toNcanvas();
 
-eventHandler.onBtnNameOfModule(); // <== Add this line of code
+eventHandler.onBtnNameOfModule(); // <== Add code
 ```
 
 4. In: "**_\UI-Photoshop-toolSet\scripts\main\main.jsx_**"
@@ -90,7 +82,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    You create UI for panel in "**main - UI.jsx**"
 
-   _Check following examples to implement your solution:_
+   _Check the following examples to implement your solution:_
 
    - 2^n canvas - UI.jsx
    - Add canvas - UI.jsx
@@ -100,7 +92,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    You create button behaviour in "**main - EventHandlerBuilderMain.jsx**"
 
-   _Check following examples to implement your solution:_
+   _Check the following examples to implement your solution:_
 
    - 2^n canvas - EventHandlerBuilderMain.jsx
    - Add canvas - EventHandlerBuilderMain.jsx
@@ -110,7 +102,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    You invoke eventHandler in "**main.jsx**"
 
-   _Check following examples to implement your solution:_
+   _Check the following examples to implement your solution:_
 
    - 2^n canvas - eventHandler.jsx
    - Add canvas - eventHandler.jsx
@@ -118,9 +110,9 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
 9. In module: **_../executeScript/NameOfModule/Name of module - functions.jsx_**"
 
-   You add functions which would be **used for all your modules**
+   You add functions that would be **used for all your modules**
 
-   _Check following examples to implement your solution:_
+   _Check the following examples to implement your solution:_
 
    - 2^n canvas - functions.jsx
    - Add canvas - functions.jsx
