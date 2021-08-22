@@ -11,28 +11,38 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 
 ![How the program works](docs/images/How_it_works.png)
 
-|                Add canvas                 |                 Resize image                  |               2^n canvas                |
+|                Add canvas                 |                  Set canvas                   |       Set canvas by biggest edges       |
 | :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: |
-| ![add canvas](docs/images/add_canvas.gif) | ![resize image](docs/images/resize_image.gif) | ![2n canvas](docs/images/2n_canvas.gif) |
+| ![add canvas](docs/images/add_canvas.gif) | ![set canvas](docs/images/set_canvas.gif)     | ![Set canvas by biggest edges](docs/images/set_canvas_by_biggest_edges.gif)|
+
+|                2^n canvas                 |                  Trim canvas                  |              Resize image               |
+| :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: |
+| ![2^n canvas](docs/images/2n_canvas.gif)  | ![trim canvas](docs/images/trim_canvas.gif)   | ![resize image](docs/images/2n_canvas.gif)|
 
 ## Getting Started 💡
 
 You choose opened files in PS or source folder with files to process  
-Later you decide if you want to save them in an original directory or in chosen destination folder  
-At the end you process files by (**Add canvas**, **Resize image** or **2^n canvas**) with input by user values
+Later you decide if you want to save them in an original directory or in the chosen destination folder  
+In the end, you process files by (**Add canvas**, **Set canvas**, **Resize image**, **Set canvas by biggest edges**, **2^n canvas**, **Trim canvas**, or **Resize image**) with input by user values
 
 List of changed files are written in **ChangedFilesList.log**, if value in **Preferences.ini** in **"CHANGEDFILESLIST.LOG"- WRITE LOG** is **=ON**  
-You can change this value by clicking button **Settings**, then button **ChangedFilesList.log" Log**
+You can change this value by clicking the button **Settings**, then button **ChangedFilesList.log" Log**
 
 #### Toolset consist of:
 
-- **Add canvas**
+- **Add canvas** (add a canvas by relative value to already existing size)
 
-- **Resize image**
+- **Set canvas** (set a canvas by absolute value, each selected file will have the same size)
+
+- **Set canvas by biggest edges** (each image has extreme edges sizes in a selected set)
 
 - **2^n canvas** (add a canvas for both sides by the nearest value of a power of 2)
 
-- **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files", enable writing changed names of files in "ChangedFilesList.log")
+- **Trim canvas**
+
+- **Resize image**
+
+- **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files" enable writing changed names of files in "ChangedFilesList.log")
 
 #### AppData are in: _~Documents/UI-Photoshop-toolSet_:
 
@@ -45,7 +55,7 @@ You can change this value by clicking button **Settings**, then button **Changed
 
 ### Prerequisites 💪
 
-To run this script you need at least **Photoshop CS6 64bit Version: 13.0** other versions of PS could not work
+To run this script, you need at least **Photoshop CS6 64bit Version: 13.0** other versions of PS could not work
 
 ### Installing 🔨
 
@@ -59,17 +69,17 @@ To run this script you need at least **Photoshop CS6 64bit Version: 13.0** other
 
 5. Chose **"Action"** tabbed panel in the left upper corner
 
-6. (If is it not yet) **Disable "Button mode"** by clicking an icon in right upper corner
+6. (If it is not yet) **Disable "Button mode"** by clicking an icon in the right upper corner
 
 7. "**Create new action**" (right bottom corner of Action window)
 
-8. **Name script** (e. g. UI toolset), optionally assign a key to it (e. g. F12) or add color (e. g. Green)
+8. **Name script** (e. g. UI toolset), optionally assign a key to it (e. g. F12) or add color (e. g. "Green")
 
 9. Click **"ok"**
 
 10. Choose in upper main menu: **"File -> Scripts -> Browse..."**
 
-11. **Navigate** to unziped folder directory
+11. **Navigate** to the unzipped folder directory
 
 12. **Open "control panel.jsx"**
 
@@ -87,7 +97,7 @@ To run this script you need at least **Photoshop CS6 64bit Version: 13.0** other
 
 ## Running the tests 🧪
 
-For now only manual testing is available. Use [**Adobe Phtoshop CS6 SDK Win**](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip) to find bugs during running script
+For now, only manual testing is available. Use [**Adobe Phtoshop CS6 SDK Win**](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip) to find bugs during running script
 
 ## Built With 🧰
 
@@ -105,7 +115,7 @@ For now only manual testing is available. Use [**Adobe Phtoshop CS6 SDK Win**](h
 
 ![Flow diagram](docs/images/Flow_Diagram.png)
 
-## How to make own module 🪓
+## How to make an own module 🪓
 
 Just open [**How_to_make_own_module.md**](docs/How_to_make_own_module.md)
 
