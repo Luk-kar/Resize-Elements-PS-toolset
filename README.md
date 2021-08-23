@@ -17,7 +17,7 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 
 |                2^n canvas                 |                  Trim canvas                  |              Resize image               |
 | :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: |
-| ![2^n canvas](docs/images/2n_canvas.gif)  | ![trim canvas](docs/images/trim_canvas.gif)   | ![resize image](docs/images/2n_canvas.gif)|
+| ![2^n canvas](docs/images/2n_canvas.gif)  | ![trim canvas](docs/images/trim_canvas.gif)   | ![resize image](docs/images/resize_image.gif)|
 
 ## Getting Started 💡
 
