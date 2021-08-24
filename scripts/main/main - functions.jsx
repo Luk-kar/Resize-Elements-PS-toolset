@@ -803,7 +803,7 @@ function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, c
 
     if (btnRadSourceFiles.chooseOpenedFiles.value === true) {
 
-        alert("You used" + '"' + scriptName + '" to ' + countChangedFilesTrue + " " + files);
+        alert("You used " + '"' + scriptName + '" to ' + countChangedFilesTrue + " " + files);
         showUnsavedFilesAlert(countChangedFilesFalse, scriptFolder);
     }
 
