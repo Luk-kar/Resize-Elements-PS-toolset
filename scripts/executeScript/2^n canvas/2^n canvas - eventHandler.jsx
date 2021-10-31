@@ -16,6 +16,8 @@ eventHandler.tooltipvalueLowestAndValueHighest();
 
 eventHandler.savingBGandFGtoRestoreLater();
 
+eventHandler.onAnchorButtons();
+
 eventHandler.onCanvExtendColorDropDwn();
 
 eventHandler.tooltipCanvExtendColor();

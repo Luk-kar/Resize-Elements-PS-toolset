@@ -105,6 +105,25 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     }
 }
 
+EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
+    var UI = this.UI;
+    var self = this;
+
+    //Default anchor position value
+    self.anchorPostionValue = AnchorPosition.MIDDLECENTER;
+
+    var anchorPositionButtons = [UI.anchorPositionTOPLEFT, UI.anchorPositionTOPCENTER, UI.anchorPositionTOPRIGHT, UI.anchorPositionMIDDLELEFT, UI.anchorPositionMIDDLECENTER, UI.anchorPositionMIDDLERIGHT, UI.anchorPositionBOTTOMLEFT, UI.anchorPositionBOTTOMCENTER, UI.anchorPositionBOTTOMRIGHT];
+    var anchorAtributes = [AnchorPosition.TOPLEFT, AnchorPosition.TOPCENTER, AnchorPosition.TOPRIGHT, AnchorPosition.MIDDLELEFT, AnchorPosition.MIDDLECENTER, AnchorPosition.MIDDLERIGHT, AnchorPosition.BOTTOMLEFT, AnchorPosition.BOTTOMCENTER, AnchorPosition.BOTTOMRIGHT];
+
+    //Adding functionality to buttons in anchor box
+    for (var i = 0; i < anchorPositionButtons.length; i++) {
+        
+        var button = anchorPositionButtons[i];
+
+        button.onClick = function() {self.anchorPostionValue = anchorSetingNew(this, anchorAtributes, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)} //You can't pass into function single particular value from array, you have to pass array into the function and later filter needed object from that array. If you pass array[i] then you pass to all functions last object from that array. 
+    }
+}
+
 EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = function() {
     var UI = this.UI;
     var self = this;
@@ -148,7 +167,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
         if ( isNaN(ValueOfSides) ) { // Giving other input value than typeof "number" in resizeCanvas() couses bug in which canvas is trimed to 1px in respective axis.
             throw new Error ("Object is not a number, retrieved value of biggest side should be numerical");
         }
-    
+
         doc.resizeCanvas(UnitValue(ValueOfSides, "PX"), UnitValue(ValueOfSides, "PX"), self.anchorPostionValue);
     }
 }

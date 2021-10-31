@@ -16,6 +16,8 @@
 
 #include "../Ι_utils/functions/preFilterFilesToProcess.jsx";
 
+#include "../Ι_utils/functions/anchorSetingNew.jsx";
+
 function nearestPow2( n ){
     return Math.pow( 2, Math.ceil( Math.log( n ) / Math.log( 2 ) ) ); // Prefer this way than bitwise, becouse you need more readability than efficiency IMHO
 }
