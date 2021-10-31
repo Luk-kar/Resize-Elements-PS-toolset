@@ -136,8 +136,8 @@ GuiBuilderMain.prototype.buildPanelChangeFile = function(executeScript){
         #include "../executeScript/Add canvas/Add canvas - UI.jsx";
     }
 
-    if (executeScript === "Resize image"){
-        #include "../executeScript/Resize image/Resize image - UI.jsx"; 
+    if (executeScript === "Add resize image"){
+        #include "../executeScript/Add resize image/Add resize image - UI.jsx"; 
     }
 
     if (executeScript === "2^n canvas"){

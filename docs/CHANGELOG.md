@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 
 - Add canvas module
-- Resize image module
+- Add resize image module
 - 2^n canvas module
 - Template to create own module
 - Settings

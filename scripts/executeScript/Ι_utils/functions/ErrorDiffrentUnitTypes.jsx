@@ -1,6 +1,6 @@
 /* 
-var unitsTypes is used in scripts\executeScript\("Resize image" || "Add canvas")\("Resize image" || "Add canvas") - EventHandlerBuilderMain.jsx
-canvExtendColorDropDwn is used in scripts\executeScript\("Resize image" || "Add canvas")\("Resize image" || "Add canvas") - UI.jsx
+var unitsTypes is used in scripts\executeScript\("Add resize image" || "Add canvas")\("Add resize image" || "Add canvas") - EventHandlerBuilderMain.jsx
+canvExtendColorDropDwn is used in scripts\executeScript\("Add resize image" || "Add canvas")\("Add resize image" || "Add canvas") - UI.jsx
 */
 
 function ErrorDiffrentUnitTypes(canvExtendColorDropDwn, unitsTypes) {

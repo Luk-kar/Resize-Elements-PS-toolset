@@ -1,18 +1,31 @@
 /*
-using from "../../settings/settings - functions.jsx":
-- isUndefined()
+using isUndefined() from "../../settings/settings - functions.jsx"
+using anchorSetingNew() from "./anchorSetingNew.jsx
+using ErrorDiffrentUnitTypes() from "../Ι_utils/functions/ErrorDiffrentUnitTypes.jsx"
+using doesItHaveBackgroundLayer() from "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx"
+using leftUpperCornerColorBGSet() from "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx"
+suing mathSumWidthAndHeight() from "../Ι_utils/functions/mathSumWidthAndHeight.jsx"
 */
 
-/*
-Look at opened script in Photoshop, on some examples (Add canvas, Add resize image, 2^n canvas)
-UI.btnRadSourceFiles.chooseOpenedFiles <=== radio button "Opened files"
-UI.btnRadSourceFiles.chooseFilesSourceFold <=== radio button "Choose folder"
-UI.btnRadDestFold.same <=== radio button "(executeScript) in the same folder"
-UI.btnRadDestFold.other <=== radio button "(executeScript) and copy files to another folder"
-self.sourceFolderFilesToProcess <=== array of files which will be processed
-UI.btnChooseFilesDestFold <=== button by which you choose destination folder
-UI.btnAccept <=== button by which you start processing files
-*/
+#include "../Ι_utils/EventHandlerBuilderMain/settingAcceptBtnBlock.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/savingBGandFGtoRestoreLater.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onCanvExtendColorDropDwn.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onGroupUnitsDropDown.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipWidthAndHeightImage.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onGrpDlgUnitValImage.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onConstrainsProportionsCheckbox.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipConstrainsProportionsCheckbox.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipCanvExtendColor.jsx";
 
 EventHandlerBuilderMain.prototype.onValueLowest = function() {
     var UI = this.UI;
@@ -92,24 +105,22 @@ EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function()
     UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
 }
 
-EventHandlerBuilderMain.prototype.settingAcceptBtnBlock = function() {
+EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     var UI = this.UI;
     var self = this;
 
-    self.lockingUnlockingAcceptBtn = function() {
+    //Default anchor position value
+    self.anchorPostionValue = AnchorPosition.MIDDLECENTER;
 
-        //Below are minimal conditions set for this function
-        if (((UI.btnRadSourceFiles.chooseOpenedFiles.value === true) || 
-        (UI.btnRadSourceFiles.chooseFilesSourceFold.value === true && !isUndefined(self.sourceFolderFilesToProcess) && (self.sourceFolderFilesToProcess.length > 0))) && 
-            ((UI.btnRadDestFold.same.value === true) || (UI.btnRadDestFold.other.value === true && UI.btnChooseFilesDestFold.title.text !== "Destination folder...")) 
-        ) {
+    var anchorPositionButtons = [UI.anchorPositionTOPLEFT, UI.anchorPositionTOPCENTER, UI.anchorPositionTOPRIGHT, UI.anchorPositionMIDDLELEFT, UI.anchorPositionMIDDLECENTER, UI.anchorPositionMIDDLERIGHT, UI.anchorPositionBOTTOMLEFT, UI.anchorPositionBOTTOMCENTER, UI.anchorPositionBOTTOMRIGHT];
+    var anchorAtributes = [AnchorPosition.TOPLEFT, AnchorPosition.TOPCENTER, AnchorPosition.TOPRIGHT, AnchorPosition.MIDDLELEFT, AnchorPosition.MIDDLECENTER, AnchorPosition.MIDDLERIGHT, AnchorPosition.BOTTOMLEFT, AnchorPosition.BOTTOMCENTER, AnchorPosition.BOTTOMRIGHT];
 
-            UI.btnAccept.enabled = true;
+    //Adding functionality to buttons in anchor box
+    for (var i = 0; i < anchorPositionButtons.length; i++) {
+        
+        var button = anchorPositionButtons[i];
 
-        } else {
-
-            UI.btnAccept.enabled = false;
-        }
+        button.onClick = function() {self.anchorPostionValue = anchorSetingNew(this, anchorAtributes, anchorPositionButtons, UI.imageAnchorTrue, UI.imageAnchorFalse)} //You can't pass into function single particular value from array, you have to pass array into the function and later filter needed object from that array. If you pass array[i] then you pass to all functions last object from that array. 
     }
 }
 
@@ -117,7 +128,15 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
     var UI = this.UI;
     var self = this;
 
-    self.startingFunction = function() { 
+    self.startingFunction = function setUnitForAddCanvas() {
+        //full list is in var AddCanvasDocUnits
+        var unitsTypes = [
+            ["ADD PX", "PX"],
+            ["ADD %", "PERCENT"],
+        ];
+        ErrorDiffrentUnitTypes(UI.groupWidth.unitsDropDown, unitsTypes);
+    
+        self.units = unitsTypes[parseInt(UI.groupWidth.unitsDropDown.selection, 10)][1];
 
         if (!isUndefined(self.sourceFolderFilesToProcess) && self.sourceFolderFilesToProcess.length > 0) {
 
@@ -155,12 +174,18 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
     var UI = this.UI;
     var self = this;
 
-    var UI = this.UI;
-    var self = this;
+    self.changeFile = function AddCanvas() {
 
-    self.changeFile = function trimCanvas() {
+        if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) {// To avoid bug with picking empty layer
+    
+            leftUpperCornerColorBGSet();
+        }
     
         var doc = app.activeDocument;
+    
+        var mathWidthAndHeightResult = mathSumWidthAndHeight(self.units, UI.groupWidth.numb.text, UI.groupHeight.numb.text, doc);
+        var sumWidth = mathWidthAndHeightResult[1];
+        var sumHeight = mathWidthAndHeightResult[0];
 
         var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
         var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string 
@@ -171,7 +196,11 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
             return "continue";
         }
     
-        doc.trim(TrimType.TRANSPARENT, true, true, true, true);
+        if ( isNaN(sumWidth) || isNaN(sumHeight) ) {
+            throw new Error ("object is not a Number. Width of file or added value or both should be numerical");
+        }
+    
+        doc.resizeCanvas(UnitValue(sumWidth, self.units), UnitValue(sumHeight, self.units), self.anchorPostionValue);
     }
 }
 
@@ -179,12 +208,9 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
     var UI = this.UI;
     var self = this;
 
-    self.endingFunction = function() {
-
-        /*
-        This function has to be declared, even if it is empty
-        This function is used AFTER you opened, changed and saved all files
-        Look at "Add canvas - EventHandlerBuilderMain.jsx" as example
-        */
+    self.endingFunction = function returnInitialBackgroundAndForeground() {
+        app.foregroundColor = self.fgColor;
+        app.backgroundColor = self.bgColor;
     }
 }
+

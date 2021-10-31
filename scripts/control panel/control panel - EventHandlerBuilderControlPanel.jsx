@@ -8,7 +8,6 @@ EventHandlerBuilderControlPanel.prototype.onBtnAddCanvas = function () {
         UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "Add canvas";
-        checkIfScriptNameIsRight(executeScript);
 
         #include "../executeScript/Add canvas/Add canvas - functions.jsx";
         #include "../executeScript/Add canvas/Add canvas - EventHandlerBuilderMain.jsx";
@@ -22,11 +21,10 @@ EventHandlerBuilderControlPanel.prototype.onBtnResizeImage = function () {
     UIctrlPanel.btnResizeImage.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
         
-        var executeScript = "Resize image";
-        checkIfScriptNameIsRight(executeScript);
+        var executeScript = "Add resize image";
 
-        #include "../executeScript/Resize image/Resize image - functions.jsx";
-        #include "../executeScript/Resize image/Resize image - EventHandlerBuilderMain.jsx";
+        #include "../executeScript/Add resize image/Add resize image - functions.jsx";
+        #include "../executeScript/Add resize image/Add resize image - EventHandlerBuilderMain.jsx";
         #include "../main/main.jsx"
 
     }
@@ -38,7 +36,6 @@ EventHandlerBuilderControlPanel.prototype.onBtn2toNcanvas = function () {
         UIctrlPanel.controlPanelWindow.close();
         
         var executeScript = "2^n canvas";
-        checkIfScriptNameIsRight(executeScript);
 
         #include "../executeScript/2^n canvas/2^n canvas - functions.jsx";
         #include "../executeScript/2^n canvas/2^n canvas - EventHandlerBuilderMain.jsx";
@@ -82,7 +79,6 @@ EventHandlerBuilderControlPanel.prototype.onBtnTrimCanvas = function () {
         UIctrlPanel.controlPanelWindow.close();
 
         var executeScript = "Trim canvas";
-        checkIfScriptNameIsRight(executeScript);
 
         #include "../executeScript/Trim canvas/Trim canvas - functions.jsx";
         #include "../executeScript/Trim canvas/Trim canvas - EventHandlerBuilderMain.jsx";
@@ -106,11 +102,5 @@ EventHandlerBuilderControlPanel.prototype.onBtnClose = function () {
 
     UIctrlPanel.btnClose.onClick = function () {
         UIctrlPanel.controlPanelWindow.close();
-    }
-}
-
-function checkIfScriptNameIsRight(executeScript) {
-    if (executeScript.split(" ").length !== 2 || !executeScript.match(/[a-z]/i)) {
-        throw new Error("Wrongly formated name. It should consist of a verb and a noun");
     }
 }

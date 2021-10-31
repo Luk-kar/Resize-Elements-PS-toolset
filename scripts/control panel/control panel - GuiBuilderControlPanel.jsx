@@ -17,7 +17,7 @@ GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
     this.btnTrimCanvas = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Trim canvas");
 
-    this.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Resize image");
+    this.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Add resize image");
 
     this.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 

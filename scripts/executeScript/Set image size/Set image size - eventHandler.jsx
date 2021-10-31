@@ -1,4 +1,4 @@
-// Resize image --------------------------------------------------------------------------------------------------------------------
+// Add canvas --------------------------------------------------------------------------------------------------------------------
 
 eventHandler.settingAcceptBtnBlock();
 
@@ -26,6 +26,14 @@ eventHandler.tooltipWidthAndHeightImage();
 
 eventHandler.onGrpDlgUnitValImage();
 
+eventHandler.onAnchorButtons();
+
 eventHandler.onConstrainsProportionsCheckbox();
 
 eventHandler.tooltipConstrainsProportionsCheckbox();
+
+eventHandler.tooltipCanvExtendColor();
+
+eventHandler.savingBGandFGtoRestoreLater();
+
+eventHandler.onCanvExtendColorDropDwn();

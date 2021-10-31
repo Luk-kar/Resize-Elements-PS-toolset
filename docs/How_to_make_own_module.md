@@ -45,7 +45,6 @@ EventHandlerBuilderControlPanel.prototype.onBtnNameOfModule = function () { // <
         UIctrlPanel.controlPanelWindow.close();
 
         var executeScript = "NameOfModule";
-        checkIfScriptNameIsRight(executeScript);
 
         #include "../executeScript/NameOfModule/Name of module - functions.jsx
         #include "../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx
@@ -94,7 +93,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    - 2^n canvas - UI.jsx
    - Add canvas - UI.jsx
-   - Resize image - UI.jsx
+   - Add resize image - UI.jsx
 
 7. In module: "**_../executeScript/NameOfModule/Name of module - EventHandlerBuilderMain.jsx_**"
 
@@ -104,7 +103,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    - 2^n canvas - EventHandlerBuilderMain.jsx
    - Add canvas - EventHandlerBuilderMain.jsx
-   - Resize image - EventHandlerBuilderMain.jsx
+   - Add resize image - EventHandlerBuilderMain.jsx
 
 8. In module: "**_../executeScript/NameOfModule/Name of module - eventHandler.jsx_**"
 
@@ -114,7 +113,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    - 2^n canvas - eventHandler.jsx
    - Add canvas - eventHandler.jsx
-   - Resize image - eventHandler.jsx
+   - Add resize image - eventHandler.jsx
 
 9. In module: **_../executeScript/NameOfModule/Name of module - functions.jsx_**"
 
@@ -124,7 +123,7 @@ eventHandler.onBtnNameOfModule(); // <== Add this line of code
 
    - 2^n canvas - functions.jsx
    - Add canvas - functions.jsx
-   - Resize image - functions.jsx
+   - Add resize image - functions.jsx
 
 10. **Test** your script to check if everything works ([**ExtendScript Toolkit**](https://flylib.com/books/en/1.513.1.60/1/))
 
