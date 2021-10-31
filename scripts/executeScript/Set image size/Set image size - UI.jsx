@@ -61,12 +61,7 @@ using from "../../main/main - functions.jsx":
                 this.groupWidth.numb.characters = 9;
 
                 //Update also unitsTypes
-                var AddCanvasDocUnits = [
-                    "ADD PX", 
-                    "ADD %",
-                    ];
-                this.groupWidth.unitsDropDown = this.groupWidth.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.groupWidth.unitsDropDown.selection = 0;
+                this.groupWidth.units = this.groupWidth.add("statictext", undefined, "PX");
 
                 //Crating tooltip
                 this.groupWidth.imageTooltip = this.groupWidth.add("image", undefined, this.imageInfHov);
@@ -80,8 +75,7 @@ using from "../../main/main - functions.jsx":
                 this.groupHeight.numb.characters = 9;
 
                 //Dropdownlist: Add PX, add %
-                this.groupHeight.unitDropDown = this.groupHeight.add("dropdownlist", undefined, AddCanvasDocUnits);
-                this.groupHeight.unitDropDown.selection = 0;
+                this.groupHeight.units = this.groupHeight.add("statictext", undefined, "PX");
 
                 //Image: InfoHover.png
                 this.groupHeight.imageTooltip = this.groupHeight.add("image", undefined, this.imageInfHov);
@@ -94,37 +88,6 @@ using from "../../main/main - functions.jsx":
 
     //Constrains proportions
     this.constrainsProportionsCheckbox = this.panelChangeFile.add("checkbox", undefined, "Same Height and Width");
-
-    //Anchor display
-    this.groupAnchorMarginesSpaceTop =  [this.panelChangeFile.add("group", undefined, ""),
-                                       this.panelChangeFile.add("group", undefined, "")];
-
-    this.groupAnchor = this.panelChangeFile.add("group");
-    this.groupAnchor.title = this.groupAnchor.add("statictext", undefined, "Anchor: ");
-    this.groupAnchor.title.alignment = [ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP]
-
-        //Creating anchor group box
-        this.groupAnchor.boxBtns = createGroupUI(this.groupAnchor, "column");
-
-        //Creating anchor gorup lines inside box
-        this.groupAnchor.boxBtns.line001 = this.groupAnchor.boxBtns.add("group");
-        this.groupAnchor.boxBtns.line002 = this.groupAnchor.boxBtns.add("group");
-        this.groupAnchor.boxBtns.line003 = this.groupAnchor.boxBtns.add("group");
-
-            //Adding 001 line of buttons
-            this.anchorPositionTOPLEFT = this.groupAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionTOPCENTER = this.groupAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionTOPRIGHT = this.groupAnchor.boxBtns.line001.add("iconbutton", undefined, this.imageAnchorFalse);
-
-            //Adding 002 line of buttons
-            this.anchorPositionMIDDLELEFT = this.groupAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionMIDDLECENTER = this.groupAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorTrue);
-            this.anchorPositionMIDDLERIGHT = this.groupAnchor.boxBtns.line002.add("iconbutton", undefined, this.imageAnchorFalse);
-
-            //Adding 003 line of buttons
-            this.anchorPositionBOTTOMLEFT = this.groupAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionBOTTOMCENTER = this.groupAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
-            this.anchorPositionBOTTOMRIGHT = this.groupAnchor.boxBtns.line003.add("iconbutton", undefined, this.imageAnchorFalse);
 
     this.groupAnchorMarginesSpaceBottom = this.panelChangeFile.add("statictext", undefined, "");
     this.groupAnchorMarginesSpaceBottom.characters = this.panelWidth + 13;//Giving the same width as: this.panelSourceFiles, this.panelFilterFiles, this.panelDestFold

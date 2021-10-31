@@ -23,5 +23,3 @@
 #include "../Ι_utils/functions/restrictValueUpTo.jsx";
 
 #include "../Ι_utils/functions/setMinimalValueAt.jsx";
-
-#include "../Ι_utils/functions/anchorSetingNew.jsx";
