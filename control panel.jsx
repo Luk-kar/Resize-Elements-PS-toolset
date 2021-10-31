@@ -35,6 +35,8 @@ function main() {
 
     eventHandler.onBtnTrimCanvas();
 
+    eventHandler.onSetImageSize();
+
     eventHandler.onBtnPanelSettings();
 
     eventHandler.onBtnClose();

@@ -86,6 +86,20 @@ EventHandlerBuilderControlPanel.prototype.onBtnTrimCanvas = function () {
     }
 }
 
+EventHandlerBuilderControlPanel.prototype.onSetImageSize = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+
+    UIctrlPanel.btnSetImageSize.onClick = function () {
+        UIctrlPanel.controlPanelWindow.close();
+
+        var executeScript = "Set image size";
+
+        #include "../executeScript/Set image size/Set image size - functions.jsx";
+        #include "../executeScript/Set image size/Set image size - EventHandlerBuilderMain.jsx";
+        #include "../main/main.jsx";
+    }
+}
+
 EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
     var UIctrlPanel = this.UIctrlPanel;
 

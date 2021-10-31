@@ -19,6 +19,8 @@ GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
     this.btnResizeImage = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Add resize image");
 
+    this.btnSetImageSize = this.controlPanelWindow.add("button", [0, 40, 190, 61], "Set image size");
+
     this.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
     this.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");

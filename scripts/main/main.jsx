@@ -59,10 +59,6 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
         #include "../executeScript/Add canvas/Add canvas - eventHandler.jsx";
     }
 
-    if (executeScript === "Add resize image"){
-        #include "../executeScript/Add resize image/Add resize image - eventHandler.jsx"; 
-    }
-
     if (executeScript === "2^n canvas"){
         #include "../executeScript/2^n canvas/2^n canvas - eventHandler.jsx"; 
     }
@@ -77,6 +73,14 @@ function main(executeScript, appData, prefFileKeys, userDataFolder) {
 
     if (executeScript === "Trim canvas"){
         #include "../executeScript/Trim canvas/Trim canvas - eventHandler.jsx";
+    }
+
+    if (executeScript === "Add resize image"){
+        #include "../executeScript/Add resize image/Add resize image - eventHandler.jsx"; 
+    }
+
+    if (executeScript === "Set image size"){ // <== Add code below
+        #include "../executeScript/Set image size/Set image size - eventHandler.jsx";
     }
 
 // Main mechanics -------------------------------------------------------------------------------------------------------------------
