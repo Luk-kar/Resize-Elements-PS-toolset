@@ -149,7 +149,7 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
             throw new Error ("Object is not a number, retrieved value of biggest side should be numerical");
         }
     
-        doc.resizeCanvas(UnitValue(ValueOfSides, "PX"), UnitValue(ValueOfSides, "PX"), AnchorPosition.MIDDLECENTER);
+        doc.resizeCanvas(UnitValue(ValueOfSides, "PX"), UnitValue(ValueOfSides, "PX"), self.anchorPostionValue);
     }
 }
 
