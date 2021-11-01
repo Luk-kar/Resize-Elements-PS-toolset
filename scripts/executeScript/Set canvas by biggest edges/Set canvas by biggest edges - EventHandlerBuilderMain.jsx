@@ -196,10 +196,6 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
 
                     var height = parseInt(xmp.getProperty(XMPConst.NS_EXIF, "PixelYDimension"), 10);
 
-                    alert(self.sourceFolderFilesToProcess[i])
-                    alert(width)
-                    alert(height)
-
                     var highestValueSide = Math.max(width, height);
 
                     if (highestValueSide >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.groupLowerThan.valueHighest.text, 10)) {
@@ -228,10 +224,6 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                 }
             }
         }
-
-        alert(sourceFilesTemp)
-        alert(biggestWidth)
-        alert(biggestHeight)
 
         self.biggestWidth = biggestWidth;
         self.biggestHeight = biggestHeight;
