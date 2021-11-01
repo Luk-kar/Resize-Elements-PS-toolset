@@ -15,15 +15,15 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 | :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: |
 | ![add canvas](docs/images/add_canvas.gif) | ![set canvas](docs/images/set_canvas.gif)     | ![Set canvas by biggest edges](docs/images/set_canvas_by_biggest_edges.gif)|
 
-|                2^n canvas                 |                  Trim canvas                  |              Add resize image               |
-| :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: |
-| ![2^n canvas](docs/images/2n_canvas.gif)  | ![trim canvas](docs/images/trim_canvas.gif)   | ![resize image](docs/images/resize_image.gif)|
+|                2^n canvas                 |                  Trim canvas                  |              Add resize image               |              Set image size             |
+| :---------------------------------------: | :-------------------------------------------: | :-------------------------------------: | :-------------------------------------: |
+| ![2^n canvas](docs/images/2n_canvas.gif)  | ![trim canvas](docs/images/trim_canvas.gif)   | ![resize image](docs/images/resize_image.gif)| ![set image size](docs/images/set_image_size.gif)|
 
 ## Getting Started 💡
 
 You choose opened files in PS or source folder with files to process  
 Later you decide if you want to save them in an original directory or in the chosen destination folder  
-In the end, you process files by (**Add canvas**, **Set canvas**, **Add resize image**, **Set canvas by biggest edges**, **2^n canvas**, **Trim canvas**, or **Add resize image**) with input by user values
+In the end, you process files by (**Add canvas**, **Set canvas**, **Add resize image**, **Set image size**, **Set canvas by biggest edges**, **2^n canvas**, **Trim canvas**, or **Add resize image**) with input by user values
 
 List of changed files are written in **ChangedFilesList.log**, if value in **Preferences.ini** in **"CHANGEDFILESLIST.LOG"- WRITE LOG** is **=ON**  
 You can change this value by clicking the button **Settings**, then button **ChangedFilesList.log" Log**
@@ -38,9 +38,11 @@ You can change this value by clicking the button **Settings**, then button **Cha
 
 - **2^n canvas** (add a canvas for both sides by the nearest value of a power of 2)
 
-- **Trim canvas**
+- **Trim canvas** (crop image to non-transparent pixels)
 
-- **Add resize image**
+- **Add resize image** (resize image by added value)
+
+- **Set image size** (resize image by set value)
 
 - **Settings** (Filter source folder files by PNG, hide dialog "Do you want to close all opened files" enable writing changed names of files in "ChangedFilesList.log")
 
