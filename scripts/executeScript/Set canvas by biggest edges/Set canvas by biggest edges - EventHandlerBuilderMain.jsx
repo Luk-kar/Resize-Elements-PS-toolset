@@ -1,21 +1,27 @@
 /*
 using isUndefined() from "../../settings/settings - functions.jsx"
-using restrictInputKeys() from "../Ι_utils/functions/restrictInputKeys.jsx"
-using getRidOfTooMuch0AtFront() from "../Ι_utils/functions/getRidOfTooMuch0AtFront.jsx"
-using restrictValueUpTo() from "./2^n canvas - functions.jsx"
-using setMinimalValueAt() from "./2^n canvas - functions.jsx"
+using anchorSetingNew() from "./anchorSetingNew.jsx
+using ErrorDiffrentUnitTypes() from "../Ι_utils/functions/ErrorDiffrentUnitTypes.jsx"
 using doesItHaveBackgroundLayer() from "../Ι_utils/functions/doesItHaveBackgroundLayer.jsx"
 using leftUpperCornerColorBGSet() from "../Ι_utils/functions/leftUpperCornerColorBGSet.jsx"
-using nearestPow2() from "./2^n canvas - functions.jsx"
+suing mathSumWidthAndHeight() from "../Ι_utils/functions/mathSumWidthAndHeight.jsx"
 */
 
 #include "../Ι_utils/EventHandlerBuilderMain/savingBGandFGtoRestoreLater.jsx";
 
 #include "../Ι_utils/EventHandlerBuilderMain/onCanvExtendColorDropDwn.jsx";
 
-#include "../Ι_utils/EventHandlerBuilderMain/tooltipCanvExtendColor.jsx";
-
 #include "../Ι_utils/EventHandlerBuilderMain/onGroupNumb.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipWidthAndHeightImage.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onGrpDlgUnitValImage.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/onConstrainsProportionsCheckbox.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipConstrainsProportionsCheckbox.jsx";
+
+#include "../Ι_utils/EventHandlerBuilderMain/tooltipCanvExtendColor.jsx";
 
 EventHandlerBuilderMain.prototype.onValueLowest = function() {
     var UI = this.UI;
@@ -28,7 +34,7 @@ EventHandlerBuilderMain.prototype.onValueLowest = function() {
     UI.groupBiggerThan.valueLowest.onChanging = function() {
 
         getRidOfTooMuch0AtFront(this);
-        
+
         restrictValueUpTo(UI.maxResValue, this);
 
         self.lockingUnlockingAcceptBtn();
@@ -85,6 +91,16 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
     }
 }
 
+EventHandlerBuilderMain.prototype.tooltipvalueLowestAndValueHighest = function() {
+    var UI = this.UI;
+
+    var tooltipValue = "Written value in any input box has to be bigger than 0 px and smaller than " + UI.maxResValue + 'px\n' +
+    "Filtered files are not updated dynamicaly in preview at the bottom of window, check log to be sure which files were processed";
+
+    UI.groupBiggerThan.imageTooltip.helpTip = tooltipValue;
+    UI.groupLowerThan.imageTooltip.helpTip = tooltipValue;
+}
+
 EventHandlerBuilderMain.prototype.onAnchorButtons = function() {
     var UI = this.UI;
     var self = this;
@@ -129,11 +145,10 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
     var UI = this.UI;
     var self = this;
 
-    self.startingFunction = function filteringFilesByHeightAndWidthWithoutOpeningThemInPS() {
-
+    self.startingFunction = function setUnitForAddCanvas() {
         if (!isUndefined(self.sourceFolderFilesToProcess) && self.sourceFolderFilesToProcess.length > 0) {
 
-            return preFiletrFilesToProcess(self, UI);
+            return preFilterFilesToProcess(self, UI);
         }
     }
 }
@@ -144,7 +159,18 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
 
     self.changeFile = function SetCanvas() {
 
+        if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) {// To avoid bug with picking empty layer
+    
+            leftUpperCornerColorBGSet();
+        }
+    
         var doc = app.activeDocument;
+        var setWidth = 10;
+        var setHeight = 10;
+    
+        if ( isNaN(setWidth) || setWidth <= 0 || isNaN(setHeight) || setHeight <= 0) {
+            throw new Error ("object is not a Number. Width of file or added value or both should be numerical");
+        }
 
         var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
         var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string 
@@ -155,11 +181,9 @@ EventHandlerBuilderMain.prototype.settingChangeFile = function() {
             return "continue";
         }
 
-        if( doesItHaveBackgroundLayer() && (UI.canvExtendColor.dropDwn.selection.toString() === "Left upper corner color")) { // To avoid bug with picking empty layer
-            leftUpperCornerColorBGSet();
-        }
-
-        doc.resizeCanvas(UnitValue(self.biggestWidth, "PX"), UnitValue(self.biggestHeight, "PX"), self.anchorPostionValue);
+        var unit = "PX"
+    
+        doc.resizeCanvas(UnitValue(setWidth, unit), UnitValue(setHeight, unit), self.anchorPostionValue);
     }
 }
 
@@ -167,16 +191,9 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveEndingFunction = funct
     var UI = this.UI;
     var self = this;
 
-    self.endingFunction = function() {
-
-        /*
-        This function has to be declared, even if it is empty
-        This function is used AFTER you opened, changed and saved all files
-        Look at "Add canvas - EventHandlerBuilderMain.jsx" as example
-        */
+    self.endingFunction = function returnInitialBackgroundAndForeground() {
+        app.foregroundColor = self.fgColor;
+        app.backgroundColor = self.bgColor;
     }
 }
-
-
-
 
