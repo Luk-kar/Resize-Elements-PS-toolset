@@ -35,3 +35,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Bugs
 - Various bug fixes
+
+## [3.0.0-new features]
+
+### Added
+
+- Set image size
+- About
+
+### Bugs
+- bug with Set canvas by biggest edges
+
