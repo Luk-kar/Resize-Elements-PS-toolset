@@ -23,6 +23,8 @@ GuiBuilderControlPanel.prototype.buildControlPanel = function () {
 
     this.btnSettings = this.controlPanelWindow.add("button", [205, 80, 395, 101], "Settings");
 
+    this.btnAbout = this.controlPanelWindow.add("button", [205, 80, 395, 101], "About");
+
     this.btnClose = this.controlPanelWindow.add("button", [205, 120, 395, 141], "Close");
 };
 

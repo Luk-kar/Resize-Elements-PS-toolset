@@ -111,6 +111,16 @@ EventHandlerBuilderControlPanel.prototype.onBtnPanelSettings = function () {
     }
 }
 
+EventHandlerBuilderControlPanel.prototype.onBtnAbout = function () {
+    var UIctrlPanel = this.UIctrlPanel;
+    UIctrlPanel.btnAbout.onClick = function () {
+
+        UIctrlPanel.controlPanelWindow.close();
+        #include "../about/about.jsx"
+        about(UIctrlPanel.controlPanelWindow)
+    }
+}
+
 EventHandlerBuilderControlPanel.prototype.onBtnClose = function () {
     var UIctrlPanel = this.UIctrlPanel;
 

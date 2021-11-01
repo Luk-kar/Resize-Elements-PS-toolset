@@ -39,6 +39,8 @@ function main() {
 
     eventHandler.onBtnPanelSettings();
 
+    eventHandler.onBtnAbout();
+    
     eventHandler.onBtnClose();
 
     UIctrlPanel.showControlPanel();
