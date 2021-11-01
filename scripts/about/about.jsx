@@ -23,7 +23,7 @@ function about(mainMenu) {
     }
 
 
-    var repoSiteWWW = "www.github.com/Luk-kar/Read_blending_colors";
+    var repoSiteWWW = "www.github.com/Luk-kar/Resize-Elements-PS-toolset";
     var repoSite = about.add("statictext", undefined, repoSiteWWW);
     repoSite.alignment = "left";
     repoSite.characters = 40;
