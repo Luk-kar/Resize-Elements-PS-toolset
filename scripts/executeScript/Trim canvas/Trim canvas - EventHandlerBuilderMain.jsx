@@ -73,7 +73,7 @@ EventHandlerBuilderMain.prototype.onValueHighest = function() {
 
     UI.groupLowerThan.valueHighest.onChange = function() {
 
-        setMinimalValueAt(2, this); //todo bug engine does not see object if value UI.groupLowerThan.valueHighest.text === "0";
+        setMinimalValueAt(2, this); // bug engine does not see object if value UI.groupLowerThan.valueHighest.text === "0";
 
         if(parseInt(UI.groupLowerThan.valueHighest.text, 10) < parseInt(UI.groupBiggerThan.valueLowest.text, 10) + 2) {
             alert('"smaller than:" value can' + "'" + '"t be lower than "bigger than:" value')

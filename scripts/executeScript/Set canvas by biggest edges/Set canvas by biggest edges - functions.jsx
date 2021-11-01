@@ -78,6 +78,9 @@ function preFiletrFilesToProcess(self, UI) {
         }
     }
 
+    alert(self.biggestWidth)
+    alert(self.biggestHeight)
+
     self.biggestWidth = biggestWidth;
     self.biggestHeight = biggestHeight;
     return sourceFilesTemp;

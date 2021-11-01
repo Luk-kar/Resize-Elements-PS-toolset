@@ -470,27 +470,20 @@ _changeFileAndSave_.btnRadChooseFilesActiveDocs = function (self, self_changeFil
 _changeFileAndSave_.btnRadChooseFilesActiveDocs_btnRadSameFolder = function (alertPreviousAppearance, previousSaveTimeSourceDoc, i, self, logFiles_Value, executeScript, appData_changedFilesList, userDataFolder) { // btnRadChooseFilesActiveDocs_btnRadSameFolder has to be separate object, becouse when btnRadSameFolder will be part of btnRadChooseFilesActiveDocs then there is propability of oversave
 
     var doc = app.activeDocument;
+
+    // $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+    doc.save(); // todo important
+    // $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
     
-    try {
-        $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
-        doc.save();
-        $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
-    }
+    // try {
+    //     $.level = 0; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+    //     doc.save();
+    //     $.level = 1; // Debugging level, Level: 0 - No Break, 1 - Break, 2 - Immediate Break //Set to level: 0 to avoid notification "The document has not yet been saved".
+    // }
 
-    catch (e) {
-        if (alertPreviousAppearance === false) { //If you would have to see alert each time, it would be annoying.
-
-            alert("You have earlier opened file in destination folder.\n" +
-                "You have choosed source files folder with the same file name as in destination folder.\n" +
-                "You overwrote the file and now your opened file doesn't exist on drive.\n" +
-                "Therefore you can't save it in original place, becouse it doesn't exist now\n" +
-                "Check files " + '"save :false"' + ' in ChangedFilesList.log in script folder:\n' +
-                userDataFolder.toString() + "\n" + //userDataFolder is folder object
-                "to find file which wasn't saved");
-
-            alertPreviousAppearance === true;
-        }
-    }
+    // catch (e) {
+    //     alert(e)
+    // }
 
     var currentSaveTime = doc.path.modified;
     var isFileSaved = saveFileValidation(previousSaveTimeSourceDoc[i], currentSaveTime, doc);
@@ -781,7 +774,7 @@ function retrievePreviuslyOpenedFiles(btnRadSourceFiles_chooseOpenedFiles, btnRa
 }
 
 function showUserSummaryOfProcessedFiles(executeScript, countChangedFilesTrue, countChangedFilesFalse, sourceFolderNameRecent, detinationFolder, btnRadSourceFiles, btnRadDestFold) {
-    // todo hardcode summary
+
     var scriptName = executeScript;
     var scriptFolder = $.fileName.slice(0, -16);
 
