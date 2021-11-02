@@ -19,7 +19,8 @@ function preFilterFilesToProcess(self, UI) {
         
             var highestValueSide = Math.max( width, height );
 
-            if (highestValueSide >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.groupLowerThan.valueHighest.text, 10) ) { 
+            if (width >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && width <= parseInt(UI.groupLowerThan.valueHighest.text, 10) &&
+            height >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && height <= parseInt(UI.groupLowerThan.valueHighest.text, 10)) { 
                 sourceFilesTemp.push(self.sourceFolderFilesToProcess[i]);
             }
         } else { // This files does not have EXIF dimensions, so they will be checked during opening files
