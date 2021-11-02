@@ -165,8 +165,9 @@ EventHandlerBuilderMain.prototype.settingChangeFileAndSaveStartingFunction = fun
                 var activeDocWidth = parseInt(doc.width.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
                 var activeDocHeight = parseInt(doc.height.toString().slice(0, -3), 10); // .slice(0, -3) cut off " px" from the string
 
-                if (activeDocWidth >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && activeDocWidth <= parseInt(UI.groupLowerThan.valueHighest.text, 10) &&
-                activeDocHeight >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && activeDocHeight <= parseInt(UI.groupLowerThan.valueHighest.text, 10)) {
+                var highestValueSide = Math.max(activeDocWidth, activeDocHeight);
+
+                if (highestValueSide >= parseInt(UI.groupBiggerThan.valueLowest.text, 10) && highestValueSide <= parseInt(UI.groupLowerThan.valueHighest.text, 10)) {
 
                     if (biggestWidth < activeDocWidth) {
                         biggestWidth = activeDocWidth;
