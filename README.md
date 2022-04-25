@@ -26,7 +26,7 @@ Important! Tested and created for Photshop CS6 64bit Version: 13.0 on Windows 10
 3. In the end, you process files by (**Add canvas**, **Set canvas**, **Add resize image**, **Set image size**, **Set canvas by biggest edges**, **2^n canvas**, **Trim canvas**, or **Add resize image**) with user's input values
 
 List of changed files are written in **ChangedFilesList.log**, if value in **Preferences.ini** in **"CHANGEDFILESLIST.LOG"** in key **WRITE LOG** is **=ON**  
-You can change **ON/OFF** this value by clicking the button **Settings**, then button **ChangedFilesList.log" Log**
+You can change **ON/OFF** value by clicking the button **Settings**, then button **ChangedFilesList.log" Log**
 
 #### Toolset consist of:
 
