@@ -51,9 +51,9 @@ You can change this value by clicking the button **Settings**, then button **Cha
 - **ChangedFilesList.log**
 
 - **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in a file:
-  - "Filter files by PNG" By default
-  - "Do you want to close all opened files?" Dialog
-  - "ChangedFilesList.log" Writing in log
+  - "Filter files by PNG" - ON/OFF
+  - "Do you want to close all opened files?" - ON/OFF
+  - "ChangedFilesList.log" - ON/OFF
 
 ### Prerequisites 💪
 
