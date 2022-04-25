@@ -57,7 +57,7 @@ You can change **ON/OFF** value by clicking the button **Settings**, then button
 
 ### Prerequisites 💪
 
-To run this script, you need at least **Photoshop CS6 64bit Version: 13.0** other versions of PS could not work
+To run this script, you need at least **Photoshop CS6 64bit Version: 13.0**, other versions of PS could not work
 
 ### Installing 🔨
 
