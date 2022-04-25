@@ -105,7 +105,7 @@ For now, only manual testing is available. Use [**Adobe Phtoshop CS6 SDK Win**](
 
 - [**Visual Studio Code**](https://code.visualstudio.com)
 - [**Adobe Phtoshop CS6 SDK Win**](http://download.macromedia.com/pub/developer/photoshop/sdk/adobe_photoshop_cs6_sdk_win.zip)
-- [**ExtendScript Debugger Extension for Visual Studio Code**](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug) (mainly or debugging)
+- [**ExtendScript Debugger Extension for Visual Studio Code**](https://marketplace.visualstudio.com/items?itemName=Adobe.extendscript-debug) (mainly for debugging)
 
 ## Needed documentation 📦
 
