@@ -51,9 +51,9 @@ You can change **ON/OFF** value by clicking the button **Settings**, then button
 - **ChangedFilesList.log**
 
 - **Preferences.ini** in which you can change values by **Settings** buttons or by rewriting them in a file:
-  - "Filter files by PNG" - ON/OFF
-  - "Do you want to close all opened files?" - ON/OFF
-  - "ChangedFilesList.log" - ON/OFF
+  - "Filter files by PNG" By default - ON/OFF
+  - "Do you want to close all opened files?" Dialog - ON/OFF
+  - "ChangedFilesList.log" Log - ON/OFF
 
 ### Prerequisites 💪
 
